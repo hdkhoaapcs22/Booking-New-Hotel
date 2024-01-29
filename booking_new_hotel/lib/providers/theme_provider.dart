@@ -22,8 +22,8 @@ class ThemeProvider extends ChangeNotifier {
 
   updateThemeMode(ThemeModeType _themeModeType) async {
     await SharedPreferencesKeys().setThemeMode(_themeModeType);
-    final systembrightness =
-        MediaQuery.of(applicationcontext!).platformBrightness;
+    final systembrightness = MediaQuery.of(applicationcontext!)
+        .platformBrightness; //helps to obtain the brightness of the device
     checkAndSetThemeMode(_themeModeType == ThemeModeType.light
         ? Brightness.light
         : _themeModeType == ThemeModeType.dark
@@ -63,9 +63,9 @@ class ThemeProvider extends ChangeNotifier {
     }
   }
 
-  void updateFontType(FontFamilyType _fontType) async {
-    await SharedPreferencesKeys().setFontType(_fontType);
-    _fontType = _fontType;
+  void updateFontType(FontFamilyType fontType) async {
+    await SharedPreferencesKeys().setFontType(fontType);
+    _fontType = fontType;
     _themeData = AppTheme.getThemeData;
     notifyListeners();
   }

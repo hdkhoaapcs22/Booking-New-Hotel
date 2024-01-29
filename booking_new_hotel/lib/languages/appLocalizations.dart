@@ -23,7 +23,8 @@ class AppLocalizations {
     for (var value in jsonData) {
       if (value is Map && value['text_id'] != null) {
         Map<String, String> texts = {};
-        texts['text_id'] = value['text_id'] ?? ''; // if text_id is null, then ''
+        texts['text_id'] =
+            value['text_id'] ?? ''; // if text_id is null, then ''
         texts['en'] = value['en'] ?? '';
         texts['fr'] = value['fr'] ?? '';
         texts['ar'] = value['ar'] ?? '';
