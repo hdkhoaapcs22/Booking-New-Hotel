@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'package:booking_new_hotel/widgets/common_button.dart';
+import '../../widgets/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../languages/appLocalizations.dart';
 import '../../utils/localfiles.dart';
 import '../../utils/themes.dart';
 import 'components/page_popview.dart';
+import '../../routes/route_names.dart';
 
 class IntroductionScreen extends StatefulWidget {
   const IntroductionScreen({super.key});
@@ -100,7 +100,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
       CommonButton(
         padding: const EdgeInsets.only(left: 48, right: 48, bottom: 8, top: 8),
         buttonText: AppLocalizations(context).of("login"),
-        onTap: () {},
+        onTap: () {
+          NavigationServices(context).gotoLoginScreen();
+        },
       ),
       CommonButton(
         padding: const EdgeInsets.only(left: 48, right: 48, bottom: 8, top: 8),
@@ -109,7 +111,10 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         buttonText: AppLocalizations(context).of("create_account"),
         onTap: () {},
       ),
-      SizedBox(height: MediaQuery.of(context).padding.bottom) // it helps create space for bottom 
+      SizedBox(
+          height: MediaQuery.of(context)
+              .padding
+              .bottom) // it helps create space for bottom
     ]));
   }
 }

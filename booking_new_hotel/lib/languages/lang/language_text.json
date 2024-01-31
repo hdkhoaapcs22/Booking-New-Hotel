@@ -63,6 +63,20 @@
         "ja": "ログイン"
     },
     {
+        "text_id": "wellcome_back",
+        "en": "Wellcome back you've been missed!",
+        "fr": "Bienvenue en arrière, vous avez manqué!",
+        "ar": "مرحبا بعودتك لقد اشتقنا إليك!",
+        "ja": "お帰りなさい、あなたは見逃されています！"
+    },
+    {
+        "text_id": "continue_with",
+        "en": "Or continue with",
+        "fr": "Ou continuer avec",
+        "ar": "أو تابع مع",
+        "ja": "または続ける"
+    },
+    {
         "text_id": "create_account",
         "en": "Create account",
         "fr": "Créer un compte",
