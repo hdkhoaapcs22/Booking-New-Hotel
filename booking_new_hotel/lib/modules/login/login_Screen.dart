@@ -1,3 +1,4 @@
+import '../../utils/validator.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: RemoveFocus(
             onClick: () {
               FocusScope.of(context).requestFocus(FocusNode());
@@ -46,18 +48,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CommonTextFieldView(
                     controller: emailController,
-                    padding: const EdgeInsets.only(left: 24, right: 24),
+                    padding:
+                        const EdgeInsets.only(top: 10, left: 24, right: 24),
                     keyboardType: TextInputType.emailAddress,
                     titleText: AppLocalizations(context).of("your_mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
+                    errorText: errorEmail,
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
-                    padding:
-                        const EdgeInsets.only(left: 24, right: 24, bottom: 20),
+                    padding: const EdgeInsets.only(left: 24, right: 24),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
+                    errorText: errorPassword,
                     isObscureText: true,
                   ),
                   forgotPasswordUI(),
@@ -70,9 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: AppTheme.whiteColor,
                               fontSize: 16,
                             )),
-                    onTap: () {},
+                    onTap: () {
+                      if (allValidation()) {
+                        print('Login');
+                      }
+                    },
                   ),
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Row(children: [
@@ -99,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ]),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(0),
                     child: Container(
                         padding: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
@@ -138,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   forgotPasswordUI() {
     return Padding(
-        padding: EdgeInsets.only(top: 3, left: 24, right: 24),
+        padding: const EdgeInsets.only(left: 24, right: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,5 +163,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         )))
           ],
         ));
+  }
+
+  bool allValidation() {
+    bool isValid = true;
+    if (emailController.text.trim().isEmpty) {
+      isValid = false;
+      errorEmail = AppLocalizations(context).of("email_cannot_empty");
+    } else if (Validator.validateEmail(emailController.text.trim()) == false) {
+      isValid = false;
+      errorEmail = AppLocalizations(context).of("enter_valid_email");
+    } else {
+      errorEmail = "";
+    }
+
+    if (passwordController.text.trim().isEmpty) {
+      isValid = false;
+      errorPassword = AppLocalizations(context).of("password_cannot_empty");
+    } else if (Validator.validateEmail(passwordController.text.trim()) ==
+        false) {
+      isValid = false;
+      errorPassword = AppLocalizations(context).of("enter_valid_password");
+    } else {
+      errorPassword = "";
+    }
+    setState(() {});
+    return isValid;
   }
 }

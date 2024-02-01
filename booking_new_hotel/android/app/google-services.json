@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "996671751499",
+    "project_id": "auth-for-booking-new-hotel",
+    "storage_bucket": "auth-for-booking-new-hotel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996671751499:android:d1a010f339b9434437d4ce",
+        "android_client_info": {
+          "package_name": "com.example.booking_new_hotel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8cvZYJhssfa2WW9FPoWRKtokDTQIYjX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

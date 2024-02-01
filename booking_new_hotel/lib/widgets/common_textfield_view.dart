@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../utils/text_styles.dart';
+import '../utils/themes.dart';
 
 class CommonTextFieldView extends StatelessWidget {
   final String? titleText;
@@ -27,7 +28,7 @@ class CommonTextFieldView extends StatelessWidget {
         padding: padding,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-              padding: EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: 15),
               child: Text(titleText ?? "",
                   style: TextStyles(context).getDescriptionStyle())),
           Card(
@@ -36,7 +37,7 @@ class CommonTextFieldView extends StatelessWidget {
             shadowColor: Colors.black12.withOpacity(
                 Theme.of(context).brightness == Brightness.dark ? 0.6 : 0.2),
             child: Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 child: TextField(
                   controller: controller,
                   obscureText: isObscureText,
@@ -53,7 +54,14 @@ class CommonTextFieldView extends StatelessWidget {
                           TextStyle(color: Theme.of(context).disabledColor)),
                   keyboardType: keyboardType,
                 )),
-          )
+          ),
+          if (errorText!.isNotEmpty)
+            Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(errorText ?? "",
+                    style: TextStyles(context).getDescriptionStyle().copyWith(
+                          color: AppTheme.redErrorColor,
+                        )))
         ]));
   }
 }
