@@ -111,10 +111,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         buttonText: AppLocalizations(context).of("create_account"),
         onTap: () {},
       ),
-      SizedBox(
-          height: MediaQuery.of(context)
-              .padding
-              .bottom) // it helps create space for bottom
+      SizedBox(height: 50) // it helps create space for bottom
     ]));
   }
 }

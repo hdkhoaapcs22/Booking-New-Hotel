@@ -11,6 +11,7 @@ class CommonTextFieldView extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final TextEditingController? controller;
   final TextInputType? keyboardType; // used to set keyboard type
+  final double dynamicDistance;
 
   const CommonTextFieldView(
       {super.key,
@@ -20,7 +21,8 @@ class CommonTextFieldView extends StatelessWidget {
       this.isObscureText = false,
       required this.padding,
       this.keyboardType,
-      this.controller});
+      this.controller,
+      this.dynamicDistance = 20.0});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class CommonTextFieldView extends StatelessWidget {
         padding: padding,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-              padding: EdgeInsets.only(top: 15),
+              padding: EdgeInsets.only(top: dynamicDistance),
               child: Text(titleText ?? "",
                   style: TextStyles(context).getDescriptionStyle())),
           Card(

@@ -20,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String errorPassword = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  double dynamicDistance = 20.0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CommonAppBarView(
+                  topPadding: AppBar().preferredSize.height - 20,
                   titleText: AppLocalizations(context).of("login"),
                   iconData: Icons.arrow_back_ios,
                   onBackClick: () {
@@ -49,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   CommonTextFieldView(
                     controller: emailController,
                     padding:
-                        const EdgeInsets.only(top: 10, left: 24, right: 24),
+                        const EdgeInsets.only(top: 12, left: 24, right: 24),
                     keyboardType: TextInputType.emailAddress,
                     titleText: AppLocalizations(context).of("your_mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
@@ -57,17 +59,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
-                    padding: const EdgeInsets.only(left: 24, right: 24),
+                    padding: EdgeInsets.only(
+                        top: dynamicDistance,
+                        left: 24,
+                        right: 24,
+                        bottom: dynamicDistance == 3 ? 0 : 34),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
                     errorText: errorPassword,
                     isObscureText: true,
+                    dynamicDistance: dynamicDistance,
                   ),
                   forgotPasswordUI(),
                   CommonButton(
                     padding:
-                        const EdgeInsets.only(top: 18, left: 24, right: 24),
+                        const EdgeInsets.only(top: 15, left: 24, right: 24),
                     buttonTextWidget:
                         Text(AppLocalizations(context).of("login"),
                             style: TextStyle(
@@ -146,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   forgotPasswordUI() {
     return Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24),
+        padding: EdgeInsets.only(left: 24, right: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -170,6 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (emailController.text.trim().isEmpty) {
       isValid = false;
       errorEmail = AppLocalizations(context).of("email_cannot_empty");
+      dynamicDistance = 3;
     } else if (Validator.validateEmail(emailController.text.trim()) == false) {
       isValid = false;
       errorEmail = AppLocalizations(context).of("enter_valid_email");

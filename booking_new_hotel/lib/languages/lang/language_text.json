@@ -1093,10 +1093,17 @@
     },
     {
         "text_id": "enter_valid_email",
-        "en": "Please enter a valid email address, abc@xyz.com",
-        "fr": "Veuillez entrer une adresse e-mail valide, abc@xyz.com",
-        "ar": "الرجاء إدخال عنوان بريد إلكتروني صالح ، abc@xyz.com",
-        "ja": "有効なメールアドレスabc@xyz.comを入力してください"
+        "en": "Please enter a valid email address",
+        "fr": "Veuillez entrer une adresse e-mail valide",
+        "ar": "الرجاء إدخال عنوان بريد إلكتروني صالح",
+        "ja": "有効なメールアドレスを入力してください"
+    },
+    {
+        "text_id": "enter_valid_password",
+        "en": "Please enter a valid password",
+        "fr": "Veuillez entrer un mot de passe valide",
+        "ar": "الرجاء إدخال كلمة مرور صالحة",
+        "ja": "有効なパスワードを入力してください"
     },
     {
         "text_id": "enter_password",
