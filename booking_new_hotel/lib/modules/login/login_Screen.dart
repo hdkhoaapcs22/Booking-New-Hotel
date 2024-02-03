@@ -1,3 +1,6 @@
+import 'package:booking_new_hotel/common/common.dart';
+
+import '../../routes/routes.dart';
 import '../../utils/validator.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
@@ -7,6 +10,7 @@ import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
 import '../../widgets/common_app_bar_view.dart';
 import 'facebook_twitter_button_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String errorPassword = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  double dynamicDistance = 20.0;
+  double distanceEmailError = 34, distancePasswordError = 34;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CommonTextFieldView(
                     controller: emailController,
-                    padding:
-                        const EdgeInsets.only(top: 12, left: 24, right: 24),
+                    padding: const EdgeInsets.only(top: 8, left: 24, right: 24),
                     keyboardType: TextInputType.emailAddress,
                     titleText: AppLocalizations(context).of("your_mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
@@ -59,17 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
-                    padding: EdgeInsets.only(
-                        top: dynamicDistance,
-                        left: 24,
-                        right: 24,
-                        bottom: dynamicDistance == 3 ? 0 : 34),
+                    padding: EdgeInsets.fromLTRB(
+                        24, distanceEmailError, 24, distancePasswordError),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
                     errorText: errorPassword,
                     isObscureText: true,
-                    dynamicDistance: dynamicDistance,
                   ),
                   forgotPasswordUI(),
                   CommonButton(
@@ -82,12 +81,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontSize: 16,
                             )),
                     onTap: () {
-                      if (allValidation()) {
-                        print('Login');
-                      }
+                      userLogin();
                     },
                   ),
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Row(children: [
@@ -125,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.grey[200],
                         ),
                         child: Image.asset("assets/images/google.png",
-                            height: 65)),
+                            height: 55)),
                   ),
                   Padding(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 5),
@@ -160,7 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             InkWell(
                 borderRadius: BorderRadius.circular(8),
-                onTap: () {},
+                onTap: () {
+                  print("Forgot Password");
+                },
                 child:
                     Text(AppLocalizations(context).of("forgot_your_Password"),
                         style: TextStyle(
@@ -177,7 +176,6 @@ class _LoginScreenState extends State<LoginScreen> {
     if (emailController.text.trim().isEmpty) {
       isValid = false;
       errorEmail = AppLocalizations(context).of("email_cannot_empty");
-      dynamicDistance = 3;
     } else if (Validator.validateEmail(emailController.text.trim()) == false) {
       isValid = false;
       errorEmail = AppLocalizations(context).of("enter_valid_email");
@@ -197,5 +195,38 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     setState(() {});
     return isValid;
+  }
+
+  Future userLogin() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      )
+          .then((value) {
+        Navigator.pushReplacementNamed(context, RoutesName.NextPage);
+      });
+    } on FirebaseAuthException catch (e) {
+      String tmp = e.code;
+      if (tmp == 'invalid-email') {
+        errorEmail = AppLocalizations(context).of('invalid_email');
+        distanceEmailError = 0;
+      } else if (tmp == 'invalid-credential') {
+        errorPassword = AppLocalizations(context).of('wrong_password');
+        distancePasswordError = 0;
+        errorEmail = "";
+        distanceEmailError = 34;
+      }
+      setState(() {});
+      Navigator.pop(context);
+    }
   }
 }

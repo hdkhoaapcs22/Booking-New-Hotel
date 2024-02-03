@@ -119,6 +119,13 @@
         "ja": "パスワードをリセットするためのメールを受信するには、メールアドレスを入力してください"
     },
     {
+        "text_id": "invalid_email",
+        "en": "Invalid email",
+        "fr": "Email invalide",
+        "ar": "بريد إلكتروني غير صالح",
+        "ja": "無効なメール"
+    },
+    {
         "text_id": "send",
         "en": "Send",
         "fr": "Envoyer",
@@ -1099,11 +1106,11 @@
         "ja": "有効なメールアドレスを入力してください"
     },
     {
-        "text_id": "enter_valid_password",
-        "en": "Please enter a valid password",
-        "fr": "Veuillez entrer un mot de passe valide",
-        "ar": "الرجاء إدخال كلمة مرور صالحة",
-        "ja": "有効なパスワードを入力してください"
+        "text_id": "wrong_password",
+        "en": "Wrong password",
+        "fr": "Mauvais mot de passe",
+        "ar": "كلمة مرور خاطئة",
+        "ja": "間違ったパスワード"
     },
     {
         "text_id": "enter_password",
