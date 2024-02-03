@@ -57,7 +57,7 @@ class CommonTextFieldView extends StatelessWidget {
                   keyboardType: keyboardType,
                 )),
           ),
-          if (errorText!.isNotEmpty)
+          if (errorText != null && errorText!.isNotEmpty)
             Padding(
                 padding: const EdgeInsets.all(5),
                 child: Text(errorText ?? "",
