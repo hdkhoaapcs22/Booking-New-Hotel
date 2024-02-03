@@ -101,7 +101,8 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         padding: const EdgeInsets.only(left: 48, right: 48, bottom: 8, top: 8),
         buttonText: AppLocalizations(context).of("login"),
         onTap: () {
-          NavigationServices(context).gotoLoginScreen();
+          // NavigationServices(context).gotoLoginScreen();
+          NavigationServices(context).gotoLoginOrSignUpScreen();
         },
       ),
       CommonButton(

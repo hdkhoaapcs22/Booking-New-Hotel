@@ -1,7 +1,4 @@
-import 'package:booking_new_hotel/common/common.dart';
-
 import '../../routes/routes.dart';
-import '../../utils/validator.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +10,8 @@ import 'facebook_twitter_button_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final Function() onTap;
+  const LoginScreen({super.key, required this.onTap});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -129,15 +127,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text("Not a member?",
-                                style: TextStyle(
+                            Text(AppLocalizations(context).of('not_a_member'),
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 )),
                             TextButton(
-                                onPressed: () {},
-                                child: const Text("Sign Up",
-                                    style: TextStyle(
+                                onPressed: () {
+                                  widget.onTap();
+                                },
+                                child: Text(AppLocalizations(context).of('register'),
+                                    style:const  TextStyle(
                                       color: Colors.blue,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -171,32 +171,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-  bool allValidation() {
-    bool isValid = true;
-    if (emailController.text.trim().isEmpty) {
-      isValid = false;
-      errorEmail = AppLocalizations(context).of("email_cannot_empty");
-    } else if (Validator.validateEmail(emailController.text.trim()) == false) {
-      isValid = false;
-      errorEmail = AppLocalizations(context).of("enter_valid_email");
-    } else {
-      errorEmail = "";
-    }
-
-    if (passwordController.text.trim().isEmpty) {
-      isValid = false;
-      errorPassword = AppLocalizations(context).of("password_cannot_empty");
-    } else if (Validator.validateEmail(passwordController.text.trim()) ==
-        false) {
-      isValid = false;
-      errorPassword = AppLocalizations(context).of("enter_valid_password");
-    } else {
-      errorPassword = "";
-    }
-    setState(() {});
-    return isValid;
-  }
-
   Future userLogin() async {
     showDialog(
         context: context,
@@ -218,14 +192,13 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacementNamed(context, RoutesName.NextPage);
       });
     } on FirebaseAuthException catch (e) {
-      String tmp = e.code;
-      if (tmp == 'channel-error') {
+      if (e.code == 'channel-error') {
         errorEmail = AppLocalizations(context).of('user_not_found');
         distanceEmailError = 0;
-      } else if (tmp == 'invalid-email') {
+      } else if (e.code == 'invalid-email') {
         errorEmail = AppLocalizations(context).of('invalid_email');
         distanceEmailError = 0;
-      } else if (tmp == 'invalid-credential') {
+      } else if (e.code == 'invalid-credential') {
         errorPassword = AppLocalizations(context).of('wrong_password');
         distancePasswordError = 0;
         errorEmail = "";

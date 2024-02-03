@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../modules/login/login_or_signup_screen.dart';
 import 'routes.dart';
-import '../modules/login/login_Screen.dart';
 
 class NavigationServices {
   final BuildContext context;
@@ -19,7 +19,7 @@ class NavigationServices {
         context, RoutesName.Introduction, (Route<dynamic> route) => false);
   }
 
-  Future<dynamic> gotoLoginScreen() async {
-    return _pushMaterialPageRoute(const LoginScreen());
+  Future<dynamic> gotoLoginOrSignUpScreen() async {
+    return _pushMaterialPageRoute(const LoginOrSignUpScreen());
   }
 }
