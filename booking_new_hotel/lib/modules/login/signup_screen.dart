@@ -160,10 +160,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (e.code == 'channel-error') {
         if (emailController.text.trim().isEmpty) {
           errorEmail = AppLocalizations(context).of('email_cannot_empty');
+          distanceEmailError = 0;
         } else {
-          errorEmail = AppLocalizations(context).of('password_cannot_empty');
+          errorPassword = AppLocalizations(context).of('password_cannot_empty');
+          errorEmail = "";
+          distanceEmailError = 34;
+          distancePasswordError = 0;
         }
-        distanceEmailError = 0;
       } else if (e.code == 'email-already-in-use') {
         errorEmail = AppLocalizations(context).of('email_already_in_use');
         errorPassword = errorPasswordConfirm = "";

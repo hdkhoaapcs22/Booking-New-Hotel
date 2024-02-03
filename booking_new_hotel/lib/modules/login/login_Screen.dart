@@ -194,8 +194,15 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'channel-error') {
-        errorEmail = AppLocalizations(context).of('user_not_found');
-        distanceEmailError = 0;
+        if (emailController.text.trim().isEmpty) {
+          errorEmail = AppLocalizations(context).of('user_not_found');
+          distanceEmailError = 0;
+        } else {
+          errorPassword = AppLocalizations(context).of('password_cannot_empty');
+          errorEmail = "";
+          distanceEmailError = 34;
+          distancePasswordError = 0;
+        }
       } else if (e.code == 'invalid-email') {
         errorEmail = AppLocalizations(context).of('invalid_email');
         distanceEmailError = 0;
