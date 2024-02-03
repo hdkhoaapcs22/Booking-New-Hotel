@@ -136,8 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () {
                                   widget.onTap();
                                 },
-                                child: Text(AppLocalizations(context).of('register'),
-                                    style:const  TextStyle(
+                                child: Text(
+                                    AppLocalizations(context).of('register'),
+                                    style: const TextStyle(
                                       color: Colors.blue,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
