@@ -126,6 +126,13 @@
         "ja": "無効なメール"
     },
     {
+        "text_id": "user_not_found",
+        "en": "User not found",
+        "fr": "Utilisateur non trouvé",
+        "ar": "المستخدم غير موجود",
+        "ja": "ユーザーが見つかりません"
+    },
+    {
         "text_id": "send",
         "en": "Send",
         "fr": "Envoyer",

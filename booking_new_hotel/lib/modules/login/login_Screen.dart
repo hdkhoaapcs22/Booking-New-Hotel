@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
 
@@ -212,11 +212,17 @@ class _LoginScreenState extends State<LoginScreen> {
         password: passwordController.text.trim(),
       )
           .then((value) {
+        errorPassword = "";
+        distancePasswordError = 34;
+        passwordController.clear();
         Navigator.pushReplacementNamed(context, RoutesName.NextPage);
       });
     } on FirebaseAuthException catch (e) {
       String tmp = e.code;
-      if (tmp == 'invalid-email') {
+      if (tmp == 'channel-error') {
+        errorEmail = AppLocalizations(context).of('user_not_found');
+        distanceEmailError = 0;
+      } else if (tmp == 'invalid-email') {
         errorEmail = AppLocalizations(context).of('invalid_email');
         distanceEmailError = 0;
       } else if (tmp == 'invalid-credential') {
