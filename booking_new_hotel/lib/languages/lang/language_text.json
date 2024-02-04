@@ -98,11 +98,39 @@
         "ja": "パスワードをお忘れですか？"
     },
     {
+        "text_id":"forgot_password",
+        "en": "Forgot\nPassword",
+        "fr": "Mot de passe\noublié",
+        "ar": "نسيت\nكلمة السر",
+        "ja": "パスワード\nを忘れた"
+    },
+    {
         "text_id": "resend_email_link",
         "en": "Enter your email to receive an email to reset your password",
         "fr": "Entrez votre email pour recevoir un email pour réinitialiser votre mot de passe",
         "ar": "أدخل بريدك الإلكتروني لتلقي بريد إلكتروني لإعادة تعيين كلمة المرور الخاصة بك",
         "ja": "パスワードをリセットするためのメールを受信するには、メールアドレスを入力してください"
+    },
+    {
+        "text_id": "reset_password",
+        "en": "Send Email",
+        "fr": "Envoyer un email",
+        "ar": "إرسال بريد إلكتروني",
+        "ja": "メールを送る"
+    },
+    {
+        "text_id":"reset_password_message",
+        "en": "We sent an email for you. Please check your email",
+        "fr": "Nous vous avons envoyé un email. Veuillez vérifier votre email",
+        "ar": "لقد أرسلنا بريدًا إلكترونيًا لك. يرجى التحقق من بريدك الإلكتروني",
+        "ja": "私たちはあなたにメールを送りました。あなたのメールをチェックしてください"
+    },
+    {
+        "text_id": "got_it",
+        "en": "GOT IT",
+        "fr": "COMPRIS",
+        "ar": "فهمت",
+        "ja": "わかりました"
     },
     {
         "text_id": "invalid_email",

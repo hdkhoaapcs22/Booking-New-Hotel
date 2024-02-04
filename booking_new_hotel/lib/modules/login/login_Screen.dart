@@ -9,6 +9,8 @@ import '../../widgets/common_app_bar_view.dart';
 import 'facebook_twitter_button_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'forgot_password.dart';
+
 class LoginScreen extends StatefulWidget {
   final Function() onTap;
   const LoginScreen({super.key, required this.onTap});
@@ -159,7 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
             InkWell(
                 borderRadius: BorderRadius.circular(8),
                 onTap: () {
-                  print("Forgot Password");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const ForgotPassword();
+                  }));
                 },
                 child:
                     Text(AppLocalizations(context).of("forgot_your_Password"),
