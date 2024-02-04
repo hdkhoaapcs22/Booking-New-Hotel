@@ -7,13 +7,6 @@
         "ja": "あなたの休日のための最高のホテルのお得な情報"
     },
     {
-        "text_id": "already_have_account",
-        "en": "Already have account? Log in",
-        "fr": "Vous avez déjà un compte? Connexion",
-        "ar": "لديك حساب بالفعل؟ تسجيل الدخول",
-        "ja": "すでにアカウントをお持ちですか？サインイン"
-    },
-    {
         "text_id": "get_started",
         "en": "Get started",
         "fr": "Commencer",
@@ -63,18 +56,25 @@
         "ja": "ログイン"
     },
     {
+        "text_id": "wellcome_back",
+        "en": "Wellcome back you've been missed!",
+        "fr": "Bienvenue en arrière, vous avez manqué!",
+        "ar": "مرحبا بعودتك لقد اشتقنا إليك!",
+        "ja": "お帰りなさい、あなたは見逃されています！"
+    },
+    {
+        "text_id": "continue_with",
+        "en": "Or continue with",
+        "fr": "Ou continuer avec",
+        "ar": "أو تابع مع",
+        "ja": "または続ける"
+    },
+    {
         "text_id": "create_account",
         "en": "Create account",
         "fr": "Créer un compte",
         "ar": "إنشاء حساب",
         "ja": "アカウントを作成する"
-    },
-    {
-        "text_id": "log_with mail",
-        "en": "or log in with email",
-        "fr": "ou connectez-vous avec e-mail",
-        "ar": "أو تسجيل الدخول بالبريد الإلكتروني",
-        "ja": "またはメールでログイン"
     },
     {
         "text_id": "your_mail",
@@ -105,6 +105,41 @@
         "ja": "パスワードをリセットするためのメールを受信するには、メールアドレスを入力してください"
     },
     {
+        "text_id": "invalid_email",
+        "en": "Invalid email",
+        "fr": "Email invalide",
+        "ar": "بريد إلكتروني غير صالح",
+        "ja": "無効なメール"
+    },
+    {
+        "text_id": "user_not_found",
+        "en": "User not found",
+        "fr": "Utilisateur non trouvé",
+        "ar": "المستخدم غير موجود",
+        "ja": "ユーザーが見つかりません"
+    },
+    {
+        "text_id": "already_have_account",
+        "en": "Already have account?",
+        "fr": "Vous avez déjà un compte?",
+        "ar": "لديك حساب بالفعل؟",
+        "ja": "すでにアカウントをお持ちですか？"
+    },
+    {
+        "text_id": "sign_in",
+        "en": "Sign in",
+        "fr": "Se connecter",
+        "ar": "تسجيل الدخول",  
+        "ja": "サインイン"
+    },
+    {
+        "text_id": "not_a_member",
+        "en": "Not a member?",
+        "fr": "Pas membre?",
+        "ar": "لست عضوا؟",
+        "ja": "メンバーではありませんか？"
+    },
+    {
         "text_id": "send",
         "en": "Send",
         "fr": "Envoyer",
@@ -112,10 +147,17 @@
         "ja": "送信"
     },
     {
+        "text_id": "register",
+        "en": "Register",
+        "fr": "S'inscrire",
+        "ar": "تسجيل",
+        "ja": "登録"
+    },
+    {
         "text_id": "sign_up",
         "en": "Sign up",
         "fr": "S'inscrire",
-        "ar": "اشتراك",
+        "ar": "سجل",
         "ja": "サインアップ"
     },
     {
@@ -131,13 +173,6 @@
         "fr": "Nom de famille",
         "ar": "الكنية",
         "ja": "苗字"
-    },
-    {
-        "text_id": "terms_agreed",
-        "en": "By Signing up,you agreed with our terms of\n Services and privacy policy",
-        "fr": "En vous inscrivant, vous acceptez nos conditions de",
-        "ar": "بالتسجيل ، فإنك توافق على شروطنا الخاصة بـ",
-        "ja": "サインアップすることにより、あなたは私たちの条件に同意した"
     },
     {
         "text_id": "explore",
@@ -1043,25 +1078,18 @@
         "ja": "パスワードを空にすることはできません"
     },
     {
-        "text_id": "valid_new_password",
-        "en": "We cannot allow less than 6 lengths of the password, please enter a valid new password",
-        "fr": "Nous ne pouvons pas autoriser moins de 6 longueurs de mot de passe, veuillez entrer un nouveau mot de passe valide",
-        "ar": "لا يمكننا السماح بأقل من 6 أطوال لكلمة المرور ، يرجى إدخال كلمة مرور جديدة صالحة",
-        "ja": "6未満の長さのパスワードは許可されません。有効な新しいパスワードを入力してください"
-    },
-    {
         "text_id": "valid_password",
-        "en": "We cannot allow less than 6 lengths of the password, please enter a valid password",
-        "fr": "Nous ne pouvons pas autoriser moins de 6 longueurs de mot de passe, veuillez entrer un mot de passe valide",
-        "ar": "لا يمكننا السماح بأقل من 6 أطوال لكلمة المرور ، يرجى إدخال كلمة مرور صالحة",
-        "ja": "パスワードの長さは6未満にすることはできません。有効なパスワードを入力してください"
+        "en": "The length must be at least 6 characters",
+        "fr": "La longueur doit être d'au moins 6 caractères",
+        "ar": "يجب أن يكون الطول على الأقل 6 أحرف",
+        "ja": "長さは少なくとも6文字でなければなりません"
     },
     {
         "text_id": "password_not_match",
-        "en": "Password does not match, please enter a valid password",
-        "fr": "Le mot de passe ne correspond pas, veuillez entrer un mot de passe valide",
-        "ar": "كلمة المرور غير متطابقة ، الرجاء إدخال كلمة مرور صالحة",
-        "ja": "パスワードが一致しません。有効なパスワードを入力してください"
+        "en": "Password does not match",
+        "fr": "Le mot de passe ne correspond pas",
+        "ar": "كلمة المرور غير متطابقة",
+        "ja": "パスワードが一致しません"
     },
     {
         "text_id": "enter_your_email",
@@ -1079,10 +1107,24 @@
     },
     {
         "text_id": "enter_valid_email",
-        "en": "Please enter a valid email address, abc@xyz.com",
-        "fr": "Veuillez entrer une adresse e-mail valide, abc@xyz.com",
-        "ar": "الرجاء إدخال عنوان بريد إلكتروني صالح ، abc@xyz.com",
-        "ja": "有効なメールアドレスabc@xyz.comを入力してください"
+        "en": "Please enter a valid email address",
+        "fr": "Veuillez entrer une adresse e-mail valide",
+        "ar": "الرجاء إدخال عنوان بريد إلكتروني صالح",
+        "ja": "有効なメールアドレスを入力してください"
+    },
+    {
+        "text_id": "email_already_in_use",
+        "en": "Email already in use",
+        "fr": "Email déjà utilisé", 
+        "ar": "البريد الإلكتروني مستخدم بالفعل",
+        "ja": "メールアドレスはすでに使用されています"
+    },
+    {
+        "text_id": "wrong_password",
+        "en": "Wrong password",
+        "fr": "Mauvais mot de passe",
+        "ar": "كلمة مرور خاطئة",
+        "ja": "間違ったパスワード"
     },
     {
         "text_id": "enter_password",

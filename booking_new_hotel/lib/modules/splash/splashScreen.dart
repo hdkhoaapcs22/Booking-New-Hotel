@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   child: Image.asset(Localfiles.appIcon),
                 ))),
-        const SizedBox(height: 20),
+        const SizedBox(height: 15),
         Text(
           "Motel",
           textAlign: TextAlign.left,
@@ -104,8 +104,7 @@ class _SplashScreenState extends State<SplashScreen> {
             opacity: isLoadText ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 680),
             child: CommonButton(
-              padding:
-                  const EdgeInsets.only(left: 48, right: 48, bottom: 8, top: 8),
+              padding: const EdgeInsets.only(left: 48, right: 48),
               buttonText: AppLocalizations(context).of("get_started"),
               onTap: () {
                 NavigationServices(context).gotoIntroductionScreen();
@@ -125,7 +124,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     .getDescriptionStyle()
                     .copyWith(color: AppTheme.whiteColor),
               ),
-            ))
+            )),
+        const SizedBox(
+          height: 20,
+        )
       ])
     ])));
   }

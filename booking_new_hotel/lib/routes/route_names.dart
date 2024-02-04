@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../modules/login/login_or_signup_screen.dart';
 import 'routes.dart';
 
 class NavigationServices {
@@ -16,5 +17,9 @@ class NavigationServices {
   void gotoIntroductionScreen() {
     Navigator.pushNamedAndRemoveUntil(
         context, RoutesName.Introduction, (Route<dynamic> route) => false);
+  }
+
+  Future<dynamic> gotoLoginOrSignUpScreen() async {
+    return _pushMaterialPageRoute(const LoginOrSignUpScreen());
   }
 }

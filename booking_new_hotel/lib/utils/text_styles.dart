@@ -6,9 +6,9 @@ class TextStyles {
 
   TextStyles(this.context);
 
-  TextStyle getTitleStyle() {
+  TextStyle getTitleStyle([double size = 24]) {
     return Theme.of(context).textTheme.titleLarge!.copyWith(
-          fontSize: 24,
+          fontSize: size,
           color: AppTheme.primaryTextColor,
         );
   }
