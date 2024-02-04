@@ -101,8 +101,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         padding: const EdgeInsets.only(left: 48, right: 48, bottom: 8, top: 8),
         buttonText: AppLocalizations(context).of("login"),
         onTap: () {
-          // NavigationServices(context).gotoLoginScreen();
-          NavigationServices(context).gotoLoginOrSignUpScreen();
+          NavigationServices(context).gotoLoginOrSignUpScreen(true);
         },
       ),
       CommonButton(
@@ -110,9 +109,11 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         backgroundColor: AppTheme.backgroundColor,
         textColor: const Color.fromARGB(255, 0, 0, 0),
         buttonText: AppLocalizations(context).of("create_account"),
-        onTap: () {},
+        onTap: () {
+          NavigationServices(context).gotoLoginOrSignUpScreen(false);
+        },
       ),
-      SizedBox(height: 50) // it helps create space for bottom
+      const SizedBox(height: 55) // it helps create space for bottom
     ]));
   }
 }

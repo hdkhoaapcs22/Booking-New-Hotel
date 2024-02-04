@@ -19,7 +19,9 @@ class NavigationServices {
         context, RoutesName.Introduction, (Route<dynamic> route) => false);
   }
 
-  Future<dynamic> gotoLoginOrSignUpScreen() async {
-    return _pushMaterialPageRoute(const LoginOrSignUpScreen());
+  Future<dynamic> gotoLoginOrSignUpScreen(bool showLoginScreen) async {
+    return _pushMaterialPageRoute(
+      LoginOrSignUpScreen(gobalState: showLoginScreen),
+    );
   }
 }

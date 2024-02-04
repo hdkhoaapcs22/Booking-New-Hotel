@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'signup_screen.dart';
 
+// ignore: must_be_immutable
 class LoginOrSignUpScreen extends StatefulWidget {
-  const LoginOrSignUpScreen({super.key});
+  bool gobalState;
+  LoginOrSignUpScreen({super.key, required this.gobalState});
 
   @override
-  State<LoginOrSignUpScreen> createState() => _LoginOrSignUpScreenState();
+  State<LoginOrSignUpScreen> createState() =>
+      _LoginOrSignUpScreenState(showLoginScreen: gobalState);
 }
 
 class _LoginOrSignUpScreenState extends State<LoginOrSignUpScreen> {
-  bool showLoginScreen = true;
+  bool showLoginScreen;
 
-  void toggleScreen()
-  {
+  _LoginOrSignUpScreenState({required this.showLoginScreen});
+
+  void toggleScreen() {
     setState(() {
       showLoginScreen = !showLoginScreen;
     });
@@ -22,14 +26,11 @@ class _LoginOrSignUpScreenState extends State<LoginOrSignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if(showLoginScreen)
-    {
-      return  LoginScreen(
+    if (showLoginScreen) {
+      return LoginScreen(
         onTap: toggleScreen,
       );
-    }
-    else
-    {
+    } else {
       return SignUpScreen(
         onTap: toggleScreen,
       );

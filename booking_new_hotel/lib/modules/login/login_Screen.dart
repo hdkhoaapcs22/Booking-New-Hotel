@@ -3,6 +3,7 @@ import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
+import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
 import '../../widgets/common_app_bar_view.dart';
@@ -38,14 +39,13 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CommonAppBarView(
-                  topPadding: AppBar().preferredSize.height - 20,
-                  titleText: AppLocalizations(context).of("login"),
-                  iconData: Icons.arrow_back_ios,
-                  onBackClick: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                Padding(
+                    padding: EdgeInsets.only(
+                        top: (AppBar().preferredSize.height * 2 - 12),
+                        left: 15,
+                        bottom: 15),
+                    child: Text(AppLocalizations(context).of("login"),
+                        style: TextStyles(context).getTitleStyle(28))),
                 Expanded(
                     child: Column(children: [
                   const Padding(
