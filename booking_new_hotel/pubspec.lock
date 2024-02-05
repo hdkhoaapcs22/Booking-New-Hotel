@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: d2e3bdcf79345363e16ce1cd590d94e33b03f2a7810fd71541ac7568c9793abe
+      sha256: "78f9e0914a5b85de1257a0c1d1af92c4e22f86448133dfc967651ca606a87a82"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.18"
+    version: "1.3.20"
   async:
     dependency: transitive
     description:
@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      sha256: "706b5707578e0c1b4b7550f64078f0a0f19dec3f50a178ffae7006b0a9ca58fb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -85,34 +93,34 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_auth
-      sha256: de30dbfe213f0496222168b51e0d8f94f32f57577adaadd98a6c3e8e66aa63fa
+      sha256: "6dae39ef1a4aba95c160506fa15a6d8545a4dbcffeff80e498a52f4698bbf520"
       url: "https://pub.dev"
     source: hosted
-    version: "4.17.1"
+    version: "4.17.3"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
-      sha256: f7ed78d7840798819e0fd978db318d677ea96fb23613a6220b53995d4159bedb
+      sha256: "1e8703687fe7ff78ff8b0c580b6476dca18087eadc6985bc8f578b5739b8e8e3"
       url: "https://pub.dev"
     source: hosted
-    version: "7.1.1"
+    version: "7.1.3"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
-      sha256: "48f7030c51b7aee3f8a6c995e1a41ef5d750b4955e24360e03f33db4775bf745"
+      sha256: "946069f8c96fb7d0fe46bcfbf1902cfa48c7445beff14a1305e29cae7e00c0f5"
       url: "https://pub.dev"
     source: hosted
-    version: "5.9.1"
+    version: "5.9.3"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: d51386e4ac38e226f4a9293c2f7e0aa0b0c5dc990ad230aaf783b728666d5e09
+      sha256: "0b066f2dc196de65f4e57dc851984acba751a7929bffaee69464b3f75e175a5c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.25.1"
+    version: "2.25.3"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -125,10 +133,10 @@ packages:
     dependency: transitive
     description:
       name: firebase_core_web
-      sha256: "8b70f6e50248be70b9e8cb012401bbd040ddf284a4eeab5425da86ed317d8ace"
+      sha256: df9d4ce37b97ecbe4347fb21887cb61383e3e95f8cf8d6c2de5999ef58e8b312
       url: "https://pub.dev"
     source: hosted
-    version: "2.11.1"
+    version: "2.11.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -147,6 +155,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: b068ffc46f82a55844acfa4fdbb61fad72fa2aef0905548419d97f0f95c456da
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.17"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -173,6 +189,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  google_maps:
+    dependency: transitive
+    description:
+      name: google_maps
+      sha256: "555d5d736339b0478e821167ac521c810d7b51c3b2734e6802a9f046b64ea37a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.0"
+  google_maps_flutter:
+    dependency: "direct main"
+    description:
+      name: google_maps_flutter
+      sha256: ae66fef3e71261d7df2eff29b2a119e190b2884325ecaa55321b1e17b5504066
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.3"
+  google_maps_flutter_android:
+    dependency: transitive
+    description:
+      name: google_maps_flutter_android
+      sha256: "714530f865f13bb3b9505c58821c3baed5d247a871724acf5d2ea5808fbed02c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.2"
+  google_maps_flutter_ios:
+    dependency: transitive
+    description:
+      name: google_maps_flutter_ios
+      sha256: b644d205c235f85dc60e22f46172a868b1cd642afd5a52b3808c789e461b025a
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  google_maps_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: google_maps_flutter_platform_interface
+      sha256: "6060779f020638a8eedeb0fb14234818e5fa32ec45a4653d6428ab436e2bbc64"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.3"
+  google_maps_flutter_web:
+    dependency: transitive
+    description:
+      name: google_maps_flutter_web
+      sha256: "6245721c160d6f531c1ef568cf9bef8d660cd585a982aa75121269030163785a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.4+3"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      sha256: "3a7812d5bcd2894edf53dfaf8cd640876cf6cef50a8f238745c8b8120ea74d3a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.4"
   http:
     dependency: transitive
     description:
@@ -205,6 +277,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  js_wrapping:
+    dependency: transitive
+    description:
+      name: js_wrapping
+      sha256: e385980f7c76a8c1c9a560dfb623b890975841542471eade630b2871d243851c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.4"
   lints:
     dependency: transitive
     description:
@@ -325,6 +405,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.1"
+  sanitize_html:
+    dependency: transitive
+    description:
+      name: sanitize_html
+      sha256: "12669c4a913688a26555323fb9cec373d8f9fbe091f2d01c40c723b33caa8989"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -418,6 +506,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      sha256: "14a00e794c7c11aa145a170587321aedce29769c08d7f58b1d141da75e3b1c6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:
@@ -484,4 +580,4 @@ packages:
     version: "1.0.4"
 sdks:
   dart: ">=3.2.4 <4.0.0"
-  flutter: ">=3.16.0"
+  flutter: ">=3.16.6"

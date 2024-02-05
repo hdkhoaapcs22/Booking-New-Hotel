@@ -1,3 +1,4 @@
+import 'package:booking_new_hotel/modules/bottomTap/bottomTapScreen.dart';
 import 'package:flutter/material.dart';
 import '../modules/login/login_or_signup_screen.dart';
 import 'routes.dart';
@@ -23,5 +24,9 @@ class NavigationServices {
     return _pushMaterialPageRoute(
       LoginOrSignUpScreen(gobalState: showLoginScreen),
     );
+  }
+
+  void gotoBottomTapScreen() async {
+    return _pushMaterialPageRoute(const BottomTapScreen());
   }
 }

@@ -1,3 +1,5 @@
+import 'package:booking_new_hotel/routes/route_names.dart';
+
 import '../../routes/routes.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
@@ -193,8 +195,10 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((value) {
         errorPassword = "";
         distancePasswordError = 34;
+        distanceEmailError = 34;
         passwordController.clear();
-        Navigator.pushReplacementNamed(context, RoutesName.NextPage);
+        errorEmail = "";
+        NavigationServices(context).gotoBottomTapScreen();
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'channel-error') {

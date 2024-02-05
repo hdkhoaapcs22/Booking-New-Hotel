@@ -41,7 +41,8 @@ dependencies:
     google_fonts: ^6.1.0
     shared_preferences: ^2.2.2
     firebase_core: ^2.25.1
-    firebase_auth: ^4.17.1
+    firebase_auth: 4.17.3
+    google_maps_flutter: ^2.5.3
 
 dev_dependencies:
     flutter_test:

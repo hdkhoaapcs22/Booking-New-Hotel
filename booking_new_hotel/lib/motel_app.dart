@@ -10,7 +10,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import 'common/common.dart';
-import 'modules/next_page.dart';
 import 'utils/enum.dart';
 import '../routes/routes.dart';
 
@@ -91,7 +90,6 @@ class _MotelAppState extends State<MotelApp> {
       RoutesName.Splash: (BuildContext context) => const SplashScreen(),
       RoutesName.Introduction: (BuildContext context) =>
           const IntroductionScreen(),
-      RoutesName.NextPage: (BuildContext context) => const NextPage(),
     };
   }
 
