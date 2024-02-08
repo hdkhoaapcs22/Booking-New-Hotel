@@ -16,7 +16,7 @@ class IntroductionScreen extends StatefulWidget {
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
-  var pageController = PageController(initialPage: 0);
+  var pageController = PageController(initialPage: 0); // pageController helps to control how pageview widget works between pages
   List<PageViewData> pageViewModelData = [];
   late Timer sliderTime;
 
