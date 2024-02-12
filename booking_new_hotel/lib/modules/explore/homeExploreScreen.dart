@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/theme_provider.dart';
+import '../../routes/route_names.dart';
 import '../../utils/enum.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
@@ -66,11 +67,11 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
 
   @override
   Widget build(BuildContext context) {
-    sliderImageHeight = MediaQuery.of(context).size.width * 1.3;
+    sliderImageHeight = MediaQuery.of(context).size.width * 1.25;
     return BottomTopMoveAnimationView(
         animationController: widget.animationController,
         child: Consumer<ThemeProvider>(
-            builder: (Context, value, child) => Stack(children: [
+            builder: (context, value, child) => Stack(children: [
                   Container(
                       color: AppTheme.scaffoldBackgroundColor,
                       child: ListView.builder(
@@ -80,7 +81,6 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                               top: sliderImageHeight + 32, bottom: 16),
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            var count = 4;
                             var animation = Tween(begin: 0.0, end: 1.0).animate(
                               CurvedAnimation(
                                   parent: widget.animationController,
@@ -96,7 +96,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                               );
                             } else if (index == 1) {
                               return Padding(
-                                padding: EdgeInsets.only(top: 8),
+                                padding: const EdgeInsets.only(top: 8),
                                 child: PopularListView(
                                   animationController:
                                       widget.animationController,
@@ -167,7 +167,10 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                       ? 1.0
                       : animationController.value);
               return SizedBox(
-                  height: sliderImageHeight * (1.0 - animationController.value),
+                  height: sliderImageHeight *
+                      (1.0 -
+                          animationController
+                              .value), // when we scroll the image will be shrink
                   child: HomeExploreSliderView(
                     opValue: opecity,
                     click: () {},
@@ -224,12 +227,14 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
 
   searchUI() {
     return Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24, top: 65),
+        padding: const EdgeInsets.only(left: 24, right: 24, top: 50),
         child: CommonCard(
             radius: 36,
             child: InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(30)),
-              onTap: () {},
+              onTap: () {
+                NavigationServices(context).gotoSearchScreen();
+              },
               child: CommonSearchBar(
                 // ignore: deprecated_member_use
                 iconData: FontAwesomeIcons.search,
@@ -246,7 +251,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
       var animation = Tween(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: widget.animationController,
-          curve: Interval(0, 1.0, curve: Curves.fastOutSlowIn),
+          curve: const Interval(0, 1.0, curve: Curves.fastOutSlowIn),
         ),
       );
       list.add(
@@ -255,8 +260,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
             hotelData: element,
             animationController: widget.animationController,
             animation: animation,
-            rating:Random().nextDouble() * 5.1 + 1.0
-            ),
+            rating: Random().nextDouble() * 5.1 + 3.5),
       );
     });
     return Padding(

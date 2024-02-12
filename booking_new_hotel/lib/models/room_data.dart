@@ -5,10 +5,10 @@ class RoomData {
 }
 
 class DateText {
-  late int stateDate;
+  late int startDate;
   late int endDate;
 
-  DateText(this.stateDate, this.endDate);
+  DateText(this.startDate, this.endDate);
 }
 
 class PeopleSleeps {

@@ -8,6 +8,7 @@ class CommonSearchBar extends StatelessWidget {
   final bool enabled, isShow;
   final double height;
   final IconData? iconData;
+  final TextEditingController? textEditingController;
 
   const CommonSearchBar(
       {super.key,
@@ -15,7 +16,8 @@ class CommonSearchBar extends StatelessWidget {
       this.enabled = false,
       this.isShow = true,
       this.height = 48,
-      this.iconData});
+      this.iconData,
+      this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class CommonSearchBar extends StatelessWidget {
                   : const SizedBox(),
               Expanded(
                   child: TextField(
+                      controller: textEditingController,
                       maxLines: 1,
                       enabled: enabled,
                       onChanged: (String text) {},
@@ -51,8 +54,9 @@ class CommonSearchBar extends StatelessWidget {
                           hintStyle: TextStyles(context)
                               .getDescriptionStyle()
                               .copyWith(
-                                  color: AppTheme.secondaryTextColor,
-                                  fontSize: 18,))))
+                                color: AppTheme.secondaryTextColor,
+                                fontSize: 18,
+                              ))))
             ]))));
   }
 }

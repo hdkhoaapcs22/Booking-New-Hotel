@@ -48,10 +48,10 @@ class _PopularListViewState extends State<PopularListView>
               future: getData(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return SizedBox();
+                  return const SizedBox();
                 } else {
                   return ListView.builder(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           top: 0, bottom: 0, right: 24, left: 8),
                       itemCount: popularList.length,
                       scrollDirection: Axis.horizontal,
@@ -64,7 +64,7 @@ class _PopularListViewState extends State<PopularListView>
                                   curve: Curves.fastOutSlowIn)),
                         );
                         animationController?.forward();
-                        // Population animation phto and text view
+                        // Population animation photo and text view
                         return CategoryView(
                           callBack: () {
                             widget.callBack(index);

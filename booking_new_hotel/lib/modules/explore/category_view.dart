@@ -39,14 +39,14 @@ class CategoryView extends StatelessWidget {
                     left: 16, bottom: 24, top: 16, right: 16),
                 child: Card(
                     elevation: 8,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(16.0))),
                     child: Stack(children: [
                       AspectRatio(
-                        aspectRatio: 2,
+                        aspectRatio: 2, // the ratio between width and height
                         child: Image.asset(
                           popularList.imagePath,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.cover, // it helps to fit the image
                         ),
                       ),
                       Positioned(
@@ -55,7 +55,8 @@ class CategoryView extends StatelessWidget {
                           right: 0,
                           child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
+                              mainAxisSize: MainAxisSize
+                                  .max, // it helps to take the full width
                               children: [
                                 Expanded(
                                     child: Container(
@@ -72,7 +73,7 @@ class CategoryView extends StatelessWidget {
                                           ),
                                         ),
                                         child: Padding(
-                                            padding: EdgeInsets.only(
+                                            padding: const EdgeInsets.only(
                                                 left: 8,
                                                 bottom: 32,
                                                 top: 8,

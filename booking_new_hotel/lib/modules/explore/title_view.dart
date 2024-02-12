@@ -29,7 +29,7 @@ class TitleView extends StatelessWidget {
                   transform: Matrix4.translationValues(
                       0.0, 30 * (1.0 - animation.value), 0.0),
                   child: Padding(
-                      padding: EdgeInsets.only(left: 24, right: 24),
+                      padding: const EdgeInsets.only(left: 24, right: 24),
                       child: Row(children: [
                         Text(
                           titleText,
@@ -38,7 +38,7 @@ class TitleView extends StatelessWidget {
                               .getBoldStyle()
                               .copyWith(fontSize: 18),
                         ),
-                        Expanded(
+                        const Expanded(
                           child: SizedBox(),
                         ),
                         isLeftButton
@@ -46,13 +46,13 @@ class TitleView extends StatelessWidget {
                                 color: Colors.transparent,
                                 child: InkWell(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(4.0)),
+                                        const BorderRadius.all(Radius.circular(4.0)),
                                     onTap: () {
                                       return click();
                                     },
                                     child: Padding(
                                         padding:
-                                            EdgeInsets.only(left: 8, right: 8),
+                                            const EdgeInsets.only(left: 8, right: 8),
                                         child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -76,7 +76,7 @@ class TitleView extends StatelessWidget {
                                                     color: Theme.of(context).primaryColor
                                                   ))
                                             ]))))
-                            : SizedBox()
+                            : const SizedBox()
                       ]))));
         });
   }
