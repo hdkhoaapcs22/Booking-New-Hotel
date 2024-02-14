@@ -227,7 +227,8 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
 
   searchUI() {
     return Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24, top: 50),
+        padding: EdgeInsets.only(
+            left: 24, right: 24, top: AppBar().preferredSize.height * 1.25),
         child: CommonCard(
             radius: 36,
             child: InkWell(

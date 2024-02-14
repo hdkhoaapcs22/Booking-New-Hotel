@@ -53,6 +53,7 @@ class _SearchScreenState extends State<SearchScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CommonAppBarView(
+              topPadding: AppBar().preferredSize.height - 10,
               iconData: Icons.close_rounded,
               onBackClick: () {
                 Navigator.pop(context);
@@ -157,9 +158,8 @@ class _SearchScreenState extends State<SearchScreen>
           final data = curList[count];
           var animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
               parent: animationController,
-              curve:
-                  Interval((1 / curList.length) * count, 1.0, 
-              curve: Curves.fastOutSlowIn)));
+              curve: Interval((1 / curList.length) * count, 1.0,
+                  curve: Curves.fastOutSlowIn)));
           animationController.forward();
           listUI.add(Expanded(
               child: SearchView(

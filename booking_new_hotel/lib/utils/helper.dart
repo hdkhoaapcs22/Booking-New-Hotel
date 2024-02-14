@@ -32,6 +32,6 @@ class Helper {
     LanguageType languageType = applicationcontext == null
         ? LanguageType.en
         : applicationcontext!.read<ThemeProvider>().languageType;
-    return "${dateText.startDate} = ${dateText.endDate} ${DateFormat('MMM', languageType.toString().split('.')[1]). format(DateTime.now().add(const Duration(days: 2)))}";
+    return "${dateText.startDate} - ${dateText.endDate} ${DateFormat('MMM', languageType.toString().split('.')[1]).format(DateTime.now().add(const Duration(days: 2)))}";
   }
 }

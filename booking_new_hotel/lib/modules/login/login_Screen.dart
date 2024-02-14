@@ -1,6 +1,5 @@
 import 'package:booking_new_hotel/routes/route_names.dart';
 
-import '../../routes/routes.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import '../../languages/appLocalizations.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
-import '../../widgets/common_app_bar_view.dart';
 import 'facebook_twitter_button_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -35,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         resizeToAvoidBottomInset: false,
         body: RemoveFocus(
             onClick: () {
-              FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(context).requestFocus(FocusNode()); // if it is the last -> keyboard is closed
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

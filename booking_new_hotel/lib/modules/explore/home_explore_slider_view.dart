@@ -44,13 +44,16 @@ class _HomeExploreSliderViewState extends State<HomeExploreSliderView> {
         subText: "five_star",
         assetImage: Localfiles.explore_3));
     sliderTimer = Timer.periodic(const Duration(seconds: 4), (timer) {
-      if (mounted) { // check because it is possible that the widget is disposed
+      if (mounted) {
+        // check because it is possible that the widget is disposed
         if (currentShowIndex == 0) {
           pageController.animateTo(MediaQuery.of(context).size.width,
-              duration: const Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+              duration: const Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn);
         } else if (currentShowIndex == 1) {
           pageController.animateTo(MediaQuery.of(context).size.width * 2,
-              duration: const Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+              duration: const Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn);
         } else if (currentShowIndex == 2) {
           pageController.animateTo(0,
               duration: const Duration(seconds: 1),
@@ -75,8 +78,10 @@ class _HomeExploreSliderViewState extends State<HomeExploreSliderView> {
       child: Stack(children: [
         PageView.builder(
             controller: pageController,
-            pageSnapping: true, // it helps to scroll page by page and doesn't stop in middle of page
+            pageSnapping:
+                true, // it helps to scroll page by page and doesn't stop in middle of page
             onPageChanged: (index) {
+              // it is called when the page is changed
               currentShowIndex = index;
             },
             scrollDirection: Axis.horizontal,
@@ -128,8 +133,9 @@ class PagePopup extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      Positioned( // it positions the text at the bottom of the image
-      // It is usually used to position child widgets in Stack widget or similar
+      Positioned(
+          // it positions the text at the bottom of the image
+          // It is usually used to position child widgets in Stack widget or similar
           bottom: 80,
           left: 24,
           right: 24,
