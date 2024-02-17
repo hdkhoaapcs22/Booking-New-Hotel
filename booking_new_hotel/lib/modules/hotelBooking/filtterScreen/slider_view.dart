@@ -27,7 +27,7 @@ class _SliderViewState extends State<SliderView> {
       child: Column(children: [
         Row(
           children: [
-            Expanded(
+            const Expanded(
               flex: 100,
               child: SizedBox(),
             ),
@@ -53,7 +53,7 @@ class _SliderViewState extends State<SliderView> {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 60,
               child: SizedBox(),
             ),

@@ -12,15 +12,17 @@ import '../../../utils/text_styles.dart';
 import 'calendar_pop_view.dart';
 import 'room_pop_up_view.dart';
 
+// ignore: must_be_immutable
 class TimeDateView extends StatefulWidget {
-  const TimeDateView({super.key});
+  Function(DateTime, DateTime, RoomData) callback;
+  TimeDateView(this.callback, {Key? key}) : super(key: key);
 
   @override
   State<TimeDateView> createState() => _TimeDateViewState();
 }
 
 class _TimeDateViewState extends State<TimeDateView> {
-  RoomData _roomData = RoomData(1, 2);
+  RoomData _roomData = RoomData(1,2);
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
   LanguageType _languageType = applicationcontext == null
@@ -113,6 +115,7 @@ class _TimeDateViewState extends State<TimeDateView> {
                 setState(() {
                   startDate = startData;
                   endDate = endData;
+                  widget.callback(startDate, endDate, _roomData);
                 });
               },
               onCancelClick: () {},
@@ -128,6 +131,7 @@ class _TimeDateViewState extends State<TimeDateView> {
               onChange: (data) {
                 setState(() {
                   _roomData = data;
+                  widget.callback(startDate, endDate, _roomData);
                 });
               },
             ));

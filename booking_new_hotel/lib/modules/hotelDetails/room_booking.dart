@@ -60,10 +60,7 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
   Widget getAppBarUI() {
     return Padding(
       padding: EdgeInsets.only(
-          top: AppBar().preferredSize.height + 10,
-          left: 16,
-          right: 16,
-          bottom: 16),
+          top: AppBar().preferredSize.height, left: 16, right: 16, bottom: 16),
       child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.end,

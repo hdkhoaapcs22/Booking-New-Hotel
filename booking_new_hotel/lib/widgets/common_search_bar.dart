@@ -40,23 +40,27 @@ class CommonSearchBar extends StatelessWidget {
                     )
                   : const SizedBox(),
               Expanded(
-                  child: TextField(
-                      controller: textEditingController,
-                      maxLines: 1,
-                      enabled: enabled,
-                      onChanged: (String text) {},
-                      cursorColor: Theme.of(context).primaryColor,
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(0),
-                          errorText: null,
-                          border: InputBorder.none,
-                          hintText: text,
-                          hintStyle: TextStyles(context)
-                              .getDescriptionStyle()
-                              .copyWith(
-                                color: AppTheme.secondaryTextColor,
-                                fontSize: 18,
-                              ))))
+                child: TextField(
+                  controller: textEditingController,
+                  maxLines: 1,
+                  enabled: enabled,
+                  onChanged: (String text) {
+                    
+                  },
+                  cursorColor: Theme.of(context).primaryColor,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(0),
+                    errorText: null,
+                    border: InputBorder.none,
+                    hintText: text,
+                    hintStyle:
+                        TextStyles(context).getDescriptionStyle().copyWith(
+                              color: AppTheme.secondaryTextColor,
+                              fontSize: 18,
+                            ),
+                  ),
+                ),
+              ),
             ]))));
   }
 }

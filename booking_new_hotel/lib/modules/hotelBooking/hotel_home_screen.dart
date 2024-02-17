@@ -11,12 +11,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/hotel_list_data.dart';
+import '../../models/room_data.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
-import '../../widgets/common_search_bar.dart';
 import '../myTrips/hotel_list_view.dart';
 import 'components/filter_bar_UI.dart';
-import 'components/map_and_list_view.dart';
 import 'components/time_date_view.dart';
 
 class HotelHomeScreen extends StatefulWidget {
@@ -30,8 +29,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     with TickerProviderStateMixin {
   late AnimationController animationController;
   late AnimationController _animationController;
-  var hotelList = HotelListData.hotelList;
+  List<HotelListData> hotelList = HotelListData.hotelList;
+  List<HotelListData> filterHotelList = HotelListData.hotelList;
   ScrollController scrollController = ScrollController();
+  String currentCountry = 'Ho Chi Minh...';
 
   int room = 1;
   int add = 2;
@@ -68,7 +69,6 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
         }
       }
     });
-
     super.initState();
   }
 
@@ -102,15 +102,17 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                         Container(
                           color: AppTheme.scaffoldBackgroundColor,
                           child: ListView.builder(
+                            itemExtent: 304,
                             controller: scrollController,
-                            itemCount: hotelList.length,
+                            itemCount: filterHotelList.length,
                             padding: const EdgeInsets.only(
-                              top: 8 + 158 + 52.0,
+                              top: 158 + 52.0,
                             ),
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) {
-                              var count =
-                                  hotelList.length > 10 ? 10 : hotelList.length;
+                              var count = filterHotelList.length > 10
+                                  ? 10
+                                  : filterHotelList.length;
                               var animation =
                                   Tween(begin: 0.0, end: 1.0).animate(
                                 CurvedAnimation(
@@ -124,9 +126,9 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                   callback: () {
                                     NavigationServices(context)
                                         .gotoRoomBookingScreen(
-                                            hotelList[index].titleTxt);
+                                            filterHotelList[index].titleTxt);
                                   },
-                                  hotelData: hotelList[index],
+                                  hotelData: filterHotelList[index],
                                   animation: animation,
                                   animationController: animationController,
                                   ratingOfHotel:
@@ -158,7 +160,16 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                 _getSearchBarUI(),
 
                                                 // time date and no of rooms view
-                                                const TimeDateView(),
+                                                TimeDateView((
+                                                  DateTime start,
+                                                  DateTime end,
+                                                  RoomData roomData,
+                                                ) {
+                                                  setState(() {
+                                                    helperSearchingByDateAndRoomData(
+                                                        start, end, roomData);
+                                                  });
+                                                }),
                                               ],
                                             ),
                                           ),
@@ -273,11 +284,28 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
               child: CommonCard(
                 color: AppTheme.backgroundColor,
                 radius: 36,
-                child: const CommonSearchBar(
-                  enabled: true,
-                  isShow: false,
-                  text: "Lodon...",
-                ),
+                child: Row(children: [
+                  Expanded(
+                    child: TextField(
+                      maxLines: 1,
+                      enabled: true,
+                      onChanged: (String text) =>
+                          helperSearchingByLocation(text),
+                      cursorColor: Theme.of(context).primaryColor,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10),
+                        errorText: null,
+                        border: InputBorder.none,
+                        hintText: currentCountry,
+                        hintStyle:
+                            TextStyles(context).getDescriptionStyle().copyWith(
+                                  color: AppTheme.secondaryTextColor,
+                                  fontSize: 18,
+                                ),
+                      ),
+                    ),
+                  ),
+                ]),
               ),
             ),
           ),
@@ -287,9 +315,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {
-                  NavigationServices(context).gotoSearchScreen();
-                },
+                onTap: () {},
                 child: Padding(
                   padding: const EdgeInsets.all(14),
                   // ignore: deprecated_member_use
@@ -302,5 +328,48 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
         ],
       ),
     );
+  }
+
+  void helperSearchingByLocation(String text) {
+    List<HotelListData> tmp = [];
+    if (text.isEmpty) {
+      tmp = HotelListData.hotelList;
+    } else {
+      RegExp exp = RegExp(' .+');
+      for (int i = 0; i < hotelList.length; i++) {
+        RegExpMatch? match = exp.firstMatch(hotelList[i].subTxt);
+        if (match![0].toString().trim() == text) {
+          tmp.add(hotelList[i]);
+        }
+      }
+    }
+    if (tmp.isEmpty) {
+      // will be done something
+    } else {
+      setState(() {
+        filterHotelList = tmp;
+      });
+    }
+  }
+
+  void helperSearchingByDateAndRoomData(
+      DateTime start, DateTime end, RoomData roomData) {
+    List<HotelListData> tmp = [];
+    for (int i = 0; i < hotelList.length; i++) {
+      if (hotelList[i].date!.startDate == start.day &&
+          hotelList[i].date!.endDate == end.day &&
+          hotelList[i].roomData!.numberRoom == roomData.numberRoom &&
+          hotelList[i].roomData!.people == roomData.people) {
+        tmp.add(hotelList[i]);
+      }
+    }
+    if (tmp.isEmpty) {
+      // will be done something
+      print("No data found");
+    } else {
+      setState(() {
+        filterHotelList = tmp;
+      });
+    }
   }
 }
