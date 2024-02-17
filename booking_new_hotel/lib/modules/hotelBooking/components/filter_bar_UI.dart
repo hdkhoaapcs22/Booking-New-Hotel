@@ -2,11 +2,13 @@ import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../routes/route_names.dart';
+import '../../../routes/routes.dart';
 import '../../../utils/themes.dart';
 
+// ignore: must_be_immutable
 class FilterBarUI extends StatelessWidget {
-  const FilterBarUI({super.key});
+  Function(Map) onFilterCallback;
+  FilterBarUI(this.onFilterCallback, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class FilterBarUI extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Text(
                     "530",
                     style: TextStyles(context).getRegularStyle(),
@@ -27,7 +29,7 @@ class FilterBarUI extends StatelessWidget {
                 ),
                 Expanded(
                     child: Padding(
-                        padding: EdgeInsets.only(left: 0.0),
+                        padding: const EdgeInsets.only(left: 0.0),
                         child: Text(
                           AppLocalizations(context).of("hotel_found"),
                           style: TextStyles(context).getRegularStyle(),
@@ -35,12 +37,15 @@ class FilterBarUI extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    onTap: () {
-                      NavigationServices(context).gotoFiltterScreen();
+                    borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                    onTap: () async {
+                      // NavigationServices(context).gotoFilterScreen();
+                      dynamic result = await Navigator.pushNamed(
+                          context, RoutesName.FilterScreen);
+                          onFilterCallback(result);
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(left: 8),
+                      padding: const EdgeInsets.only(left: 8),
                       child: Row(
                         children: [
                           Text(

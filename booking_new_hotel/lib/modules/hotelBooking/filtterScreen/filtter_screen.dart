@@ -4,22 +4,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/popular_filter_list.dart';
+import '../../../models/room_data.dart';
 import '../../../utils/themes.dart';
 import 'range_slider_view.dart';
 import 'slider_view.dart';
 
-class FiltterScreen extends StatefulWidget {
-  const FiltterScreen({super.key});
+class FilterScreen extends StatefulWidget {
+  const FilterScreen({super.key});
 
   @override
-  State<FiltterScreen> createState() => _FiltterScreenState();
+  State<FilterScreen> createState() => _FilterScreenState();
 }
 
-class _FiltterScreenState extends State<FiltterScreen> {
+class _FilterScreenState extends State<FilterScreen> {
   List<PopularFilterListData> popularFilterListData =
       PopularFilterListData.popularFList;
   List<PopularFilterListData> accomodationListData =
       PopularFilterListData.accomodationList;
+  Amenity amenity = Amenity();
 
   RangeValues _values = const RangeValues(100, 600);
   double distValue = 50;
@@ -39,7 +41,12 @@ class _FiltterScreenState extends State<FiltterScreen> {
               topPadding: 0,
               iconData: Icons.close,
               onBackClick: () {
-                Navigator.pop(context);
+                Navigator.pop(context, {
+                  "minimumPrice": _values.start,
+                  "maximumPrice": _values.end,
+                  "distance": distValue / 10,
+                  "amenity": amenity,
+                });
               },
               titleText: AppLocalizations(context).of("filtter"),
             ),
@@ -158,6 +165,33 @@ class _FiltterScreenState extends State<FiltterScreen> {
                       onTap: () {
                         setState(() {
                           data.isSelected = !data.isSelected;
+                          switch (data.titleTxt) {
+                            case "pool_text":
+                              {
+                                amenity.isPool = data.isSelected;
+                                break;
+                              }
+                            case "pet_friendly":
+                              {
+                                amenity.isPetFriendly = data.isSelected;
+                                break;
+                              }
+                            case "free_breakfast":
+                              {
+                                amenity.isFreeBreakfast = data.isSelected;
+                                break;
+                              }
+                            case "free_wifi":
+                              {
+                                amenity.isFreeWifi = data.isSelected;
+                                break;
+                              }
+                            case "free_Parking":
+                              {
+                                amenity.isFreeParking = data.isSelected;
+                                break;
+                              }
+                          }
                         });
                       },
                       child: Padding(

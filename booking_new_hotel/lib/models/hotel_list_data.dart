@@ -18,6 +18,7 @@ class HotelListData {
   bool isSelected;
   PeopleSleeps? peopleSleeps;
   LatLng? location;
+  Amenity? amenity;
   Offset? screenMapPin; // we used this screen Offset for adding on Map layer
 
   HotelListData({
@@ -36,6 +37,7 @@ class HotelListData {
     this.peopleSleeps,
     this.location,
     this.screenMapPin,
+    this.amenity,
   });
 
   // we need location in this hotelList bcz we using that in map
@@ -49,6 +51,7 @@ class HotelListData {
       rating: 4.4,
       perNight: 180,
       roomData: RoomData(1, 2),
+      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       isSelected: true,
       date: DateText(DateTime.now().day, DateTime.now().day + 6),
       location: const LatLng(51.516898, -0.143377),
@@ -62,6 +65,7 @@ class HotelListData {
       rating: 4.5,
       perNight: 200,
       roomData: RoomData(1, 3),
+      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       isSelected: false,
       date: DateText(DateTime.now().day + 2, DateTime.now().day + 6),
       location: const LatLng(51.505799, -0.137904),
@@ -75,6 +79,7 @@ class HotelListData {
       rating: 4.0,
       perNight: 60,
       roomData: RoomData(2, 3),
+      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       isSelected: false,
       date: DateText(DateTime.now().day + 5, DateTime.now().day + 9),
       location: const LatLng(51.499162, -0.119788),
@@ -89,6 +94,7 @@ class HotelListData {
       perNight: 170,
       isSelected: false,
       roomData: RoomData(2, 2),
+      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 5),
       location: const LatLng(51.519541, -0.114503),
     ),
@@ -102,6 +108,7 @@ class HotelListData {
       isSelected: false,
       perNight: 200,
       roomData: RoomData(1, 7),
+      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 4),
       location: const LatLng(51.508383, -0.109502),
     ),
@@ -115,6 +122,7 @@ class HotelListData {
       isSelected: false,
       perNight: 200,
       roomData: RoomData(1, 7),
+      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 4),
       location: const LatLng(51.508383, -0.109502),
     ),

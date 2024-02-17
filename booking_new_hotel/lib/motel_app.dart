@@ -10,6 +10,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import 'common/common.dart';
+import 'modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import 'utils/enum.dart';
 import '../routes/routes.dart';
 
@@ -90,6 +91,8 @@ class _MotelAppState extends State<MotelApp> {
       RoutesName.Splash: (BuildContext context) => const SplashScreen(),
       RoutesName.Introduction: (BuildContext context) =>
           const IntroductionScreen(),
+      RoutesName.FilterScreen: (BuildContext context) =>
+          const FilterScreen(),
     };
   }
 

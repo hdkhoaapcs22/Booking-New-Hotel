@@ -21,3 +21,14 @@ class AdultAndChild {
   int child;
   AdultAndChild(this.adult, this.child);
 }
+
+class Amenity {
+  bool isPool, isPetFriendly, isFreeBreakfast, isFreeWifi, isFreeParking;
+  Amenity({
+    this.isPool = false,
+    this.isPetFriendly = false,
+    this.isFreeBreakfast = false,
+    this.isFreeWifi = false,
+    this.isFreeParking = false,
+  });
+}

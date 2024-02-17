@@ -173,7 +173,9 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                               ],
                                             ),
                                           ),
-                                          const FilterBarUI(),
+                                          FilterBarUI((value) {
+                                            helperSearchingByAmenity(value);
+                                          }),
                                         ],
                                       ),
                                     ),
@@ -365,7 +367,32 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     }
     if (tmp.isEmpty) {
       // will be done something
-      print("No data found");
+    } else {
+      setState(() {
+        filterHotelList = tmp;
+      });
+    }
+  }
+
+  void helperSearchingByAmenity(Map value) {
+    Amenity amenity = value['amenity'];
+    List<HotelListData> tmp = [];
+    for (int i = 0; i < filterHotelList.length; i++) {
+      if (filterHotelList[i].amenity!.isPool == amenity.isPool &&
+          filterHotelList[i].amenity!.isPetFriendly == amenity.isPetFriendly &&
+          filterHotelList[i].amenity!.isFreeBreakfast == amenity.isFreeBreakfast &&
+          filterHotelList[i].amenity!.isFreeWifi == amenity.isFreeWifi &&
+          filterHotelList[i].amenity!.isFreeParking == amenity.isFreeParking && 
+          filterHotelList[i].dist >= value['distance'] - 2 &&
+          filterHotelList[i].dist <= value['distance'] + 2 &&
+          filterHotelList[i].perNight >= value['minimumPrice'] && 
+          filterHotelList[i].perNight <= value['maximumPrice']
+          ) {
+        tmp.add(filterHotelList[i]);
+      }
+    }
+    if (tmp.isEmpty) {
+      // will be done something
     } else {
       setState(() {
         filterHotelList = tmp;
