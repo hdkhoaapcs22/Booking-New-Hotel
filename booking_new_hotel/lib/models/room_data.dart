@@ -15,3 +15,9 @@ class PeopleSleeps {
   int peopleNumber;
   PeopleSleeps(this.peopleNumber);
 }
+
+class AdultAndChild {
+  int adult;
+  int child;
+  AdultAndChild(this.adult, this.child);
+}

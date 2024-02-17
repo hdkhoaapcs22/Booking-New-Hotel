@@ -609,14 +609,14 @@
         "ja": "プール"
     },
     {
-        "text_id": "pet_friendlly",
-        "en": "Pet Friendlly",
+        "text_id" : "pet_friendly",
+        "en": "Pet Friendly",
         "fr": "Animaux acceptés",
-        "ar": "صديق للحيوانات الاليفة",
-        "ja": "ペットに優しい"
+        "ar": "صديق للحيوانات الأليفة",
+        "ja": "ペットフレンドリー"
     },
     {
-        "text_id": "Free_Wifi",
+        "text_id": "free_wifi",
         "en": "Free Wifi",
         "fr": "Wifi gratuit",
         "ar": "واى فاى مجانى",

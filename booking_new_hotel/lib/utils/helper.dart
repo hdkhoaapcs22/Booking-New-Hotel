@@ -34,4 +34,10 @@ class Helper {
         : applicationcontext!.read<ThemeProvider>().languageType;
     return "${dateText.startDate} - ${dateText.endDate} ${DateFormat('MMM', languageType.toString().split('.')[1]).format(DateTime.now().add(const Duration(days: 2)))}";
   }
+
+  static String getDateText(DateText dateText)
+  {
+    return "${dateText.startDate} - ${dateText.endDate}";
+  }
+
 }

@@ -24,7 +24,7 @@ class PopularFilterListData {
       isSelected: false,
     ),
     PopularFilterListData(
-      titleTxt: 'Free_wifi',
+      titleTxt: 'free_wifi',
       isSelected: false,
     ),
   ];

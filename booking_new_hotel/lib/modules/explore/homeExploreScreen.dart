@@ -207,7 +207,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                       child: CommonButton(
                         onTap: () {
                           if (opecity != 0) {
-                            const Scaffold();
+                            NavigationServices(context).gotoHotelHomeScreen();
                           }
                         },
                         buttonTextWidget: Padding(

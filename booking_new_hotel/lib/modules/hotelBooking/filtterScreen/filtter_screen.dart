@@ -1,0 +1,333 @@
+import 'package:booking_new_hotel/languages/appLocalizations.dart';
+import 'package:booking_new_hotel/widgets/common_app_bar_view.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../../../models/popular_filter_list.dart';
+import '../../../utils/themes.dart';
+import 'range_slider_view.dart';
+import 'slider_view.dart';
+
+class FiltterScreen extends StatefulWidget {
+  const FiltterScreen({super.key});
+
+  @override
+  State<FiltterScreen> createState() => _FiltterScreenState();
+}
+
+class _FiltterScreenState extends State<FiltterScreen> {
+  List<PopularFilterListData> popularFilterListData =
+      PopularFilterListData.popularFList;
+  List<PopularFilterListData> accomodationListData =
+      PopularFilterListData.accomodationList;
+
+  RangeValues _values = const RangeValues(100, 600);
+  double distValue = 50;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: AppTheme.scaffoldBackgroundColor,
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: AppBar().preferredSize.height - 10,
+            ),
+            CommonAppBarView(
+              topPadding: 0,
+              iconData: Icons.close,
+              onBackClick: () {
+                Navigator.pop(context);
+              },
+              titleText: AppLocalizations(context).of("filtter"),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      priceBarFilter(),
+                      Divider(
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.2),
+                      ),
+                      // facilititate filter in hotel
+                      popularFilter(),
+                      Divider(
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.2),
+                      ),
+                      distanceViewUI(),
+                      Divider(
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.2),
+                      ),
+                      allAccomodationUI(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget priceBarFilter() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          child: Text(
+            AppLocalizations(context).of("price_text"),
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
+        RangeSliderView(
+          values: _values,
+          onChangeRangeValue: (values) {
+            _values = values;
+          },
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+      ],
+    );
+  }
+
+  Widget popularFilter() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+          child: Text(
+            AppLocalizations(context).of("popular filter"),
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 16, left: 16),
+          child: Column(
+            children: getList(),
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+      ],
+    );
+  }
+
+  List<Widget> getList() {
+    List<Widget> noList = [];
+    int count = 0;
+    const columnCount = 2;
+    for (int i = 0; i < popularFilterListData.length / columnCount; ++i) {
+      List<Widget> listUI = [];
+      for (int j = 0; j < columnCount; ++j) {
+        try {
+          final data = popularFilterListData[count];
+          listUI.add(
+            Expanded(
+              child: Row(
+                children: [
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(4.0)),
+                      onTap: () {
+                        setState(() {
+                          data.isSelected = !data.isSelected;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
+                        child: Row(
+                          children: [
+                            Icon(
+                              data.isSelected
+                                  ? Icons.check_box
+                                  : Icons.check_box_outline_blank,
+                              color: data.isSelected
+                                  ? AppTheme.primaryColor
+                                  : Colors.grey.withOpacity(0.6),
+                            ),
+                            const SizedBox(width: 4),
+                            FittedBox(
+                              fit: BoxFit.cover,
+                              child: Text(
+                                AppLocalizations(context).of(data.titleTxt),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+          ++count;
+        } catch (e) {}
+      }
+      noList.add(Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: listUI,
+      ));
+    }
+    return noList;
+  }
+
+  Widget distanceViewUI() {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              AppLocalizations(context).of("distance from city"),
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
+          SliderView(
+            distValue: distValue,
+            onChangedDistValue: (double value) {
+              distValue = value;
+            },
+          ),
+        ]);
+  }
+
+  Widget allAccomodationUI() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              AppLocalizations(context).of("type of accommodation"),
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+                fontWeight: FontWeight.normal,
+              ),
+            )),
+        Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Column(children: getAccomodationListUI())),
+        const SizedBox(
+          height: 8,
+        ),
+      ],
+    );
+  }
+
+  List<Widget> getAccomodationListUI() {
+    List<Widget> noList = [];
+    for (int i = 0; i < accomodationListData.length; ++i) {
+      var data = accomodationListData[i];
+      noList.add(
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(AppLocalizations(context).of(data.titleTxt)),
+                  ),
+                  CupertinoSwitch(
+                    activeColor: data.isSelected
+                        ? Theme.of(context).primaryColor
+                        : Colors.grey.withOpacity(0.6),
+                    value: data.isSelected,
+                    onChanged: (value) {
+                      setState(() {
+                        checkAppPosition(i);
+                      });
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+      if (i == 0) {
+        noList.add(
+          Divider(
+            height: 1,
+            color: Colors.grey.withOpacity(0.2),
+          ),
+        );
+      }
+    }
+    return noList;
+  }
+
+  void checkAppPosition(int index) {
+    if (index == 0) {
+      // index = 0 is all
+      if (accomodationListData[0].isSelected) {
+        for (int i = 0; i < accomodationListData.length; ++i) {
+          accomodationListData[i].isSelected = false;
+        }
+      } else {
+        for (int i = 0; i < accomodationListData.length; ++i) {
+          accomodationListData[i].isSelected = true;
+        }
+      }
+    } else {
+      accomodationListData[index].isSelected =
+          !accomodationListData[index].isSelected;
+      int count = 0;
+      for (int i = 0; i < accomodationListData.length; ++i) {
+        if (i != 0) {
+          var data = accomodationListData[i];
+          if (data.isSelected) {
+            ++count;
+          }
+        }
+      }
+      // check all selected
+      if (count == accomodationListData.length - 1) {
+        accomodationListData[0].isSelected = true;
+      } else {
+        accomodationListData[0].isSelected = false;
+      }
+    }
+  }
+}
