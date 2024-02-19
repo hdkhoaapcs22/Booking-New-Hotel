@@ -2,8 +2,10 @@ import 'package:booking_new_hotel/modules/bottomTap/bottomTapScreen.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/search_screen.dart';
 import 'package:flutter/material.dart';
+import '../models/hotel_list_data.dart';
 import '../modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import '../modules/hotelBooking/hotel_home_screen.dart';
+import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/login/login_or_signup_screen.dart';
 import 'routes.dart';
 
@@ -49,6 +51,12 @@ class NavigationServices {
   void gotoRoomBookingScreen(String name) async {
     return _pushMaterialPageRoute(RoomBookingScreen(
       hotelName: name,
+    ));
+  }
+
+  Future<dynamic> gotoHotelDetails(HotelListData hotelListData) async {
+    return await _pushMaterialPageRoute(HotelDetails(
+      hotelData: hotelListData,
     ));
   }
 }
