@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/models/hotel_list_data.dart';
+import 'package:booking_new_hotel/modules/hotelDetails/reviews_view.dart';
 import 'package:booking_new_hotel/utils/themes.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_card.dart';
@@ -13,6 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../routes/route_names.dart';
 import '../../utils/helper.dart';
 import '../../utils/text_styles.dart';
+import 'hotel_room_list.dart';
 import 'rating_view.dart';
 
 class HotelDetails extends StatefulWidget {
@@ -139,10 +141,43 @@ class _HotelDetailsState extends State<HotelDetails>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 16),
-                  child: RatingView(hotelData: widget.hotelData),                  
+                  padding: const EdgeInsets.only(
+                      left: 24, right: 24, top: 8, bottom: 16),
+                  child: RatingView(hotelData: widget.hotelData),
                 ),
-                _getPhotoReviewUI("room_photo","view_all",Icons.arrow_forward,(){}),
+                _getPhotoReviewUI(
+                    "room_photo", "view_all", Icons.arrow_forward, () {}),
+                // hotel inside photo view
+                const HotelRoomList(),
+                _getPhotoReviewUI("reviews", "view_all", Icons.arrow_forward,
+                    () {
+                  NavigationServices(context).gotoReviewsListScreen();
+                }),
+
+                // feedback & review data view
+                for (int i = 0; i < 2; ++i)
+                  ReviewsView(
+                    callback: () {},
+                    reviewsList: HotelListData.reviewsList[i],
+                    animationController: animationController,
+                    animation: animationController,
+                  ),
+
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CommonButton(
+                    buttonText: AppLocalizations(context).of("book_now"),
+                    onTap: () {
+                      NavigationServices(context).gotoRoomBookingScreen(
+                        widget.hotelData.titleTxt,
+                      );
+                    },
+                  ),
+                ),
+
+                SizedBox(
+                  height: MediaQuery.of(context).padding.bottom,
+                ),
               ],
             ),
           ),
@@ -218,7 +253,8 @@ class _HotelDetailsState extends State<HotelDetails>
         children: [
           Expanded(
             child: Text(
-              AppLocalizations(context).of(title), style: TextStyles(context).getBoldStyle().copyWith(
+              AppLocalizations(context).of(title),
+              style: TextStyles(context).getBoldStyle().copyWith(
                     fontSize: 14,
                   ),
             ),

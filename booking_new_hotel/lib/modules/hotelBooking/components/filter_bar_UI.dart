@@ -42,7 +42,7 @@ class FilterBarUI extends StatelessWidget {
                       // NavigationServices(context).gotoFilterScreen();
                       dynamic result = await Navigator.pushNamed(
                           context, RoutesName.FilterScreen);
-                          onFilterCallback(result);
+                      onFilterCallback(result);
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),

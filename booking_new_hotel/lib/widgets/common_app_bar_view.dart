@@ -15,7 +15,7 @@ class CommonAppBarView extends StatelessWidget {
       this.topPadding,
       required this.iconData,
       required this.titleText,
-      required this.onBackClick,
+      this.onBackClick,
       this.backButton});
 
   @override

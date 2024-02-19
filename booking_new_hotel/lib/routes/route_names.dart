@@ -6,6 +6,7 @@ import '../models/hotel_list_data.dart';
 import '../modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
+import '../modules/hotelDetails/reviews_list_screen.dart';
 import '../modules/login/login_or_signup_screen.dart';
 import 'routes.dart';
 
@@ -58,5 +59,9 @@ class NavigationServices {
     return await _pushMaterialPageRoute(HotelDetails(
       hotelData: hotelListData,
     ));
+  }
+
+  Future<dynamic> gotoReviewsListScreen() async {
+    return await _pushMaterialPageRoute(const ReviewsListScreen());
   }
 }
