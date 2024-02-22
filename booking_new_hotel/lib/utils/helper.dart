@@ -35,9 +35,10 @@ class Helper {
     return "${dateText.startDate} - ${dateText.endDate} ${DateFormat('MMM', languageType.toString().split('.')[1]).format(DateTime.now().add(const Duration(days: 2)))}";
   }
 
-  static String getDateText(DateText dateText)
-  {
-    return "${dateText.startDate} - ${dateText.endDate}";
+  static String getDateText(DateText dateText) {
+    LanguageType languageType = applicationcontext == null
+        ? LanguageType.en
+        : applicationcontext!.read<ThemeProvider>().languageType;
+    return "${dateText.startDate} ${DateFormat('MMM', languageType.toString().split('.')[1]).format(DateTime.now().add(const Duration(days: 2)))} - ${dateText.endDate} ${DateFormat('MMM', languageType.toString().split('.')[1]).format(DateTime.now().add(const Duration(days: 2)))}";
   }
-
 }

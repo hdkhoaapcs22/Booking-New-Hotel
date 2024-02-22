@@ -13,7 +13,7 @@ import '../../utils/themes.dart';
 import '../../widgets/common_card.dart';
 
 class HotelListView extends StatelessWidget {
-  final bool isShowData;
+  final bool isShowDate;
   final VoidCallback callback;
   final HotelListData hotelData;
   final AnimationController animationController;
@@ -22,7 +22,7 @@ class HotelListView extends StatelessWidget {
 
   const HotelListView(
       {super.key,
-      this.isShowData = false,
+      this.isShowDate = false,
       required this.callback,
       required this.hotelData,
       required this.animationController,
@@ -39,7 +39,7 @@ class HotelListView extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
         child: Column(
           children: [
-            isShowData
+            isShowDate
                 ? Padding(
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     child: Row(
