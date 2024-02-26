@@ -247,13 +247,23 @@ class SettingsListData {
   ];
 
   static List<SettingsListData> subHelpList = [
-    SettingsListData(titleTxt: "", subTxt: "You can cancel"),
+    SettingsListData(
+        titleTxt: "",
+        subTxt:
+            "You can cancel a reservation any time before Or during your trip. To cancel reservation:"),
     SettingsListData(
       titleTxt: "",
-      subTxt: "GO to Trips and choose yotr trip",
+      subTxt:
+          "Go to Trips and choose your trip. Click your home reservation. Click Modify reservation.",
     ),
-    SettingsListData(titleTxt: "", subTxt: "You'll be taken to"),
-    SettingsListData(titleTxt: "", subTxt: "If you cancel, your "),
+    SettingsListData(
+        titleTxt: "",
+        subTxt:
+            "You'll be taken to a new page where you either change or cancel your reservation. Click the Next button under Cancel reservation to Start the cancellation process."),
+    SettingsListData(
+        titleTxt: "",
+        subTxt:
+            "If you cancel, your refund will be determined by host's cancellation policy.We will show your refund breakdown before you finalize your cancellation."),
     SettingsListData(
       titleTxt: "",
       subTxt: "Give feedback",

@@ -8,6 +8,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../models/room_data.dart';
+import '../widgets/custom_dialog.dart';
+import '../widgets/custom_dialog_action_button.dart';
 
 class Helper {
   static Widget ratingStar(double rating) {
@@ -40,5 +42,51 @@ class Helper {
         ? LanguageType.en
         : applicationcontext!.read<ThemeProvider>().languageType;
     return "${dateText.startDate} ${DateFormat('MMM', languageType.toString().split('.')[1]).format(DateTime.now().add(const Duration(days: 2)))} - ${dateText.endDate} ${DateFormat('MMM', languageType.toString().split('.')[1]).format(DateTime.now().add(const Duration(days: 2)))}";
+  }
+
+  static String getPeopleAndChildren(RoomData roomData) {
+    return "${AppLocalizations(applicationcontext!).of("sleeps")} ${roomData.people}}";
+  }
+
+  Future<bool> showCommonPopup(
+      String title, String description, BuildContext context,
+      {bool isYesOrNoPopup = false, bool barrierDismissible = true}) async {
+    bool isOkClick = false;
+    return await showDialog(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (BuildContext context) => CustomDialog(
+        title: title,
+        description: description,
+        onCloseClick: () {
+          Navigator.pop(context);
+        },
+        actionButtonList: isYesOrNoPopup
+            ? <Widget>[
+                CustomDialogActionButton(
+                    buttonText: "NO",
+                    color: Colors.green,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
+                CustomDialogActionButton(
+                    buttonText: "YES",
+                    color: Colors.red,
+                    onPressed: () {
+                      isOkClick = true;
+                      Navigator.of(context).pop();
+                    }),
+              ]
+            : <Widget>[
+                CustomDialogActionButton(
+                    buttonText: "OK",
+                    color: Colors.green,
+                    onPressed: () {
+                      isOkClick = true;
+                      Navigator.of(context).pop();
+                    }),
+              ],
+      ),
+    ).then((value) => isOkClick);
   }
 }

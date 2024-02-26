@@ -1,6 +1,7 @@
 import 'package:booking_new_hotel/modules/bottomTap/bottomTapScreen.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/search_screen.dart';
+import 'package:booking_new_hotel/modules/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import '../models/hotel_list_data.dart';
 import '../modules/hotelBooking/filtterScreen/filtter_screen.dart';
@@ -8,6 +9,10 @@ import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/hotelDetails/reviews_list_screen.dart';
 import '../modules/login/login_or_signup_screen.dart';
+import '../modules/profile/help_center_screen.dart';
+import '../modules/profile/how_do_screen.dart';
+import '../modules/profile/invite_friend.dart';
+import '../modules/profile/settings_screen.dart';
 import 'routes.dart';
 
 class NavigationServices {
@@ -64,4 +69,37 @@ class NavigationServices {
   Future<dynamic> gotoReviewsListScreen() async {
     return await _pushMaterialPageRoute(const ReviewsListScreen());
   }
+
+  Future<dynamic> gotoProfileScreen() async {
+    return await _pushMaterialPageRoute(const EditProfile());
+  }
+
+  Future<dynamic> gotoChangePasswordScreen() async {
+    return await _pushMaterialPageRoute(const EditProfile());
+  }
+
+  Future<dynamic> gotoInviteFriendsScreen() async {
+    return await _pushMaterialPageRoute(const InviteFriend());
+  }
+
+  Future<dynamic> gotoHelpCenterScreen() async {
+    return await _pushMaterialPageRoute(const HelpCenterScreen());
+  }
+
+  Future<dynamic> gotoSettingsScreen() async {
+    return await _pushMaterialPageRoute(const SettingsScreen());
+  }
+
+  Future<dynamic> gotoHowDoScreen() async {
+    return await _pushMaterialPageRoute(const HowDoScreen());
+  }
+
+  Future<dynamic> gotoCountryScreen() async {
+    return await _pushMaterialPageRoute(const HowDoScreen());
+  }
+
+  Future<dynamic> gotoCurrencyScreen() async {
+    return await _pushMaterialPageRoute(const HowDoScreen());
+  }
+
 }
