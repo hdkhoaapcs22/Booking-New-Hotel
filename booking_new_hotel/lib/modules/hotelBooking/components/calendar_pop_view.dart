@@ -169,7 +169,7 @@ class _CalendarPopViewState extends State<CalendarPopView>
           style:
               TextStyles(context).getDescriptionStyle().copyWith(fontSize: 16),
         ),
-        SizedBox(
+        const SizedBox(
           height: 4,
         ),
         Text(

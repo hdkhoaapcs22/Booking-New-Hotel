@@ -9,10 +9,13 @@ import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/hotelDetails/reviews_list_screen.dart';
 import '../modules/login/login_or_signup_screen.dart';
+import '../modules/profile/country_screen.dart';
+import '../modules/profile/currency_screen.dart';
 import '../modules/profile/help_center_screen.dart';
 import '../modules/profile/how_do_screen.dart';
 import '../modules/profile/invite_friend.dart';
 import '../modules/profile/settings_screen.dart';
+import '../modules/splash/splashScreen.dart';
 import 'routes.dart';
 
 class NavigationServices {
@@ -95,11 +98,16 @@ class NavigationServices {
   }
 
   Future<dynamic> gotoCountryScreen() async {
-    return await _pushMaterialPageRoute(const HowDoScreen());
+    return await _pushMaterialPageRoute(const CountryScreen());
   }
 
   Future<dynamic> gotoCurrencyScreen() async {
-    return await _pushMaterialPageRoute(const HowDoScreen());
+    return await _pushMaterialPageRoute(const CurrencyScreen());
   }
 
+  Future<dynamic> gotoSplashScreen() async {
+    return Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const SplashScreen()),
+        (Route<dynamic> route) => false);
+  }
 }

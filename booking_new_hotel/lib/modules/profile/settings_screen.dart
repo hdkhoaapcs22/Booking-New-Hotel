@@ -100,6 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               }
                             case 10:
                               {
+                                _logout();
                                 break;
                               }
                           }
@@ -527,7 +528,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _gotoSplashScreeen() async {
+  void _logout() async {
     bool isOk = await Helper().showCommonPopup(
       "Are you sure?",
       "Do you want to logout?",
@@ -536,8 +537,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       barrierDismissible: true,
     );
 
-    if(isOk)
-    {
+    if (isOk) {
       NavigationServices(context).gotoSplashScreen();
     }
   }

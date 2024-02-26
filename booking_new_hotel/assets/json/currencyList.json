@@ -1,0 +1,44 @@
+{
+    "currencyList": [
+        {
+            "name": "Australia Dollar",
+            "code": "$ AUD"
+        },
+        {
+            "name": "Argentina Peso",
+            "code": "$ ARS"
+        },
+        {
+            "name": "India Rupee",
+            "code": "₹ INR"
+        },
+        {
+            "name": "United States Dollar",
+            "code": "$ USD"
+        },
+        {
+            "name": "Chinese Yuan",
+            "code": "¥ CNY"
+        },
+        {
+            "name": "Euro",
+            "code": "€ EUR"
+        },
+        {
+            "name": "Brazilian Real",
+            "code": "R$ BRL"
+        },
+        {
+            "name": "Canadian Dollar",
+            "code": "$ CAD"
+        },
+        {
+            "name": "Cuba Peso",
+            "code": "$ CUP"
+        },
+        {
+            "name": "Hong Kong Dollar",
+            "code": "$ HKD"
+        }
+]
+}

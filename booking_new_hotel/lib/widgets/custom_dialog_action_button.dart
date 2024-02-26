@@ -19,6 +19,17 @@ class CustomDialogActionButton extends StatefulWidget {
 class _CustomDialogActionButtonState extends State<CustomDialogActionButton> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Expanded(
+      child: InkWell(
+        onTap: widget.onPressed,
+        child: Center(
+          child: Text(widget.buttonText,
+              style: TextStyle(
+                color: widget.color,
+                fontSize: 18,
+              )),
+        ),
+      ),
+    );
   }
 }
