@@ -35,23 +35,23 @@ class HotelListViewData extends StatelessWidget {
       animation: animation,
       animationController: animationController,
       child: Padding(
-        padding: EdgeInsets.only(left: 24, right: 24, bottom: 16),
+        padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
         child: InkWell(
-            borderRadius: BorderRadius.all(Radius.circular(16.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
             onTap: () {
               try {
                 callback();
               } catch (e) {}
             },
             child: Row(children: [
-              isShowDate ? getUI(context) : SizedBox(),
+              isShowDate ? getUI(context) : const SizedBox(),
               CommonCard(
                 color: AppTheme.backgroundColor,
                 radius: 16,
                 child: SizedBox(
                   height: 150,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                     child: AspectRatio(
                       aspectRatio: 1,
                       child: Image.asset(

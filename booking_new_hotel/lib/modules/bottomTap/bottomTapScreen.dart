@@ -31,7 +31,8 @@ class _BottomTapScreenState extends State<BottomTapScreen>
         duration: const Duration(milliseconds: 400), vsync: this);
     indexView = Container();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) { // it will run after the build method
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // it will run after the build method
       starLoadingScreen();
     });
     super.initState();
@@ -44,7 +45,8 @@ class _BottomTapScreenState extends State<BottomTapScreen>
   }
 
   Future starLoadingScreen() async {
-    await Future.delayed(const Duration(milliseconds: 480)); // it will wait for 480ms
+    await Future.delayed(
+        const Duration(milliseconds: 480)); // it will wait for 480ms
     setState(() {
       isFirstTime = false;
       indexView = HomeExploreScreen(
@@ -57,20 +59,18 @@ class _BottomTapScreenState extends State<BottomTapScreen>
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
-      builder: (_, provider, child) => Container(
-        child: Scaffold(
-            bottomNavigationBar: Container(
-              height: 60 + MediaQuery.of(context).padding.bottom,
-              child: getBottomBarUI(bottomBarType),
-            ),
-            body: isFirstTime
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                    ),
-                  )
-                : indexView),
-      ),
+      builder: (_, provider, child) => Scaffold(
+          bottomNavigationBar: SizedBox(
+            height: 60 + MediaQuery.of(context).padding.bottom,
+            child: getBottomBarUI(bottomBarType),
+          ),
+          body: isFirstTime
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                )
+              : indexView),
     );
   }
 
@@ -83,7 +83,9 @@ class _BottomTapScreenState extends State<BottomTapScreen>
             children: [
               TabButtonUI(
                 icon: Icons.search,
-                isSelected: bottomBarType == BottomBarType.Explore, // if true -> primaryColor else secondaryTextColor
+                isSelected: bottomBarType ==
+                    BottomBarType
+                        .Explore, // if true -> primaryColor else secondaryTextColor
                 text: AppLocalizations(context).of("explore"),
                 onTap: () {
                   tabClick(BottomBarType.Explore);
@@ -112,7 +114,8 @@ class _BottomTapScreenState extends State<BottomTapScreen>
   }
 
   void tabClick(BottomBarType tabType) {
-    if (tabType != bottomBarType) { // check because if the user click on the same tab then no need to do anything
+    if (tabType != bottomBarType) {
+      // check because if the user click on the same tab then no need to do anything
       bottomBarType = tabType;
       animationController.reverse().then((value) => {
             if (tabType == BottomBarType.Explore)

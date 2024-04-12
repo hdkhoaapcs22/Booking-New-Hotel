@@ -37,7 +37,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               CommonAppBarView(
                 topPadding: AppBar().preferredSize.height,
                 titleText: AppLocalizations(context).of("forgot_password"),
-                iconData: Icons.arrow_back_ios,
+                iconData: Icons.arrow_back,
                 onBackClick: () {
                   Navigator.pop(context);
                 },

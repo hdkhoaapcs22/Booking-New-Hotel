@@ -40,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonAppBarView(
-                iconData: Icons.arrow_back_ios_new,
+                iconData: Icons.arrow_back,
                 titleText: AppLocalizations(context).of("setting_text"),
                 onBackClick: () {
                   Navigator.pop(context);

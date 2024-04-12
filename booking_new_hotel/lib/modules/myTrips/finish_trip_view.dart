@@ -2,7 +2,6 @@ import 'package:booking_new_hotel/models/hotel_list_data.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
-import 'hotel_list_view.dart';
 import 'hotel_list_view_data.dart';
 
 class FinishTripView extends StatefulWidget {

@@ -736,10 +736,10 @@
     },
     {
         "text_id": "invite_friend_desc",
-        "en": "are you one of those who makes everything at the last moment",
-        "fr": "es-tu de ceux qui font tout au dernier moment",
-        "ar": "هل أنت ممن يصنعون كل شيء في آخر لحظة",
-        "ja": "あなたは最後の瞬間にすべてを作る人の一人ですか"
+        "en": "Share the love with your friends to have an interesting trip together",
+        "fr": "Partagez l'amour avec vos amis pour passer un voyage intéressant ensemble",
+        "ar": "شارك الحب مع أصدقائك لقضاء رحلة مثيرة معًا",
+        "ja": "友達と一緒に面白い旅をするために愛を共有する" 
     },
     {
         "text_id": "share_text",

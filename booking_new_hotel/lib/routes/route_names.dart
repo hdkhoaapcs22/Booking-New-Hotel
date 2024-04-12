@@ -1,6 +1,7 @@
 import 'package:booking_new_hotel/modules/bottomTap/bottomTapScreen.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/search_screen.dart';
+import 'package:booking_new_hotel/modules/profile/change_password.dart';
 import 'package:booking_new_hotel/modules/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import '../models/hotel_list_data.dart';
@@ -78,7 +79,7 @@ class NavigationServices {
   }
 
   Future<dynamic> gotoChangePasswordScreen() async {
-    return await _pushMaterialPageRoute(const EditProfile());
+    return await _pushMaterialPageRoute(const ChangePassword());
   }
 
   Future<dynamic> gotoInviteFriendsScreen() async {

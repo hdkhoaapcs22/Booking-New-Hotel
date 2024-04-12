@@ -40,7 +40,7 @@ class _InviteFriendState extends State<InviteFriend> {
               Container(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  AppLocalizations(context).of("invite_your_friend_desc"),
+                  AppLocalizations(context).of("invite_friend_desc"),
                   textAlign: TextAlign.center,
                   style: TextStyles(context)
                       .getRegularStyle()
@@ -111,7 +111,7 @@ class _InviteFriendState extends State<InviteFriend> {
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Icon(
-                      Icons.arrow_back_ios_new,
+                      Icons.arrow_back,
                     ),
                   )),
             ),

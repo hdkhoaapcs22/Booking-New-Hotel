@@ -18,15 +18,14 @@ class ListCellAnimationView extends StatelessWidget {
     return AnimatedBuilder(
       animation: animation,
       child: child,
-      builder: (BuildContext context, Widget? child){
+      builder: (BuildContext context, Widget? child) {
         return FadeTransition(
-          opacity: animation,
-          child: Transform(
-            transform: Matrix4.translationValues(
-                0.0, yTranslation * (1.0 - animation.value), 0.0),
-            child: child,
-          )
-        );
+            opacity: animation,
+            child: Transform(
+              transform: Matrix4.translationValues(
+                  0.0, yTranslation * (1.0 - animation.value), 0.0),
+              child: child,
+            ));
       },
     );
   }

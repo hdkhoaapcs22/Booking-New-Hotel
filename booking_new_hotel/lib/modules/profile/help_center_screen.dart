@@ -124,7 +124,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CommonAppBarView(
-          iconData: Icons.arrow_back_ios_new,
+          iconData: Icons.arrow_back,
           titleText: AppLocalizations(context).of("how_can_help_you"),
           onBackClick: () {
             Navigator.pop(context);

@@ -43,7 +43,7 @@ class Localfiles {
   static const String introduction3 = BaseImageUrl + 'introduction3.png';
   static const String inviteImage = BaseImageUrl + 'inviteImage.png';
   static const String mapImage = BaseImageUrl + 'mapImage.png';
-  static const String userImage = BaseImageUrl + 'userImage.png';
+  static const String userImage = BaseImageUrl + 'userImage.jpg';
   static const String popular_1 = BaseImageUrl + 'popular_1.jpg';
   static const String popular_2 = BaseImageUrl + 'popular_2.jpg';
   static const String popular_3 = BaseImageUrl + 'popular_3.jpg';

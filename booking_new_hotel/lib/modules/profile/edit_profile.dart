@@ -32,7 +32,7 @@ class _EditProfileState extends State<EditProfile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonAppBarView(
-                iconData: Icons.arrow_back_ios_new,
+                iconData: Icons.arrow_back,
                 titleText: AppLocalizations(context).of("edit_profile"),
                 onBackClick: () {
                   Navigator.pop(context);

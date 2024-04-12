@@ -27,8 +27,10 @@ class CommonTextFieldView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: padding,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      padding: padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Padding(
               padding: EdgeInsets.only(top: dynamicDistance),
               child: Text(titleText ?? "",
@@ -59,11 +61,16 @@ class CommonTextFieldView extends StatelessWidget {
           ),
           if (errorText != null && errorText!.isNotEmpty)
             Padding(
-                padding: const EdgeInsets.all(5),
-                child: Text(errorText ?? "",
-                    style: TextStyles(context).getDescriptionStyle().copyWith(
-                          color: AppTheme.redErrorColor,
-                        )))
-        ]));
+              padding: const EdgeInsets.all(5),
+              child: Text(
+                errorText ?? "",
+                style: TextStyles(context).getDescriptionStyle().copyWith(
+                      color: AppTheme.redErrorColor,
+                    ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }

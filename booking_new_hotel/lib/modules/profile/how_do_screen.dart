@@ -31,7 +31,7 @@ class _HowDoScreenState extends State<HowDoScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonAppBarView(
-                iconData: Icons.arrow_back_ios_new,
+                iconData: Icons.arrow_back,
                 titleText: "How do I cancel my rooms ?",
                 onBackClick: () {
                   Navigator.pop(context);

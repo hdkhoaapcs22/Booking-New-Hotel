@@ -259,6 +259,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
         HotelListViewPage(
             callback: () {
               NavigationServices(context).gotoHotelDetails(element);
+              print("khoa");
             },
             hotelData: element,
             animationController: widget.animationController,
