@@ -49,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               Expanded(
                 child: ListView.builder(
-                  padding: EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.only(top: 16),
                   itemCount: settingsList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -108,7 +108,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(left: 8, right: 16),
+                              padding:const EdgeInsets.only(left: 8, right: 16),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -264,7 +264,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Navigator.pop(context);
             },
             child: Padding(
-              padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

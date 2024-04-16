@@ -12,9 +12,6 @@ import '../modules/hotelDetails/reviews_list_screen.dart';
 import '../modules/login/login_or_signup_screen.dart';
 import '../modules/profile/country_screen.dart';
 import '../modules/profile/currency_screen.dart';
-import '../modules/profile/help_center_screen.dart';
-import '../modules/profile/how_do_screen.dart';
-import '../modules/profile/invite_friend.dart';
 import '../modules/profile/settings_screen.dart';
 import '../modules/splash/splashScreen.dart';
 import 'routes.dart';
@@ -82,20 +79,8 @@ class NavigationServices {
     return await _pushMaterialPageRoute(const ChangePassword());
   }
 
-  Future<dynamic> gotoInviteFriendsScreen() async {
-    return await _pushMaterialPageRoute(const InviteFriend());
-  }
-
-  Future<dynamic> gotoHelpCenterScreen() async {
-    return await _pushMaterialPageRoute(const HelpCenterScreen());
-  }
-
   Future<dynamic> gotoSettingsScreen() async {
     return await _pushMaterialPageRoute(const SettingsScreen());
-  }
-
-  Future<dynamic> gotoHowDoScreen() async {
-    return await _pushMaterialPageRoute(const HowDoScreen());
   }
 
   Future<dynamic> gotoCountryScreen() async {

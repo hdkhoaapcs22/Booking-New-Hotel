@@ -1,14 +1,15 @@
+import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/models/setting_list_data.dart';
 import 'package:booking_new_hotel/providers/theme_provider.dart';
 import 'package:booking_new_hotel/widgets/bottom_top_move_animation_view.dart';
+import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../routes/route_names.dart';
 import '../../utils/localfiles.dart';
-import '../../utils/text_styles.dart';
-import '../../utils/themes.dart';
 
 class ProfileScreen extends StatefulWidget {
   final AnimationController animationController;
@@ -34,103 +35,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Consumer<ThemeProvider>(
         builder: ((context, value, child) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:
-                      EdgeInsets.only(top: AppBar().preferredSize.height + 10),
-                  child: Container(
-                    child: appBar(),
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(0.0),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: userSettingsList.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          // Change Password Screen
-                          switch (index) {
-                            case 0:
-                              {
-                                NavigationServices(context)
-                                    .gotoChangePasswordScreen();
-                                break;
-                              }
-                            case 1:
-                              {
-                                NavigationServices(context)
-                                    .gotoInviteFriendsScreen();
-                                break;
-                              }
-                            case 2:
-                              {
-                                break;
-                              }
-                            case 3:
-                              {
-                                NavigationServices(context)
-                                    .gotoHelpCenterScreen();
-                                break;
-                              }
-                            case 4:
-                              {
-                                NavigationServices(context)
-                                    .gotoSettingsScreen();
-                                break;
-                              }
-                          }
-                        },
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8, right: 8),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text(
-                                        AppLocalizations(context).of(
-                                            userSettingsList[index].titleTxt),
-                                        style: TextStyles(context)
-                                            .getRegularStyle()
-                                            .copyWith(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 16,
-                                            ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Container(
-                                        child: Icon(
-                                          userSettingsList[index].iconData,
-                                          color: AppTheme.secondaryTextColor
-                                              .withOpacity(0.7),
-                                          size: 24,
-                                        ),
-                                      ))
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16, right: 16),
-                              child: Divider(
-                                height: 1,
-                                color: Colors.grey.withOpacity(0.4),
-                              ),
-                            )
-                          ],
+                    padding: const EdgeInsets.only(left: 40),
+                    child: Row(
+                      children: [
+                        GlobalVar.iconic.appIcon(context),
+                        const SizedBox(width: 10),
+                        GlobalVar.iconic.nameOfApp(context),
+                        const SizedBox(width: 140),
+                        InkWell(
+                          onTap: () {
+                            NavigationServices(context).gotoSettingsScreen();
+                          },
+                          child: Icon(
+                            Icons.settings,
+                            color: Theme.of(context).disabledColor,
+                            size: 45,
+                          ),
                         ),
-                      );
-                    },
+                      ],
+                    )),
+                const SizedBox(height: 55),
+                const Center(
+                  child: CircleAvatar(
+                    radius: 65,
+                    backgroundImage: AssetImage(Localfiles.userImage),
                   ),
                 ),
+                const SizedBox(
+                  height: 40,
+                ),
+                CommonButton(
+                  padding: const EdgeInsets.only(left: 48, right: 48),
+                  buttonText: AppLocalizations(context).of("edit_profile"),
+                  buttonTextWidget: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        FontAwesomeIcons.penToSquare,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        AppLocalizations(context).of("edit_profile"),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    NavigationServices(context).gotoProfileScreen();
+                  },
+                ),
+                const SizedBox(height: 30),
+                Divider(
+                  height: 1,
+                  color: Colors.grey.withOpacity(0.5),
+                ),
+                
               ],
             )),
       ),

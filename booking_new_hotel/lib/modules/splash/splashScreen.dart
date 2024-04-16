@@ -9,6 +9,7 @@ import '../../providers/theme_provider.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_button.dart';
+import '../../global/global_var.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -64,28 +65,9 @@ class _SplashScreenState extends State<SplashScreen> {
           flex: 1,
           child: SizedBox(),
         ),
-        Center(
-            child: Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Theme.of(context).dividerColor,
-                          offset: const Offset(1.1, 1.1),
-                          blurRadius: 10.0)
-                    ]),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                  child: Image.asset(Localfiles.appIcon),
-                ))),
-        const SizedBox(height: 15),
-        Text(
-          "Motel",
-          textAlign: TextAlign.left,
-          style: TextStyles(context).getBoldStyle().copyWith(fontSize: 24),
-        ),
+        Center(child: GlobalVar.iconic.appIcon(context)),
+        const SizedBox(height: 13),
+        GlobalVar.iconic.nameOfApp(context),
         const SizedBox(height: 8.0),
         AnimatedOpacity(
           opacity: isLoadText ? 1.0 : 0.0,

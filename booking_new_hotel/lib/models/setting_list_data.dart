@@ -33,28 +33,6 @@ class SettingsListData {
       isSelected: false,
       iconData: FontAwesomeIcons.lock,
     ),
-    SettingsListData(
-      titleTxt: "invite_friend",
-      isSelected: false,
-      // ignore: deprecated_member_use
-      iconData: FontAwesomeIcons.userFriends,
-    ),
-    SettingsListData(
-      titleTxt: "credit_coupons",
-      isSelected: false,
-      iconData: FontAwesomeIcons.gift,
-    ),
-    SettingsListData(
-      titleTxt: "help_center",
-      isSelected: false,
-      iconData: FontAwesomeIcons.wallet,
-    ),
-    SettingsListData(
-      titleTxt: "payment_text",
-      isSelected: false,
-      // ignore: deprecated_member_use
-      iconData: FontAwesomeIcons.cog,
-    ),
   ];
   static List<SettingsListData> settingsList = [
     SettingsListData(
