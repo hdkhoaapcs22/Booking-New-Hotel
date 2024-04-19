@@ -23,8 +23,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   List<SettingsListData> settingsList = SettingsListData.settingsList;
-  String country = "Indian";
-  String currency = "₹ Rupee";
   int selectedRadioTile = 0;
   List<String> data = ["English", "French", "Arabic", "Japanese"];
   @override
@@ -55,60 +53,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     return InkWell(
                         onTap: () {
                           switch (index) {
+                           case 0:
+                              break;
                             case 1:
-                              {
-                                break;
-                              }
+                              _getFontPopUI();
+                              break;
                             case 2:
-                              {
-                                _getFontPopUI();
-                                break;
-                              }
+                              _getColorPopUI();
+                              break;
                             case 3:
-                              {
-                                _getColorPopUI();
-                                break;
-                              }
+                              _getLanguageUI();
+                              break;
                             case 4:
-                              {
-                                _getLanguageUI();
-                                break;
-                              }
-                            case 5:
-                              {
-                                NavigationServices(context)
-                                    .gotoCountryScreen()
-                                    .then((value) {
-                                  if (value is String && value != "") {
-                                    setState(() {
-                                      country = value;
-                                    });
-                                  }
-                                });
-                              }
-                            case 6:
-                              {
-                                NavigationServices(context)
-                                    .gotoCurrencyScreen()
-                                    .then((value) {
-                                  if (value is String && value != "") {
-                                    setState(() {
-                                      currency = value;
-                                    });
-                                  }
-                                });
-                              }
-                            case 10:
-                              {
-                                _logout();
-                                break;
-                              }
+                              _logout();
+                              break;
                           }
                         },
                         child: Column(
                           children: [
                             Padding(
-                              padding:const EdgeInsets.only(left: 8, right: 16),
+                              padding:
+                                  const EdgeInsets.only(left: 8, right: 16),
                               child: Row(
                                 children: [
                                   Expanded(
@@ -124,33 +89,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       ),
                                     ),
                                   ),
-                                  index == 5
-                                      ? Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: getTextUI(country),
-                                        )
-                                      : index == 6
-                                          ? Padding(
-                                              padding: const EdgeInsets.all(16),
-                                              child: getTextUI(currency),
-                                            )
-                                          : index == 1
-                                              ? _themeUI()
-                                              : Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(16),
-                                                  child: Container(
-                                                    child: Icon(
-                                                      settingsList[index]
-                                                          .iconData,
-                                                      color: AppTheme
-                                                          .secondaryTextColor,
-                                                    ),
-                                                  ),
-                                                ),
+                                  index == 0 ? _themeUI() :
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Icon(
+                                      settingsList[index].iconData,
+                                      color: AppTheme.primaryColor,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
+                            
                             Padding(
                               padding:
                                   const EdgeInsets.only(left: 16, right: 16),

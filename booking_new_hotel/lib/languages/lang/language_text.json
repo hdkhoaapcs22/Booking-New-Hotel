@@ -189,20 +189,6 @@
         "ja": "サインアップ"
     },
     {
-        "text_id": "first_name",
-        "en": "First name",
-        "fr": "Prénom",
-        "ar": "الاسم الأول",
-        "ja": "ファーストネーム"
-    },
-    {
-        "text_id": "last_name",
-        "en": "Last name",
-        "fr": "Nom de famille",
-        "ar": "الكنية",
-        "ja": "苗字"
-    },
-    {
         "text_id": "explore",
         "en": "Explore",
         "fr": "explorer",
@@ -805,13 +791,6 @@
         "ja": "選択した言語"
     },
     {
-        "text_id": "Country",
-        "en": "Country",
-        "fr": "Pays",
-        "ar": "دولة",
-        "ja": "国"
-    },
-    {
         "text_id": "Currency",
         "en": "Currency",
         "fr": "Devise",
@@ -995,37 +974,52 @@
     },
     {
         "text_id": "enter_password",
-        "en": "enter password",
-        "fr": "enter_password",
+        "en": "Enter password",
+        "fr": "Entrez le mot de passe",
         "ar": "أدخل كلمة المرور",
-        "ja": "パスワードを入力する"
+        "ja": "パスワードを入力"
     },
     {
-        "text_id": "enter_first_name",
-        "en": "Enter first name",
-        "fr": "entrez votre prénom",
-        "ar": "أدخل الاسم الأول",
-        "ja": "名を入力してください"
+        "text_id": "enter_name",
+        "en": "Enter name",
+        "fr": "Entrez le nom",
+        "ar": "أدخل الاسم",
+        "ja": "名前を入力"
     },
     {
-        "text_id": "enter_last_name",
-        "en": "Enter first name",
-        "fr": "Entrer le nom de famille",
-        "ar": "إدخال اسم آخر",
-        "ja": "名前を入力してください"
+        "text_id": "name",
+        "en": "Name",
+        "fr": "Nom",
+        "ar": "اسم",
+        "ja": "名前"
     },
     {
-        "text_id": "first_name_cannot_empty",
-        "en": "First Name cannot be empty",
-        "fr": "Le prénom ne peut pas être vide",
-        "ar": "لا يمكن أن يكون الاسم الأول فارغًا",
-        "ja": "名を空にすることはできません"
+        "text_id": "phone",
+        "en": "Phone number",
+        "fr": "Numéro de téléphone",
+        "ar": "رقم الهاتف",
+        "ja": "電話番号"
     },
     {
-        "text_id": "last_name_cannot_empty",
-        "en": "Last Name cannot be empty",
-        "fr": "Le nom de famille ne peut pas être vide",
-        "ar": "لا يمكن أن يكون الاسم الأخير فارغًا",
-        "ja": "姓を空にすることはできません"
+        "text_id":"enter_phone_number",
+    "en": "Enter phone number",
+    "fr": "Entrez le numéro de téléphone",
+    "ar": "أدخل رقم الهاتف",
+    "ja": "電話番号を入力"
+    },
+    {
+        "text_id": "enter_address",
+        "en": "Enter address",
+        "fr": "Entrez l'adresse",
+        "ar": "أدخل العنوان",
+        "ja": "住所を入力"
+    },
+    {
+        "text_id": "update_profile",
+        "en": "Update",
+        "fr": "Mettre à jour",
+        "ar": "تحديث",
+        "ja": "更新"
     }
+    
 ]

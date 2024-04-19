@@ -10,8 +10,6 @@ import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/hotelDetails/reviews_list_screen.dart';
 import '../modules/login/login_or_signup_screen.dart';
-import '../modules/profile/country_screen.dart';
-import '../modules/profile/currency_screen.dart';
 import '../modules/profile/settings_screen.dart';
 import '../modules/splash/splashScreen.dart';
 import 'routes.dart';
@@ -71,7 +69,7 @@ class NavigationServices {
     return await _pushMaterialPageRoute(const ReviewsListScreen());
   }
 
-  Future<dynamic> gotoProfileScreen() async {
+  Future<dynamic> gotoEditProfileScreen() async {
     return await _pushMaterialPageRoute(const EditProfile());
   }
 
@@ -81,14 +79,6 @@ class NavigationServices {
 
   Future<dynamic> gotoSettingsScreen() async {
     return await _pushMaterialPageRoute(const SettingsScreen());
-  }
-
-  Future<dynamic> gotoCountryScreen() async {
-    return await _pushMaterialPageRoute(const CountryScreen());
-  }
-
-  Future<dynamic> gotoCurrencyScreen() async {
-    return await _pushMaterialPageRoute(const CurrencyScreen());
   }
 
   Future<dynamic> gotoSplashScreen() async {

@@ -32,7 +32,6 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   List<HotelListData> hotelList = HotelListData.hotelList;
   List<HotelListData> filterHotelList = HotelListData.hotelList;
   ScrollController scrollController = ScrollController();
-  String currentCountry = 'Ho Chi Minh...';
 
   int room = 1;
   int add = 2;
@@ -298,7 +297,6 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                         contentPadding: const EdgeInsets.all(10),
                         errorText: null,
                         border: InputBorder.none,
-                        hintText: currentCountry,
                         hintStyle:
                             TextStyles(context).getDescriptionStyle().copyWith(
                                   color: AppTheme.secondaryTextColor,
