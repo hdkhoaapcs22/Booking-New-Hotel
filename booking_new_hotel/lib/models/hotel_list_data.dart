@@ -35,7 +35,6 @@ class HotelListData {
     this.isSelected = false,
     this.date,
     this.peopleSleeps,
-    this.location,
     this.screenMapPin,
     this.amenity,
   });
@@ -54,7 +53,6 @@ class HotelListData {
       amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       isSelected: true,
       date: DateText(DateTime.now().day, DateTime.now().day + 6),
-      location: const LatLng(51.516898, -0.143377),
     ),
     HotelListData(
       imagePath: Localfiles.hotel_2,
@@ -68,7 +66,6 @@ class HotelListData {
       amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       isSelected: false,
       date: DateText(DateTime.now().day + 2, DateTime.now().day + 6),
-      location: const LatLng(51.505799, -0.137904),
     ),
     HotelListData(
       imagePath: Localfiles.hotel_3,
@@ -82,7 +79,6 @@ class HotelListData {
       amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       isSelected: false,
       date: DateText(DateTime.now().day + 5, DateTime.now().day + 9),
-      location: const LatLng(51.499162, -0.119788),
     ),
     HotelListData(
       imagePath: Localfiles.hotel_4,
@@ -96,7 +92,6 @@ class HotelListData {
       roomData: RoomData(2, 2),
       amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 5),
-      location: const LatLng(51.519541, -0.114503),
     ),
     HotelListData(
       imagePath: Localfiles.hotel_5,
@@ -110,7 +105,6 @@ class HotelListData {
       roomData: RoomData(1, 7),
       amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 4),
-      location: const LatLng(51.508383, -0.109502),
     ),
     HotelListData(
       imagePath: Localfiles.hotel_5,
@@ -124,7 +118,6 @@ class HotelListData {
       roomData: RoomData(1, 7),
       amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 4),
-      location: const LatLng(51.508383, -0.109502),
     ),
   ];
 

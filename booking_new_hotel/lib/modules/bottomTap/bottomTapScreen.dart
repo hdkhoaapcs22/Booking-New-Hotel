@@ -1,3 +1,4 @@
+import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -27,10 +28,10 @@ class _BottomTapScreenState extends State<BottomTapScreen>
 
   @override
   void initState() {
+    GlobalVar.databaseService!.getHotelListData();
     animationController = AnimationController(
         duration: const Duration(milliseconds: 400), vsync: this);
     indexView = Container();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // it will run after the build method
       starLoadingScreen();

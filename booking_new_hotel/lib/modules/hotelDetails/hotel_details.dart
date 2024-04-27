@@ -320,7 +320,7 @@ class _HotelDetailsState extends State<HotelDetails>
                             top: 0,
                             left: 0,
                             right: 0,
-                            child: Container(
+                            child: SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height,
                               child: Image.asset(hotelData.imagePath,

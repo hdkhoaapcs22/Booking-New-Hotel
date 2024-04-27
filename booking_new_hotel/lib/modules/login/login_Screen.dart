@@ -1,14 +1,15 @@
+import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
+import '../../service/Database/database_service.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
 import 'facebook_twitter_button_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'forgot_password.dart';
 
@@ -26,14 +27,14 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   double distanceEmailError = 34, distancePasswordError = 34;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: RemoveFocus(
             onClick: () {
-              FocusScope.of(context).requestFocus(FocusNode()); // if it is the last -> keyboard is closed
+              FocusScope.of(context).requestFocus(
+                  FocusNode()); // if it is the last -> keyboard is closed
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,43 +184,40 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
+    String tmpEmail = emailController.text.trim();
+    String tmpPassword = passwordController.text.trim();
 
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      )
-          .then((value) {
-        errorPassword = "";
+    if (tmpEmail.isEmpty) {
+      errorEmail = AppLocalizations(context).of('user_not_found');
+      distanceEmailError = 0;
+      if (tmpPassword.isNotEmpty) {
         distancePasswordError = 34;
-        distanceEmailError = 34;
-        passwordController.clear();
-        errorEmail = "";
-        NavigationServices(context).gotoBottomTapScreen();
-      });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'channel-error') {
-        if (emailController.text.trim().isEmpty) {
-          errorEmail = AppLocalizations(context).of('user_not_found');
-          distanceEmailError = 0;
-        } else {
-          errorPassword = AppLocalizations(context).of('password_cannot_empty');
-          errorEmail = "";
-          distanceEmailError = 34;
-          distancePasswordError = 0;
-        }
-      } else if (e.code == 'invalid-email') {
-        errorEmail = AppLocalizations(context).of('invalid_email');
-        distanceEmailError = 0;
-      } else if (e.code == 'invalid-credential') {
-        errorPassword = AppLocalizations(context).of('wrong_password');
-        distancePasswordError = 0;
-        errorEmail = "";
-        distanceEmailError = 34;
+        errorPassword = "";
       }
       setState(() {});
       Navigator.pop(context);
+    } else if (tmpPassword.isEmpty) {
+      errorPassword = AppLocalizations(context).of('password_cannot_empty');
+      errorEmail = "";
+      distanceEmailError = 34;
+      distancePasswordError = 0;
+      setState(() {});
+      Navigator.pop(context);
+    } else {
+      await GlobalVar.authService
+          .signInWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
+          .then((value) {
+        if (value != null) {
+          errorPassword = "";
+          distancePasswordError = 34;
+          distanceEmailError = 34;
+          errorEmail = "";
+          GlobalVar.uidOfUser = value.uid;
+          GlobalVar.databaseService = DatabaseService(uid: value.uid);
+          print(value.uid);
+          NavigationServices(context).gotoBottomTapScreen();
+        }
+      });
     }
   }
 }

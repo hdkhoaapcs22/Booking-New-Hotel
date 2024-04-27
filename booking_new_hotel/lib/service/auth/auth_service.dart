@@ -1,0 +1,46 @@
+import 'package:booking_new_hotel/models/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class AuthService {
+  // firebase auth instance
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // custom return user
+  // ignore: unused_element
+  MyUser? _userFromFirebaseUser(User? user) {
+    return user != null ? MyUser(uid: user.uid) : null;
+  }
+
+  // register with email and password
+  Future registerWithEmailAndPassword({required String email, required String password}) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // sign in with email and password
+  Future signInWithEmailAndPassword({required String email, required String password}) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      return e;
+    }
+  }
+
+  // sign out
+  Future signOutAccount() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      return null;
+    }
+  }
+}

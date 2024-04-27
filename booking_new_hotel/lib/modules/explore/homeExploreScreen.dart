@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../../global/global_var.dart';
 import '../../providers/theme_provider.dart';
 import '../../routes/route_names.dart';
 import '../../utils/enum.dart';
@@ -31,7 +32,8 @@ class HomeExploreScreen extends StatefulWidget {
 
 class _HomeExploreScreenState extends State<HomeExploreScreen>
     with TickerProviderStateMixin {
-  var hotelList = HotelListData.hotelList;
+  // var hotelList = HotelListData.hotelList;
+  var hotelList = GlobalVar.hotelListData;
   late ScrollController scrollController;
   late AnimationController animationController;
   var sliderImageHeight = 0.0;
@@ -247,8 +249,9 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
 
   Widget getDealListView(int index) {
     var hotelList = HotelListData.hotelList;
+    // var hotelList = GlobalVar.hotelListData;
     List<Widget> list = [];
-    hotelList.forEach((element) {
+    hotelList!.forEach((element) {
       var animation = Tween(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: widget.animationController,
@@ -259,7 +262,6 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
         HotelListViewPage(
             callback: () {
               NavigationServices(context).gotoHotelDetails(element);
-              print("khoa");
             },
             hotelData: element,
             animationController: widget.animationController,

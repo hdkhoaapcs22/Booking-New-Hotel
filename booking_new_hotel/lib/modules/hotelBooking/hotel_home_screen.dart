@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../../global/global_var.dart';
 import '../../models/hotel_list_data.dart';
 import '../../models/room_data.dart';
 import '../../utils/text_styles.dart';
@@ -29,8 +30,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     with TickerProviderStateMixin {
   late AnimationController animationController;
   late AnimationController _animationController;
-  List<HotelListData> hotelList = HotelListData.hotelList;
-  List<HotelListData> filterHotelList = HotelListData.hotelList;
+  // List<HotelListData> hotelList = HotelListData.hotelList;
+  // List<HotelListData> filterHotelList = HotelListData.hotelList;
+  List<HotelListData> hotelList = GlobalVar.hotelListData!;
+  List<HotelListData> filterHotelList = GlobalVar.hotelListData!;
   ScrollController scrollController = ScrollController();
 
   int room = 1;
@@ -333,7 +336,8 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   void helperSearchingByLocation(String text) {
     List<HotelListData> tmp = [];
     if (text.isEmpty) {
-      tmp = HotelListData.hotelList;
+      // tmp = HotelListData.hotelList;
+      tmp = GlobalVar.hotelListData!;
     } else {
       RegExp exp = RegExp(' .+');
       for (int i = 0; i < hotelList.length; i++) {

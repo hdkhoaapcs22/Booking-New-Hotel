@@ -75,15 +75,15 @@ class _MotelAppState extends State<MotelApp> {
     applicationcontext = context;
     _setStatusBarNavigationBarTheme(theme);
     // we call some theme basic data set in the app like color, font, theme mode, language
-    context
-        .read<ThemeProvider>()
-        .checkAndSetThemeMode(MediaQuery.of(context).platformBrightness);
+    // context
+    //     .read<ThemeProvider>()
+    //     .checkAndSetThemeMode(MediaQuery.of(context).platformBrightness);
 
-    context
-        .read<ThemeProvider>()
-        .checkAndSetLanguage(); // it helps to set the previous language
-    context.read<ThemeProvider>().checkAndSetFonType();
-    context.read<ThemeProvider>().checkAndSetColorType();
+    // context
+    //     .read<ThemeProvider>()
+    //     .checkAndSetLanguage(); // it helps to set the previous language
+    // context.read<ThemeProvider>().checkAndSetFonType();
+    // context.read<ThemeProvider>().checkAndSetColorType();
   }
 
   Map<String, WidgetBuilder> _buildRoutes() {

@@ -104,6 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 1,
               color: Colors.grey.withOpacity(0.5),
             ),
+            
           ],
         ));
   }

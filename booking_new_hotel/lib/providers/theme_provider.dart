@@ -8,25 +8,30 @@ class ThemeProvider extends ChangeNotifier {
   ThemeProvider({required ThemeData state}) : super();
 
   bool _isLightMode = true;
-  ThemeData _themeData = AppTheme.getThemeData;
-  ThemeModeType _themeModeType = ThemeModeType.system;
-  ThemeData get themeData => _themeData;
   bool get isLightMode => _isLightMode;
+
+  ThemeData _themeData = AppTheme.getThemeData;
+  ThemeData get themeData => _themeData;
+
+  ThemeModeType _themeModeType = ThemeModeType.system;
   ThemeModeType get themeModeType => _themeModeType;
+
   FontFamilyType get fontType => _fontType;
   FontFamilyType _fontType = FontFamilyType.WorkSans;
+
   ColorType get colorType => _colorType;
   ColorType _colorType = ColorType.Verdigris;
-  LanguageType get languageType => _languageType;
-  LanguageType _languageType = LanguageType.en;
 
-  updateThemeMode(ThemeModeType _themeModeType) async {
-    await SharedPreferencesKeys().setThemeMode(_themeModeType);
+  LanguageType _languageType = LanguageType.en;
+  LanguageType get languageType => _languageType;
+
+  updateThemeMode(ThemeModeType settingThemeModeType) async {
     final systembrightness = MediaQuery.of(applicationcontext!)
         .platformBrightness; //helps to obtain the brightness of the device
-    checkAndSetThemeMode(_themeModeType == ThemeModeType.light
+    _themeModeType = settingThemeModeType;
+    checkAndSetThemeMode(settingThemeModeType == ThemeModeType.light
         ? Brightness.light
-        : _themeModeType == ThemeModeType.dark
+        : settingThemeModeType == ThemeModeType.dark
             ? Brightness.dark
             : systembrightness);
   }
@@ -36,7 +41,6 @@ class ThemeProvider extends ChangeNotifier {
     bool _theLightTheme = _isLightMode;
 
     // mode is selected by user
-    _themeModeType = await SharedPreferencesKeys().getThemeMode();
     if (_themeModeType == ThemeModeType.system) {
       // if mode is system then we add as system birtness
       _theLightTheme = systemBrightness == Brightness.light;
@@ -49,15 +53,6 @@ class ThemeProvider extends ChangeNotifier {
 
     if (_isLightMode != _theLightTheme) {
       _isLightMode = _theLightTheme;
-      _themeData = AppTheme.getThemeData;
-      notifyListeners();
-    }
-  }
-
-  void checkAndSetFonType() async {
-    final FontFamilyType fontType = await SharedPreferencesKeys().getFontType();
-    if (fontType != _fontType) {
-      _fontType = fontType;
       _themeData = AppTheme.getThemeData;
       notifyListeners();
     }
@@ -77,30 +72,10 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void checkAndSetColorType() async {
-    final ColorType _colorTypeData =
-        await SharedPreferencesKeys().getColorType();
-    if (_colorTypeData != colorType) {
-      _colorType = _colorTypeData;
-      _themeData = AppTheme.getThemeData;
-      notifyListeners();
-    }
-  }
-
   void updateLanguage(LanguageType _language) async {
     await SharedPreferencesKeys().setLanguageType(_language);
     _languageType = _language;
     _themeData = AppTheme.getThemeData;
     notifyListeners();
-  }
-
-  void checkAndSetLanguage() async {
-    final LanguageType _languageTypeData =
-        await SharedPreferencesKeys().getLanguageType();
-    if (_languageTypeData != languageType) {
-      _languageType = _languageTypeData;
-      _themeData = AppTheme.getThemeData;
-      notifyListeners();
-    }
   }
 }

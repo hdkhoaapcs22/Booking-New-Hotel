@@ -226,7 +226,14 @@ class HotelListView extends StatelessWidget {
                           child: InkWell(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(32)),
-                            onTap: () {},
+                            onTap: () {
+                              if (favouriteIcon == Icons.favorite_border) {
+                                favouriteIcon = Icons.favorite;
+                            
+                              } else {
+                                favouriteIcon = Icons.favorite_border;
+                              }
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(8),
                               child: Icon(
