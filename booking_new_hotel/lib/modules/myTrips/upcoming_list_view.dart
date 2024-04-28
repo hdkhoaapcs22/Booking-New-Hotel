@@ -35,8 +35,7 @@ class _UpcomingListViewState extends State<UpcomingListView> {
     return StreamBuilder(
         stream: upcomingsStream,
         builder: (context, AsyncSnapshot snapshot) {
-          return 
-          ListView.builder(
+          return ListView.builder(
             itemCount: hotelList.length,
             padding: const EdgeInsets.only(top: 8, bottom: 16),
             scrollDirection: Axis.vertical,

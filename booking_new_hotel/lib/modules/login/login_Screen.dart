@@ -212,10 +212,16 @@ class _LoginScreenState extends State<LoginScreen> {
           distancePasswordError = 34;
           distanceEmailError = 34;
           errorEmail = "";
-          GlobalVar.uidOfUser = value.uid;
-          GlobalVar.databaseService = DatabaseService(uid: value.uid);
-          print(value.uid);
-          NavigationServices(context).gotoBottomTapScreen();
+          GlobalVar.databaseService = DatabaseService(uid: value.getUID);
+          GlobalVar.user = value;
+          GlobalVar.user!
+              .setUserInfo(name: "", email: tmpEmail, address: "", phone: "");
+          GlobalVar.databaseService!.updateUserInfoData(
+            name: "khoa",
+            address: "",
+            phone: "",
+          );
+                    NavigationServices(context).gotoBottomTapScreen();
         }
       });
     }

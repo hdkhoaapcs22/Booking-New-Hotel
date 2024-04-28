@@ -1,13 +1,10 @@
+import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/widgets/common_app_bar_view.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:booking_new_hotel/widgets/remove_focus.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../../models/setting_list_data.dart';
-import '../../service/Database/database_service.dart';
 import '../../utils/localfiles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_button.dart';
@@ -21,8 +18,6 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   List<SettingsListData> userSettingsList = SettingsListData.userSettingsList;
-  DatabaseService databaseService =
-      DatabaseService(uid: "jWslizNXKfZbYtZ3X897jYZ6wC43");
   TextEditingController nameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -57,31 +52,6 @@ class _EditProfileState extends State<EditProfile> {
               hintText: AppLocalizations(context).of("enter_name"),
               controller: nameController,
             ),
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 25, 24, 2),
-                child: Text(
-                  "email",
-                  style: TextStyle(color: Theme.of(context).disabledColor),
-                ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24, top: 5),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        shadowColor: Colors.black12.withOpacity(
-                            Theme.of(context).brightness == Brightness.dark
-                                ? 0.6
-                                : 0.2),
-                        child: const Padding(
-                          padding: EdgeInsets.all(14),
-                          child: Text("haha"),
-                        )),
-                  ))
-            ]),
             CommonTextFieldView(
               padding: const EdgeInsets.only(left: 24, right: 24, top: 5),
               titleText: AppLocalizations(context).of("phone"),
@@ -108,18 +78,13 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
                 onTap: () {
-                  databaseService.updateUserInfoData(
-                      name: nameController.text,
-                      email: "haha",
-                      address: addressController.text,
-                      phone: phoneController.text);
-                  final information = Provider.of<QuerySnapshot>(context);
-
-                  if (information != null) {
-                    for (var doc in information.docs) {
-                      print(doc.data());
-                    }
-                  }
+                  String name = nameController.text.trim();
+                  String address = addressController.text.trim();
+                  String phone = phoneController.text.trim();
+                  GlobalVar.user!
+                      .setUserInfo(name: name, address: address, phone: phone);
+                  GlobalVar.databaseService!.updateUserInfoData(
+                      name: name, address: address, phone: phone);
                   Navigator.pop(context);
                 },
               ),

@@ -1,4 +1,4 @@
-import 'package:booking_new_hotel/models/user.dart';
+import 'package:booking_new_hotel/modules/profile/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -43,4 +43,14 @@ class AuthService {
       return null;
     }
   }
+
+  // get email 
+  Future getEmail() async {
+    try {
+      return _auth.currentUser!.email;
+    } catch (e) {
+      return null;
+    }
+  }
+  
 }

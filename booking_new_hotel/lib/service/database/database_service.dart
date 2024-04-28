@@ -5,29 +5,35 @@ import '../../global/global_var.dart';
 import '../../models/room_data.dart';
 
 class DatabaseService {
-  final String? uid;
-  DatabaseService({this.uid});
+  late String uid;
+  // DatabaseService({this.uid});
+
+  // singleton object
+  static final DatabaseService _singleton = DatabaseService._internal();
+  factory DatabaseService({required String uid}) {
+    _singleton.uid = uid;
+    return _singleton;
+  }
+  DatabaseService._internal();
 
   // user collection reference
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
-  Future updateUserInfoData(
-      {required String name,
-      required String email,
-      required String address,
-      required String phone}) async {
+  Future updateUserInfoData({
+    required String name,
+    required String address,
+    required String phone,
+  }) async {
     return await userCollection.doc(uid).collection("usersInfo").doc(uid).set({
       'name': name,
-      'email': email,
       'address': address,
       'phone': phone,
-      'uid': uid,
     });
   }
 
   Future<Stream<QuerySnapshot>> getUserInfoData() async {
-    return userCollection.snapshots();
+    return userCollection.doc(uid).collection("usersInfo").snapshots();
   }
 
   Future<Stream<QuerySnapshot>> getFavoritesListData() async {
@@ -67,6 +73,7 @@ class DatabaseService {
               perNight: doc['price'],
               imagePath: doc['image'],
               roomData: RoomData(doc['room'], doc['people']),
+              date: DateText(DateTime.now().day, DateTime.now().day + 6),
             ))
         .toList();
   }

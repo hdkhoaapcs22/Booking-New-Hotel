@@ -251,7 +251,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
     var hotelList = HotelListData.hotelList;
     // var hotelList = GlobalVar.hotelListData;
     List<Widget> list = [];
-    hotelList!.forEach((element) {
+    hotelList.forEach((element) {
       var animation = Tween(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: widget.animationController,

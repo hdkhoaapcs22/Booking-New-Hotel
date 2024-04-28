@@ -169,8 +169,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           distancePasswordError = distanceEmailError = 34;
           distanceEmailError =
               distancePasswordError = distanceConfirmPasswordError = 34;
-          GlobalVar.uidOfUser = value.uid;
-          GlobalVar.databaseService = DatabaseService(uid: value.uid);
+          GlobalVar.databaseService = DatabaseService(uid: value.getUID);
+          GlobalVar.user = value;
           NavigationServices(context).gotoBottomTapScreen();
         }
       });

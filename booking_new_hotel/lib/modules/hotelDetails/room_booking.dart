@@ -38,7 +38,7 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
         getAppBarUI(),
         Expanded(
             child: ListView.builder(
-          padding: EdgeInsets.all(0.0),
+          padding: const EdgeInsets.all(0.0),
           itemCount: roomList.length,
           itemBuilder: (context, index) {
             int count = roomList.length > 10 ? 10 : roomList.length;

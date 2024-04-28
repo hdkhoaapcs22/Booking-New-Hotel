@@ -91,14 +91,14 @@ class _HotelDetailsState extends State<HotelDetails>
                   padding: const EdgeInsets.only(left: 24, right: 24),
                   child: getHotelDetails(isInList: true),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(16),
                   child: Divider(
                     height: 1,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 24, right: 24),
+                  padding: const EdgeInsets.only(left: 24, right: 24),
                   child: Row(children: [
                     Expanded(
                       child: Text(
