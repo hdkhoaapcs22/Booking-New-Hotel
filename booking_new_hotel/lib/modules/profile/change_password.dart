@@ -66,10 +66,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           child: CommonButton(
             buttonText: AppLocalizations(context).of("change_password"),
             onTap: () {
-              String tmpCurrentPassword = currentPassword.text.trim();
-              String tmpNewPassword = newPassword.text.trim();
-              String tmpConfirmPassword = confirmPassword.text.trim();
-              // checkValidity(tmpCurrentPassword);
+              checkValidity();
             },
           ),
         ),
@@ -77,7 +74,10 @@ class _ChangePasswordState extends State<ChangePassword> {
     ));
   }
 
-  // void  checkValidity(String tmpCurrentPassword) {
-  //   if(tmpC)
-  // }
+  void  checkValidity() {
+    // String tmpCurrentPassword = currentPassword.text.trim();
+    //           String tmpNewPassword = newPassword.text.trim();
+    //           String tmpConfirmPassword = confirmPassword.text.trim();
+    // if(tmpC)
+  }
 }

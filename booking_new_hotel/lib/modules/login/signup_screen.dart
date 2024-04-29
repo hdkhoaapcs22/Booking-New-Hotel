@@ -1,4 +1,6 @@
 import 'package:booking_new_hotel/global/global_var.dart';
+import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
+import 'package:booking_new_hotel/modules/login/validity_email_password.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
@@ -18,15 +20,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String errorEmail = "";
-  String errorPassword = "";
-  String errorPasswordConfirm = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  double distanceEmailError = 34,
-      distancePasswordError = 34,
-      distanceConfirmPasswordError = 34;
+  ShowAuthError showAuthError = ShowAuthError();
 
   @override
   Widget build(BuildContext context) {
@@ -55,29 +52,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     keyboardType: TextInputType.emailAddress,
                     titleText: AppLocalizations(context).of("your_mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
-                    errorText: errorEmail,
+                    errorText: showAuthError.getMessageEmailError,
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
                     padding: EdgeInsets.fromLTRB(
-                        24, distanceEmailError, 24, distancePasswordError),
+                        24,
+                        showAuthError.getGapBetweenEmailAndPasswordDuringError,
+                        24,
+                        showAuthError
+                            .getGapBetweenPasswordAndConfirmPasswordDuringError),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
                     isObscureText: true,
-                    errorText: errorPassword,
+                    errorText: showAuthError.getMessagePasswordError,
                   ),
                   CommonTextFieldView(
                     controller: confirmPasswordController,
                     padding: EdgeInsets.only(
                         left: 24,
                         right: 24,
-                        bottom: distanceConfirmPasswordError),
+                        bottom: showAuthError
+                            .getGapBetweenPasswordAndButtonDuringError),
                     titleText: AppLocalizations(context).of("confirm_password"),
                     hintText:
                         AppLocalizations(context).of("enter_confirm_password"),
                     keyboardType: TextInputType.text,
-                    errorText: errorPasswordConfirm,
+                    errorText: showAuthError.getMessagePasswordConfirmError,
                     isObscureText: true,
                   ),
                   CommonButton(
@@ -132,32 +134,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String tmpEmail = emailController.text.trim();
     String tmpPassword = passwordController.text.trim();
     String tmpConfirmPassword = confirmPasswordController.text.trim();
-
-    if (tmpEmail.isEmpty) {
-      errorEmail = AppLocalizations(context).of('user_not_found');
-      distanceEmailError = 0;
-      if (tmpPassword.isNotEmpty) {
-        distancePasswordError = 34;
-        errorPassword = "";
-      }
-      if (tmpConfirmPassword.isNotEmpty) {
-        distanceConfirmPasswordError = 34;
-        errorPasswordConfirm = "";
-      }
-      setState(() {});
-      Navigator.pop(context);
-    } else if (tmpPassword.isEmpty) {
-      errorPassword = AppLocalizations(context).of('password_cannot_empty');
-      errorEmail = "";
-      distanceEmailError = 34;
-      distancePasswordError = 0;
-      setState(() {});
-      Navigator.pop(context);
-    } else if (tmpPassword != tmpConfirmPassword) {
-      errorPasswordConfirm = AppLocalizations(context).of('password_not_match');
-      errorEmail = errorPassword = "";
-      distancePasswordError = distanceEmailError = 34;
-      distanceConfirmPasswordError = 0;
+    ValidityEmailPassword validityEmailPassword = ValidityEmailPassword(
+        email: tmpEmail,
+        password: tmpPassword,
+        confirmPassword: tmpConfirmPassword);
+    if (!validityEmailPassword.checkValidityInSignUp(showAuthError, context)) {
       setState(() {});
       Navigator.pop(context);
     } else {
@@ -165,19 +146,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           .registerWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
           .then((value) {
         if (value != null) {
-          errorPassword = errorEmail = errorPasswordConfirm = "";
-          distancePasswordError = distanceEmailError = 34;
-          distanceEmailError =
-              distancePasswordError = distanceConfirmPasswordError = 34;
           GlobalVar.databaseService = DatabaseService(uid: value.getUID);
           GlobalVar.user = value;
-          GlobalVar.user!
-              .setUserInfo(name: "", email: tmpEmail, password: tmpPassword, address: "", phone: "");
+          GlobalVar.user!.setUserInfo(
+              name: "",
+              email: tmpEmail,
+              password: tmpPassword,
+              address: "",
+              phone: "");
           GlobalVar.databaseService!.updateUserInfoData(
             name: "",
             address: "",
             phone: "",
           );
+          Navigator.pop(context);
           NavigationServices(context).gotoBottomTapScreen();
         }
       });

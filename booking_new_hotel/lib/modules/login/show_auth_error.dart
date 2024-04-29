@@ -1,49 +1,56 @@
 class ShowAuthError {
-  late String _message;
-  int? _gapBetweenEmailAndPasswordDuringError,
-      _gapBetweenPasswordAndButtonDuringError,
-      _gapBetweenPasswordAndConfirmPasswordDuringError;
+  String _messageEmailError = "", _messagePasswordError = "", _messagePasswordConfirmError = "";
+  double _gapBetweenEmailAndPasswordDuringError = 34,
+      _gapBetweenPasswordAndButtonDuringError = 34,
+      _gapBetweenPasswordAndConfirmPasswordDuringError = 34;
 
-  ShowAuthError({
-    required int gapBetweenEmailAndPasswordDuringError,
-    required int gapBetweenPasswordAndButtonDuringError,
-    required int gapBetweenPasswordAndConfirmPasswordDuringError,
-  }) {
-    _gapBetweenEmailAndPasswordDuringError =
-        gapBetweenEmailAndPasswordDuringError;
-    _gapBetweenPasswordAndButtonDuringError =
-        gapBetweenPasswordAndButtonDuringError;
-    _gapBetweenPasswordAndConfirmPasswordDuringError =
-        gapBetweenPasswordAndConfirmPasswordDuringError;
+  void setMessageEmailError({required String messageEmailError}) {
+    _messageEmailError = messageEmailError;
   }
 
-  void setMessage({required String message}) {
-    _message = message;
+  void setMessagePasswordError({required String messagePasswordError}) {
+    _messagePasswordError = messagePasswordError;
+  }
+
+  void setMessagePasswordConfirmError({required String messagePasswordConfirmError}) {
+    _messagePasswordConfirmError = messagePasswordConfirmError;
   }
 
   void setGapBetweenEmailAndPasswordDuringError(
-      {required int gapBetweenEmailAndPasswordDuringError}) {
+      {required double gapBetweenEmailAndPasswordDuringError}) {
     _gapBetweenEmailAndPasswordDuringError =
         gapBetweenEmailAndPasswordDuringError;
   }
 
   void setGapBetweenPasswordAndButtonDuringError(
-      {required int gapBetweenPasswordAndButtonDuringError}) {
+      {required double gapBetweenPasswordAndButtonDuringError}) {
     _gapBetweenPasswordAndButtonDuringError =
         gapBetweenPasswordAndButtonDuringError;
   }
 
   void setGapBetweenPasswordAndConfirmPasswordDuringError(
-      {required int gapBetweenPasswordAndConfirmPasswordDuringError}) {
+      {required double gapBetweenPasswordAndConfirmPasswordDuringError}) {
     _gapBetweenPasswordAndConfirmPasswordDuringError =
         gapBetweenPasswordAndConfirmPasswordDuringError;
   }
 
-  String get getMessage => _message;
-  int get getGapBetweenEmailAndPasswordDuringError =>
-      _gapBetweenEmailAndPasswordDuringError!;
-  int get getGapBetweenPasswordAndButtonDuringError =>
-      _gapBetweenPasswordAndButtonDuringError!;
-  int get getGapBetweenPasswordAndConfirmPasswordDuringError =>
-      _gapBetweenPasswordAndConfirmPasswordDuringError!;
+  void clear()
+  {
+    _messageEmailError = "";
+    _messagePasswordError = "";
+    _messagePasswordConfirmError = "";
+    _gapBetweenEmailAndPasswordDuringError = 34;
+    _gapBetweenPasswordAndButtonDuringError = 34;
+    _gapBetweenPasswordAndConfirmPasswordDuringError = 34;
+  }
+
+  String get getMessageEmailError => _messageEmailError;
+  String get getMessagePasswordError => _messagePasswordError;
+  String get getMessagePasswordConfirmError => _messagePasswordConfirmError;
+  double get getGapBetweenEmailAndPasswordDuringError =>
+      _gapBetweenEmailAndPasswordDuringError;
+  double get getGapBetweenPasswordAndButtonDuringError =>
+      _gapBetweenPasswordAndButtonDuringError;
+  double get getGapBetweenPasswordAndConfirmPasswordDuringError =>
+      _gapBetweenPasswordAndConfirmPasswordDuringError;
 }

@@ -1,4 +1,6 @@
 import 'package:booking_new_hotel/global/global_var.dart';
+import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
+import 'package:booking_new_hotel/modules/login/validity_email_password.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 
 import 'package:booking_new_hotel/widgets/common_button.dart';
@@ -22,11 +24,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String errorEmail = "";
-  String errorPassword = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  double distanceEmailError = 34, distancePasswordError = 34;
+  ShowAuthError showAuthError = ShowAuthError();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,16 +60,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.emailAddress,
                     titleText: AppLocalizations(context).of("your_mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
-                    errorText: errorEmail,
+                    errorText: showAuthError.getMessageEmailError,
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
                     padding: EdgeInsets.fromLTRB(
-                        24, distanceEmailError, 24, distancePasswordError),
+                        24,
+                        showAuthError.getGapBetweenEmailAndPasswordDuringError,
+                        24,
+                        showAuthError
+                            .getGapBetweenPasswordAndButtonDuringError),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
-                    errorText: errorPassword,
+                    errorText: showAuthError.getMessagePasswordError,
                     isObscureText: true,
                   ),
                   forgotPasswordUI(),
@@ -178,6 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future userLogin() async {
+    print("it is in userLogin");
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -187,20 +193,9 @@ class _LoginScreenState extends State<LoginScreen> {
     String tmpEmail = emailController.text.trim();
     String tmpPassword = passwordController.text.trim();
 
-    if (tmpEmail.isEmpty) {
-      errorEmail = AppLocalizations(context).of('user_not_found');
-      distanceEmailError = 0;
-      if (tmpPassword.isNotEmpty) {
-        distancePasswordError = 34;
-        errorPassword = "";
-      }
-      setState(() {});
-      Navigator.pop(context);
-    } else if (tmpPassword.isEmpty) {
-      errorPassword = AppLocalizations(context).of('password_cannot_empty');
-      errorEmail = "";
-      distanceEmailError = 34;
-      distancePasswordError = 0;
+    ValidityEmailPassword validityEmailPassword =
+        ValidityEmailPassword(email: tmpEmail, password: tmpPassword);
+    if (!validityEmailPassword.checkValidityInLogin(showAuthError, context)) {
       setState(() {});
       Navigator.pop(context);
     } else {
@@ -208,10 +203,6 @@ class _LoginScreenState extends State<LoginScreen> {
           .signInWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
           .then((value) {
         if (value != null) {
-          errorPassword = "";
-          distancePasswordError = 34;
-          distanceEmailError = 34;
-          errorEmail = "";
           GlobalVar.databaseService = DatabaseService(uid: value.getUID);
           GlobalVar.user = value;
           GlobalVar.user!.setEmail(email: tmpEmail);
