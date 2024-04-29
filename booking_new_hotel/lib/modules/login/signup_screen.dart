@@ -171,6 +171,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               distancePasswordError = distanceConfirmPasswordError = 34;
           GlobalVar.databaseService = DatabaseService(uid: value.getUID);
           GlobalVar.user = value;
+          GlobalVar.user!
+              .setUserInfo(name: "", email: tmpEmail, password: tmpPassword, address: "", phone: "");
+          GlobalVar.databaseService!.updateUserInfoData(
+            name: "",
+            address: "",
+            phone: "",
+          );
           NavigationServices(context).gotoBottomTapScreen();
         }
       });

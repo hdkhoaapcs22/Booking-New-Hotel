@@ -4,7 +4,6 @@ import 'package:booking_new_hotel/models/setting_list_data.dart';
 import 'package:booking_new_hotel/utils/text_styles.dart';
 import 'package:booking_new_hotel/widgets/bottom_top_move_animation_view.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,8 +12,6 @@ import '../../utils/enum.dart';
 import '../../utils/localfiles.dart';
 import '../../utils/themes.dart';
 import 'pop_up_menu_list_items.dart';
-
-int count = 1;
 
 class ProfileScreen extends StatefulWidget {
   final AnimationController animationController;
@@ -43,7 +40,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(count++);
     return StreamBuilder(
         stream: userStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -56,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Padding(
                         padding: EdgeInsets.only(
-                            left: 20, top: AppBar().preferredSize.height),
+                            left: 20, top: AppBar().preferredSize.height + 10),
                         child: Row(
                           children: [
                             GlobalVar.iconic.appIcon(context),
@@ -87,10 +83,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             )
                           ],
                         )),
-                    const SizedBox(height: 90),
+                    const SizedBox(height: 100),
                     const Center(
                       child: CircleAvatar(
-                        radius: 60,
+                        radius: 65,
                         backgroundImage: AssetImage(Localfiles.userImage),
                       ),
                     ),
@@ -120,13 +116,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         NavigationServices(context).gotoEditProfileScreen();
                       },
                     ),
-                    const SizedBox(height: 28),
+                    const SizedBox(height: 55),
                     Divider(
                       height: 1,
                       color: Colors.grey.withOpacity(0.5),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8),
+                      padding: const EdgeInsets.only(top: 5),
                       child: profileDetails(userInfoData),
                     )
                   ],
@@ -141,37 +137,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
       decoration: BoxDecoration(
         color: AppTheme.backgroundColor,
         borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            offset: const Offset(4, 4),
+            blurRadius: 16,
+          ),
+        ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 20, top: 15),
         child: Column(children: [
           profileItemDetail(
               "name", const Icon(FontAwesomeIcons.person), userInfoData),
           Divider(
             height: 2,
             color: Colors.grey.withOpacity(0.5),
-            indent: 20,
             endIndent: 20,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           profileItemDetail(
               "mail_text", const Icon(FontAwesomeIcons.envelope), userInfoData),
           Divider(
             height: 2,
             color: Colors.grey.withOpacity(0.5),
-            indent: 20,
             endIndent: 20,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           profileItemDetail(
               "phone", const Icon(FontAwesomeIcons.phone), userInfoData),
           Divider(
             height: 2,
             color: Colors.grey.withOpacity(0.5),
-            indent: 20,
             endIndent: 20,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           profileItemDetail("address_text",
               const Icon(FontAwesomeIcons.locationArrow), userInfoData),
         ]),
@@ -183,14 +183,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         icon,
-        const SizedBox(width: 10),
+        const SizedBox(width: 8),
         Text(AppLocalizations(context).of(item),
             style: TextStyles(context).getTitleStyle().copyWith(
                   fontSize: 20,
                 )),
       ]),
       Padding(
-        padding: const EdgeInsets.fromLTRB(10, 10, 20, 10),
+        padding: const EdgeInsets.fromLTRB(30, 6, 20, 10),
         child: Text(
           chooseItem(item, userInfoData),
           style: TextStyles(context).getDescriptionStyle(),

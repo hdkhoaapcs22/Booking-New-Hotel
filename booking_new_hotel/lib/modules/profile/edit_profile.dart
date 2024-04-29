@@ -8,6 +8,9 @@ import '../../models/setting_list_data.dart';
 import '../../utils/localfiles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_button.dart';
+import '../../widgets/custom_dialog.dart';
+import '../../widgets/custom_dialog_action_button.dart';
+import '../../widgets/got_it_dialog.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -23,6 +26,11 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    GotItDialog gotItDialog = GotItDialog(
+      context: context,
+      title: "profile_updated",
+      description: "profile_updated_description",
+    );
     return Scaffold(
       backgroundColor: AppTheme.scaffoldBackgroundColor,
       body: RemoveFocus(
@@ -42,7 +50,7 @@ class _EditProfileState extends State<EditProfile> {
             const SizedBox(height: 20),
             const Center(
               child: CircleAvatar(
-                radius: 60,
+                radius: 65,
                 backgroundImage: AssetImage(Localfiles.userImage),
               ),
             ),
@@ -85,7 +93,8 @@ class _EditProfileState extends State<EditProfile> {
                       .setUserInfo(name: name, address: address, phone: phone);
                   GlobalVar.databaseService!.updateUserInfoData(
                       name: name, address: address, phone: phone);
-                  Navigator.pop(context);
+                  // show the dialog to show the success message
+                  gotItDialog.gotItDialog();
                 },
               ),
             ),

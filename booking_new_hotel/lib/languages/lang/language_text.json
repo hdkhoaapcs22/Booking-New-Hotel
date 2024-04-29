@@ -518,13 +518,6 @@
         "ja": "ホテルが見つかりました"
     },
     {
-        "text_id": "filtter",
-        "en": "filtter",
-        "fr": "filtre",
-        "ar": "منقي",
-        "ja": "フィルタ"
-    },
-    {
         "text_id": "price_text",
         "en": "price (for 1 night)",
         "fr": "prix (pour 1 nuit)",
@@ -630,13 +623,6 @@
         "ja": "アマンダ"
     },
     {
-        "text_id": "view_edit",
-        "en": "View and Edit profile",
-        "fr": "Afficher et modifier le profil",
-        "ar": "عرض وتحرير الملف الشخصي",
-        "ja": "プロファイルの表示と編集"
-    },
-    {
         "text_id": "edit_profile",
         "en": "Edit Profile",
         "fr": "Editer le profil",
@@ -644,25 +630,11 @@
         "ja": "プロファイル編集"
     },
     {
-        "text_id": "username_text",
-        "en": "UserName",
-        "fr": "Nom d'utilisateur",
-        "ar": "اسم االمستخدم",
-        "ja": "ユーザー名"
-    },
-    {
         "text_id": "phone",
         "en": "Phone",
         "fr": "Téléphoner",
         "ar": "هاتف",
         "ja": "電話"
-    },
-    {
-        "text_id": "date_of_birth",
-        "en": "Date of Birth",
-        "fr": "Date de naissance",
-        "ar": "تاريخ الولادة",
-        "ja": "生年月日"
     },
     {
         "text_id": "address_text",
@@ -686,11 +658,11 @@
         "ja": "パスワードを変更する"
     },
     {
-        "text_id": "enter_your_new_password",
-        "en": "Enter your new password and confirm your password",
-        "fr": "Entrez votre nouveau mot de passe et confirmez votre mot de passe",
-        "ar": "أدخل كلمة المرور الجديدة الخاصة بك وقم بتأكيد كلمة المرور الخاصة بك",
-        "ja": "新しいパスワードを入力し、パスワードを確認します"
+        "text_id": "enter_new_password",
+        "en": "Emter new password",
+        "fr": "Entrez un nouveau mot de passe",
+        "ar": "أدخل كلمة مرور جديدة",
+        "ja": "新しいパスワードを入力してください"
     },
     {
         "text_id": "new_password",
@@ -707,18 +679,18 @@
         "ja": "パスワードを認証する"
     },
     {
+        "text_id": "enter_confirm_password",
+        "en": "Enter confirm password",
+        "fr": "Entrez le mot de passe de confirmation",
+        "ar": "أدخل تأكيد كلمة المرور",
+        "ja": "確認パスワードを入力してください"
+    },
+    {
         "text_id": "setting_text",
         "en": "Setting",
         "fr": "Réglage",
         "ar": "جلسة",
         "ja": "設定"
-    },
-    {
-        "text_id": "Notifications",
-        "en": "Notifications",
-        "fr": "Notifications",
-        "ar": "إشعارات",
-        "ja": "通知"
     },
     {
         "text_id": "Theme Mode",
@@ -796,27 +768,6 @@
         "fr": "Devise",
         "ar": "عملة",
         "ja": "通貨"
-    },
-    {
-        "text_id": "Terms of Services",
-        "en": "Terms of Services",
-        "fr": "Conditions de services",
-        "ar": "شروط الخدمة",
-        "ja": "利用規約"
-    },
-    {
-        "text_id": "Privacy Policy",
-        "en": "Privacy Policy",
-        "fr": "Politique de confidentialité",
-        "ar": "سياسة الخصوصية",
-        "ja": "個人情報保護方針"
-    },
-    {
-        "text_id": "Give Us Feedbacks",
-        "en": "Give Us Feedbacks",
-        "fr": "Donnez-nous des commentaires",
-        "ar": "قدم لنا الاصداء",
-        "ja": "フィードバックをお寄せください"
     },
     {
         "text_id": "Log out",
@@ -903,20 +854,6 @@
         "ja": "子供達"
     },
     {
-        "text_id": "enter_new_password",
-        "en": "enter new password",
-        "fr": "Entrez un nouveau mot de passe",
-        "ar": "أدخل كلمة مرور جديدة",
-        "ja": "新しいパスワードを入力してください"
-    },
-    {
-        "text_id": "enter_confirm_password",
-        "en": "enter confirm password",
-        "fr": "Entrez confirmer le mot de passe",
-        "ar": "أدخل تأكيد كلمة المرور",
-        "ja": "確認パスワードを入力してください"
-    },
-    {
         "text_id": "password_cannot_empty",
         "en": "Password cannot be empty",
         "fr": "Le mot de passe ne peut pas être vide",
@@ -950,13 +887,6 @@
         "fr": "L'e-mail ne peut pas être vide",
         "ar": "لا يمكن أن يكون البريد الإلكتروني فارغًا",
         "ja": "メールを空にすることはできません"
-    },
-    {
-        "text_id": "enter_valid_email",
-        "en": "Please enter a valid email address",
-        "fr": "Veuillez entrer une adresse e-mail valide",
-        "ar": "الرجاء إدخال عنوان بريد إلكتروني صالح",
-        "ja": "有効なメールアドレスを入力してください"
     },
     {
         "text_id": "email_already_in_use",
@@ -1020,6 +950,19 @@
         "fr": "Mettre à jour",
         "ar": "تحديث",
         "ja": "更新"
+    },
+    {
+        "text_id": "updated",
+        "en": "Updated",
+        "fr": "Mis à jour",
+        "ar": "محدث",
+        "ja": "更新済み"
+    },
+    {
+        "text_id": "profile_updated",
+        "en": "Profile updated successfully",
+        "fr": "Profil mis à jour avec succès",
+        "ar": "تم تحديث الملف الشخصي بنجاح",
+        "ja": "プロフィールが正常に更新されました"
     }
-    
 ]

@@ -214,14 +214,10 @@ class _LoginScreenState extends State<LoginScreen> {
           errorEmail = "";
           GlobalVar.databaseService = DatabaseService(uid: value.getUID);
           GlobalVar.user = value;
-          GlobalVar.user!
-              .setUserInfo(name: "", email: tmpEmail, address: "", phone: "");
-          GlobalVar.databaseService!.updateUserInfoData(
-            name: "khoa",
-            address: "",
-            phone: "",
-          );
-                    NavigationServices(context).gotoBottomTapScreen();
+          GlobalVar.user!.setEmail(email: tmpEmail);
+          GlobalVar.user!.setPassword(password: tmpPassword);
+          Navigator.pop(context);
+          NavigationServices(context).gotoBottomTapScreen();
         }
       });
     }
