@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/models/hotel_list_data.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/reviews_view.dart';
@@ -34,14 +35,16 @@ class _HotelDetailsState extends State<HotelDetails>
   String hotelText2 =
       "Featuring a fit ness center, Grand Royale Park Hotel is located in Sweden, 4.7km from National Musium a fitness center ";
 
-  bool isFav = false;
   bool isReadless = false;
   late AnimationController animationController;
   double imageHeight = 0.0;
   late AnimationController _animationController;
+  late bool isFav;
 
   @override
   void initState() {
+    isFav = GlobalVar.databaseService!.favoriteHotelsDatabase
+        .isFavoriteHotel(name: widget.hotelData.titleTxt);
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
     _animationController = AnimationController(
@@ -169,7 +172,7 @@ class _HotelDetailsState extends State<HotelDetails>
                     buttonText: AppLocalizations(context).of("book_now"),
                     onTap: () {
                       NavigationServices(context).gotoRoomBookingScreen(
-                        widget.hotelData.titleTxt,
+                        widget.hotelData,
                       );
                     },
                   ),
@@ -184,7 +187,7 @@ class _HotelDetailsState extends State<HotelDetails>
           _backgroundImageUI(widget.hotelData),
           Padding(
             padding: EdgeInsets.only(top: AppBar().preferredSize.height),
-            child: Container(
+            child: SizedBox(
               height: AppBar().preferredSize.height,
               child: Row(children: [
                 _getAppBarUI(Theme.of(context).disabledColor.withOpacity(0.4),
@@ -204,6 +207,13 @@ class _HotelDetailsState extends State<HotelDetails>
                     AppTheme.backgroundColor,
                     isFav ? Icons.favorite : Icons.favorite_border,
                     AppTheme.primaryColor, () {
+                  if (isFav) {
+                    GlobalVar.databaseService!.favoriteHotelsDatabase
+                        .removeFavoriteHotel(name: widget.hotelData.titleTxt);
+                  } else {
+                    GlobalVar.databaseService!.favoriteHotelsDatabase
+                        .addFavoriteHotel(favoriteHotel: widget.hotelData);
+                  }
                   setState(() {
                     isFav = !isFav;
                   });
@@ -312,23 +322,21 @@ class _HotelDetailsState extends State<HotelDetails>
               child: Stack(
                 children: [
                   IgnorePointer(
-                    child: Container(
-                      child: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height,
-                              child: Image.asset(hotelData.imagePath,
-                                  fit: BoxFit.cover),
-                            ),
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            child: Image.asset(hotelData.imagePath,
+                                fit: BoxFit.cover),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Positioned(
@@ -372,7 +380,7 @@ class _HotelDetailsState extends State<HotelDetails>
                                           onTap: () {
                                             NavigationServices(context)
                                                 .gotoRoomBookingScreen(
-                                              widget.hotelData.titleTxt,
+                                              widget.hotelData,
                                             );
                                           },
                                         ),

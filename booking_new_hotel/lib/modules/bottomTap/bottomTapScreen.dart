@@ -28,7 +28,7 @@ class _BottomTapScreenState extends State<BottomTapScreen>
 
   @override
   void initState() {
-    GlobalVar.databaseService!.getHotelListData();
+    print("It is in initState of BottomTapScreen");
     animationController = AnimationController(
         duration: const Duration(milliseconds: 400), vsync: this);
     indexView = Container();
@@ -46,6 +46,7 @@ class _BottomTapScreenState extends State<BottomTapScreen>
   }
 
   Future starLoadingScreen() async {
+    print("It is in starLoadingScreen of BottomTapScreen");
     await Future.delayed(
         const Duration(milliseconds: 480)); // it will wait for 480ms
     setState(() {
@@ -59,6 +60,7 @@ class _BottomTapScreenState extends State<BottomTapScreen>
 
   @override
   Widget build(BuildContext context) {
+    print("It is in BottomTapScreen");
     return Consumer<ThemeProvider>(
       builder: (_, provider, child) => Scaffold(
           bottomNavigationBar: SizedBox(

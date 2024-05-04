@@ -659,7 +659,7 @@
     },
     {
         "text_id": "enter_new_password",
-        "en": "Emter new password",
+        "en": "Enter new password",
         "fr": "Entrez un nouveau mot de passe",
         "ar": "أدخل كلمة مرور جديدة",
         "ja": "新しいパスワードを入力してください"
@@ -960,9 +960,45 @@
     },
     {
         "text_id": "profile_updated",
-        "en": "Profile updated successfully",
-        "fr": "Profil mis à jour avec succès",
-        "ar": "تم تحديث الملف الشخصي بنجاح",
-        "ja": "プロフィールが正常に更新されました"
+        "en": "Profile updated successfully!",
+        "fr": "Profil mis à jour avec succès!",
+        "ar": "تم تحديث الملف الشخصي بنجاح!",
+        "ja": "プロフィールが正常に更新されました！"
+    },
+    {
+        "text_id": "current_password_not_match",
+        "en": "Current password does not match",
+        "fr": "Le mot de passe actuel ne correspond pas",
+        "ar": "كلمة المرور الحالية غير متطابقة",
+        "ja": "現在のパスワードが一致しません"
+    },
+    {
+        "text_id": "strong_password_strong_defense",
+        "en": "Strong password, strong defense",
+        "fr": "Mot de passe fort, défense forte",
+        "ar": "كلمة مرور قوية ، دفاع قوي",
+        "ja": "強力なパスワード、強力な防御"
+    },
+    {
+        "text_id": "password_updated",
+        "en": "Password updated successfully!",
+        "fr": "Mot de passe mis à jour avec succès!",
+        "ar": "تم تحديث كلمة المرور بنجاح!",
+        "ja": "パスワードが正常に更新されました！"
+    },
+    {
+        "text_id": "current_password",
+        "en": "Current Password",
+        "fr": "Mot de passe actuel",
+        "ar": "كلمة المرور الحالية",
+        "ja": "現在のパスワード"
+    },
+    {
+        "text_id": "enter_current_password",
+        "en": "Enter current password",
+        "fr": "Entrez le mot de passe actuel",
+        "ar": "أدخل كلمة المرور الحالية",
+        "ja": "現在のパスワードを入力"
     }
+
 ]

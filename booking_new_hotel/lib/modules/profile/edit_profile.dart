@@ -8,8 +8,6 @@ import '../../models/setting_list_data.dart';
 import '../../utils/localfiles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_button.dart';
-import '../../widgets/custom_dialog.dart';
-import '../../widgets/custom_dialog_action_button.dart';
 import '../../widgets/got_it_dialog.dart';
 
 class EditProfile extends StatefulWidget {
@@ -26,11 +24,6 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    GotItDialog gotItDialog = GotItDialog(
-      context: context,
-      title: "profile_updated",
-      description: "profile_updated_description",
-    );
     return Scaffold(
       backgroundColor: AppTheme.scaffoldBackgroundColor,
       body: RemoveFocus(
@@ -45,7 +38,7 @@ class _EditProfileState extends State<EditProfile> {
               onBackClick: () {
                 Navigator.pop(context);
               },
-              topPadding: AppBar().preferredSize.height,
+              topPadding: AppBar().preferredSize.height + 10,
             ),
             const SizedBox(height: 20),
             const Center(
@@ -91,10 +84,15 @@ class _EditProfileState extends State<EditProfile> {
                   String phone = phoneController.text.trim();
                   GlobalVar.user!
                       .setUserInfo(name: name, address: address, phone: phone);
-                  GlobalVar.databaseService!.updateUserInfoData(
+                  GlobalVar.databaseService!.userInfoDatabase.updateUserInfoData(
                       name: name, address: address, phone: phone);
                   // show the dialog to show the success message
-                  gotItDialog.gotItDialog();
+                  GotItDialog successDialog = GotItDialog(
+                    context: context,
+                    title: "updated",
+                    description: "profile_updated",
+                  );
+                  successDialog.gotItDialog();
                 },
               ),
             ),

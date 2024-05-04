@@ -30,11 +30,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     with TickerProviderStateMixin {
   late AnimationController animationController;
   late AnimationController _animationController;
-  // List<HotelListData> hotelList = HotelListData.hotelList;
-  // List<HotelListData> filterHotelList = HotelListData.hotelList;
   List<HotelListData> hotelList = GlobalVar.hotelListData!;
   List<HotelListData> filterHotelList = GlobalVar.hotelListData!;
   ScrollController scrollController = ScrollController();
+  IconData favoriteIcon = Icons.favorite_border;
 
   int room = 1;
   int add = 2;
@@ -87,6 +86,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    print("It is in hotel home screen");
     return Scaffold(
       body: Stack(
         children: [
@@ -124,17 +124,18 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                 ),
                               );
                               animationController.forward();
+                              // TODO: check whether a hotel is favorite or not
                               return HotelListView(
-                                  callback: () {
-                                    NavigationServices(context)
-                                        .gotoRoomBookingScreen(
-                                            filterHotelList[index].titleTxt);
-                                  },
-                                  hotelData: filterHotelList[index],
-                                  animation: animation,
-                                  animationController: animationController,
-                                  ratingOfHotel:
-                                      Random().nextDouble() * 5.1 + 3.5);
+                                callback: () {
+                                  NavigationServices(context)
+                                      .gotoRoomBookingScreen(
+                                          filterHotelList[index]);
+                                },
+                                hotelData: filterHotelList[index],
+                                animation: animation,
+                                animationController: animationController,
+                                ratingOfHotel: filterHotelList[index].rating,
+                              );
                             },
                           ),
                         ),
@@ -348,7 +349,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
       }
     }
     if (tmp.isEmpty) {
-      // will be done something
+      // will be done something like show a message.
     } else {
       setState(() {
         filterHotelList = tmp;
@@ -382,14 +383,14 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     for (int i = 0; i < filterHotelList.length; i++) {
       if (filterHotelList[i].amenity!.isPool == amenity.isPool &&
           filterHotelList[i].amenity!.isPetFriendly == amenity.isPetFriendly &&
-          filterHotelList[i].amenity!.isFreeBreakfast == amenity.isFreeBreakfast &&
+          filterHotelList[i].amenity!.isFreeBreakfast ==
+              amenity.isFreeBreakfast &&
           filterHotelList[i].amenity!.isFreeWifi == amenity.isFreeWifi &&
-          filterHotelList[i].amenity!.isFreeParking == amenity.isFreeParking && 
+          filterHotelList[i].amenity!.isFreeParking == amenity.isFreeParking &&
           filterHotelList[i].dist >= value['distance'] - 2 &&
           filterHotelList[i].dist <= value['distance'] + 2 &&
-          filterHotelList[i].perNight >= value['minimumPrice'] && 
-          filterHotelList[i].perNight <= value['maximumPrice']
-          ) {
+          filterHotelList[i].perNight >= value['minimumPrice'] &&
+          filterHotelList[i].perNight <= value['maximumPrice']) {
         tmp.add(filterHotelList[i]);
       }
     }

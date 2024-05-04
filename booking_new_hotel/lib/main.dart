@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'service/database/core_database_service.dart';
 import 'utils/themes.dart';
 import 'providers/theme_provider.dart';
 import 'motel_app.dart';
@@ -18,6 +19,7 @@ void main() async {
 }
 
 Widget _setAllProviders() {
+  CoreDatabaseService().getHotelListData();
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(

@@ -29,12 +29,12 @@ class CommonAppBarView extends StatelessWidget {
               padding: const EdgeInsets.only(left: 15, right: 10, top: 10),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.2),
+                  color: Colors.grey.withOpacity(0.28),
                   shape: BoxShape.circle,
                   boxShadow: <BoxShadow>[
                     BoxShadow(
                         color: Colors.grey.withOpacity(0.3),
-                        offset: const Offset(2.0, 4.0),
+                        offset: const Offset(2.0, 3.5),
                         blurRadius: 8),
                   ],
                 ),

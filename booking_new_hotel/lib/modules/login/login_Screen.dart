@@ -1,16 +1,16 @@
 import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
-import 'package:booking_new_hotel/modules/login/validity_email_password.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
-import '../../service/Database/database_service.dart';
+import '../../service/database/database_service.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
+import 'credentials_validity.dart';
 import 'facebook_twitter_button_view.dart';
 
 import 'forgot_password.dart';
@@ -60,20 +60,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.emailAddress,
                     titleText: AppLocalizations(context).of("your_mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
-                    errorText: showAuthError.getMessageEmailError,
+                    errorText: showAuthError.getmessageFirstFieldError,
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
                     padding: EdgeInsets.fromLTRB(
                         24,
-                        showAuthError.getGapBetweenEmailAndPasswordDuringError,
+                        showAuthError
+                            .getgapBetweenFirstAndSecondFieldDuringError,
                         24,
                         showAuthError
-                            .getGapBetweenPasswordAndButtonDuringError),
+                            .getgapBetweenThirdFieldAndButtonDuringError),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
-                    errorText: showAuthError.getMessagePasswordError,
+                    errorText: showAuthError.getmessageSecondFieldError,
                     isObscureText: true,
                   ),
                   forgotPasswordUI(),
@@ -159,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   forgotPasswordUI() {
     return Padding(
-        padding: EdgeInsets.only(left: 24, right: 24),
+        padding: const EdgeInsets.only(left: 24, right: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -183,7 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future userLogin() async {
-    print("it is in userLogin");
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -191,11 +191,11 @@ class _LoginScreenState extends State<LoginScreen> {
               child: CircularProgressIndicator(),
             ));
     String tmpEmail = emailController.text.trim();
-    String tmpPassword = passwordController.text.trim();
+    String tmpPassword = passwordController.text;
 
-    ValidityEmailPassword validityEmailPassword =
-        ValidityEmailPassword(email: tmpEmail, password: tmpPassword);
-    if (!validityEmailPassword.checkValidityInLogin(showAuthError, context)) {
+    CredentialsValidity credentialsValidity = CredentialsValidity();
+    if (!credentialsValidity.checkValidityInLogin(showAuthError, context,
+        email: tmpEmail, password: tmpPassword)) {
       setState(() {});
       Navigator.pop(context);
     } else {

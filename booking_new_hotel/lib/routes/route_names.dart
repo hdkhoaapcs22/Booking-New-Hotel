@@ -53,9 +53,9 @@ class NavigationServices {
     return _pushMaterialPageRoute(const FilterScreen());
   }
 
-  void gotoRoomBookingScreen(String name) async {
+  void gotoRoomBookingScreen(HotelListData hotel) async {
     return _pushMaterialPageRoute(RoomBookingScreen(
-      hotelName: name,
+      hotel: hotel,
     ));
   }
 

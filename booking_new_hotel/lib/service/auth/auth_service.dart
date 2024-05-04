@@ -12,7 +12,8 @@ class AuthService {
   }
 
   // register with email and password
-  Future registerWithEmailAndPassword({required String email, required String password}) async {
+  Future registerWithEmailAndPassword(
+      {required String email, required String password}) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -24,12 +25,22 @@ class AuthService {
   }
 
   // sign in with email and password
-  Future signInWithEmailAndPassword({required String email, required String password}) async {
+  Future signInWithEmailAndPassword(
+      {required String email, required String password}) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
       return _userFromFirebaseUser(user);
+    } catch (e) {
+      return e;
+    }
+  }
+
+  Future updateUserPassword({required String newPassword}) async {
+    try {
+      return await FirebaseAuth.instance.currentUser!
+          .updatePassword(newPassword);
     } catch (e) {
       return e;
     }
@@ -44,7 +55,7 @@ class AuthService {
     }
   }
 
-  // get email 
+  // get email
   Future getEmail() async {
     try {
       return _auth.currentUser!.email;
@@ -52,5 +63,4 @@ class AuthService {
       return null;
     }
   }
-  
 }

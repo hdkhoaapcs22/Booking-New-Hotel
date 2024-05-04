@@ -1,12 +1,12 @@
 import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
-import 'package:booking_new_hotel/modules/login/validity_email_password.dart';
+import 'package:booking_new_hotel/modules/login/credentials_validity.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
 import '../../routes/route_names.dart';
-import '../../service/Database/database_service.dart';
+import '../../service/database/database_service.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
@@ -52,21 +52,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     keyboardType: TextInputType.emailAddress,
                     titleText: AppLocalizations(context).of("your_mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
-                    errorText: showAuthError.getMessageEmailError,
+                    errorText: showAuthError.getmessageFirstFieldError,
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
                     padding: EdgeInsets.fromLTRB(
                         24,
-                        showAuthError.getGapBetweenEmailAndPasswordDuringError,
+                        showAuthError
+                            .getgapBetweenFirstAndSecondFieldDuringError,
                         24,
                         showAuthError
-                            .getGapBetweenPasswordAndConfirmPasswordDuringError),
+                            .getgapBetweenSecondAndThirdFieldDuringError),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
                     isObscureText: true,
-                    errorText: showAuthError.getMessagePasswordError,
+                    errorText: showAuthError.getmessageSecondFieldError,
                   ),
                   CommonTextFieldView(
                     controller: confirmPasswordController,
@@ -74,12 +75,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         left: 24,
                         right: 24,
                         bottom: showAuthError
-                            .getGapBetweenPasswordAndButtonDuringError),
+                            .getgapBetweenThirdFieldAndButtonDuringError),
                     titleText: AppLocalizations(context).of("confirm_password"),
                     hintText:
                         AppLocalizations(context).of("enter_confirm_password"),
                     keyboardType: TextInputType.text,
-                    errorText: showAuthError.getMessagePasswordConfirmError,
+                    errorText: showAuthError.getmessageThirdFieldError,
                     isObscureText: true,
                   ),
                   CommonButton(
@@ -132,13 +133,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: CircularProgressIndicator(),
             ));
     String tmpEmail = emailController.text.trim();
-    String tmpPassword = passwordController.text.trim();
-    String tmpConfirmPassword = confirmPasswordController.text.trim();
-    ValidityEmailPassword validityEmailPassword = ValidityEmailPassword(
+    String tmpPassword = passwordController.text;
+    String tmpConfirmPassword = confirmPasswordController.text;
+    CredentialsValidity credentialsValidity = CredentialsValidity();
+    if (!credentialsValidity.checkValidityInSignUp(showAuthError, context,
         email: tmpEmail,
         password: tmpPassword,
-        confirmPassword: tmpConfirmPassword);
-    if (!validityEmailPassword.checkValidityInSignUp(showAuthError, context)) {
+        confirmPassword: tmpConfirmPassword)) {
       setState(() {});
       Navigator.pop(context);
     } else {
@@ -154,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               password: tmpPassword,
               address: "",
               phone: "");
-          GlobalVar.databaseService!.updateUserInfoData(
+          GlobalVar.databaseService!.userInfoDatabase.updateUserInfoData(
             name: "",
             address: "",
             phone: "",

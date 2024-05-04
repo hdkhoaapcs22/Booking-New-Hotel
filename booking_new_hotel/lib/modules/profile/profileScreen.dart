@@ -24,10 +24,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   List<SettingsListData> userSettingsList = SettingsListData.userSettingsList;
   Stream? userStream;
-  var userInfoData;
 
   void fetchUserInfoData() async {
-    userStream = await GlobalVar.databaseService!.getUserInfoData();
+    userStream =
+        await GlobalVar.databaseService!.userInfoDatabase.getUserInfoStream();
     setState(() {});
   }
 
@@ -43,8 +43,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return StreamBuilder(
         stream: userStream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            userInfoData = snapshot.data!.docs[0];
+          if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+            var userInfoData = snapshot.data!.docs[0];
             return BottomTopMoveAnimationView(
                 animationController: widget.animationController,
                 child: Column(
@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Padding(
                         padding: EdgeInsets.only(
-                            left: 20, top: AppBar().preferredSize.height + 10),
+                            left: 20, top: AppBar().preferredSize.height),
                         child: Row(
                           children: [
                             GlobalVar.iconic.appIcon(context),
@@ -83,15 +83,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             )
                           ],
                         )),
-                    const SizedBox(height: 100),
+                    const SizedBox(height: 98),
                     const Center(
                       child: CircleAvatar(
-                        radius: 65,
+                        radius: 61,
                         backgroundImage: AssetImage(Localfiles.userImage),
                       ),
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 34,
                     ),
                     CommonButton(
                       padding: const EdgeInsets.only(left: 48, right: 48),
@@ -116,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         NavigationServices(context).gotoEditProfileScreen();
                       },
                     ),
-                    const SizedBox(height: 55),
+                    const SizedBox(height: 42),
                     Divider(
                       height: 1,
                       color: Colors.grey.withOpacity(0.5),
@@ -148,38 +148,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Padding(
         padding: const EdgeInsets.only(left: 20, top: 15),
         child: Column(children: [
-          profileItemDetail(
-              "name", const Icon(FontAwesomeIcons.person), userInfoData),
+          profileItemDetail("name", const Icon(FontAwesomeIcons.person),
+              userInfoData['name']),
           Divider(
             height: 2,
             color: Colors.grey.withOpacity(0.5),
             endIndent: 20,
           ),
-          const SizedBox(height: 12),
-          profileItemDetail(
-              "mail_text", const Icon(FontAwesomeIcons.envelope), userInfoData),
+          const SizedBox(height: 10),
+          profileItemDetail("mail_text", const Icon(FontAwesomeIcons.envelope),
+              GlobalVar.user!.getEmail),
           Divider(
             height: 2,
             color: Colors.grey.withOpacity(0.5),
             endIndent: 20,
           ),
-          const SizedBox(height: 12),
-          profileItemDetail(
-              "phone", const Icon(FontAwesomeIcons.phone), userInfoData),
+          const SizedBox(height: 10),
+          profileItemDetail("phone", const Icon(FontAwesomeIcons.phone),
+              userInfoData['phone']),
           Divider(
             height: 2,
             color: Colors.grey.withOpacity(0.5),
             endIndent: 20,
           ),
-          const SizedBox(height: 12),
-          profileItemDetail("address_text",
-              const Icon(FontAwesomeIcons.locationArrow), userInfoData),
+          const SizedBox(height: 10),
+          profileItemDetail(
+              "address_text",
+              const Icon(FontAwesomeIcons.locationArrow),
+              userInfoData['address']),
         ]),
       ),
     );
   }
 
-  profileItemDetail(String item, Icon icon, userInfoData) {
+  profileItemDetail(String item, Icon icon, String userInfo) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         icon,
@@ -192,7 +194,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Padding(
         padding: const EdgeInsets.fromLTRB(30, 6, 20, 10),
         child: Text(
-          chooseItem(item, userInfoData),
+          userInfo,
           style: TextStyles(context).getDescriptionStyle(),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
@@ -201,24 +203,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ]);
   }
 
-  chooseItem(String item, userInfoData) {
-    switch (item) {
-      case "name":
-        {
-          return userInfoData['name'];
-        }
-      case "mail_text":
-        {
-          return GlobalVar.user!.getEmail;
-        }
-      case "phone":
-        {
-          return userInfoData['phone'];
-        }
-      case "address_text":
-        {
-          return userInfoData['address'];
-        }
-    }
-  }
+  // chooseItem(String item, userInfoData) {
+  //   switch (item) {
+  //     case "name":
+  //       {
+  //         return userInfoData['name'];
+  //       }
+  //     case "mail_text":
+  //       {
+  //         return GlobalVar.user!.getEmail;
+  //       }
+  //     case "phone":
+  //       {
+  //         return userInfoData['phone'];
+  //       }
+  //     case "address_text":
+  //       {
+  //         return userInfoData['address'];
+  //       }
+  //   }
+  // }
 }

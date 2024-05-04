@@ -1,56 +1,48 @@
 class ShowAuthError {
-  String _messageEmailError = "", _messagePasswordError = "", _messagePasswordConfirmError = "";
-  double _gapBetweenEmailAndPasswordDuringError = 34,
-      _gapBetweenPasswordAndButtonDuringError = 34,
-      _gapBetweenPasswordAndConfirmPasswordDuringError = 34;
+  String _messageFirstFieldError = "",
+      _messageSecondFieldError = "",
+      _messageThirdFieldError = "";
+  double _gapBetweenFirstAndSecondFieldDuringError = 34,
+      _gapBetweenThirdFieldAndButtonDuringError = 34,
+      _gapBetweenSecondAndThirdFieldDuringError = 34;
 
-  void setMessageEmailError({required String messageEmailError}) {
-    _messageEmailError = messageEmailError;
+  void setMessageFirstFieldError({required String messageFirstFieldError}) {
+    _messageFirstFieldError = messageFirstFieldError;
   }
 
-  void setMessagePasswordError({required String messagePasswordError}) {
-    _messagePasswordError = messagePasswordError;
+  void setMessageSecondFieldError({required String messageSecondFieldError}) {
+    _messageSecondFieldError = messageSecondFieldError;
   }
 
-  void setMessagePasswordConfirmError({required String messagePasswordConfirmError}) {
-    _messagePasswordConfirmError = messagePasswordConfirmError;
+  void setMessageThirdFieldError({required String messageThirdFieldError}) {
+    _messageThirdFieldError = messageThirdFieldError;
   }
 
-  void setGapBetweenEmailAndPasswordDuringError(
-      {required double gapBetweenEmailAndPasswordDuringError}) {
-    _gapBetweenEmailAndPasswordDuringError =
-        gapBetweenEmailAndPasswordDuringError;
+  void setGapBetweenFirstAndSecondFieldDuringError(
+      {required double gapBetweenFirstAndSecondFieldDuringError}) {
+    _gapBetweenFirstAndSecondFieldDuringError =
+        gapBetweenFirstAndSecondFieldDuringError;
   }
 
-  void setGapBetweenPasswordAndButtonDuringError(
-      {required double gapBetweenPasswordAndButtonDuringError}) {
-    _gapBetweenPasswordAndButtonDuringError =
-        gapBetweenPasswordAndButtonDuringError;
+  void setGapBetweenThirdFieldAndButtonDuringError(
+      {required double gapBetweenThirdFieldAndButtonDuringError}) {
+    _gapBetweenThirdFieldAndButtonDuringError =
+        gapBetweenThirdFieldAndButtonDuringError;
   }
 
-  void setGapBetweenPasswordAndConfirmPasswordDuringError(
-      {required double gapBetweenPasswordAndConfirmPasswordDuringError}) {
-    _gapBetweenPasswordAndConfirmPasswordDuringError =
-        gapBetweenPasswordAndConfirmPasswordDuringError;
+  void setGapBetweenSecondAndThirdDuringError(
+      {required double gapBetweenSecondAndThirdFieldDuringError}) {
+    _gapBetweenSecondAndThirdFieldDuringError =
+        gapBetweenSecondAndThirdFieldDuringError;
   }
 
-  void clear()
-  {
-    _messageEmailError = "";
-    _messagePasswordError = "";
-    _messagePasswordConfirmError = "";
-    _gapBetweenEmailAndPasswordDuringError = 34;
-    _gapBetweenPasswordAndButtonDuringError = 34;
-    _gapBetweenPasswordAndConfirmPasswordDuringError = 34;
-  }
-
-  String get getMessageEmailError => _messageEmailError;
-  String get getMessagePasswordError => _messagePasswordError;
-  String get getMessagePasswordConfirmError => _messagePasswordConfirmError;
-  double get getGapBetweenEmailAndPasswordDuringError =>
-      _gapBetweenEmailAndPasswordDuringError;
-  double get getGapBetweenPasswordAndButtonDuringError =>
-      _gapBetweenPasswordAndButtonDuringError;
-  double get getGapBetweenPasswordAndConfirmPasswordDuringError =>
-      _gapBetweenPasswordAndConfirmPasswordDuringError;
+  String get getmessageFirstFieldError => _messageFirstFieldError;
+  String get getmessageSecondFieldError => _messageSecondFieldError;
+  String get getmessageThirdFieldError => _messageThirdFieldError;
+  double get getgapBetweenFirstAndSecondFieldDuringError =>
+      _gapBetweenFirstAndSecondFieldDuringError;
+  double get getgapBetweenThirdFieldAndButtonDuringError =>
+      _gapBetweenThirdFieldAndButtonDuringError;
+  double get getgapBetweenSecondAndThirdFieldDuringError =>
+      _gapBetweenSecondAndThirdFieldDuringError;
 }

@@ -1,4 +1,3 @@
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,8 @@ class _UpcomingListViewState extends State<UpcomingListView> {
 
   Stream? upcomingsStream;
   void fetchFavoritesListView() async {
-    upcomingsStream = await GlobalVar.databaseService!.getUpcomingsListData();
+    upcomingsStream = await GlobalVar.databaseService!.upcomingHotelsDatabase
+        .getUpcomingHotelsStream();
     setState(() {});
   }
 
@@ -53,10 +53,11 @@ class _UpcomingListViewState extends State<UpcomingListView> {
                 animation: animation,
                 callback: () {
                   NavigationServices(context)
-                      .gotoRoomBookingScreen(hotelList[index].titleTxt);
+                      .gotoRoomBookingScreen(hotelList[index]);
                 },
                 ratingOfHotel: hotelList[index].rating,
                 isShowDate: true,
+                isShowFav: false,
               );
             },
           );

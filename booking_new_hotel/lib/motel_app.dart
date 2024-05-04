@@ -10,6 +10,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import 'common/common.dart';
+import 'global/global_var.dart';
 import 'modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import 'utils/enum.dart';
 import '../routes/routes.dart';

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/models/hotel_list_data.dart';
 import 'package:booking_new_hotel/modules/explore/home_explore_slider_view.dart';
@@ -32,8 +30,7 @@ class HomeExploreScreen extends StatefulWidget {
 
 class _HomeExploreScreenState extends State<HomeExploreScreen>
     with TickerProviderStateMixin {
-  // var hotelList = HotelListData.hotelList;
-  var hotelList = GlobalVar.hotelListData;
+  List<HotelListData> hotelList = GlobalVar.hotelListData!;
   late ScrollController scrollController;
   late AnimationController animationController;
   var sliderImageHeight = 0.0;
@@ -69,6 +66,7 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
 
   @override
   Widget build(BuildContext context) {
+    print("It is in explore screen");
     sliderImageHeight = MediaQuery.of(context).size.width * 1.25;
     return BottomTopMoveAnimationView(
         animationController: widget.animationController,
@@ -248,10 +246,9 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
   }
 
   Widget getDealListView(int index) {
-    var hotelList = HotelListData.hotelList;
-    // var hotelList = GlobalVar.hotelListData;
+    var hotelList = GlobalVar.hotelListData;
     List<Widget> list = [];
-    hotelList.forEach((element) {
+    hotelList!.forEach((element) {
       var animation = Tween(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: widget.animationController,
@@ -266,7 +263,8 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
             hotelData: element,
             animationController: widget.animationController,
             animation: animation,
-            rating: Random().nextDouble() * 5.1 + 3.5),
+            rating: element.rating,
+            ),
       );
     });
     return Padding(

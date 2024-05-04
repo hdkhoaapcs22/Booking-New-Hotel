@@ -42,7 +42,7 @@ class _FinishTripViewState extends State<FinishTripView> {
             animation: animation,
             callback: () {
               NavigationServices(context)
-                  .gotoRoomBookingScreen(hotelList[index].titleTxt);
+                  .gotoRoomBookingScreen(hotelList[index]);
             },
             ratingOfHotel: hotelList[index].rating,
             isShowDate: (index % 2) != 0,

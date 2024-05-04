@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+import '../../global/global_var.dart';
 import '../../languages/appLocalizations.dart';
 import '../../models/hotel_list_data.dart';
 import '../../utils/enum.dart';
@@ -12,17 +13,17 @@ import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_card.dart';
 
-class HotelListView extends StatelessWidget {
-  final bool isShowDate;
+class HotelListView extends StatefulWidget {
+  final bool isShowDate, isShowFav;
   final VoidCallback callback;
   final HotelListData hotelData;
   final AnimationController animationController;
   final Animation<double> animation;
   final double ratingOfHotel;
-
   const HotelListView(
       {super.key,
       this.isShowDate = false,
+      this.isShowFav = true,
       required this.callback,
       required this.hotelData,
       required this.animationController,
@@ -30,23 +31,29 @@ class HotelListView extends StatelessWidget {
       required this.ratingOfHotel});
 
   @override
+  State<HotelListView> createState() => _HotelListViewState();
+}
+
+class _HotelListViewState extends State<HotelListView> {
+  @override
   Widget build(BuildContext context) {
-    IconData favouriteIcon = Icons.favorite_border;
+    bool isFav = GlobalVar.databaseService!.favoriteHotelsDatabase
+        .isFavoriteHotel(name: widget.hotelData.titleTxt);
     return ListCellAnimationView(
-      animation: animation,
-      animationController: animationController,
+      animation: widget.animation,
+      animationController: widget.animationController,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
         child: Column(
           children: [
-            isShowDate
+            widget.isShowDate
                 ? Padding(
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          Helper.getDateText(hotelData.date!) + ', ',
+                          Helper.getDateText(widget.hotelData.date!) + ', ',
                           style: TextStyles(context)
                               .getRegularStyle()
                               .copyWith(fontSize: 14),
@@ -54,7 +61,8 @@ class HotelListView extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 2),
                           child: Text(
-                            Helper.getRoomText(hotelData.roomData!) + ', ',
+                            Helper.getRoomText(widget.hotelData.roomData!) +
+                                ', ',
                             style: TextStyles(context)
                                 .getRegularStyle()
                                 .copyWith(fontSize: 14),
@@ -74,7 +82,7 @@ class HotelListView extends StatelessWidget {
                       children: [
                         AspectRatio(
                           aspectRatio: 2,
-                          child: Image.asset(hotelData.imagePath,
+                          child: Image.asset(widget.hotelData.imagePath,
                               fit: BoxFit.cover),
                         ),
                         Row(
@@ -90,7 +98,7 @@ class HotelListView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      hotelData.titleTxt,
+                                      widget.hotelData.titleTxt,
                                       textAlign: TextAlign.left,
                                       style: TextStyles(context)
                                           .getBoldStyle()
@@ -103,7 +111,7 @@ class HotelListView extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          hotelData.subTxt + ' ',
+                                          widget.hotelData.subTxt + ' ',
                                           textAlign: TextAlign.left,
                                           style: TextStyles(context)
                                               .getDescriptionStyle(),
@@ -117,7 +125,7 @@ class HotelListView extends StatelessWidget {
                                             color:
                                                 Theme.of(context).primaryColor),
                                         Text(
-                                          "${hotelData.dist.toStringAsFixed(1)}",
+                                          "${widget.hotelData.dist.toStringAsFixed(1)}",
                                           textAlign: TextAlign.left,
                                           style: TextStyles(context)
                                               .getDescriptionStyle(),
@@ -140,9 +148,10 @@ class HotelListView extends StatelessWidget {
                                       padding: const EdgeInsets.only(top: 4),
                                       child: Row(
                                         children: [
-                                          Helper.ratingStar(ratingOfHotel),
+                                          Helper.ratingStar(
+                                              widget.ratingOfHotel),
                                           Text(
-                                            "${hotelData.reviews}",
+                                            "${widget.hotelData.reviews}",
                                             style: TextStyles(context)
                                                 .getDescriptionStyle(),
                                           ),
@@ -167,7 +176,7 @@ class HotelListView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      "\$${hotelData.perNight}",
+                                      "\$${widget.hotelData.perNight}",
                                       style: TextStyles(context)
                                           .getBoldStyle()
                                           .copyWith(fontSize: 22),
@@ -209,42 +218,54 @@ class HotelListView extends StatelessWidget {
                                   const BorderRadius.all(Radius.circular(16)),
                               onTap: () {
                                 try {
-                                  callback();
+                                  widget.callback();
                                 } catch (e) {}
                               })),
                     ),
-                    Positioned(
-                      top: 8,
-                      right: 8,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.background,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(32)),
-                            onTap: () {
-                              if (favouriteIcon == Icons.favorite_border) {
-                                favouriteIcon = Icons.favorite;
-                            
-                              } else {
-                                favouriteIcon = Icons.favorite_border;
-                              }
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Icon(
-                                favouriteIcon,
-                                color: Theme.of(context).primaryColor,
+                    widget.isShowFav
+                        ? Positioned(
+                            top: 8,
+                            right: 8,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.background,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(32)),
+                                  onTap: () {
+                                    if (isFav) {
+                                      GlobalVar.databaseService!
+                                          .favoriteHotelsDatabase
+                                          .removeFavoriteHotel(
+                                              name: widget.hotelData.titleTxt);
+                                    } else {
+                                      GlobalVar.databaseService!
+                                          .favoriteHotelsDatabase
+                                          .addFavoriteHotel(
+                                              favoriteHotel: widget.hotelData);
+                                    }
+                                    setState(() {
+                                      isFav = !isFav;
+                                    });
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Icon(
+                                      isFav
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                    )
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),

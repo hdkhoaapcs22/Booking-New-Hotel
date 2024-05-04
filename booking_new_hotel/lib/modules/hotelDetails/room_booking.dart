@@ -2,11 +2,12 @@ import 'package:booking_new_hotel/models/hotel_list_data.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../global/global_var.dart';
 import '../../utils/text_styles.dart';
 
 class RoomBookingScreen extends StatefulWidget {
-  final String hotelName;
-  const RoomBookingScreen({super.key, required this.hotelName});
+  final HotelListData hotel;
+  const RoomBookingScreen({super.key, required this.hotel});
 
   @override
   State<RoomBookingScreen> createState() => _RoomBookingScreenState();
@@ -32,10 +33,13 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
 
   @override
   Widget build(BuildContext context) {
+    bool isFav = GlobalVar.databaseService!.favoriteHotelsDatabase
+        .isFavoriteHotel(name: widget.hotel.titleTxt);
+    print("It is in RoomBookingScreen");
     return Scaffold(
         body: Column(
       children: [
-        getAppBarUI(),
+        getAppBarUI(isFavoriteHotel: isFav),
         Expanded(
             child: ListView.builder(
           padding: const EdgeInsets.all(0.0),
@@ -57,7 +61,7 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
     ));
   }
 
-  Widget getAppBarUI() {
+  Widget getAppBarUI({required bool isFavoriteHotel}) {
     return Padding(
       padding: EdgeInsets.only(
           top: AppBar().preferredSize.height, left: 16, right: 16, bottom: 16),
@@ -79,7 +83,7 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
             ),
             Expanded(
               child: Center(
-                child: Text(widget.hotelName,
+                child: Text(widget.hotel.titleTxt,
                     style: TextStyles(context).getTitleStyle(),
                     overflow: TextOverflow.ellipsis),
               ),
@@ -88,11 +92,22 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: const BorderRadius.all(Radius.circular(32.0)),
-                onTap: () {},
-                child: const Padding(
-                  padding: EdgeInsets.all(8),
+                onTap: () {
+                  if (isFavoriteHotel) {
+                    GlobalVar.databaseService!.favoriteHotelsDatabase
+                        .removeFavoriteHotel(name: widget.hotel.titleTxt);
+                  } else {
+                    GlobalVar.databaseService!.favoriteHotelsDatabase
+                        .addFavoriteHotel(favoriteHotel: widget.hotel);
+                  }
+                  setState(() {
+                    isFavoriteHotel = !isFavoriteHotel;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
                   child: Icon(
-                    Icons.favorite_border,
+                    isFavoriteHotel ? Icons.favorite : Icons.favorite_border,
                   ),
                 ),
               ),

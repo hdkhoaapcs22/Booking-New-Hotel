@@ -15,10 +15,10 @@ class FavoritesListView extends StatefulWidget {
 }
 
 class _FavoritesListViewState extends State<FavoritesListView> {
-
   Stream? favoritesStream;
   void fetchFavoritesListView() async {
-    favoritesStream = await GlobalVar.databaseService!.getFavoritesListData();
+    favoritesStream = await GlobalVar.databaseService!.favoriteHotelsDatabase
+        .getFavoriteHotelsStream();
     setState(() {});
   }
 
@@ -34,17 +34,20 @@ class _FavoritesListViewState extends State<FavoritesListView> {
     return StreamBuilder(
         stream: favoritesStream,
         builder: (context, AsyncSnapshot snapshot) {
-          var hotelList = snapshot.hasData? snapshot.data.docs.map((doc) => HotelListData(
-            titleTxt: doc['title'],
-            subTxt: doc['subtitle'],
-            dist: doc['dist'],
-            reviews: doc['reviews'],
-            rating: doc['rating'],
-            perNight: doc['price'],
-            imagePath: doc['image'],      
-            roomData: RoomData(doc['room'], doc['people']),      
-            
-          )).toList(): [];
+          var hotelList = snapshot.hasData
+              ? snapshot.data.docs
+                  .map((doc) => HotelListData(
+                        titleTxt: doc['title'],
+                        subTxt: doc['subtitle'],
+                        dist: doc['dist'],
+                        reviews: doc['reviews'],
+                        rating: doc['rating'],
+                        perNight: doc['price'],
+                        imagePath: doc['image'],
+                        roomData: RoomData(doc['room'], doc['people']),
+                      ))
+                  .toList()
+              : [];
           return ListView.builder(
             itemCount: hotelList.length,
             padding: const EdgeInsets.only(top: 8, bottom: 8),

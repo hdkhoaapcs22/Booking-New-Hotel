@@ -1,24 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserInfo {
-  String uid;
-  UserInfo({required this.uid});
+import '../../global/global_var.dart';
 
-  // user collection reference
-  final CollectionReference userCollection =
-      FirebaseFirestore.instance.collection('users');
+class UserInfoDatabase {
+  late String uid;
+  // UserInfoDatabase({this.uid});
 
-  // update user data
-  Future updateUserData(
-      {required String name,
-      required String email,
-      required String address,
-      required String phone}) async {
-    return await userCollection.doc(uid).set({
+  // singleton object
+  static final UserInfoDatabase _singleton = UserInfoDatabase._internal();
+  factory UserInfoDatabase({required String uid}) {
+    _singleton.uid = uid;
+    return _singleton;
+  }
+  UserInfoDatabase._internal();
+
+  Future updateUserInfoData({
+    required String name,
+    required String address,
+    required String phone,
+  }) async {
+    return await GlobalVar.userInfoCollection
+        .doc(uid)
+        .collection("usersInfo")
+        .doc(uid)
+        .set({
       'name': name,
-      'email': email,
       'address': address,
       'phone': phone,
     });
+  }
+
+  Future<Stream<QuerySnapshot>> getUserInfoStream() async {
+    return GlobalVar.userInfoCollection
+        .doc(uid)
+        .collection("usersInfo")
+        .snapshots();
   }
 }
