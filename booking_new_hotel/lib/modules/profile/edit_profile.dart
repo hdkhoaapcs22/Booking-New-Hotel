@@ -69,7 +69,6 @@ class _EditProfileState extends State<EditProfile> {
             Padding(
               padding: const EdgeInsets.only(left: 24, right: 24, top: 5),
               child: CommonButton(
-                buttonText: AppLocalizations(context).of("update_profile"),
                 buttonTextWidget: Text(
                   AppLocalizations(context).of("update_profile"),
                   style: const TextStyle(

@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'room_data.dart';
 import '../utils/localfiles.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HotelListData {
   String imagePath;
@@ -9,34 +7,33 @@ class HotelListData {
   String subTxt;
   DateText? date;
   String dateTxt;
-  String roomSizeTxt;
   RoomData? roomData;
   double dist;
   double rating;
   int reviews;
   int perNight;
-  bool isSelected;
-  PeopleSleeps? peopleSleeps;
-  LatLng? location;
+  bool isBooked;
+  bool isBestDeal;
   Amenity? amenity;
-  Offset? screenMapPin; // we used this screen Offset for adding on Map layer
+  int discountRate;
+  String? typeOfBuilding;
 
   HotelListData({
     this.imagePath = '',
     this.titleTxt = '',
     this.subTxt = "",
     this.dateTxt = "",
-    this.roomSizeTxt = "",
     this.roomData,
     this.dist = 1.8,
     this.reviews = 80,
     this.rating = 4.5,
     this.perNight = 180,
-    this.isSelected = false,
+    this.isBooked = false,
+    this.isBestDeal = false,
+    this.discountRate = 0,
     this.date,
-    this.peopleSleeps,
-    this.screenMapPin,
     this.amenity,
+    this.typeOfBuilding,
   });
 
   // we need location in this hotelList bcz we using that in map
@@ -50,8 +47,13 @@ class HotelListData {
       rating: 4.4,
       perNight: 180,
       roomData: RoomData(1, 2),
-      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
-      isSelected: true,
+      amenity: Amenity(
+          isPool: false,
+          isPetFriendly: true,
+          isFreeBreakfast: false,
+          isFreeWifi: true,
+          isFreeParking: true),
+      isBooked: true,
       date: DateText(DateTime.now().day, DateTime.now().day + 6),
     ),
     HotelListData(
@@ -63,8 +65,13 @@ class HotelListData {
       rating: 4.5,
       perNight: 200,
       roomData: RoomData(1, 3),
-      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
-      isSelected: false,
+      amenity: Amenity(
+          isPool: false,
+          isPetFriendly: true,
+          isFreeBreakfast: false,
+          isFreeWifi: true,
+          isFreeParking: true),
+      isBooked: false,
       date: DateText(DateTime.now().day + 2, DateTime.now().day + 6),
     ),
     HotelListData(
@@ -76,8 +83,13 @@ class HotelListData {
       rating: 4.0,
       perNight: 60,
       roomData: RoomData(2, 3),
-      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
-      isSelected: false,
+      amenity: Amenity(
+          isPool: false,
+          isPetFriendly: true,
+          isFreeBreakfast: false,
+          isFreeWifi: true,
+          isFreeParking: true),
+      isBooked: false,
       date: DateText(DateTime.now().day + 5, DateTime.now().day + 9),
     ),
     HotelListData(
@@ -88,9 +100,14 @@ class HotelListData {
       reviews: 90,
       rating: 4.4,
       perNight: 170,
-      isSelected: false,
+      isBooked: false,
       roomData: RoomData(2, 2),
-      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
+      amenity: Amenity(
+          isPool: false,
+          isPetFriendly: true,
+          isFreeBreakfast: false,
+          isFreeWifi: true,
+          isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 5),
     ),
     HotelListData(
@@ -100,10 +117,15 @@ class HotelListData {
       dist: 2.0,
       reviews: 240,
       rating: 4.5,
-      isSelected: false,
+      isBooked: false,
       perNight: 200,
       roomData: RoomData(1, 7),
-      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
+      amenity: Amenity(
+          isPool: false,
+          isPetFriendly: true,
+          isFreeBreakfast: false,
+          isFreeWifi: true,
+          isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 4),
     ),
     HotelListData(
@@ -113,10 +135,15 @@ class HotelListData {
       dist: 2.0,
       reviews: 240,
       rating: 4.5,
-      isSelected: false,
+      isBooked: false,
       perNight: 200,
       roomData: RoomData(1, 7),
-      amenity: Amenity(isPool:  false, isPetFriendly: true, isFreeBreakfast:false, isFreeWifi: true, isFreeParking: true),
+      amenity: Amenity(
+          isPool: false,
+          isPetFriendly: true,
+          isFreeBreakfast: false,
+          isFreeWifi: true,
+          isFreeParking: true),
       date: DateText(DateTime.now().day, DateTime.now().day + 4),
     ),
   ];
@@ -249,47 +276,47 @@ class HotelListData {
     HotelListData(
       imagePath: Localfiles.hotel_Type_1,
       titleTxt: 'hotel_data',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_2,
       titleTxt: 'Backpacker_data',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_3,
       titleTxt: 'Resort_data',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_4,
       titleTxt: 'villa_data',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_5,
       titleTxt: 'apartment',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_6,
       titleTxt: 'guest_house',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_7,
       titleTxt: 'motel',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_8,
       titleTxt: 'accommodation',
-      isSelected: false,
+      isBooked: false,
     ),
     HotelListData(
       imagePath: Localfiles.hotel_Type_9,
       titleTxt: 'Bed_breakfast',
-      isSelected: false,
+      isBooked: false,
     ),
   ];
   static List<HotelListData> lastsSearchesList = [

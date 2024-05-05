@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/models/hotel_list_data.dart';
 import 'package:booking_new_hotel/modules/explore/home_explore_slider_view.dart';
@@ -30,7 +32,6 @@ class HomeExploreScreen extends StatefulWidget {
 
 class _HomeExploreScreenState extends State<HomeExploreScreen>
     with TickerProviderStateMixin {
-  List<HotelListData> hotelList = GlobalVar.hotelListData!;
   late ScrollController scrollController;
   late AnimationController animationController;
   var sliderImageHeight = 0.0;
@@ -245,10 +246,24 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
             )));
   }
 
+  List<HotelListData> _chooseRandomlyBestDealHotels() {
+    List<HotelListData> bestDealHotels = [];
+    while (bestDealHotels.length < 4) {
+      var randomIndex = Random().nextInt(GlobalVar.hotelListData!.length);
+      if (!bestDealHotels.contains(GlobalVar.hotelListData![randomIndex])) {
+        bestDealHotels.add(GlobalVar.hotelListData![randomIndex]);
+        GlobalVar.hotelListData![randomIndex].discountRate =
+            Random().nextInt(30) + 50;
+        GlobalVar.hotelListData![randomIndex].isBestDeal = true;
+      }
+    }
+    return bestDealHotels;
+  }
+
   Widget getDealListView(int index) {
-    var hotelList = GlobalVar.hotelListData;
+    List<HotelListData> bestDealHotelList = _chooseRandomlyBestDealHotels();
     List<Widget> list = [];
-    hotelList!.forEach((element) {
+    bestDealHotelList.forEach((element) {
       var animation = Tween(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: widget.animationController,
@@ -257,14 +272,14 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
       );
       list.add(
         HotelListViewPage(
-            callback: () {
-              NavigationServices(context).gotoHotelDetails(element);
-            },
-            hotelData: element,
-            animationController: widget.animationController,
-            animation: animation,
-            rating: element.rating,
-            ),
+          callback: () {
+            NavigationServices(context).gotoHotelDetails(element);
+          },
+          hotelData: element,
+          animationController: widget.animationController,
+          animation: animation,
+          rating: element.rating,
+        ),
       );
     });
     return Padding(

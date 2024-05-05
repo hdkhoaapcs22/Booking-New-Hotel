@@ -7,8 +7,9 @@ import '../../../utils/themes.dart';
 
 // ignore: must_be_immutable
 class FilterBarUI extends StatelessWidget {
-  Function(Map) onFilterCallback;
-  FilterBarUI(this.onFilterCallback, {Key? key}) : super(key: key);
+  int hotelFound;
+  Function(Map?) onFilterCallback;
+  FilterBarUI(this.hotelFound, this.onFilterCallback, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +40,9 @@ class FilterBarUI extends StatelessWidget {
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(4.0)),
                     onTap: () async {
-                      // NavigationServices(context).gotoFilterScreen();
                       dynamic result = await Navigator.pushNamed(
                           context, RoutesName.FilterScreen);
-                      onFilterCallback(result);
+                      await onFilterCallback(result);
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),

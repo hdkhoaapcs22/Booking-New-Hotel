@@ -101,14 +101,14 @@ class _SearchTypeListViewState extends State<SearchTypeListView>
                                             .withOpacity(0.4),
                                         onTap: () {
                                           setState(() {
-                                            hotelTypeList[index].isSelected =
+                                            hotelTypeList[index].isBooked =
                                                 !hotelTypeList[index]
-                                                    .isSelected;
+                                                    .isBooked;
                                           });
                                         },
                                         child: Opacity(
                                           opacity:
-                                              hotelTypeList[index].isSelected
+                                              hotelTypeList[index].isBooked
                                                   ? 1.0
                                                   : 0.0,
                                           child: CommonCard(

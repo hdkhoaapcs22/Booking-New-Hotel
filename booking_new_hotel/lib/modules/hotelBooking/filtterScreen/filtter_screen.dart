@@ -3,9 +3,9 @@ import 'package:booking_new_hotel/widgets/common_app_bar_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/popular_filter_list.dart';
-import '../../../models/room_data.dart';
+import '../../../models/categories_filter_list.dart';
 import '../../../utils/themes.dart';
+import '../../../widgets/common_button.dart';
 import 'range_slider_view.dart';
 import 'slider_view.dart';
 
@@ -17,11 +17,12 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  List<PopularFilterListData> popularFilterListData =
-      PopularFilterListData.popularFList;
-  List<PopularFilterListData> accomodationListData =
-      PopularFilterListData.accomodationList;
-  Amenity amenity = Amenity();
+  List<CategoriesFilterList> categoriesAmenityFilterList = List.generate(
+      CategoriesFilterList.amenityCategories.length,
+      (index) => CategoriesFilterList.amenityCategories[index]);
+  List<CategoriesFilterList> accomodationListData = List.generate(
+      CategoriesFilterList.accomodationCategories.length, (index) =>CategoriesFilterList.accomodationCategories[index]);
+  final columnCount = 2;
 
   RangeValues _values = const RangeValues(100, 600);
   double distValue = 50;
@@ -41,12 +42,7 @@ class _FilterScreenState extends State<FilterScreen> {
               topPadding: 0,
               iconData: Icons.close,
               onBackClick: () {
-                Navigator.pop(context, {
-                  "minimumPrice": _values.start,
-                  "maximumPrice": _values.end,
-                  "distance": distValue / 10,
-                  "amenity": amenity,
-                });
+                Navigator.pop(context);
               },
               titleText: AppLocalizations(context).of("filtter"),
             ),
@@ -73,6 +69,8 @@ class _FilterScreenState extends State<FilterScreen> {
                         color: Colors.grey.withOpacity(0.2),
                       ),
                       allAccomodationUI(),
+                      const SizedBox(height: 30),
+                      buttonApply(),
                     ],
                   ),
                 ),
@@ -145,14 +143,13 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   List<Widget> getList() {
-    List<Widget> noList = [];
+    List<Widget> cateforiesFilter = [];
     int count = 0;
-    const columnCount = 2;
-    for (int i = 0; i < popularFilterListData.length / columnCount; ++i) {
+    for (int i = 0; i < categoriesAmenityFilterList.length / columnCount; ++i) {
       List<Widget> listUI = [];
       for (int j = 0; j < columnCount; ++j) {
         try {
-          final data = popularFilterListData[count];
+          final data = categoriesAmenityFilterList[count];
           listUI.add(
             Expanded(
               child: Row(
@@ -166,29 +163,30 @@ class _FilterScreenState extends State<FilterScreen> {
                         setState(() {
                           data.isSelected = !data.isSelected;
                           switch (data.titleTxt) {
-                            case "pool_text":
-                              {
-                                amenity.isPool = data.isSelected;
-                                break;
-                              }
-                            case "pet_friendly":
-                              {
-                                amenity.isPetFriendly = data.isSelected;
-                                break;
-                              }
                             case "free_breakfast":
                               {
-                                amenity.isFreeBreakfast = data.isSelected;
-                                break;
-                              }
-                            case "free_wifi":
-                              {
-                                amenity.isFreeWifi = data.isSelected;
+                               categoriesAmenityFilterList[0].isSelected = data.isSelected;
                                 break;
                               }
                             case "free_Parking":
                               {
-                                amenity.isFreeParking = data.isSelected;
+                                categoriesAmenityFilterList[1].isSelected = data.isSelected;
+                                break;
+                              }
+                            case "pool_text":
+                              {
+                                categoriesAmenityFilterList[2].isSelected =
+                                    data.isSelected;
+                                break;
+                              }
+                            case "pet_friendly":
+                              {
+                                categoriesAmenityFilterList[3].isSelected = data.isSelected;
+                                break;
+                              }
+                            case "free_wifi":
+                              {
+                                categoriesAmenityFilterList[4].isSelected = data.isSelected;
                                 break;
                               }
                           }
@@ -225,14 +223,14 @@ class _FilterScreenState extends State<FilterScreen> {
           ++count;
         } catch (e) {}
       }
-      noList.add(Row(
+      cateforiesFilter.add(Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: listUI,
       ));
     }
-    return noList;
+    return cateforiesFilter;
   }
 
   Widget distanceViewUI() {
@@ -310,7 +308,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     value: data.isSelected,
                     onChanged: (value) {
                       setState(() {
-                        checkAppPosition(i);
+                        controlSwitchAccomodationButton(i);
                       });
                     },
                   )
@@ -332,7 +330,7 @@ class _FilterScreenState extends State<FilterScreen> {
     return noList;
   }
 
-  void checkAppPosition(int index) {
+  void controlSwitchAccomodationButton(int index) {
     if (index == 0) {
       // index = 0 is all
       if (accomodationListData[0].isSelected) {
@@ -363,5 +361,29 @@ class _FilterScreenState extends State<FilterScreen> {
         accomodationListData[0].isSelected = false;
       }
     }
+  }
+
+  Widget buttonApply() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 24, right: 24, top: 5),
+      child: CommonButton(
+          buttonTextWidget: Text(
+            AppLocalizations(context).of("apply_text"),
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context, {
+              "minimumPrice": _values.start,
+              "maximumPrice": _values.end,
+              "distance": distValue / 10,
+              "amenity": categoriesAmenityFilterList,
+              "accomodation": accomodationListData,
+            });
+          }),
+    );
   }
 }

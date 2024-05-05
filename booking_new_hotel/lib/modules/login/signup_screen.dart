@@ -160,6 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             address: "",
             phone: "",
           );
+          GlobalVar.databaseService!.favoriteHotelsDatabase.getFavoriteListData();
           Navigator.pop(context);
           NavigationServices(context).gotoBottomTapScreen();
         }

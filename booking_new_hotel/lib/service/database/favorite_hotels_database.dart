@@ -60,6 +60,7 @@ class FavoriteHotelsDatabase {
               roomData: RoomData(doc['room'], doc['people']),
             ))
         .toList();
+    print(favoriteListData.length);
   }
 
   bool isFavoriteHotel({required String name}) {

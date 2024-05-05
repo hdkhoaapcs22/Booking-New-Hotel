@@ -64,4 +64,5 @@ class Localfiles {
   static const String room_12 = BaseImageUrl + 'room_12.jpg';
   static const String birghtness = BaseImageUrl + 'birghtness.png';
   static const String parth = BaseImageUrl + 'parth.png';
+  static const String message_fail_to_find = BaseImageUrl + 'fail_to_find_hotels.jpg';
 }

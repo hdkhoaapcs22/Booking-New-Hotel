@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
-import 'package:booking_new_hotel/modules/splash/introductionScreen.dart';
-import 'package:booking_new_hotel/modules/splash/splashScreen.dart';
+import 'package:booking_new_hotel/modules/splash/introduction_screen.dart';
+import 'package:booking_new_hotel/modules/splash/splash_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -7,10 +7,10 @@ import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_card.dart';
-import '../explore/homeExploreScreen.dart';
-import '../myTrips/myTripsScreen.dart';
-import '../profile/profileScreen.dart';
-import 'components/tabButtonUI.dart';
+import '../explore/home_explore_screen.dart';
+import '../myTrips/my_trip_screen.dart';
+import '../profile/profile_screen.dart';
+import 'components/tab_button_UI.dart';
 
 class BottomTapScreen extends StatefulWidget {
   const BottomTapScreen({super.key});

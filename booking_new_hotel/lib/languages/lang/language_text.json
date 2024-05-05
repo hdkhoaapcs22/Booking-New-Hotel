@@ -238,7 +238,7 @@
         "ja": "バックパッカー"
     },
     {
-        "text_id": "Resort_data",
+        "text_id": "resort_data",
         "en": "Resort",
         "fr": "Recours",
         "ar": "ملجأ",
@@ -371,11 +371,11 @@
         "ja": "すべて表示"
     },
     {
-        "text_id": "km_to_city",
-        "en": "km to city",
-        "fr": "km de la ville",
-        "ar": "كم للمدينة",
-        "ja": "街までキロ"
+        "text_id": "km",
+        "en": "km",
+        "fr": "km",
+        "ar": "كم",
+        "ja": "キロメートル"
     },
     {
         "text_id": "per_night",
@@ -546,7 +546,7 @@
         "ja": "宿泊施設の種類"
     },
     {
-        "text_id": "Apply_text",
+        "text_id": "apply_text",
         "en": "Apply",
         "fr": "Appliquer",
         "ar": "تطبيق",
@@ -999,6 +999,12 @@
         "fr": "Entrez le mot de passe actuel",
         "ar": "أدخل كلمة المرور الحالية",
         "ja": "現在のパスワードを入力"
+    },
+    {
+        "text_id": "no_hotel_found",
+        "en": "We cannot find any hotel",
+        "fr": "Nous ne pouvons trouver aucun hôtel",
+        "ar": "لا يمكننا العثور على أي فندق",
+        "ja": "ホテルが見つかりません"
     }
-
 ]

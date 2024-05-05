@@ -207,6 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
           GlobalVar.user = value;
           GlobalVar.user!.setEmail(email: tmpEmail);
           GlobalVar.user!.setPassword(password: tmpPassword);
+          GlobalVar.databaseService!.favoriteHotelsDatabase.getFavoriteListData();
           Navigator.pop(context);
           NavigationServices(context).gotoBottomTapScreen();
         }

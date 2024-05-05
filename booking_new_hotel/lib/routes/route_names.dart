@@ -1,4 +1,4 @@
-import 'package:booking_new_hotel/modules/bottomTap/bottomTapScreen.dart';
+import 'package:booking_new_hotel/modules/bottomTap/bottom_tap_screen.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/search_screen.dart';
 import 'package:booking_new_hotel/modules/profile/change_password.dart';
@@ -11,7 +11,7 @@ import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/hotelDetails/reviews_list_screen.dart';
 import '../modules/login/login_or_signup_screen.dart';
 import '../modules/profile/settings_screen.dart';
-import '../modules/splash/splashScreen.dart';
+import '../modules/splash/splash_screen.dart';
 import 'routes.dart';
 
 class NavigationServices {

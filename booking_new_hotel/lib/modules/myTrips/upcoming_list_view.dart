@@ -55,9 +55,8 @@ class _UpcomingListViewState extends State<UpcomingListView> {
                   NavigationServices(context)
                       .gotoRoomBookingScreen(hotelList[index]);
                 },
-                ratingOfHotel: hotelList[index].rating,
                 isShowDate: true,
-                isShowFav: false,
+                isShowFavIcon: false,
               );
             },
           );

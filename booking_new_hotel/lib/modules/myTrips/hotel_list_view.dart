@@ -14,21 +14,20 @@ import '../../utils/themes.dart';
 import '../../widgets/common_card.dart';
 
 class HotelListView extends StatefulWidget {
-  final bool isShowDate, isShowFav;
+  final bool isShowDate, isShowFavIcon;
   final VoidCallback callback;
   final HotelListData hotelData;
   final AnimationController animationController;
   final Animation<double> animation;
-  final double ratingOfHotel;
-  const HotelListView(
-      {super.key,
-      this.isShowDate = false,
-      this.isShowFav = true,
-      required this.callback,
-      required this.hotelData,
-      required this.animationController,
-      required this.animation,
-      required this.ratingOfHotel});
+  const HotelListView({
+    super.key,
+    this.isShowDate = false,
+    this.isShowFavIcon = true,
+    required this.callback,
+    required this.hotelData,
+    required this.animationController,
+    required this.animation,
+  });
 
   @override
   State<HotelListView> createState() => _HotelListViewState();
@@ -39,6 +38,12 @@ class _HotelListViewState extends State<HotelListView> {
   Widget build(BuildContext context) {
     bool isFav = GlobalVar.databaseService!.favoriteHotelsDatabase
         .isFavoriteHotel(name: widget.hotelData.titleTxt);
+    if (isFav) {
+      print(widget.hotelData.titleTxt + " is favorite hotel");
+    }
+    else {
+      print(widget.hotelData.titleTxt + " is not favorite hotel");
+    }
     return ListCellAnimationView(
       animation: widget.animation,
       animationController: widget.animationController,
@@ -92,7 +97,7 @@ class _HotelListViewState extends State<HotelListView> {
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 8, bottom: 8, left: 16),
+                                    top: 8, bottom: 8, left: 14),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,8 +140,7 @@ class _HotelListViewState extends State<HotelListView> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            AppLocalizations(context)
-                                                .of("km_to_city"),
+                                            AppLocalizations(context).of("km"),
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyles(context)
                                                 .getDescriptionStyle(),
@@ -149,7 +153,7 @@ class _HotelListViewState extends State<HotelListView> {
                                       child: Row(
                                         children: [
                                           Helper.ratingStar(
-                                              widget.ratingOfHotel),
+                                              widget.hotelData.rating),
                                           Text(
                                             "${widget.hotelData.reviews}",
                                             style: TextStyles(context)
@@ -168,36 +172,59 @@ class _HotelListViewState extends State<HotelListView> {
                                 ),
                               ),
                             ),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 16, top: 8, left: 16),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
+                            widget.hotelData.isBestDeal &&
+                                    widget.hotelData.discountRate > 0
+                                ? Row(children: [
+                                    Text("${widget.hotelData.perNight}",
+                                        style: TextStyle(
+                                          color: Colors.grey.withOpacity(0.4),
+                                          fontSize: 20,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                        )),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
                                     Text(
-                                      "\$${widget.hotelData.perNight}",
+                                      "${widget.hotelData.perNight - (widget.hotelData.perNight * widget.hotelData.discountRate ~/ 100)}\$",
                                       style: TextStyles(context)
                                           .getBoldStyle()
                                           .copyWith(fontSize: 22),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: context
-                                                      .read<ThemeProvider>()
-                                                      .languageType ==
-                                                  LanguageType.ar
-                                              ? 2.0
-                                              : 0.0),
-                                      child: Text(
-                                        AppLocalizations(context)
-                                            .of("per_night"),
-                                        style: TextStyles(context)
-                                            .getDescriptionStyle(),
-                                      ),
-                                    )
-                                  ],
-                                ))
+                                  ])
+                                : Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 8, left: 16),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "${widget.hotelData.perNight}\$",
+                                          style: TextStyles(context)
+                                              .getBoldStyle()
+                                              .copyWith(fontSize: 22),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              top: context
+                                                          .read<ThemeProvider>()
+                                                          .languageType ==
+                                                      LanguageType.ar
+                                                  ? 2.0
+                                                  : 0.0),
+                                          child: Text(
+                                            AppLocalizations(context)
+                                                .of("per_night"),
+                                            style: TextStyles(context)
+                                                .getDescriptionStyle(),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
                           ],
                         ),
                       ],
@@ -222,10 +249,10 @@ class _HotelListViewState extends State<HotelListView> {
                                 } catch (e) {}
                               })),
                     ),
-                    widget.isShowFav
+                    widget.isShowFavIcon
                         ? Positioned(
                             top: 8,
-                            right: 8,
+                            left: 8,
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.background,
@@ -265,6 +292,36 @@ class _HotelListViewState extends State<HotelListView> {
                               ),
                             ),
                           )
+                        : const SizedBox(),
+                    widget.hotelData.isBestDeal &&
+                            widget.hotelData.discountRate > 0
+                        ? Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Container(
+                                height: 32,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                    color: AppTheme.whiteColor,
+                                    borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(15),
+                                    ),
+                                    border: Border.all(
+                                        color: Colors.grey.withOpacity(0.1),
+                                        width: 1.5)),
+                                child: Text(
+                                  widget.hotelData.discountRate.toString() +
+                                      "%",
+                                  style: TextStyles(context)
+                                      .getRegularStyle()
+                                      .copyWith(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red,
+                                      ),
+                                  textAlign: TextAlign.center,
+                                )))
                         : const SizedBox(),
                   ],
                 ),

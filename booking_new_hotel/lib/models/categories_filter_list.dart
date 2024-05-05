@@ -1,57 +1,49 @@
-class PopularFilterListData {
+class CategoriesFilterList {
   String titleTxt;
   bool isSelected;
-  PopularFilterListData({
+  CategoriesFilterList({
     this.titleTxt = '',
     this.isSelected = false,
   });
 
-  static List<PopularFilterListData> popularFList = [
-    PopularFilterListData(
+  static List<CategoriesFilterList> amenityCategories = [
+    CategoriesFilterList(
       titleTxt: 'free_breakfast',
       isSelected: false,
     ),
-    PopularFilterListData(
+    CategoriesFilterList(
       titleTxt: 'free_Parking',
       isSelected: false,
     ),
-    PopularFilterListData(
+    CategoriesFilterList(
       titleTxt: 'pool_text',
       isSelected: true,
     ),
-    PopularFilterListData(
+    CategoriesFilterList(
       titleTxt: 'pet_friendly',
       isSelected: false,
     ),
-    PopularFilterListData(
+    CategoriesFilterList(
       titleTxt: 'free_wifi',
       isSelected: false,
     ),
   ];
 
-  static List<PopularFilterListData> accomodationList = [
-    PopularFilterListData(
+  static List<CategoriesFilterList> accomodationCategories = [
+    CategoriesFilterList(
       titleTxt: 'all_text',
       isSelected: false,
     ),
-    PopularFilterListData(
-      titleTxt: 'apartment',
-      isSelected: false,
-    ),
-    PopularFilterListData(
-      titleTxt: 'Home_text',
-      isSelected: false,
-    ),
-    PopularFilterListData(
+    CategoriesFilterList(
       titleTxt: 'villa_data',
       isSelected: false,
     ),
-    PopularFilterListData(
+    CategoriesFilterList(
       titleTxt: 'hotel_data',
       isSelected: false,
     ),
-    PopularFilterListData(
-      titleTxt: 'Resort_data',
+    CategoriesFilterList(
+      titleTxt: 'resort_data',
       isSelected: false,
     ),
   ];

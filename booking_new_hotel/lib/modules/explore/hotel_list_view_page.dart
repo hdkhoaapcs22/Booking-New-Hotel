@@ -25,7 +25,8 @@ class HotelListViewPage extends StatelessWidget {
       required this.callback,
       required this.hotelData,
       required this.animationController,
-      required this.animation, required this.rating});
+      required this.animation,
+      required this.rating,});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,9 @@ class HotelListViewPage extends StatelessWidget {
           radius: 15,
           child: ClipRect(
             child: AspectRatio(
-                aspectRatio: 2.7,
-                child: Stack(children: [
+              aspectRatio: 2.7,
+              child: Stack(
+                children: [
                   Row(
                     children: [
                       AspectRatio(
@@ -111,7 +113,7 @@ class HotelListViewPage extends StatelessWidget {
                                                 Expanded(
                                                   child: Text(
                                                     AppLocalizations(context)
-                                                        .of("km_to_city"),
+                                                        .of("km"),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyles(context)
@@ -120,8 +122,8 @@ class HotelListViewPage extends StatelessWidget {
                                                   ),
                                                 ),
                                                 const SizedBox(
-                                                  width: 5,
-                                                )
+                                                  width: 2,
+                                                ),
                                               ],
                                             ),
                                             Helper.ratingStar(rating),
@@ -138,12 +140,34 @@ class HotelListViewPage extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.end,
                                               children: [
-                                                Text("${hotelData.perNight}",
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyles(context)
-                                                        .getBoldStyle()
-                                                        .copyWith(
-                                                            fontSize: 22)),
+                                                hotelData.discountRate == 0?  Text(
+                                                      "${hotelData.perNight}\$",
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyles(context)
+                                                          .getBoldStyle()
+                                                          .copyWith(
+                                                              fontSize: 24)
+                                                      ):  Row(children: [
+                                                  Text("${hotelData.perNight}",
+                                                      style: TextStyle(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.4),
+                                                        fontSize: 20,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      )),
+                                                  const SizedBox(
+                                                    width: 4,
+                                                  ),
+                                                  Text(
+                                                      "${hotelData.perNight - (hotelData.perNight * hotelData.discountRate ~/ 100)}\$",
+                                                      textAlign: TextAlign.left,
+                                                      style: TextStyles(context)
+                                                          .getBoldStyle()
+                                                          .copyWith(
+                                                              fontSize: 24)),
+                                                ]),
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       top: context
@@ -154,12 +178,12 @@ class HotelListViewPage extends StatelessWidget {
                                                           ? 2.0
                                                           : 0.0),
                                                   child: Text(
-                                                      AppLocalizations(context)
-                                                          .of("per_night"),
-                                                      style: TextStyles(context)
-                                                          .getRegularStyle()
-                                                          .copyWith(
-                                                              fontSize: 14)),
+                                                    AppLocalizations(context)
+                                                        .of("per_night"),
+                                                    style: TextStyles(context)
+                                                        .getRegularStyle()
+                                                        .copyWith(fontSize: 14),
+                                                  ),
                                                 )
                                               ]),
                                         ),
@@ -173,17 +197,46 @@ class HotelListViewPage extends StatelessWidget {
                     ],
                   ),
                   Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                          highlightColor: Colors.transparent,
-                          splashColor:
-                              Theme.of(context).primaryColor.withOpacity(0.1),
-                          onTap: () {
-                            try {
-                              callback();
-                            } catch (e) {}
-                          }))
-                ])),
+                    color: Colors.transparent,
+                    child: InkWell(
+                      highlightColor: Colors.transparent,
+                      splashColor:
+                          Theme.of(context).primaryColor.withOpacity(0.1),
+                      onTap: () {
+                        try {
+                          callback();
+                        } catch (e) {}
+                      },
+                    ),
+                  ),
+                  hotelData.discountRate == 0
+                      ? const SizedBox()
+                      :
+                  Positioned(
+                      top: 0.9,
+                      right: 1,
+                      child: Container(
+                          height: 32,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              color: AppTheme.whiteColor,
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(15),
+                                bottomLeft: Radius.circular(15),
+                              )),
+                          child: Text(
+                            hotelData.discountRate.toString() + "%",
+                            style:
+                                TextStyles(context).getRegularStyle().copyWith(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red,
+                                    ),
+                            textAlign: TextAlign.center,
+                          )))
+                ],
+              ),
+            ),
           ),
         ),
       ),
