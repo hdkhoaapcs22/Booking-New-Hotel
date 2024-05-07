@@ -22,7 +22,7 @@ class TimeDateView extends StatefulWidget {
 }
 
 class _TimeDateViewState extends State<TimeDateView> {
-  RoomData _roomData = RoomData(1,2);
+  RoomData _roomData = RoomData(numberOfBed: 0,numberOfPeople: 0);
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
   LanguageType _languageType = applicationcontext == null

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../global/global_var.dart';
 import '../../languages/appLocalizations.dart';
-import '../../models/hotel_list_data.dart';
+import '../../models/hotel.dart';
 import '../../utils/enum.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
@@ -16,7 +16,7 @@ import '../../widgets/common_card.dart';
 class HotelListView extends StatefulWidget {
   final bool isShowDate, isShowFavIcon;
   final VoidCallback callback;
-  final HotelListData hotelData;
+  final Hotel hotelData;
   final AnimationController animationController;
   final Animation<double> animation;
   const HotelListView({
@@ -37,12 +37,11 @@ class _HotelListViewState extends State<HotelListView> {
   @override
   Widget build(BuildContext context) {
     bool isFav = GlobalVar.databaseService!.favoriteHotelsDatabase
-        .isFavoriteHotel(name: widget.hotelData.titleTxt);
+        .isFavoriteHotel(name: widget.hotelData.name);
     if (isFav) {
-      print(widget.hotelData.titleTxt + " is favorite hotel");
-    }
-    else {
-      print(widget.hotelData.titleTxt + " is not favorite hotel");
+      print(widget.hotelData.name + " is favorite hotel");
+    } else {
+      print(widget.hotelData.name + " is not favorite hotel");
     }
     return ListCellAnimationView(
       animation: widget.animation,
@@ -63,16 +62,16 @@ class _HotelListViewState extends State<HotelListView> {
                               .getRegularStyle()
                               .copyWith(fontSize: 14),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2),
-                          child: Text(
-                            Helper.getRoomText(widget.hotelData.roomData!) +
-                                ', ',
-                            style: TextStyles(context)
-                                .getRegularStyle()
-                                .copyWith(fontSize: 14),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 2),
+                        //   child: Text(
+                        //     Helper.getRoomText(widget.hotelData.roomData!) +
+                        //         ', ',
+                        //     style: TextStyles(context)
+                        //         .getRegularStyle()
+                        //         .copyWith(fontSize: 14),
+                        //   ),
+                        // ),
                       ],
                     ))
                 : const SizedBox(),
@@ -87,7 +86,7 @@ class _HotelListViewState extends State<HotelListView> {
                       children: [
                         AspectRatio(
                           aspectRatio: 2,
-                          child: Image.asset(widget.hotelData.imagePath,
+                          child: Image.asset(widget.hotelData.imageHotel,
                               fit: BoxFit.cover),
                         ),
                         Row(
@@ -103,7 +102,7 @@ class _HotelListViewState extends State<HotelListView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      widget.hotelData.titleTxt,
+                                      widget.hotelData.name,
                                       textAlign: TextAlign.left,
                                       style: TextStyles(context)
                                           .getBoldStyle()
@@ -116,7 +115,7 @@ class _HotelListViewState extends State<HotelListView> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          widget.hotelData.subTxt + ' ',
+                                          widget.hotelData.locationOfHotel + ' ',
                                           textAlign: TextAlign.left,
                                           style: TextStyles(context)
                                               .getDescriptionStyle(),
@@ -175,7 +174,7 @@ class _HotelListViewState extends State<HotelListView> {
                             widget.hotelData.isBestDeal &&
                                     widget.hotelData.discountRate > 0
                                 ? Row(children: [
-                                    Text("${widget.hotelData.perNight}",
+                                    Text("${widget.hotelData.averagePrice}",
                                         style: TextStyle(
                                           color: Colors.grey.withOpacity(0.4),
                                           fontSize: 20,
@@ -186,7 +185,7 @@ class _HotelListViewState extends State<HotelListView> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "${widget.hotelData.perNight - (widget.hotelData.perNight * widget.hotelData.discountRate ~/ 100)}\$",
+                                      "${widget.hotelData.averagePrice - (widget.hotelData.averagePrice * widget.hotelData.discountRate ~/ 100)}\$",
                                       style: TextStyles(context)
                                           .getBoldStyle()
                                           .copyWith(fontSize: 22),
@@ -202,7 +201,7 @@ class _HotelListViewState extends State<HotelListView> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          "${widget.hotelData.perNight}\$",
+                                          "${widget.hotelData.averagePrice}\$",
                                           style: TextStyles(context)
                                               .getBoldStyle()
                                               .copyWith(fontSize: 22),
@@ -268,7 +267,7 @@ class _HotelListViewState extends State<HotelListView> {
                                       GlobalVar.databaseService!
                                           .favoriteHotelsDatabase
                                           .removeFavoriteHotel(
-                                              name: widget.hotelData.titleTxt);
+                                              name: widget.hotelData.name);
                                     } else {
                                       GlobalVar.databaseService!
                                           .favoriteHotelsDatabase

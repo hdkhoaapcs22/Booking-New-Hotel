@@ -574,17 +574,17 @@
         "ja": "無料の朝食"
     },
     {
-        "text_id": "free_Parking",
+        "text_id": "free_parking",
         "en": "Free Parking",
         "fr": "Parking gratuit",
         "ar": "موقف سيارات مجاني",
         "ja": "無料駐車場"
     },
     {
-        "text_id": "pool_text",
-        "en": "Pool",
+        "text_id": "swimming_pool",
+        "en": "Swimming Pool",
         "fr": "Piscine",
-        "ar": "تجمع",
+        "ar": "حمام سباحة",
         "ja": "プール"
     },
     {
@@ -805,25 +805,11 @@
         "ja": "人"
     },
     {
-        "text_id": "room_data",
-        "en": "Room",
-        "fr": "Chambre",
-        "ar": "غرفة",
-        "ja": "ルーム"
-    },
-    {
         "text_id": "choose_date",
         "en": "Choose Date",
         "fr": "Choisissez la date",
         "ar": "اختر موعدا",
         "ja": "日付を選択"
-    },
-    {
-        "text_id": "Apply_date",
-        "en": "Apply",
-        "fr": "Appliquer",
-        "ar": "تطبيق",
-        "ja": "適用する"
     },
     {
         "text_id": "From_text",
@@ -924,13 +910,6 @@
         "ja": "名前"
     },
     {
-        "text_id": "phone",
-        "en": "Phone number",
-        "fr": "Numéro de téléphone",
-        "ar": "رقم الهاتف",
-        "ja": "電話番号"
-    },
-    {
         "text_id":"enter_phone_number",
     "en": "Enter phone number",
     "fr": "Entrez le numéro de téléphone",
@@ -1006,5 +985,26 @@
         "fr": "Nous ne pouvons trouver aucun hôtel",
         "ar": "لا يمكننا العثور على أي فندق",
         "ja": "ホテルが見つかりません"
+    },
+    {
+        "text_id":"detail_title",
+        "en": "Detail Information",
+        "fr": "Information détaillée",
+        "ar": "معلومات مفصلة",
+        "ja": "詳細情報"
+    },
+    {
+        "text_id": "room_detail",
+        "en": "Room Detail",
+        "fr": "Détail de la chambre",
+        "ar": "تفاصيل الغرفة",
+        "ja": "部屋の詳細"
+    },
+    {
+        "text_id": "amenity",
+        "en": "Amenity",
+        "fr": "Commodité",
+        "ar": "وسيلة راحة",
+        "ja": "アメニティ"
     }
 ]

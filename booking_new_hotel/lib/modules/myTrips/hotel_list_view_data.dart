@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../languages/appLocalizations.dart';
-import '../../models/hotel_list_data.dart';
+import '../../models/hotel.dart';
 import '../../providers/theme_provider.dart';
 import '../../utils/enum.dart';
 import '../../utils/helper.dart';
@@ -15,7 +15,7 @@ import '../../widgets/common_card.dart';
 class HotelListViewData extends StatelessWidget {
   final bool isShowDate;
   final VoidCallback callback;
-  final HotelListData hotelData;
+  final Hotel hotelData;
   final AnimationController animationController;
   final Animation<double> animation;
   final double ratingOfHotel;
@@ -55,7 +55,7 @@ class HotelListViewData extends StatelessWidget {
                     child: AspectRatio(
                       aspectRatio: 1,
                       child: Image.asset(
-                        hotelData.imagePath,
+                        hotelData.imageHotel,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -84,14 +84,14 @@ class HotelListViewData extends StatelessWidget {
               isShowDate ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
             Text(
-              hotelData.titleTxt,
+              hotelData.name,
               maxLines: 2,
               textAlign: isShowDate ? TextAlign.right : TextAlign.left,
               style: TextStyles(context).getBoldStyle().copyWith(fontSize: 16),
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              hotelData.subTxt,
+              hotelData.locationOfHotel,
               style: TextStyles(context).getBoldStyle().copyWith(fontSize: 14),
             ),
             Text(
@@ -146,7 +146,7 @@ class HotelListViewData extends StatelessWidget {
                             : MainAxisAlignment.start,
                         children: [
                           Text(
-                            "\$${hotelData.perNight}",
+                            "\$${hotelData.averagePrice}",
                             style: TextStyles(context)
                                 .getRegularStyle()
                                 .copyWith(

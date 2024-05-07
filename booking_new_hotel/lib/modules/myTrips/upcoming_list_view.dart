@@ -13,8 +13,8 @@ class UpcomingListView extends StatefulWidget {
 }
 
 class _UpcomingListViewState extends State<UpcomingListView> {
-  // var hotelList = HotelListData.hotelList;
-  var hotelList = GlobalVar.hotelListData!;
+  // var hotelList = Hotel.hotelList;
+  var hotelList = GlobalVar.listAllHotels!;
 
   Stream? upcomingsStream;
   void fetchFavoritesListView() async {

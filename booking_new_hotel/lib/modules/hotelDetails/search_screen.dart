@@ -5,7 +5,7 @@ import 'package:booking_new_hotel/widgets/remove_focus.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../models/hotel_list_data.dart';
+import '../../models/hotel.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_app_bar_view.dart';
 import 'search_type_list_view.dart';
@@ -20,7 +20,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen>
     with TickerProviderStateMixin {
-  List<HotelListData> lastSearchList = HotelListData.lastsSearchesList;
+  List<Hotel> lastSearchList = Hotel.lastsSearchesList;
 
   late AnimationController animationController;
 
@@ -147,9 +147,9 @@ class _SearchScreenState extends State<SearchScreen>
     List<Widget> noList = [];
     var count = 0;
     final columnCount = 2;
-    List<HotelListData> curList = HotelListData.lastsSearchesList
+    List<Hotel> curList = Hotel.lastsSearchesList
         .where((element) =>
-            element.titleTxt.toLowerCase().contains(searchValue.toLowerCase()))
+            element.name.toLowerCase().contains(searchValue.toLowerCase()))
         .toList();
     for (int i = 0; i < curList.length / columnCount; ++i) {
       List<Widget> listUI = [];
@@ -163,7 +163,7 @@ class _SearchScreenState extends State<SearchScreen>
           animationController.forward();
           listUI.add(Expanded(
               child: SearchView(
-            hotelInfo: data,
+            hotel: data,
             animation: animation,
             animationController: animationController,
           )));

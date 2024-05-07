@@ -1,4 +1,4 @@
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
+import 'package:booking_new_hotel/models/hotel.dart';
 import 'package:booking_new_hotel/widgets/common_app_bar_view.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class ReviewsListScreen extends StatefulWidget {
 
 class _ReviewsListScreenState extends State<ReviewsListScreen>
     with TickerProviderStateMixin {
-  List<HotelListData> reviewsList = HotelListData.reviewsList;
+  List<Hotel> reviewsList = Hotel.reviewsList;
   late AnimationController animationController;
 
   @override

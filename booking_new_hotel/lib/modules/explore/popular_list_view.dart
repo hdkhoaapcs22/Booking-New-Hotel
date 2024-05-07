@@ -1,7 +1,7 @@
 import 'package:booking_new_hotel/modules/explore/category_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/hotel_list_data.dart';
+import '../../models/hotel.dart';
 import '../../widgets/bottom_top_move_animation_view.dart';
 
 class PopularListView extends StatefulWidget {
@@ -16,7 +16,7 @@ class PopularListView extends StatefulWidget {
 
 class _PopularListViewState extends State<PopularListView>
     with TickerProviderStateMixin {
-  var popularList = HotelListData.popularList;
+  var popularList = Hotel.popularList;
   AnimationController? animationController;
 
   @override

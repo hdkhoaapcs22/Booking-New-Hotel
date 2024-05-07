@@ -2,7 +2,7 @@ import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../models/hotel_list_data.dart';
+import '../../models/hotel.dart';
 import '../../widgets/common_card.dart';
 
 class SearchTypeListView extends StatefulWidget {
@@ -14,7 +14,7 @@ class SearchTypeListView extends StatefulWidget {
 
 class _SearchTypeListViewState extends State<SearchTypeListView>
     with TickerProviderStateMixin {
-  List<HotelListData> hotelTypeList = HotelListData.hotelTypeList;
+  List<Hotel> hotelTypeList = Hotel.hotelTypeList;
 
   late AnimationController animationController;
   @override
@@ -84,7 +84,7 @@ class _SearchTypeListViewState extends State<SearchTypeListView>
                                           child: AspectRatio(
                                             aspectRatio: 1,
                                             child: Image.asset(
-                                              hotelTypeList[index].imagePath,
+                                              hotelTypeList[index].imageHotel,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -100,17 +100,16 @@ class _SearchTypeListViewState extends State<SearchTypeListView>
                                             .primaryColor
                                             .withOpacity(0.4),
                                         onTap: () {
-                                          setState(() {
-                                            hotelTypeList[index].isBooked =
-                                                !hotelTypeList[index]
-                                                    .isBooked;
-                                          });
+                                          // setState(() {
+                                          //   hotelTypeList[index].isBooked =
+                                          //       !hotelTypeList[index].isBooked;
+                                          // });
                                         },
                                         child: Opacity(
-                                          opacity:
-                                              hotelTypeList[index].isBooked
-                                                  ? 1.0
-                                                  : 0.0,
+                                          opacity: 1,
+                                          // opacity: hotelTypeList[index].isBooked
+                                          //     ? 1.0
+                                          //     : 0.0,
                                           child: CommonCard(
                                             color: Theme.of(context)
                                                 .primaryColor
@@ -137,7 +136,7 @@ class _SearchTypeListViewState extends State<SearchTypeListView>
                                       padding: const EdgeInsets.only(top: 5),
                                       child: Text(
                                           AppLocalizations(context).of(
-                                              hotelTypeList[index].titleTxt),
+                                              hotelTypeList[index].name),
                                           maxLines: 2,
                                           style: const TextStyle(
                                             fontSize: 14,

@@ -17,15 +17,15 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  List<CategoriesFilterList> categoriesAmenityFilterList = List.generate(
-      CategoriesFilterList.amenityCategories.length,
-      (index) => CategoriesFilterList.amenityCategories[index]);
-  List<CategoriesFilterList> accomodationListData = List.generate(
-      CategoriesFilterList.accomodationCategories.length, (index) =>CategoriesFilterList.accomodationCategories[index]);
-  final columnCount = 2;
+  List<CategoriesFilterList> categoriesAmenityFilterList =
+      CategoriesFilterList.amenityCategories;
+  List<CategoriesFilterList> accomodationListData =
+      CategoriesFilterList.accomodationCategories;
 
+  final columnCount = 2;
   RangeValues _values = const RangeValues(100, 600);
   double distValue = 50;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,8 +68,8 @@ class _FilterScreenState extends State<FilterScreen> {
                         height: 1,
                         color: Colors.grey.withOpacity(0.2),
                       ),
-                      allAccomodationUI(),
-                      const SizedBox(height: 30),
+                      // allAccomodationUI(),
+                      // const SizedBox(height: 30),
                       buttonApply(),
                     ],
                   ),
@@ -165,15 +165,17 @@ class _FilterScreenState extends State<FilterScreen> {
                           switch (data.titleTxt) {
                             case "free_breakfast":
                               {
-                               categoriesAmenityFilterList[0].isSelected = data.isSelected;
+                                categoriesAmenityFilterList[0].isSelected =
+                                    data.isSelected;
                                 break;
                               }
-                            case "free_Parking":
+                            case "free_parking":
                               {
-                                categoriesAmenityFilterList[1].isSelected = data.isSelected;
+                                categoriesAmenityFilterList[1].isSelected =
+                                    data.isSelected;
                                 break;
                               }
-                            case "pool_text":
+                            case "swimming_pool":
                               {
                                 categoriesAmenityFilterList[2].isSelected =
                                     data.isSelected;
@@ -181,12 +183,14 @@ class _FilterScreenState extends State<FilterScreen> {
                               }
                             case "pet_friendly":
                               {
-                                categoriesAmenityFilterList[3].isSelected = data.isSelected;
+                                categoriesAmenityFilterList[3].isSelected =
+                                    data.isSelected;
                                 break;
                               }
                             case "free_wifi":
                               {
-                                categoriesAmenityFilterList[4].isSelected = data.isSelected;
+                                categoriesAmenityFilterList[4].isSelected =
+                                    data.isSelected;
                                 break;
                               }
                           }
@@ -259,109 +263,109 @@ class _FilterScreenState extends State<FilterScreen> {
         ]);
   }
 
-  Widget allAccomodationUI() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: Text(
-              AppLocalizations(context).of("type of accommodation"),
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
-                fontWeight: FontWeight.normal,
-              ),
-            )),
-        Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Column(children: getAccomodationListUI())),
-        const SizedBox(
-          height: 8,
-        ),
-      ],
-    );
-  }
+  // Widget allAccomodationUI() {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Padding(
+  //           padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+  //           child: Text(
+  //             AppLocalizations(context).of("type of accommodation"),
+  //             textAlign: TextAlign.left,
+  //             style: TextStyle(
+  //               color: Colors.grey,
+  //               fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+  //               fontWeight: FontWeight.normal,
+  //             ),
+  //           )),
+  //       Padding(
+  //           padding: const EdgeInsets.only(left: 16, right: 16),
+  //           child: Column(children: getAccomodationListUI())),
+  //       const SizedBox(
+  //         height: 8,
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  List<Widget> getAccomodationListUI() {
-    List<Widget> noList = [];
-    for (int i = 0; i < accomodationListData.length; ++i) {
-      var data = accomodationListData[i];
-      noList.add(
-        Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(AppLocalizations(context).of(data.titleTxt)),
-                  ),
-                  CupertinoSwitch(
-                    activeColor: data.isSelected
-                        ? Theme.of(context).primaryColor
-                        : Colors.grey.withOpacity(0.6),
-                    value: data.isSelected,
-                    onChanged: (value) {
-                      setState(() {
-                        controlSwitchAccomodationButton(i);
-                      });
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-      if (i == 0) {
-        noList.add(
-          Divider(
-            height: 1,
-            color: Colors.grey.withOpacity(0.2),
-          ),
-        );
-      }
-    }
-    return noList;
-  }
+  // List<Widget> getAccomodationListUI() {
+  //   List<Widget> noList = [];
+  //   for (int i = 0; i < accomodationListData.length; ++i) {
+  //     var data = accomodationListData[i];
+  //     noList.add(
+  //       Material(
+  //         color: Colors.transparent,
+  //         child: InkWell(
+  //           borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Row(
+  //               children: [
+  //                 Expanded(
+  //                   child: Text(AppLocalizations(context).of(data.titleTxt)),
+  //                 ),
+  //                 CupertinoSwitch(
+  //                   activeColor: data.isSelected
+  //                       ? Theme.of(context).primaryColor
+  //                       : Colors.grey.withOpacity(0.6),
+  //                   value: data.isSelected,
+  //                   onChanged: (value) {
+  //                     setState(() {
+  //                       controlSwitchAccomodationButton(i);
+  //                     });
+  //                   },
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     );
+  //     if (i == 0) {
+  //       noList.add(
+  //         Divider(
+  //           height: 1,
+  //           color: Colors.grey.withOpacity(0.2),
+  //         ),
+  //       );
+  //     }
+  //   }
+  //   return noList;
+  // }
 
-  void controlSwitchAccomodationButton(int index) {
-    if (index == 0) {
-      // index = 0 is all
-      if (accomodationListData[0].isSelected) {
-        for (int i = 0; i < accomodationListData.length; ++i) {
-          accomodationListData[i].isSelected = false;
-        }
-      } else {
-        for (int i = 0; i < accomodationListData.length; ++i) {
-          accomodationListData[i].isSelected = true;
-        }
-      }
-    } else {
-      accomodationListData[index].isSelected =
-          !accomodationListData[index].isSelected;
-      int count = 0;
-      for (int i = 0; i < accomodationListData.length; ++i) {
-        if (i != 0) {
-          var data = accomodationListData[i];
-          if (data.isSelected) {
-            ++count;
-          }
-        }
-      }
-      // check all selected
-      if (count == accomodationListData.length - 1) {
-        accomodationListData[0].isSelected = true;
-      } else {
-        accomodationListData[0].isSelected = false;
-      }
-    }
-  }
+  // void controlSwitchAccomodationButton(int index) {
+  //   if (index == 0) {
+  //     // index = 0 is all
+  //     if (accomodationListData[0].isSelected) {
+  //       for (int i = 0; i < accomodationListData.length; ++i) {
+  //         accomodationListData[i].isSelected = false;
+  //       }
+  //     } else {
+  //       for (int i = 0; i < accomodationListData.length; ++i) {
+  //         accomodationListData[i].isSelected = true;
+  //       }
+  //     }
+  //   } else {
+  //     accomodationListData[index].isSelected =
+  //         !accomodationListData[index].isSelected;
+  //     int count = 0;
+  //     for (int i = 0; i < accomodationListData.length; ++i) {
+  //       if (i != 0) {
+  //         var data = accomodationListData[i];
+  //         if (data.isSelected) {
+  //           ++count;
+  //         }
+  //       }
+  //     }
+  //     // check all selected
+  //     if (count == accomodationListData.length - 1) {
+  //       accomodationListData[0].isSelected = true;
+  //     } else {
+  //       accomodationListData[0].isSelected = false;
+  //     }
+  //   }
+  // }
 
   Widget buttonApply() {
     return Padding(
@@ -381,7 +385,6 @@ class _FilterScreenState extends State<FilterScreen> {
               "maximumPrice": _values.end,
               "distance": distValue / 10,
               "amenity": categoriesAmenityFilterList,
-              "accomodation": accomodationListData,
             });
           }),
     );

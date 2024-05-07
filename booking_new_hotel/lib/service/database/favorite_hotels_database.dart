@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../global/global_var.dart';
-import '../../models/hotel_list_data.dart';
-import '../../models/room_data.dart';
+import '../../models/hotel.dart';
 
 class FavoriteHotelsDatabase {
   late String uid;
-  List<HotelListData> favoriteListData = [];
+  List<Hotel> favoriteListData = [];
 
   // singleton object
   static final FavoriteHotelsDatabase _singleton =
@@ -24,22 +23,20 @@ class FavoriteHotelsDatabase {
         .snapshots();
   }
 
-  Future addFavoriteHotel({required HotelListData favoriteHotel}) async {
+  Future addFavoriteHotel({required Hotel favoriteHotel}) async {
     favoriteListData.add(favoriteHotel);
     return await GlobalVar.userInfoCollection
         .doc(uid)
         .collection("favorites")
-        .doc(favoriteHotel.titleTxt)
+        .doc(favoriteHotel.name)
         .set({
-      'image': favoriteHotel.imagePath,
-      'title': favoriteHotel.titleTxt,
-      'subtitle': favoriteHotel.subTxt,
+      'image': favoriteHotel.imageHotel,
+      'title': favoriteHotel.name,
+      'subtitle': favoriteHotel.locationOfHotel,
       'dist': favoriteHotel.dist,
       'rating': favoriteHotel.rating,
-      'price': favoriteHotel.perNight,
+      'price': favoriteHotel.averagePrice,
       'reviews': favoriteHotel.reviews,
-      'room': favoriteHotel.roomData!.numberRoom,
-      'people': favoriteHotel.roomData!.people,
     });
   }
 
@@ -49,15 +46,14 @@ class FavoriteHotelsDatabase {
         .collection("favorites")
         .get();
     favoriteListData = value.docs
-        .map((doc) => HotelListData(
-              titleTxt: doc['title'],
-              subTxt: doc['subtitle'],
+        .map((doc) => Hotel(
+              name: doc['title'],
+              locationOfHotel: doc['subtitle'],
               dist: doc['dist'],
               reviews: doc['reviews'],
               rating: doc['rating'],
-              perNight: doc['price'],
-              imagePath: doc['image'],
-              roomData: RoomData(doc['room'], doc['people']),
+              averagePrice: doc['price'],
+              imageHotel: doc['image'],
             ))
         .toList();
     print(favoriteListData.length);
@@ -69,7 +65,7 @@ class FavoriteHotelsDatabase {
     }
 
     for (int i = 0; i < favoriteListData.length; ++i) {
-      if (favoriteListData[i].titleTxt == name) {
+      if (favoriteListData[i].name == name) {
         return true;
       }
     }
@@ -85,6 +81,6 @@ class FavoriteHotelsDatabase {
         .collection("favorites")
         .doc(name)
         .delete();
-    favoriteListData.removeWhere((element) => element.titleTxt == name);
+    favoriteListData.removeWhere((element) => element.name == name);
   }
 }

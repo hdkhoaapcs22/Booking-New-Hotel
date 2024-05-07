@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 
 import '../../global/global_var.dart';
 import '../../models/categories_filter_list.dart';
-import '../../models/hotel_list_data.dart';
+import '../../models/hotel.dart';
+import '../../models/room.dart';
 import '../../models/room_data.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
@@ -29,7 +30,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     with TickerProviderStateMixin {
   late AnimationController animationController;
   late AnimationController _animationController;
-  List<HotelListData> filterHotelList = GlobalVar.hotelListData!;
+  List<Hotel> filterHotelList = GlobalVar.listAllHotels!;
   ScrollController scrollController = ScrollController();
   IconData favoriteIcon = Icons.favorite_border;
   late Map categoriesFilter;
@@ -84,7 +85,6 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    print("It is in hotel home screen");
     return Scaffold(
       body: Stack(
         children: [
@@ -184,12 +184,13 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                           FilterBarUI(filterHotelList.length,
                                               (value) {
                                             if (value != null) {
-                                              // searchByPriceAmenityDistanceAndType(
+                                              // searchByPriceAmenityDistance(
                                               //     value);
                                               categoriesFilter = value;
                                               searchWithAllCriteria(
-                                                  typeSearching:
-                                                      'Search by price, amenity, distance and type',);
+                                                typeSearching:
+                                                    'Search by price, amenity, distance and type',
+                                              );
                                             }
                                           }),
                                         ],
@@ -347,51 +348,64 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     );
   }
 
-  List<HotelListData> searchByLocation(
-      String text, List<HotelListData> traverseList) {
-    List<HotelListData> tmp = [];
+  List<Hotel> searchByLocation(String text, List<Hotel> traverseList) {
+    List<Hotel> tmp = [];
     if (text.isEmpty) {
-      tmp = GlobalVar.hotelListData!;
+      tmp = GlobalVar.listAllHotels!;
     } else {
       RegExp exp = RegExp(' .+');
-      for (int i = 0; i < GlobalVar.hotelListData!.length; i++) {
-        RegExpMatch? match = exp.firstMatch(GlobalVar.hotelListData![i].subTxt);
+      for (int i = 0; i < GlobalVar.listAllHotels!.length; i++) {
+        RegExpMatch? match =
+            exp.firstMatch(GlobalVar.listAllHotels![i].locationOfHotel);
         if (match![0].toString().trim() == text) {
-          tmp.add(GlobalVar.hotelListData![i]);
+          tmp.add(GlobalVar.listAllHotels![i]);
         }
       }
     }
     return tmp;
-    // setState(() {
-    //   filterHotelList = tmp;
-    // });
   }
 
-  List<HotelListData> searchByDateAndRoomData(DateTime start, DateTime end,
-      RoomData roomData, List<HotelListData> traverseList) {
-    List<HotelListData> tmp = [];
+
+  Future<List<Room>> getListOfRooms(Hotel currentHotel) async {
+    return await currentHotel.listOfRooms!;
+  }
+
+  Future<bool> checkByRoomData(Hotel currentHotel, RoomData roomData) async {
+    List<Room> listOfRooms = await getListOfRooms(currentHotel);
+    for (int i = 0; i < listOfRooms.length; ++i) {
+      if (listOfRooms[i].roomData.numberOfBed == roomData.numberOfBed &&
+          listOfRooms[i].roomData.numberOfPeople == roomData.numberOfPeople) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool checkByDate(DateTime start, DateTime end, DateText? date) {
+    if (start.day == 0 && end.day == 0) return true;
+    return (date!.startDate == start.day || date.startDate - 1 >= start.day) &&
+        (date.endDate == end.day || date.endDate + 1 <= end.day);
+  }
+
+  Future<List<Hotel>> searchByDateAndRoomData(DateTime start, DateTime end,
+      RoomData roomData, List<Hotel> traverseList) async {
+    List<Hotel> tmp = [];
     for (int i = 0; i < traverseList.length; i++) {
-      if ((traverseList[i].date!.startDate == start.day || traverseList[i].date!.startDate + 1 <= start.day) &&
-          (traverseList[i].date!.endDate == end.day || traverseList[i].date!.endDate -1 >= end.day) &&
-          ( traverseList[i].roomData!.numberRoom == roomData.numberRoom || traverseList[i].roomData!.numberRoom-1 >= roomData.numberRoom) &&
-          ( traverseList[i].roomData!.people == roomData.people|| traverseList[i].roomData!.people -1 >= roomData.people)) {
+      if (checkByDate(start, end, traverseList[i].date!) &&
+          await checkByRoomData(traverseList[i], roomData)) {
         tmp.add(traverseList[i]);
       }
     }
-    // setState(() {
-    //   filterHotelList = tmp;
-    // });
     return tmp;
   }
 
-  bool checkPrice(HotelListData currentHotel, int minPrice, int maxPrice) {
-    int bias = (currentHotel.perNight * currentHotel.discountRate ~/ 100);
-    return currentHotel.perNight - bias >= minPrice &&
-        currentHotel.perNight - bias <= maxPrice;
+  bool checkPrice(Hotel currentHotel, int minPrice, int maxPrice) {
+    int bias = (currentHotel.averagePrice * currentHotel.discountRate ~/ 100);
+    return currentHotel.averagePrice - bias >= minPrice &&
+        currentHotel.averagePrice - bias <= maxPrice;
   }
 
-  bool checkAmenity(
-      HotelListData currentHotel, List<CategoriesFilterList> amenity) {
+  bool checkAmenity(Hotel currentHotel, List<CategoriesFilterList> amenity) {
     return currentHotel.amenity!.isFreeBreakfast == amenity[0].isSelected &&
         currentHotel.amenity!.isFreeParking == amenity[1].isSelected &&
         currentHotel.amenity!.isPool == amenity[2].isSelected &&
@@ -399,59 +413,23 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
         currentHotel.amenity!.isFreeWifi == amenity[4].isSelected;
   }
 
-  bool checkDistance(HotelListData currentHotel, int distance) {
+  bool checkDistance(Hotel currentHotel, int distance) {
     return currentHotel.dist >= distance - 2 &&
         currentHotel.dist <= distance + 2;
   }
 
-  bool checkType(HotelListData currentHotel, String titleTxt) {
-    String type = "";
-    switch (titleTxt) {
-      case "villa_data":
-        {
-          type = "villa";
-          break;
-        }
-      case "hotel_data":
-        {
-          type = "hotel";
-          break;
-        }
-      case "resort_data":
-        {
-          type = "resort";
-          break;
-        }
-    }
-    return currentHotel.typeOfBuilding == type;
-  }
-
-  List<HotelListData> searchByPriceAmenityDistanceAndType(
-      Map value, List<HotelListData> traverseList) {
-    List<HotelListData> tmp = [];
+  List<Hotel> searchByPriceAmenityDistance(List<Hotel> traverseList) {
+    List<Hotel> tmp = [];
     for (int i = 0; i < traverseList.length; ++i) {
-      if (checkPrice(traverseList[i], value['minimumPrice'].toInt(),
-              value['maximumPrice'].toInt()) &&
-          checkAmenity(traverseList[i], value['amenity']) &&
-          checkDistance(traverseList[i], value['distance'].toInt())) {
-        // if the all-button is selected
-        if (value['accomodation'][0].isSelected == true) {
-          tmp.add(traverseList[i]);
-        } else {
-          for (int j = 1; j < value['accomodation'].length; ++j) {
-            if (value['accomodation'][j].isSelected &&
-                checkType(traverseList[i], value['accomodation'][j].titleTxt)) {
-              tmp.add(traverseList[i]);
-              break;
-            }
-          }
-        }
+      if (checkPrice(traverseList[i], categoriesFilter['minimumPrice'].toInt(),
+              categoriesFilter['maximumPrice'].toInt()) &&
+          checkAmenity(traverseList[i], categoriesFilter['amenity']) &&
+          checkDistance(
+              traverseList[i], categoriesFilter['distance'].toInt())) {
+        tmp.add(traverseList[i]);
       }
     }
     return tmp;
-    // setState(() {
-    //   filterHotelList = tmp;
-    // });
   }
 
   Widget emptyPage() {
@@ -476,17 +454,16 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   // 2. If we just use filterHotelList to search, it is also incorrect because when it is empty in just a case,
   // and after that, we control to match a hotel, the result is still empty.
   void searchWithAllCriteria(
-      {
-      DateTime? start,
+      {DateTime? start,
       DateTime? end,
       RoomData? roomData,
       String text = '',
       required String typeSearching}) async {
-    List<HotelListData> tmp = [];
+    List<Hotel> tmp = [];
     if (filterHotelList.isEmpty) {
-      tmp = await searchByLocation(text, GlobalVar.hotelListData!);
+      tmp = searchByLocation(text, GlobalVar.listAllHotels!);
       tmp = await searchByDateAndRoomData(start!, end!, roomData!, tmp);
-      tmp = await searchByPriceAmenityDistanceAndType(categoriesFilter, tmp);
+      tmp = searchByPriceAmenityDistance(tmp);
     } else {
       switch (typeSearching) {
         case 'Search by location':
@@ -496,13 +473,13 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
           }
         case 'Search by date and room data':
           {
-            tmp = searchByDateAndRoomData(
+            tmp = await searchByDateAndRoomData(
                 start!, end!, roomData!, filterHotelList);
             break;
           }
         case 'Search by price, amenity, distance and type':
           {
-            tmp = searchByPriceAmenityDistanceAndType(categoriesFilter, filterHotelList);
+            tmp = searchByPriceAmenityDistance(filterHotelList);
             break;
           }
       }

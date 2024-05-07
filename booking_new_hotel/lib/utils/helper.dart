@@ -27,7 +27,7 @@ class Helper {
   }
 
   static String getRoomText(RoomData roomData) {
-    return "${roomData.numberRoom} ${AppLocalizations(applicationcontext!).of("room_data")} ${roomData.people} ${AppLocalizations(applicationcontext!).of("people_data")}";
+    return "${roomData.numberOfBed} ${AppLocalizations(applicationcontext!).of("room")} ${roomData.numberOfPeople} ${AppLocalizations(applicationcontext!).of("people_data")}";
   }
 
   static String getListSearchDate(DateText dateText) {
@@ -45,7 +45,7 @@ class Helper {
   }
 
   static String getPeopleAndChildren(RoomData roomData) {
-    return "${AppLocalizations(applicationcontext!).of("sleeps")} ${roomData.people}}";
+    return "${AppLocalizations(applicationcontext!).of("sleeps")} ${roomData.numberOfPeople}}";
   }
 
   Future<bool> showCommonPopup(

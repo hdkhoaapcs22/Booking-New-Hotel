@@ -22,8 +22,7 @@ class _RangeSliderViewState extends State<RangeSliderView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    return  Column(
         children: [
           Stack(
             children: [
@@ -87,7 +86,6 @@ class _RangeSliderViewState extends State<RangeSliderView> {
                 },
               ))
         ],
-      ),
     );
   }
 }

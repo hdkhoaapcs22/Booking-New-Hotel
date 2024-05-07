@@ -12,11 +12,11 @@ class CategoriesFilterList {
       isSelected: false,
     ),
     CategoriesFilterList(
-      titleTxt: 'free_Parking',
+      titleTxt: 'free_parking',
       isSelected: false,
     ),
     CategoriesFilterList(
-      titleTxt: 'pool_text',
+      titleTxt: 'swimming_pool',
       isSelected: true,
     ),
     CategoriesFilterList(

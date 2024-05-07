@@ -1,32 +1,43 @@
+import 'package:booking_new_hotel/models/hotel.dart';
+import 'package:booking_new_hotel/models/room.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/localfiles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_card.dart';
 
+// ignore: must_be_immutable
 class HotelRoomList extends StatefulWidget {
-  const HotelRoomList({super.key});
+  Hotel hotel;
+  HotelRoomList({super.key, required this.hotel});
 
   @override
   State<HotelRoomList> createState() => _HotelRoomListState();
 }
 
 class _HotelRoomListState extends State<HotelRoomList> {
-  List<String> photoList = [
-    Localfiles.hotel_room_1,
-    Localfiles.hotel_room_2,
-    Localfiles.hotel_room_3,
-    Localfiles.hotel_room_4,
-    Localfiles.hotel_room_5,
-    Localfiles.hotel_room_6,
-    Localfiles.hotel_room_7,
-  ];
+  List<String> listOfPhots = [];
+
+  void fetchRoomList() async {
+    List<Room> tmp = await widget.hotel.listOfRooms!;
+    for (int i = 0; i < 2; ++i) {
+      List<String> res = tmp[i].imageRooms.split(" ");
+      listOfPhots.addAll(res);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchRoomList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
         height: 120,
         child: ListView.builder(
-          itemCount: photoList.length,
+          itemCount: listOfPhots.length,
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
@@ -40,7 +51,7 @@ class _HotelRoomListState extends State<HotelRoomList> {
                     child: AspectRatio(
                       aspectRatio: 1,
                       child: Image.asset(
-                        photoList[index],
+                        listOfPhots[index],
                         fit: BoxFit.cover,
                       ),
                     ),

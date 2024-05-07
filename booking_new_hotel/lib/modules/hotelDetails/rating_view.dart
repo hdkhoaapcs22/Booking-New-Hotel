@@ -1,5 +1,5 @@
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
+import 'package:booking_new_hotel/models/hotel.dart';
 import 'package:booking_new_hotel/widgets/common_card.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
@@ -7,7 +7,7 @@ import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 
 class RatingView extends StatefulWidget {
-  final HotelListData hotelData;
+  final Hotel hotelData;
   const RatingView({super.key, required this.hotelData});
 
   @override
@@ -30,7 +30,7 @@ class _RatingViewState extends State<RatingView> {
                 SizedBox(
                   width: 60,
                   child: Text(
-                    (rating * 2).toStringAsFixed(1),
+                    rating.toStringAsFixed(1),
                     textAlign: TextAlign.left,
                     style: TextStyles(context).getBoldStyle().copyWith(
                           fontSize: 38,

@@ -1,13 +1,13 @@
 import 'package:booking_new_hotel/widgets/common_card.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/hotel_list_data.dart';
+import '../../models/hotel.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 
 class CategoryView extends StatelessWidget {
   final VoidCallback callBack;
-  final HotelListData popularList;
+  final Hotel popularList;
   final AnimationController animationController;
   final Animation<double> animation;
   const CategoryView(
@@ -46,7 +46,7 @@ class CategoryView extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 2, // the ratio between width and height
                   child: Image.asset(
-                    popularList.imagePath,
+                    popularList.imageHotel,
                     fit: BoxFit.cover, // it helps to fit the image
                   ),
                 ),
@@ -80,7 +80,7 @@ class CategoryView extends StatelessWidget {
                                           top: 8,
                                           right: 8),
                                       child: Text(
-                                        popularList.titleTxt,
+                                        popularList.name,
                                         style: TextStyles(context)
                                             .getBoldStyle()
                                             .copyWith(

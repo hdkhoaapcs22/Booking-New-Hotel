@@ -1,7 +1,8 @@
 class RoomData {
-  int numberRoom;
-  int people;
-  RoomData(this.numberRoom, this.people);
+  int numberOfBed;
+  int numberOfPeople;
+  final int numberOfAttributes = 2;
+  RoomData({required this.numberOfBed, required this.numberOfPeople});
 }
 
 class DateText {
@@ -24,6 +25,7 @@ class AdultAndChild {
 
 class Amenity {
   bool isPool, isPetFriendly, isFreeBreakfast, isFreeWifi, isFreeParking;
+  final int numberOfAmenities = 5;
   Amenity({
     this.isPool = false,
     this.isPetFriendly = false,

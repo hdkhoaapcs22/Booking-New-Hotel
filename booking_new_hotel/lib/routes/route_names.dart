@@ -4,7 +4,7 @@ import 'package:booking_new_hotel/modules/hotelDetails/search_screen.dart';
 import 'package:booking_new_hotel/modules/profile/change_password.dart';
 import 'package:booking_new_hotel/modules/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
-import '../models/hotel_list_data.dart';
+import '../models/hotel.dart';
 import '../modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
@@ -53,15 +53,15 @@ class NavigationServices {
     return _pushMaterialPageRoute(const FilterScreen());
   }
 
-  void gotoRoomBookingScreen(HotelListData hotel) async {
+  void gotoRoomBookingScreen(Hotel hotel) async {
     return _pushMaterialPageRoute(RoomBookingScreen(
       hotel: hotel,
     ));
   }
 
-  Future<dynamic> gotoHotelDetails(HotelListData hotelListData) async {
+  Future<dynamic> gotoHotelDetails(Hotel Hotel) async {
     return await _pushMaterialPageRoute(HotelDetails(
-      hotelData: hotelListData,
+      hotelData: Hotel,
     ));
   }
 

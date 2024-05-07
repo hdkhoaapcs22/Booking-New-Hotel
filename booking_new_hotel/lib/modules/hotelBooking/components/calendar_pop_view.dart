@@ -140,7 +140,7 @@ class _CalendarPopViewState extends State<CalendarPopView>
                                     left: 16, right: 16, top: 10, bottom: 15),
                                 child: CommonButton(
                                     buttonText: AppLocalizations(context)
-                                        .of("Apply_date"),
+                                        .of("apply_text"),
                                     onTap: () {
                                       try {
                                         widget.onApplyClick(

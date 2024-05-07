@@ -1,4 +1,5 @@
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
+import 'package:booking_new_hotel/models/hotel.dart';
+import 'package:booking_new_hotel/models/room.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking_view.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,7 @@ import '../../global/global_var.dart';
 import '../../utils/text_styles.dart';
 
 class RoomBookingScreen extends StatefulWidget {
-  final HotelListData hotel;
+  final Hotel hotel;
   const RoomBookingScreen({super.key, required this.hotel});
 
   @override
@@ -15,11 +16,18 @@ class RoomBookingScreen extends StatefulWidget {
 
 class _RoomBookingScreenState extends State<RoomBookingScreen>
     with TickerProviderStateMixin {
-  List<HotelListData> roomList = HotelListData.romeList;
+  // List<Hotel> roomList = Hotel.romeList;
+  List<Room> roomList = [];
   late AnimationController animationController;
+
+  void fetchRoomList() async {
+    roomList = await widget.hotel.listOfRooms!;
+    setState(() {});
+  }
 
   @override
   void initState() {
+    fetchRoomList();
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
     super.initState();
@@ -34,31 +42,34 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
   @override
   Widget build(BuildContext context) {
     bool isFav = GlobalVar.databaseService!.favoriteHotelsDatabase
-        .isFavoriteHotel(name: widget.hotel.titleTxt);
+        .isFavoriteHotel(name: widget.hotel.name);
     print("It is in RoomBookingScreen");
-    return Scaffold(
-        body: Column(
-      children: [
-        getAppBarUI(isFavoriteHotel: isFav),
-        Expanded(
-            child: ListView.builder(
-          padding: const EdgeInsets.all(0.0),
-          itemCount: roomList.length,
-          itemBuilder: (context, index) {
-            int count = roomList.length > 10 ? 10 : roomList.length;
-            var animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-                parent: animationController,
-                curve: Interval((1 / count) * index, 1.0,
-                    curve: Curves.fastOutSlowIn)));
-            animationController.forward();
-            return RoomBookingView(
-                roomData: roomList[index],
-                animationController: animationController,
-                animation: animation);
-          },
-        ))
-      ],
-    ));
+    return roomList.isNotEmpty
+        ? Scaffold(
+            body: Column(
+            children: [
+              getAppBarUI(isFavoriteHotel: isFav),
+              Expanded(
+                  child: ListView.builder(
+                padding: const EdgeInsets.all(0.0),
+                itemCount: roomList.length,
+                itemBuilder: (context, index) {
+                  int count = roomList.length > 10 ? 10 : roomList.length;
+                  var animation = Tween(begin: 0.0, end: 1.0).animate(
+                      CurvedAnimation(
+                          parent: animationController,
+                          curve: Interval((1 / count) * index, 1.0,
+                              curve: Curves.fastOutSlowIn)));
+                  animationController.forward();
+                  return RoomBookingView(
+                      roomData: roomList[index],
+                      animationController: animationController,
+                      animation: animation);
+                },
+              ))
+            ],
+          ))
+        : const SizedBox();
   }
 
   Widget getAppBarUI({required bool isFavoriteHotel}) {
@@ -83,7 +94,7 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
             ),
             Expanded(
               child: Center(
-                child: Text(widget.hotel.titleTxt,
+                child: Text(widget.hotel.name,
                     style: TextStyles(context).getTitleStyle(),
                     overflow: TextOverflow.ellipsis),
               ),
@@ -95,7 +106,7 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
                 onTap: () {
                   if (isFavoriteHotel) {
                     GlobalVar.databaseService!.favoriteHotelsDatabase
-                        .removeFavoriteHotel(name: widget.hotel.titleTxt);
+                        .removeFavoriteHotel(name: widget.hotel.locationOfHotel);
                   } else {
                     GlobalVar.databaseService!.favoriteHotelsDatabase
                         .addFavoriteHotel(favoriteHotel: widget.hotel);

@@ -1,5 +1,4 @@
 import 'package:booking_new_hotel/global/global_var.dart';
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +13,8 @@ class FinishTripView extends StatefulWidget {
 }
 
 class _FinishTripViewState extends State<FinishTripView> {
-  // var hotelList = HotelListData.hotelList;
-  var hotelList = GlobalVar.hotelListData!;
+  // var hotelList = Hotel.hotelList;
+  var hotelList = GlobalVar.listAllHotels!;
   @override
   void initState() {
     widget.animationController.forward();

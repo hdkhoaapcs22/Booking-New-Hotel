@@ -39,7 +39,7 @@ class _RoomPopupViewState extends State<RoomPopupView>
     animationController = AnimationController(
         duration: const Duration(milliseconds: 400), vsync: this);
     animationController.forward();
-    _roomData = RoomData(widget.roomData.numberRoom, widget.roomData.people);
+    _roomData = RoomData(numberOfBed: widget.roomData.numberOfBed, numberOfPeople: widget.roomData.numberOfPeople);
     super.initState();
   }
 
@@ -87,18 +87,18 @@ class _RoomPopupViewState extends State<RoomPopupView>
                               const Divider(height: 1),
                               getRowView(
                                   AppLocalizations(context).of("number_room"),
-                                  _roomData!.numberRoom,
+                                  _roomData!.numberOfBed,
                                   PopupTextType.no),
                               getRowView(
                                   AppLocalizations(context).of("people_data"),
-                                  _roomData!.people,
+                                  _roomData!.numberOfPeople,
                                   PopupTextType.ad),
                               Padding(
                                   padding: const EdgeInsets.only(
                                       left: 16, right: 16, top: 24, bottom: 16),
                                   child: CommonButton(
                                       buttonText: AppLocalizations(context)
-                                          .of("Apply_date"),
+                                          .of("apply_text"),
                                       onTap: () {
                                         try {
                                           widget.onChange(_roomData!);
@@ -154,9 +154,9 @@ class _RoomPopupViewState extends State<RoomPopupView>
                             onTap: () {
                               setState(() {
                                 if (popupTextType == PopupTextType.no) {
-                                  ++_roomData!.numberRoom;
+                                  ++_roomData!.numberOfBed;
                                 } else if (popupTextType == PopupTextType.ad) {
-                                  ++_roomData!.people;
+                                  ++_roomData!.numberOfPeople;
                                 }
                               });
                             },
@@ -183,14 +183,14 @@ class _RoomPopupViewState extends State<RoomPopupView>
                             onTap: () {
                               setState(() {
                                 if (popupTextType == PopupTextType.no) {
-                                  --_roomData!.numberRoom;
-                                  if (_roomData!.numberRoom < 0) {
-                                    _roomData!.numberRoom = 0;
+                                  --_roomData!.numberOfBed;
+                                  if (_roomData!.numberOfBed < 0) {
+                                    _roomData!.numberOfBed = 0;
                                   }
                                 } else if (popupTextType == PopupTextType.ad) {
-                                  --_roomData!.people;
-                                  if (_roomData!.people < 0) {
-                                    _roomData!.people = 0;
+                                  --_roomData!.numberOfPeople;
+                                  if (_roomData!.numberOfPeople < 0) {
+                                    _roomData!.numberOfPeople = 0;
                                   }
                                 }
                               });

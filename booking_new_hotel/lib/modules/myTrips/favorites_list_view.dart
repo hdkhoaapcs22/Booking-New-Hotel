@@ -1,5 +1,5 @@
 import 'package:booking_new_hotel/global/global_var.dart';
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
+import 'package:booking_new_hotel/models/hotel.dart';
 import 'package:booking_new_hotel/modules/explore/hotel_list_view_page.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 import 'package:flutter/material.dart';
@@ -36,15 +36,14 @@ class _FavoritesListViewState extends State<FavoritesListView> {
         builder: (context, AsyncSnapshot snapshot) {
           var hotelList = snapshot.hasData
               ? snapshot.data.docs
-                  .map((doc) => HotelListData(
-                        titleTxt: doc['title'],
-                        subTxt: doc['subtitle'],
+                  .map((doc) => Hotel(
+                        name: doc['title'],
+                        locationOfHotel: doc['subtitle'],
                         dist: doc['dist'],
                         reviews: doc['reviews'],
                         rating: doc['rating'],
-                        perNight: doc['price'],
-                        imagePath: doc['image'],
-                        roomData: RoomData(doc['room'], doc['people']),
+                        averagePrice: doc['price'],
+                        imageHotel: doc['image'],
                       ))
                   .toList()
               : [];
@@ -68,7 +67,6 @@ class _FavoritesListViewState extends State<FavoritesListView> {
                   NavigationServices(context)
                       .gotoRoomBookingScreen(hotelList[index].titleTxt);
                 },
-                rating: hotelList[index].rating,
               );
             },
           );

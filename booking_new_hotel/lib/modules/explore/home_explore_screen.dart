@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
+import 'package:booking_new_hotel/models/hotel.dart';
 import 'package:booking_new_hotel/modules/explore/home_explore_slider_view.dart';
 import 'package:booking_new_hotel/modules/explore/hotel_list_view_page.dart';
 import 'package:booking_new_hotel/widgets/bottom_top_move_animation_view.dart';
@@ -80,7 +80,6 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                           itemCount: 4,
                           padding: EdgeInsets.only(
                               top: sliderImageHeight + 32, bottom: 16),
-                          scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
                             var animation = Tween(begin: 0.0, end: 1.0).animate(
                               CurvedAnimation(
@@ -246,22 +245,21 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
             )));
   }
 
-  List<HotelListData> _chooseRandomlyBestDealHotels() {
-    List<HotelListData> bestDealHotels = [];
-    while (bestDealHotels.length < 4) {
-      var randomIndex = Random().nextInt(GlobalVar.hotelListData!.length);
-      if (!bestDealHotels.contains(GlobalVar.hotelListData![randomIndex])) {
-        bestDealHotels.add(GlobalVar.hotelListData![randomIndex]);
-        GlobalVar.hotelListData![randomIndex].discountRate =
-            Random().nextInt(30) + 50;
-        GlobalVar.hotelListData![randomIndex].isBestDeal = true;
+  List<Hotel> _chooseRandomlyBestDealHotels() {
+    List<Hotel> bestDealHotels = [];
+    while (bestDealHotels.length < 5) {
+      var randomIndex = Random().nextInt(GlobalVar.listAllHotels!.length);
+      if (!bestDealHotels.contains(GlobalVar.listAllHotels![randomIndex])) {
+        bestDealHotels.add(GlobalVar.listAllHotels![randomIndex]);
+        GlobalVar.listAllHotels![randomIndex].discountRate = Random().nextInt(20) + 20;
+        GlobalVar.listAllHotels![randomIndex].isBestDeal = true;
       }
     }
     return bestDealHotels;
   }
 
   Widget getDealListView(int index) {
-    List<HotelListData> bestDealHotelList = _chooseRandomlyBestDealHotels();
+    List<Hotel> bestDealHotelList = _chooseRandomlyBestDealHotels();
     List<Widget> list = [];
     bestDealHotelList.forEach((element) {
       var animation = Tween(begin: 0.0, end: 1.0).animate(
@@ -278,7 +276,6 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
           hotelData: element,
           animationController: widget.animationController,
           animation: animation,
-          rating: element.rating,
         ),
       );
     });

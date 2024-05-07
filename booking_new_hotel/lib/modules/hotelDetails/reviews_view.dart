@@ -1,5 +1,5 @@
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
-import 'package:booking_new_hotel/models/hotel_list_data.dart';
+import 'package:booking_new_hotel/models/hotel.dart';
 import 'package:booking_new_hotel/widgets/list_cell_animation_view.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
@@ -10,7 +10,7 @@ import '../../widgets/common_card.dart';
 
 class ReviewsView extends StatelessWidget {
   final VoidCallback callback;
-  final HotelListData reviewsList;
+  final Hotel reviewsList;
   final AnimationController animationController;
   final Animation<double> animation;
   const ReviewsView(
@@ -44,7 +44,7 @@ class ReviewsView extends StatelessWidget {
                             const BorderRadius.all(Radius.circular(8)),
                         child: AspectRatio(
                           aspectRatio: 1,
-                          child: Image.asset(reviewsList.imagePath,
+                          child: Image.asset(reviewsList.imageHotel,
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -56,7 +56,7 @@ class ReviewsView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      reviewsList.titleTxt,
+                      reviewsList.name,
                       style: TextStyles(context)
                           .getBoldStyle()
                           .copyWith(fontSize: 14),
@@ -110,7 +110,7 @@ class ReviewsView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                reviewsList.subTxt,
+                reviewsList.locationOfHotel,
                 style: TextStyles(context).getDescriptionStyle().copyWith(
                       fontWeight: FontWeight.w100,
                       color: Theme.of(context).disabledColor,
