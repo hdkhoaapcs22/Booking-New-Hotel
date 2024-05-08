@@ -4,7 +4,6 @@ import 'package:booking_new_hotel/modules/explore/hotel_list_view_page.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/room_data.dart';
 
 class FavoritesListView extends StatefulWidget {
   final AnimationController animationController;

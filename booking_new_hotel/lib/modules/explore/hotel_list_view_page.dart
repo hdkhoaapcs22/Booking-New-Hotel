@@ -12,7 +12,6 @@ import '../../utils/themes.dart';
 import '../../widgets/common_card.dart';
 import '../../widgets/list_cell_animation_view.dart';
 
-
 class HotelListViewPage extends StatelessWidget {
   final bool isShowDate;
   final VoidCallback callback;
@@ -158,7 +157,7 @@ class HotelListViewPage extends StatelessWidget {
                                                               color: Colors.grey
                                                                   .withOpacity(
                                                                       0.4),
-                                                              fontSize: 20,
+                                                              fontSize: 19,
                                                               decoration:
                                                                   TextDecoration
                                                                       .lineThrough,

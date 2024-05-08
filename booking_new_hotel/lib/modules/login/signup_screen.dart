@@ -26,6 +26,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   ShowAuthError showAuthError = ShowAuthError();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,

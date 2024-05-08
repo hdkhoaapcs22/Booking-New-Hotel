@@ -1,3 +1,5 @@
+
+import '../service/location/location.dart';
 import 'room.dart';
 import 'room_data.dart';
 import '../utils/localfiles.dart';
@@ -16,13 +18,14 @@ class Hotel {
   Amenity? amenity;
   int discountRate;
   Future<List<Room>>? listOfRooms;
+  Location? position;
 
   Hotel({
     this.imageHotel = '',
     this.name = '',
     this.locationOfHotel = "",
     this.dateTxt = "",
-    this.dist = 1.8,
+    this.dist = 0.0,
     this.reviews = 80,
     this.rating = 4.5,
     this.averagePrice = 180,
@@ -31,6 +34,7 @@ class Hotel {
     this.date,
     this.amenity,
     this.listOfRooms,
+    this.position,
   });
 
   // we need location in this hotelList bcz we using that in map

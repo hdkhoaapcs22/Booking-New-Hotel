@@ -127,8 +127,8 @@ class _HotelDetailsState extends State<HotelDetails>
                             recognizer: TapGestureRecognizer()..onTap = () {}),
                         TextSpan(
                             text: !isReadless
-                                ? AppLocalizations(context).of("read_more")
-                                : AppLocalizations(context).of("less"),
+                                ? AppLocalizations(context).of("more_than")
+                                : AppLocalizations(context).of("less_than"),
                             style: TextStyles(context)
                                 .getDescriptionStyle()
                                 .copyWith(

@@ -1,6 +1,8 @@
 import 'dart:math';
 
+
 import '../../global/global_var.dart';
+import '../location/location.dart';
 import '../../models/room.dart';
 import '../../models/room_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,7 +15,6 @@ class CoreDatabaseService {
         .map((doc) => Hotel(
               name: doc['title'],
               locationOfHotel: doc['subtitle'],
-              dist: doc['dist'].toDouble(),
               reviews: doc['reviews'],
               rating: doc['rating'].toDouble(),
               averagePrice: doc['price'],
@@ -28,6 +29,7 @@ class CoreDatabaseService {
                   isPetFriendly: doc['amenity'][3],
                   isPool: doc['amenity'][4]),
               listOfRooms: loadFromSubCollection(doc.reference.id),
+              position: Location(latitude: doc['location'][0], longitude: doc['location'][1])
             ))
         .toList();
   }

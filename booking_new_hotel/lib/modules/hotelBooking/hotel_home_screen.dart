@@ -365,6 +365,18 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     return tmp;
   }
 
+  bool checkByDestination(
+      Hotel currentHotel, List<CategoriesFilterList> destination) {
+    if (destination[0].isSelected) {
+      return true;
+    }
+    for (int i = 1; i < destination.length; ++i) {
+      if (currentHotel.locationOfHotel.split(', ')[0] == destination[i].destination) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   Future<List<Room>> getListOfRooms(Hotel currentHotel) async {
     return await currentHotel.listOfRooms!;
@@ -425,7 +437,9 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
               categoriesFilter['maximumPrice'].toInt()) &&
           checkAmenity(traverseList[i], categoriesFilter['amenity']) &&
           checkDistance(
-              traverseList[i], categoriesFilter['distance'].toInt())) {
+              traverseList[i], categoriesFilter['distance'].toInt()) &&
+          checkByDestination(
+              traverseList[i], categoriesFilter['destination'])) {
         tmp.add(traverseList[i]);
       }
     }

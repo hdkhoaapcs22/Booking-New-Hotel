@@ -38,6 +38,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
   }
 
+  dispose() {
+    widget.animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
@@ -7,6 +8,7 @@ import 'package:booking_new_hotel/modules/explore/hotel_list_view_page.dart';
 import 'package:booking_new_hotel/widgets/bottom_top_move_animation_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 import '../../global/global_var.dart';
@@ -37,7 +39,34 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
   var sliderImageHeight = 0.0;
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  void calculateDistanceBetweenUserAndHotels() {
+    for (int i = 0; i < GlobalVar.listAllHotels!.length; ++i) {
+      GlobalVar.listAllHotels![i].dist = Geolocator.distanceBetween(
+          GlobalVar.locationOfUser!.latitude,
+          GlobalVar.locationOfUser!.longitude,
+          GlobalVar.listAllHotels![i].position!.latitude,
+          GlobalVar.listAllHotels![i].position!.longitude)/1000.0;
+    }
+  }
+
+  @override
   void initState() {
+    const LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 500,
+    );
+    StreamSubscription<Position> _ =
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position position) {
+      GlobalVar.locationOfUser = position;
+    });
+
+    calculateDistanceBetweenUserAndHotels();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 0));
     widget.animationController.forward();
@@ -251,7 +280,8 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
       var randomIndex = Random().nextInt(GlobalVar.listAllHotels!.length);
       if (!bestDealHotels.contains(GlobalVar.listAllHotels![randomIndex])) {
         bestDealHotels.add(GlobalVar.listAllHotels![randomIndex]);
-        GlobalVar.listAllHotels![randomIndex].discountRate = Random().nextInt(20) + 20;
+        GlobalVar.listAllHotels![randomIndex].discountRate =
+            Random().nextInt(20) + 20;
         GlobalVar.listAllHotels![randomIndex].isBestDeal = true;
       }
     }

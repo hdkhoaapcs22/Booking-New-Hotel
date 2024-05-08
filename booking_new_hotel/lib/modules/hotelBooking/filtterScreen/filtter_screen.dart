@@ -1,4 +1,5 @@
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
+import 'package:booking_new_hotel/utils/text_styles.dart';
 import 'package:booking_new_hotel/widgets/common_app_bar_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,9 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
   List<CategoriesFilterList> categoriesAmenityFilterList =
       CategoriesFilterList.amenityCategories;
-  List<CategoriesFilterList> accomodationListData =
-      CategoriesFilterList.accomodationCategories;
+  List<CategoriesFilterList> destinationDistrictFilterList =
+      CategoriesFilterList.destinationDistrict;
+  bool isShowAllDestinationButton = false;
 
   final columnCount = 2;
   RangeValues _values = const RangeValues(100, 600);
@@ -58,7 +60,7 @@ class _FilterScreenState extends State<FilterScreen> {
                         color: Colors.grey.withOpacity(0.2),
                       ),
                       // facilititate filter in hotel
-                      popularFilter(),
+                      amenitiesFilter(),
                       Divider(
                         height: 1,
                         color: Colors.grey.withOpacity(0.2),
@@ -68,8 +70,8 @@ class _FilterScreenState extends State<FilterScreen> {
                         height: 1,
                         color: Colors.grey.withOpacity(0.2),
                       ),
-                      // allAccomodationUI(),
-                      // const SizedBox(height: 30),
+                      allDestinationButtonUI(),
+                      const SizedBox(height: 30),
                       buttonApply(),
                     ],
                   ),
@@ -112,7 +114,7 @@ class _FilterScreenState extends State<FilterScreen> {
     );
   }
 
-  Widget popularFilter() {
+  Widget amenitiesFilter() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,109 +265,164 @@ class _FilterScreenState extends State<FilterScreen> {
         ]);
   }
 
-  // Widget allAccomodationUI() {
-  //   return Column(
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Padding(
-  //           padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-  //           child: Text(
-  //             AppLocalizations(context).of("type of accommodation"),
-  //             textAlign: TextAlign.left,
-  //             style: TextStyle(
-  //               color: Colors.grey,
-  //               fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
-  //               fontWeight: FontWeight.normal,
-  //             ),
-  //           )),
-  //       Padding(
-  //           padding: const EdgeInsets.only(left: 16, right: 16),
-  //           child: Column(children: getAccomodationListUI())),
-  //       const SizedBox(
-  //         height: 8,
-  //       ),
-  //     ],
-  //   );
-  // }
+  Widget allDestinationButtonUI() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Text(
+              AppLocalizations(context).of("location"),
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
+                fontWeight: FontWeight.normal,
+              ),
+            )),
+        Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Column(children: getDestinationButtonListUI())),
+        const SizedBox(
+          height: 8,
+        ),
+      ],
+    );
+  }
 
-  // List<Widget> getAccomodationListUI() {
-  //   List<Widget> noList = [];
-  //   for (int i = 0; i < accomodationListData.length; ++i) {
-  //     var data = accomodationListData[i];
-  //     noList.add(
-  //       Material(
-  //         color: Colors.transparent,
-  //         child: InkWell(
-  //           borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-  //           child: Padding(
-  //             padding: const EdgeInsets.all(8.0),
-  //             child: Row(
-  //               children: [
-  //                 Expanded(
-  //                   child: Text(AppLocalizations(context).of(data.titleTxt)),
-  //                 ),
-  //                 CupertinoSwitch(
-  //                   activeColor: data.isSelected
-  //                       ? Theme.of(context).primaryColor
-  //                       : Colors.grey.withOpacity(0.6),
-  //                   value: data.isSelected,
-  //                   onChanged: (value) {
-  //                     setState(() {
-  //                       controlSwitchAccomodationButton(i);
-  //                     });
-  //                   },
-  //                 )
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     );
-  //     if (i == 0) {
-  //       noList.add(
-  //         Divider(
-  //           height: 1,
-  //           color: Colors.grey.withOpacity(0.2),
-  //         ),
-  //       );
-  //     }
-  //   }
-  //   return noList;
-  // }
+  List<Widget> getDestinationButtonListUI() {
+    List<Widget> resForShowMore = [];
+    List<Widget> resForShowLess = [];
+    for (int i = 0; i < destinationDistrictFilterList.length; ++i) {
+      CategoriesFilterList data = destinationDistrictFilterList[i];
+      resForShowMore.add(
+        Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(AppLocalizations(context).of(data.titleTxt)),
+                  ),
+                  CupertinoSwitch(
+                    activeColor: data.isSelected
+                        ? Theme.of(context).primaryColor
+                        : Colors.grey.withOpacity(0.6),
+                    value: data.isSelected,
+                    onChanged: (value) {
+                      setState(() {
+                        controlSwitchDestinationButton(i);
+                      });
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+      if (i == 0) {
+        resForShowMore.add(
+          Divider(
+            height: 1,
+            color: Colors.grey.withOpacity(0.2),
+          ),
+        );
+      }
+      if (i <= 5) {
+        resForShowLess.add(resForShowMore[i]);
+        if (i == 5) {
+          resForShowLess.add(
+            Center(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                  onTap: () {
+                    setState(() {
+                      isShowAllDestinationButton = true;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                          AppLocalizations(context).of("more_than"),
+                          style: TextStyles(context).getRegularStyle(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            )  );
+        }
+      }
+      if (i == destinationDistrictFilterList.length - 1) {
+        resForShowMore.add(
+          Center(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                onTap: () {
+                  setState(() {
+                    isShowAllDestinationButton = false;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child:  Text(
+                        AppLocalizations(context).of("less_than"),
+                        style: TextStyles(context).getRegularStyle(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    return isShowAllDestinationButton ? resForShowMore : resForShowLess;
+  }
 
-  // void controlSwitchAccomodationButton(int index) {
-  //   if (index == 0) {
-  //     // index = 0 is all
-  //     if (accomodationListData[0].isSelected) {
-  //       for (int i = 0; i < accomodationListData.length; ++i) {
-  //         accomodationListData[i].isSelected = false;
-  //       }
-  //     } else {
-  //       for (int i = 0; i < accomodationListData.length; ++i) {
-  //         accomodationListData[i].isSelected = true;
-  //       }
-  //     }
-  //   } else {
-  //     accomodationListData[index].isSelected =
-  //         !accomodationListData[index].isSelected;
-  //     int count = 0;
-  //     for (int i = 0; i < accomodationListData.length; ++i) {
-  //       if (i != 0) {
-  //         var data = accomodationListData[i];
-  //         if (data.isSelected) {
-  //           ++count;
-  //         }
-  //       }
-  //     }
-  //     // check all selected
-  //     if (count == accomodationListData.length - 1) {
-  //       accomodationListData[0].isSelected = true;
-  //     } else {
-  //       accomodationListData[0].isSelected = false;
-  //     }
-  //   }
-  // }
+  void controlSwitchDestinationButton(int index) {
+    if (index == 0) {
+      // index = 0 is all
+      if (destinationDistrictFilterList[0].isSelected) {
+        for (int i = 0; i < destinationDistrictFilterList.length; ++i) {
+          destinationDistrictFilterList[i].isSelected = false;
+        }
+      } else {
+        for (int i = 0; i < destinationDistrictFilterList.length; ++i) {
+          destinationDistrictFilterList[i].isSelected = true;
+        }
+      }
+    } else {
+      destinationDistrictFilterList[index].isSelected =
+          !destinationDistrictFilterList[index].isSelected;
+      int count = 0;
+      for (int i = 0; i < destinationDistrictFilterList.length; ++i) {
+        if (i != 0) {
+          var data = destinationDistrictFilterList[i];
+          if (data.isSelected) {
+            ++count;
+          }
+        }
+      }
+      // check all selected
+      if (count == destinationDistrictFilterList.length - 1) {
+        destinationDistrictFilterList[0].isSelected = true;
+      } else {
+        destinationDistrictFilterList[0].isSelected = false;
+      }
+    }
+  }
 
   Widget buttonApply() {
     return Padding(
@@ -385,6 +442,7 @@ class _FilterScreenState extends State<FilterScreen> {
               "maximumPrice": _values.end,
               "distance": distValue / 10,
               "amenity": categoriesAmenityFilterList,
+              "destination": destinationDistrictFilterList,
             });
           }),
     );

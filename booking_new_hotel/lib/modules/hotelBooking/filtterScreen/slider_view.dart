@@ -36,7 +36,7 @@ class _SliderViewState extends State<SliderView> {
               child: Row(
                 children: [
                   Text(
-                    AppLocalizations(context).of("Less_than"),
+                    AppLocalizations(context).of("less_than"),
                     textAlign: TextAlign.center,
                   ),
                   Padding(

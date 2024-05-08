@@ -413,11 +413,11 @@
         "ja": "概要"
     },
     {
-        "text_id": "read_more",
-        "en": "read more",
-        "fr": "Lire la suite",
-        "ar": "اقرأ أكثر",
-        "ja": "続きを読む"
+        "text_id": "more_than",
+        "en": "More than",
+        "fr": "Plus de",
+        "ar": "أكثر من",
+        "ja": "より多くの"
     },
     {
         "text_id": "less",
@@ -602,7 +602,7 @@
         "ja": "無料のWifi"
     },
     {
-        "text_id": "Less_than",
+        "text_id": "less_than",
         "en": "Less than",
         "fr": "Moins que",
         "ar": "أقل من",
@@ -1006,5 +1006,131 @@
         "fr": "Commodité",
         "ar": "وسيلة راحة",
         "ja": "アメニティ"
+    },
+    {
+        "text_id": "district_1",
+        "en": "Dist 1",
+        "fr": "Dist 1",
+        "ar": "الحي 1",
+        "ja": "地区1"
+    },
+    {
+        "text_id": "district_2",
+        "en": "Dist 2",
+        "fr": "Dist 2",
+        "ar": "الحي 2",
+        "ja": "地区2"
+    },
+    {
+        "text_id": "district_3",
+        "en": "Dist 3",
+        "fr": "Dist 3",
+        "ar": "الحي 3",
+        "ja": "地区3"
+    },
+    {
+        "text_id": "district_4",
+        "en": "Dist 4",
+        "fr": "Dist 4",
+        "ar": "الحي 4",
+        "ja": "地区4"
+    },
+    {
+        "text_id": "district_5",
+        "en": "Dist 5",
+        "fr": "Dist 5",
+        "ar": "الحي 5",
+        "ja": "地区5"
+    },
+    {
+        "text_id": "district_6",
+        "en": "Dist 6",
+        "fr": "Dist 6",
+        "ar": "الحي 6",
+        "ja": "地区6"
+    },
+    {
+        "text_id":"district_7",
+        "en": "Dist 7",
+        "fr": "Dist 7",
+        "ar": "الحي 7",
+        "ja": "地区7"
+    },
+    {
+        "text_id": "district_8",
+        "en": "Dist 8",
+        "fr": "Dist 8",
+        "ar": "الحي 8",
+        "ja": "地区8"
+    },
+    {
+        "text_id": "district_9",
+        "en": "Dist 9",
+        "fr": "Dist 9",
+        "ar": "الحي 9",
+        "ja": "地区9"
+    },
+    {
+        "text_id": "district_10",
+        "en": "Dist 10",
+        "fr": "Dist 10",
+        "ar": "الحي 10",
+        "ja": "地区10"
+    },
+    {
+        "text_id": "district_11",
+        "en": "Dist 11",
+        "fr": "Dist 11",
+        "ar": "الحي 11",
+        "ja": "地区11"
+    },
+    {
+        "text_id": "district_12",
+        "en": "Dist 12",
+        "fr": "Dist 12",
+        "ar": "الحي 12",
+        "ja": "地区12"
+    },
+    {
+        "text_id": "binh_tan",
+        "en": "Binh Tan Dist",
+        "fr": "Binh Tan Dist",
+        "ar": "منطقة بينه تان",
+        "ja": "ビンタン地区"
+    },
+    {
+        "text_id": "binh_thanh",
+        "en": "Binh Thanh Dist",
+        "fr": "Binh Thanh Dist",
+        "ar": "منطقة بينه تان",
+        "ja": "ビンタン地区"
+    },
+    {
+        "text_id": "go_vap",
+        "en": "Go Vap Dist",
+        "fr": "Go Vap Dist",
+        "ar": "منطقة جو فاب",
+        "ja": "ゴーヴァップ地区"
+    },
+    {
+        "text_id": "phu_nhuan",
+        "en": "Phu Nhuan Dist",
+        "fr": "Phu Nhuan Dist",
+        "ar": "منطقة فو نهوان",
+        "ja": "フーヌアン地区"
+    },
+    {
+        "text_id": "tan_binh",
+        "en": "Tan Binh Dist",
+        "fr": "Tan Binh Dist",
+        "ar": "منطقة تان بينه",
+        "ja": "タンビン地区"
+    },
+    {
+        "text_id": "tan_phu",
+        "en": "Tan Phu Dist",
+        "fr": "Tan Phu Dist",
+        "ar": "منطقة تان فو",
+        "ja": "タンフー地区"
     }
 ]
