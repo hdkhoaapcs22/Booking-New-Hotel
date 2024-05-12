@@ -77,11 +77,11 @@
         "ja": "アカウントを作成する"
     },
     {
-        "text_id": "your_mail",
-        "en": "Your email",
-        "fr": "Votre email",
-        "ar": "بريدك الالكتروني",
-        "ja": "あなたのメール"
+        "text_id": "mail",
+        "en": "Email",
+        "fr": "Email",
+        "ar": "البريد الإلكتروني",
+        "ja": "メール"
     },
     {
         "text_id": "password",
@@ -231,62 +231,6 @@
         "ja": "ホテル"
     },
     {
-        "text_id": "Backpacker_data",
-        "en": "Backpacker",
-        "fr": "Randonneuse",
-        "ar": "الرحال",
-        "ja": "バックパッカー"
-    },
-    {
-        "text_id": "resort_data",
-        "en": "Resort",
-        "fr": "Recours",
-        "ar": "ملجأ",
-        "ja": "リゾート"
-    },
-    {
-        "text_id": "villa_data",
-        "en": "Villa",
-        "fr": "Villa",
-        "ar": "فيلا",
-        "ja": "ヴィラ"
-    },
-    {
-        "text_id": "apartment",
-        "en": "Apartment",
-        "fr": "Appartement",
-        "ar": "شقة",
-        "ja": "アパート"
-    },
-    {
-        "text_id": "guest_house",
-        "en": "Guest house",
-        "fr": "Maison d'hôtes",
-        "ar": "منزل الضيف",
-        "ja": "ゲストハウス"
-    },
-    {
-        "text_id": "motel",
-        "en": "Motel",
-        "fr": "Motel",
-        "ar": "فندق صغير",
-        "ja": "モーテル"
-    },
-    {
-        "text_id": "accommodation",
-        "en": "Accommodation",
-        "fr": "Hébergement",
-        "ar": "إقامة",
-        "ja": "宿泊施設"
-    },
-    {
-        "text_id": "Bed_breakfast",
-        "en": "Bed & Breakfast",
-        "fr": "lit et petit-déjeuner",
-        "ar": "سرير و فطور",
-        "ja": "ベッド＆ブレックファスト"
-    },
-    {
         "text_id": "Last_search",
         "en": "Last searches",
         "fr": "Dernières recherches",
@@ -371,13 +315,6 @@
         "ja": "すべて表示"
     },
     {
-        "text_id": "km",
-        "en": "km",
-        "fr": "km",
-        "ar": "كم",
-        "ja": "キロメートル"
-    },
-    {
         "text_id": "per_night",
         "en": "/per night",
         "fr": "/par nuit",
@@ -394,7 +331,7 @@
     {
         "text_id": "book_now",
         "en": "Book now",
-        "fr": "Destination\npopulaire",
+        "fr": "Destination populaire",
         "ar": " احجز الآن",
         "ja": "今予約する"
     },
@@ -644,13 +581,6 @@
         "ja": "住所"
     },
     {
-        "text_id": "mail_text",
-        "en": "Email",
-        "fr": "E-mail",
-        "ar": "بريد إلكتروني",
-        "ja": "Eメール"
-    },
-    {
         "text_id": "change_password",
         "en": "Change Password",
         "fr": "Changer le mot de passe",
@@ -742,11 +672,11 @@
         "ja": "色"
     },
     {
-        "text_id": "Selected color",
-        "en": "Selected color",
-        "fr": "Couleur sélectionnée",
-        "ar": "اللون المحدد",
-        "ja": "選択した色"
+        "text_id": "select_color",
+        "en": "Select color",
+        "fr": "Sélectionnez la couleur",
+        "ar": "حدد اللون",
+        "ja": "色を選択"
     },
     {
         "text_id": "Language",
@@ -756,11 +686,11 @@
         "ja": "言語"
     },
     {
-        "text_id": "Selected language",
-        "en": "Selected language",
-        "fr": "Langue sélectionnée",
-        "ar": "اللغة المختارة",
-        "ja": "選択した言語"
+        "text_id": "select_language",
+        "en": "Select language",
+        "fr": "Sélectionnez la langue",
+        "ar": "اختر اللغة",
+        "ja": "言語を選択"
     },
     {
         "text_id": "Currency",
@@ -824,20 +754,6 @@
         "fr": "À",
         "ar": "ل",
         "ja": "に"
-    },
-    {
-        "text_id": "sleeps",
-        "en": "sleeps",
-        "fr": "dort",
-        "ar": "ينام",
-        "ja": "眠る"
-    },
-    {
-        "text_id": "children",
-        "en": "children",
-        "fr": "enfants",
-        "ar": "الأطفال",
-        "ja": "子供達"
     },
     {
         "text_id": "password_cannot_empty",
@@ -1132,5 +1048,152 @@
         "fr": "Tan Phu Dist",
         "ar": "منطقة تان فو",
         "ja": "タンフー地区"
+    },
+    {
+        "text_id": "payment_details",
+        "en": "Payment Details",
+        "fr": "Détails de paiement",
+        "ar": "تفاصيل الدفع",
+        "ja": "支払い詳細"
+    },
+    {
+        "text_id": "night",
+        "en": "Night(s)",
+        "fr": "Nuit(s)",
+        "ar": "ليلة",
+        "ja": "夜"
+    },
+    {
+        "text_id": "check_in",
+        "en": "Check-in",
+        "fr": "Arrivée",
+        "ar": "تسجيل الوصول",
+        "ja": "チェックイン"
+    },
+    {
+        "text_id": "check_out",
+        "en": "Check-out",
+        "fr": "Check-out",
+        "ar": "الدفع",
+        "ja": "チェックアウト"
+    },
+    {
+        "text_id": "booked_soon",
+        "en": "Hurry up! It will be booked soon",
+        "fr": "Dépêchez-vous! Il sera bientôt réservé",
+        "ar": "أسرع! سيتم حجزه قريبًا",
+        "ja": "急いで！ すぐに予約されます"
+    },
+    {
+        "text_id": "initial_price",
+        "en": "Initial price",
+        "fr": "Prix ​​initial",
+        "ar": "السعر المبدئي",
+        "ja": "初期価格"
+    },
+    {
+        "text_id": "current_price",
+        "en": "Current price",
+        "fr": "Prix ​​actuel",
+        "ar": "السعر الحالي",
+        "ja": "現在の価格"
+    },
+    {
+        "text_id": "total_price",
+        "en": "Total price(include 5% tax)",
+        "fr": "Prix ​​total (taxe de 5% incluse)",
+        "ar": "السعر الإجمالي (تشمل 5٪ ضريبة)",
+        "ja": "合計価格（5％の税金を含む）"
+    },
+    {
+        "text_id": "off",
+        "en": "off",
+        "fr": "de",
+        "ar": "إيقاف",
+        "ja": "オフ"
+    },
+    {
+        "text_id": "pay_at_hotel",
+        "en": "You will pay at the hotel when you check-in",
+        "fr": "Vous paierez lorsque vous vous enregistrerez",
+        "ar": "سوف تدفع عند تسجيل الوصول",
+        "ja": "チェックイン時に支払います"
+    },
+    {
+        "text_id": "your_information",
+        "en": "Your Information",
+        "fr": "Vos informations",
+        "ar": "معلوماتك",
+        "ja": "あなたの情報"
+    },
+    {
+        "text_id": "pay_now",
+        "en": "Pay now",
+        "fr": "Payer maintenant",
+        "ar": "ادفع الآن",
+        "ja": "今すぐ支払う"
+    },
+    {
+        "text_id": "success",
+        "en": "Success",
+        "fr": "Succès",
+        "ar": "نجاح",
+        "ja": "成功"
+    },
+    {
+        "text_id": "call_next_hours",
+        "en": "We will call you to confim in the next few hours",
+        "fr": "Nous vous appellerons pour confirmer dans les prochaines heures",
+        "ar": "سنتصل بك للتأكيد في الساعات القادمة",
+        "ja": "数時間以内に確認のためにお電話します"
+    },
+    {
+        "text_id": "error",
+        "en": "Error",
+        "fr": "Erreur",
+        "ar": "خطأ",
+        "ja": "エラー"
+    },
+    {
+        "text_id": "fill_information",
+        "en": "Please fill in the information in the profile screen",
+        "fr": "Veuillez remplir les",
+        "ar": "يرجى ملء المعلومات في شاشة الملف الشخصي",
+        "ja": "プロフィール画面の情報を入力してください"        
+    },
+    {
+        "text_id": "cancel",
+        "en": "Cancel",
+        "fr": "Annuler",
+        "ar": "إلغاء",
+        "ja": "キャンセル"
+    },
+    {
+        "text_id": "check_in_time",
+        "en": "Check-in time",
+        "fr": "Heure d'arrivée",
+        "ar": "وقت تسجيل الوصول",
+        "ja": "チェックイン時間"
+    },
+    {
+        "text_id": "check_out_time",
+        "en": "Check-out time",
+        "fr": "Heure de départ",
+        "ar": "وقت تسجيل الخروج",
+        "ja": "チェックアウト時間"
+    },
+    {
+        "text_id": "14:00 PM",
+        "en": "14:00 PM",
+        "fr": "14:00 PM",
+        "ar": "14:00 مساءً",
+        "ja": "14:00 PM"
+    },
+    {
+        "text_id": "12:00 PM",
+        "en": "12:00 PM",
+        "fr": "12:00 PM",
+        "ar": "12:00 مساءً",
+        "ja": "12:00 PM"
     }
 ]

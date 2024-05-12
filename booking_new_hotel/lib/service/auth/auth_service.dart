@@ -1,4 +1,4 @@
-import 'package:booking_new_hotel/modules/profile/user.dart';
+// import 'package:booking_new_hotel/modules/profile/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -7,9 +7,9 @@ class AuthService {
 
   // custom return user
   // ignore: unused_element
-  MyUser? _userFromFirebaseUser(User? user) {
-    return user != null ? MyUser(uid: user.uid) : null;
-  }
+  // MyUser? _userFromFirebaseUser(User? user) {
+  //   return user != null ? MyUser(uid: user.uid) : null;
+  // }
 
   // register with email and password
   Future registerWithEmailAndPassword(
@@ -18,7 +18,7 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      return _userFromFirebaseUser(user);
+      return user != null ? user.uid : null;
     } catch (e) {
       return null;
     }
@@ -31,7 +31,7 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      return _userFromFirebaseUser(user);
+      return user != null ? user.uid : null;
     } catch (e) {
       return e;
     }

@@ -36,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     padding: const EdgeInsets.only(top: 8, left: 24, right: 24),
                     keyboardType: TextInputType.emailAddress,
-                    titleText: AppLocalizations(context).of("your_mail"),
+                    titleText: AppLocalizations(context).of("mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
                     errorText: showAuthError.getmessageFirstFieldError,
                   ),
@@ -210,13 +209,13 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       await GlobalVar.authService
           .signInWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
-          .then((value) {
+          .then((value){
         if (value != null) {
-          GlobalVar.databaseService = DatabaseService(uid: value.getUID);
-          GlobalVar.user = value;
-          GlobalVar.user!.setEmail(email: tmpEmail);
-          GlobalVar.user!.setPassword(password: tmpPassword);
-          GlobalVar.databaseService!.favoriteHotelsDatabase.getFavoriteListData();
+          GlobalVar.databaseService = DatabaseService(uid: value);
+           GlobalVar.databaseService!.favoriteHotelsDatabase
+              .getFavoriteListData();
+          GlobalVar.databaseService!.upcomingHotelsDatabase.getUpcomingListData();
+          GlobalVar.userPassword = tmpPassword;
           Navigator.pop(context);
           NavigationServices(context).gotoBottomTapScreen();
         }

@@ -14,6 +14,25 @@ class UserInfoDatabase {
   }
   UserInfoDatabase._internal();
 
+  Future setUserInfoData({
+    required String name,
+    required String address,
+    required String phone,
+    required String email,
+    required String password,
+  }) async {
+    return await GlobalVar.userInfoCollection
+        .doc(uid)
+        .collection("usersInfo")
+        .doc(uid)
+        .set({
+      'name': name,
+      'address': address,
+      'phone': phone,
+      'mail': email,
+    });
+  }
+
   Future updateUserInfoData({
     required String name,
     required String address,
@@ -23,7 +42,7 @@ class UserInfoDatabase {
         .doc(uid)
         .collection("usersInfo")
         .doc(uid)
-        .set({
+        .update({
       'name': name,
       'address': address,
       'phone': phone,

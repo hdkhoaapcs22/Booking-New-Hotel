@@ -1,149 +1,149 @@
-import 'package:booking_new_hotel/languages/appLocalizations.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:booking_new_hotel/languages/appLocalizations.dart';
+// import 'package:flutter/material.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../models/hotel.dart';
-import '../../widgets/common_card.dart';
+// import '../../models/hotel.dart';
+// import '../../widgets/common_card.dart';
 
-class SearchTypeListView extends StatefulWidget {
-  const SearchTypeListView({super.key});
+// class SearchTypeListView extends StatefulWidget {
+//   const SearchTypeListView({super.key});
 
-  @override
-  State<SearchTypeListView> createState() => _SearchTypeListViewState();
-}
+//   @override
+//   State<SearchTypeListView> createState() => _SearchTypeListViewState();
+// }
 
-class _SearchTypeListViewState extends State<SearchTypeListView>
-    with TickerProviderStateMixin {
-  List<Hotel> hotelTypeList = Hotel.hotelTypeList;
+// class _SearchTypeListViewState extends State<SearchTypeListView>
+//     with TickerProviderStateMixin {
+//   List<Hotel> hotelTypeList = Hotel.hotelTypeList;
 
-  late AnimationController animationController;
-  @override
-  void initState() {
-    animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2000));
-    super.initState();
-  }
+//   late AnimationController animationController;
+//   @override
+//   void initState() {
+//     animationController = AnimationController(
+//         vsync: this, duration: const Duration(milliseconds: 2000));
+//     super.initState();
+//   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    animationController.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     // TODO: implement dispose
+//     animationController.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    Size deviceSize = MediaQuery.of(context).size;
+//   @override
+//   Widget build(BuildContext context) {
+//     Size deviceSize = MediaQuery.of(context).size;
 
-    return Container(
-        height: deviceSize.height * 0.2,
-        child: ListView.builder(
-            padding: const EdgeInsets.only(top: 0, right: 16, left: 16),
-            itemCount: hotelTypeList.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              var count = hotelTypeList.length;
-              var animation = Tween(begin: 0.0, end: 1.0).animate(
-                  CurvedAnimation(
-                      parent: animationController,
-                      curve: Interval((1 / count) * index, 1.0,
-                          curve: Curves.fastOutSlowIn)));
-              animationController.forward();
-              return AnimatedBuilder(
-                  animation: animationController,
-                  builder: (BuildContext context, Widget? child) {
-                    return FadeTransition(
-                        opacity: animation,
-                        child: Transform(
-                            transform: Matrix4.translationValues(
-                                50 * (1.0 - animation.value), 0.0, 0.0),
-                            child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, right: 8.0, bottom: 8.0, top: 0),
-                                child: Column(children: [
-                                  Stack(children: [
-                                    Container(
-                                        width: deviceSize.width * 0.2,
-                                        decoration: BoxDecoration(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(
-                                                    deviceSize.width * 0.2)),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Theme.of(context)
-                                                      .dividerColor,
-                                                  blurRadius: 8,
-                                                  offset: const Offset(4, 4))
-                                            ]),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(
-                                                  deviceSize.width * 0.2)),
-                                          child: AspectRatio(
-                                            aspectRatio: 1,
-                                            child: Image.asset(
-                                              hotelTypeList[index].imageHotel,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        )),
-                                    Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(
-                                                deviceSize.width * 0.2)),
-                                        highlightColor: Colors.transparent,
-                                        splashColor: Theme.of(context)
-                                            .primaryColor
-                                            .withOpacity(0.4),
-                                        onTap: () {
-                                          // setState(() {
-                                          //   hotelTypeList[index].isBooked =
-                                          //       !hotelTypeList[index].isBooked;
-                                          // });
-                                        },
-                                        child: Opacity(
-                                          opacity: 1,
-                                          // opacity: hotelTypeList[index].isBooked
-                                          //     ? 1.0
-                                          //     : 0.0,
-                                          child: CommonCard(
-                                            color: Theme.of(context)
-                                                .primaryColor
-                                                .withOpacity(0.4),
-                                            radius: 48,
-                                            child: SizedBox(
-                                              height: deviceSize.width * 0.2,
-                                              width: deviceSize.width * 0.2,
-                                              child: Center(
-                                                child: Icon(
-                                                  FontAwesomeIcons.check,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .background,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ]),
-                                  Padding(
-                                      padding: const EdgeInsets.only(top: 5),
-                                      child: Text(
-                                          AppLocalizations(context).of(
-                                              hotelTypeList[index].name),
-                                          maxLines: 2,
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                          )))
-                                ]))));
-                  });
-            }));
-  }
-}
+//     return Container(
+//         height: deviceSize.height * 0.2,
+//         child: ListView.builder(
+//             padding: const EdgeInsets.only(top: 0, right: 16, left: 16),
+//             itemCount: hotelTypeList.length,
+//             scrollDirection: Axis.horizontal,
+//             itemBuilder: (context, index) {
+//               var count = hotelTypeList.length;
+//               var animation = Tween(begin: 0.0, end: 1.0).animate(
+//                   CurvedAnimation(
+//                       parent: animationController,
+//                       curve: Interval((1 / count) * index, 1.0,
+//                           curve: Curves.fastOutSlowIn)));
+//               animationController.forward();
+//               return AnimatedBuilder(
+//                   animation: animationController,
+//                   builder: (BuildContext context, Widget? child) {
+//                     return FadeTransition(
+//                         opacity: animation,
+//                         child: Transform(
+//                             transform: Matrix4.translationValues(
+//                                 50 * (1.0 - animation.value), 0.0, 0.0),
+//                             child: Padding(
+//                                 padding: const EdgeInsets.only(
+//                                     left: 8.0, right: 8.0, bottom: 8.0, top: 0),
+//                                 child: Column(children: [
+//                                   Stack(children: [
+//                                     Container(
+//                                         width: deviceSize.width * 0.2,
+//                                         decoration: BoxDecoration(
+//                                             color:
+//                                                 Theme.of(context).primaryColor,
+//                                             borderRadius: BorderRadius.all(
+//                                                 Radius.circular(
+//                                                     deviceSize.width * 0.2)),
+//                                             boxShadow: [
+//                                               BoxShadow(
+//                                                   color: Theme.of(context)
+//                                                       .dividerColor,
+//                                                   blurRadius: 8,
+//                                                   offset: const Offset(4, 4))
+//                                             ]),
+//                                         child: ClipRRect(
+//                                           borderRadius: BorderRadius.all(
+//                                               Radius.circular(
+//                                                   deviceSize.width * 0.2)),
+//                                           child: AspectRatio(
+//                                             aspectRatio: 1,
+//                                             child: Image.asset(
+//                                               hotelTypeList[index].imageHotel,
+//                                               fit: BoxFit.cover,
+//                                             ),
+//                                           ),
+//                                         )),
+//                                     Material(
+//                                       color: Colors.transparent,
+//                                       child: InkWell(
+//                                         borderRadius: BorderRadius.all(
+//                                             Radius.circular(
+//                                                 deviceSize.width * 0.2)),
+//                                         highlightColor: Colors.transparent,
+//                                         splashColor: Theme.of(context)
+//                                             .primaryColor
+//                                             .withOpacity(0.4),
+//                                         onTap: () {
+//                                           // setState(() {
+//                                           //   hotelTypeList[index].isBooked =
+//                                           //       !hotelTypeList[index].isBooked;
+//                                           // });
+//                                         },
+//                                         child: Opacity(
+//                                           opacity: 1,
+//                                           // opacity: hotelTypeList[index].isBooked
+//                                           //     ? 1.0
+//                                           //     : 0.0,
+//                                           child: CommonCard(
+//                                             color: Theme.of(context)
+//                                                 .primaryColor
+//                                                 .withOpacity(0.4),
+//                                             radius: 48,
+//                                             child: SizedBox(
+//                                               height: deviceSize.width * 0.2,
+//                                               width: deviceSize.width * 0.2,
+//                                               child: Center(
+//                                                 child: Icon(
+//                                                   FontAwesomeIcons.check,
+//                                                   color: Theme.of(context)
+//                                                       .colorScheme
+//                                                       .background,
+//                                                 ),
+//                                               ),
+//                                             ),
+//                                           ),
+//                                         ),
+//                                       ),
+//                                     )
+//                                   ]),
+//                                   Padding(
+//                                       padding: const EdgeInsets.only(top: 5),
+//                                       child: Text(
+//                                           AppLocalizations(context).of(
+//                                               hotelTypeList[index].name),
+//                                           maxLines: 2,
+//                                           style: const TextStyle(
+//                                             fontSize: 14,
+//                                             fontWeight: FontWeight.bold,
+//                                           )))
+//                                 ]))));
+//                   });
+//             }));
+//   }
+// }

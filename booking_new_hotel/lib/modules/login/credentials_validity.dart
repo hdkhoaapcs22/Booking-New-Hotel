@@ -125,19 +125,21 @@ class CredentialsValidity {
   }
 
   bool checkValidityInChangePassword(
-      ShowAuthError showAuthError, BuildContext context,
-      {required String currentPassword,
+      {required ShowAuthError showAuthError,
+      required BuildContext context,
+      required String previousPassword,
+      required String enterPassword,
       required String newPassword,
       required String confirmPassword}) {
     if (helperCheckValidityInSignUpAndChangePassowrd(
       showAuthError,
       context,
-      firstField: currentPassword,
+      firstField: enterPassword,
       secondField: newPassword,
       thirdField: confirmPassword,
       messageForFirstError: 'password_cannot_empty',
     )) {
-      if (currentPassword != GlobalVar.user!.getPassword) {
+      if (enterPassword != previousPassword) {
         showAuthError.setMessageFirstFieldError(
             messageFirstFieldError:
                 AppLocalizations(context).of('current_password_not_match'));
@@ -145,7 +147,7 @@ class CredentialsValidity {
             gapBetweenFirstAndSecondFieldDuringError: 0);
         showAuthError.setGapBetweenSecondAndThirdDuringError(
             gapBetweenSecondAndThirdFieldDuringError: 34);
-        if(!isThirdFieldEmpty(confirmPassword)) {
+        if (!isThirdFieldEmpty(confirmPassword)) {
           showAuthError.setGapBetweenThirdFieldAndButtonDuringError(
               gapBetweenThirdFieldAndButtonDuringError: 34);
           showAuthError.setMessageThirdFieldError(messageThirdFieldError: "");

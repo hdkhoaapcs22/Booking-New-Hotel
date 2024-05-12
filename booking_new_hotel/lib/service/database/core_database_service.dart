@@ -1,6 +1,5 @@
 import 'dart:math';
 
-
 import '../../global/global_var.dart';
 import '../location/location.dart';
 import '../../models/room.dart';
@@ -12,25 +11,27 @@ class CoreDatabaseService {
   void getHotel() async {
     var value = await FirebaseFirestore.instance.collection("hotels").get();
     GlobalVar.listAllHotels = value.docs
-        .map((doc) => Hotel(
-              name: doc['title'],
-              locationOfHotel: doc['subtitle'],
-              reviews: doc['reviews'],
-              rating: doc['rating'].toDouble(),
-              averagePrice: doc['price'],
-              imageHotel: doc['image'],
-              date: DateText(DateTime.now().day,
-                  DateTime.now().day + Random().nextInt(5) + 1),
-              discountRate: Random().nextInt(20),
-              amenity: Amenity(
-                  isFreeBreakfast: doc['amenity'][0],
-                  isFreeParking: doc['amenity'][1],
-                  isFreeWifi: doc['amenity'][2],
-                  isPetFriendly: doc['amenity'][3],
-                  isPool: doc['amenity'][4]),
-              listOfRooms: loadFromSubCollection(doc.reference.id),
-              position: Location(latitude: doc['location'][0], longitude: doc['location'][1])
-            ))
+        .map((doc)  => Hotel(
+            name: doc['title'],
+            locationOfHotel: doc['subtitle'],
+            reviews: doc['reviews'],
+            rating: doc['rating'].toDouble(),
+            averagePrice: doc['price'],
+            imageHotel: doc['image'],
+            date: DateText(
+              startDate: DateTime.now(),
+              endDate: DateTime.now().add(Duration(days: Random().nextInt(5))),
+            ),
+            discountRate: Random().nextInt(20),
+            amenity: Amenity(
+                isFreeBreakfast: doc['amenity'][0],
+                isFreeParking: doc['amenity'][1],
+                isFreeWifi: doc['amenity'][2],
+                isPetFriendly: doc['amenity'][3],
+                isPool: doc['amenity'][4]),
+            listOfRooms: loadFromSubCollection(doc.reference.id),
+            position: Location(
+                latitude: doc['location'][0], longitude: doc['location'][1])))
         .toList();
   }
 
@@ -49,7 +50,6 @@ class CoreDatabaseService {
               roomData: RoomData(
                   numberOfBed: doc['roomData'][0],
                   numberOfPeople: doc['roomData'][1]),
-              isBooked: doc['isBooked'],
             ))
         .toList();
   }

@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 
 class ListCellAnimationView extends StatelessWidget {
   final Animation<double> animation;
-  final AnimationController animationController;
   final Widget child;
   final double yTranslation;
 
   const ListCellAnimationView(
       {super.key,
       required this.animation,
-      required this.animationController,
       required this.child,
       this.yTranslation = 50});
 

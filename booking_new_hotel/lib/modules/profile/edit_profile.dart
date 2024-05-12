@@ -87,14 +87,13 @@ class _EditProfileState extends State<EditProfile> {
                     color: Colors.white,
                   ),
                 ),
-                onTap: () {
+                onTap: () async {
                   String name = nameController.text.trim();
                   String address = addressController.text.trim();
                   String phone = phoneController.text.trim();
-                  GlobalVar.user!
-                      .setUserInfo(name: name, address: address, phone: phone);
-                  GlobalVar.databaseService!.userInfoDatabase.updateUserInfoData(
-                      name: name, address: address, phone: phone);
+                  await GlobalVar.databaseService!.userInfoDatabase
+                      .updateUserInfoData(
+                          name: name, address: address, phone: phone);
                   // show the dialog to show the success message
                   GotItDialog successDialog = GotItDialog(
                     context: context,

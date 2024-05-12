@@ -22,7 +22,7 @@ class _RatingViewState extends State<RatingView> {
       radius: 16,
       color: AppTheme.backgroundColor,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(10, 16, 3, 16),
         child: Column(
           children: [
             Row(
@@ -40,7 +40,7 @@ class _RatingViewState extends State<RatingView> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 8, right: 8),
+                    padding: const EdgeInsets.only(left: 8, right: 3),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,11 +60,11 @@ class _RatingViewState extends State<RatingView> {
                           color: Colors.green,
                           borderColor: Colors.green,
                           spacing: 0.0,
-                          onRatingChanged: (v) {
-                            setState(() {
-                              rating = v;
-                            });
-                          },
+                          // onRatingChanged: (v) {
+                          //   setState(() {
+                          //     rating = v;
+                          //   });
+                          // },
                         )
                       ],
                     ),
@@ -92,16 +92,17 @@ class _RatingViewState extends State<RatingView> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-            width: 63,
-            child: Text(
-              AppLocalizations(context).of(text),
-              textAlign: TextAlign.left,
-              style: TextStyles(context).getRegularStyle().copyWith(
-                    fontSize: 14,
-                    color: Theme.of(context).disabledColor.withOpacity(0.8),
-                  ),
-            )),
-        const SizedBox(width: 8),
+          width: 105,
+          child: Text(
+            AppLocalizations(context).of(text),
+            textAlign: TextAlign.left,
+            style: TextStyles(context).getRegularStyle().copyWith(
+                  fontSize: 14,
+                  color: Theme.of(context).disabledColor.withOpacity(0.8),
+                ),
+          ),
+        ),
+        const SizedBox(width: 20),
         Expanded(
             child: Row(
           children: [

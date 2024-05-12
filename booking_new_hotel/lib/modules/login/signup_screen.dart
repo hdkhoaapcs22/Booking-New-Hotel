@@ -59,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     padding:
                         const EdgeInsets.only(top: 15, left: 24, right: 24),
                     keyboardType: TextInputType.emailAddress,
-                    titleText: AppLocalizations(context).of("your_mail"),
+                    titleText: AppLocalizations(context).of("mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
                     errorText: showAuthError.getmessageFirstFieldError,
                   ),
@@ -156,20 +156,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           .registerWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
           .then((value) {
         if (value != null) {
-          GlobalVar.databaseService = DatabaseService(uid: value.getUID);
-          GlobalVar.user = value;
-          GlobalVar.user!.setUserInfo(
-              name: "",
-              email: tmpEmail,
-              password: tmpPassword,
-              address: "",
-              phone: "");
-          GlobalVar.databaseService!.userInfoDatabase.updateUserInfoData(
+          GlobalVar.databaseService = DatabaseService(uid: value);
+          GlobalVar.databaseService!.userInfoDatabase.setUserInfoData(
             name: "",
             address: "",
             phone: "",
+            email: tmpEmail,
+            password: tmpPassword,
           );
-          GlobalVar.databaseService!.favoriteHotelsDatabase.getFavoriteListData();
           Navigator.pop(context);
           NavigationServices(context).gotoBottomTapScreen();
         }

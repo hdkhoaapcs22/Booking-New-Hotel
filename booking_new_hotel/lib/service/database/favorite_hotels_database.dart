@@ -5,7 +5,7 @@ import '../../models/hotel.dart';
 
 class FavoriteHotelsDatabase {
   late String uid;
-  List<Hotel> favoriteListData = [];
+  List<String> _favoriteListData = [];
 
   // singleton object
   static final FavoriteHotelsDatabase _singleton =
@@ -24,7 +24,7 @@ class FavoriteHotelsDatabase {
   }
 
   Future addFavoriteHotel({required Hotel favoriteHotel}) async {
-    favoriteListData.add(favoriteHotel);
+    _favoriteListData.add(favoriteHotel.name);
     return await GlobalVar.userInfoCollection
         .doc(uid)
         .collection("favorites")
@@ -45,27 +45,16 @@ class FavoriteHotelsDatabase {
         .doc(uid)
         .collection("favorites")
         .get();
-    favoriteListData = value.docs
-        .map((doc) => Hotel(
-              name: doc['title'],
-              locationOfHotel: doc['subtitle'],
-              dist: doc['dist'],
-              reviews: doc['reviews'],
-              rating: doc['rating'],
-              averagePrice: doc['price'],
-              imageHotel: doc['image'],
-            ))
-        .toList();
-    print(favoriteListData.length);
+    _favoriteListData = value.docs.map((e) => e.id).toList();
   }
 
   bool isFavoriteHotel({required String name}) {
-    if (favoriteListData.isEmpty) {
+    if (_favoriteListData.isEmpty) {
       return false;
     }
 
-    for (int i = 0; i < favoriteListData.length; ++i) {
-      if (favoriteListData[i].name == name) {
+    for (int i = 0; i < _favoriteListData.length; ++i) {
+      if (_favoriteListData[i] == name) {
         return true;
       }
     }
@@ -73,7 +62,7 @@ class FavoriteHotelsDatabase {
   }
 
   void removeFavoriteHotel({required String name}) async {
-    if (favoriteListData.isEmpty) {
+    if (_favoriteListData.isEmpty) {
       return;
     }
     await GlobalVar.userInfoCollection
@@ -81,6 +70,6 @@ class FavoriteHotelsDatabase {
         .collection("favorites")
         .doc(name)
         .delete();
-    favoriteListData.removeWhere((element) => element.name == name);
+    _favoriteListData.removeWhere((element) => element == name);
   }
 }

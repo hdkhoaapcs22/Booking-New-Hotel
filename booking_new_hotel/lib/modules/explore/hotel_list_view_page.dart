@@ -13,11 +13,11 @@ import '../../widgets/common_card.dart';
 import '../../widgets/list_cell_animation_view.dart';
 
 class HotelListViewPage extends StatelessWidget {
-  final bool isShowDate;
   final VoidCallback callback;
   final Hotel hotelData;
   final AnimationController animationController;
   final Animation<double> animation;
+  final bool isShowDate;
   const HotelListViewPage({
     super.key,
     this.isShowDate = false,
@@ -31,7 +31,6 @@ class HotelListViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListCellAnimationView(
       animation: animation,
-      animationController: animationController,
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 16),
         child: CommonCard(
@@ -62,17 +61,19 @@ class HotelListViewPage extends StatelessWidget {
                               // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(hotelData.name,
-                                    maxLines: 2,
+                                    maxLines: 1,
                                     textAlign: TextAlign.left,
                                     style: TextStyles(context)
                                         .getBoldStyle()
-                                        .copyWith(fontSize: 16)),
+                                        .copyWith(fontSize: 16),
+                                    overflow: TextOverflow.ellipsis),
                                 Text(hotelData.locationOfHotel,
-                                    maxLines: 2,
+                                    maxLines: 1,
                                     textAlign: TextAlign.left,
                                     style: TextStyles(context)
                                         .getDescriptionStyle()
-                                        .copyWith(fontSize: 14)),
+                                        .copyWith(fontSize: 14),
+                                    overflow: TextOverflow.ellipsis),
                                 Expanded(
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -112,7 +113,7 @@ class HotelListViewPage extends StatelessWidget {
                                                 Expanded(
                                                   child: Text(
                                                     AppLocalizations(context)
-                                                        .of("km"),
+                                                        .of("km_text"),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                     style: TextStyles(context)

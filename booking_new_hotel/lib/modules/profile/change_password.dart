@@ -12,8 +12,10 @@ import '../../widgets/remove_focus.dart';
 import '../login/credentials_validity.dart';
 import '../login/show_auth_error.dart';
 
+// ignore: must_be_immutable
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({super.key});
+  String previousPassword;
+  ChangePassword({super.key, required this.previousPassword});
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -117,8 +119,10 @@ class _ChangePasswordState extends State<ChangePassword> {
     CredentialsValidity credentialsValidity = CredentialsValidity();
 
     if (!credentialsValidity.checkValidityInChangePassword(
-        showAuthError, context,
-        currentPassword: tmpCurrentPassword,
+        showAuthError: showAuthError,
+        context: context,
+        previousPassword: widget.previousPassword,
+        enterPassword: tmpCurrentPassword,
         newPassword: tmpNewPassword,
         confirmPassword: tmpConfirmNewPassword)) {
       setState(() {});
@@ -134,7 +138,7 @@ class _ChangePasswordState extends State<ChangePassword> {
             title: "updated",
             description: "password_updated",
           );
-          GlobalVar.user!.setPassword(password: tmpNewPassword);
+          GlobalVar.userPassword = tmpNewPassword;
           successDialog.gotItDialog();
         });
       } catch (e) {

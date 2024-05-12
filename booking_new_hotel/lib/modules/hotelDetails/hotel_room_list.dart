@@ -17,24 +17,30 @@ class HotelRoomList extends StatefulWidget {
 class _HotelRoomListState extends State<HotelRoomList> {
   List<String> listOfPhots = [];
 
-  void fetchRoomList() async {
-    List<Room> tmp = await widget.hotel.listOfRooms!;
+  Future<List<Room>> fetchRoomList() async {
+    return await widget.hotel.listOfRooms!;
+  }
+
+  void loadPhotos() async {
+    List<Room> tmp = await fetchRoomList();
     for (int i = 0; i < 2; ++i) {
       List<String> res = tmp[i].imageRooms.split(" ");
       listOfPhots.addAll(res);
     }
+    setState(() {
+    });
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    fetchRoomList();
+    loadPhotos();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 120,
         child: ListView.builder(
           itemCount: listOfPhots.length,
@@ -42,7 +48,7 @@ class _HotelRoomListState extends State<HotelRoomList> {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: CommonCard(
                   color: AppTheme.backgroundColor,
                   radius: 8,

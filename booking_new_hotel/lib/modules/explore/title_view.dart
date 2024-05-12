@@ -4,10 +4,10 @@ import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 
 class TitleView extends StatelessWidget {
-  final String titleText, subText;
   final AnimationController animationController;
   final Animation<double> animation;
   final VoidCallback click;
+  final String titleText, subText;
   final bool isLeftButton;
   const TitleView(
       {super.key,

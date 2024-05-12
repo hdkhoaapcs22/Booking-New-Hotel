@@ -5,11 +5,13 @@ import 'package:booking_new_hotel/modules/profile/change_password.dart';
 import 'package:booking_new_hotel/modules/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import '../models/hotel.dart';
+import '../models/room.dart';
 import '../modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/hotelDetails/reviews_list_screen.dart';
 import '../modules/login/login_or_signup_screen.dart';
+import '../modules/payScreen/pay_screen.dart';
 import '../modules/profile/settings_screen.dart';
 import '../modules/splash/splash_screen.dart';
 import 'routes.dart';
@@ -41,9 +43,9 @@ class NavigationServices {
     return _pushMaterialPageRoute(const BottomTapScreen());
   }
 
-  void gotoSearchScreen() async {
-    return _pushMaterialPageRoute(const SearchScreen());
-  }
+  // void gotoSearchScreen() async {
+  //   return _pushMaterialPageRoute(const SearchScreen());
+  // }
 
   void gotoHotelHomeScreen() async {
     return _pushMaterialPageRoute(const HotelHomeScreen());
@@ -53,9 +55,14 @@ class NavigationServices {
     return _pushMaterialPageRoute(const FilterScreen());
   }
 
-  void gotoRoomBookingScreen(Hotel hotel) async {
+  void gotoRoomBookingScreen(
+      {required Hotel hotel,
+      required DateTime startDateBooking,
+      required DateTime endDateBooking}) async {
     return _pushMaterialPageRoute(RoomBookingScreen(
       hotel: hotel,
+      startDateBooking: startDateBooking,
+      endDateBooking: endDateBooking,
     ));
   }
 
@@ -73,8 +80,11 @@ class NavigationServices {
     return await _pushMaterialPageRoute(const EditProfile());
   }
 
-  Future<dynamic> gotoChangePasswordScreen() async {
-    return await _pushMaterialPageRoute(const ChangePassword());
+  Future<dynamic> gotoChangePasswordScreen(
+      {required String previousPassword}) async {
+    return await _pushMaterialPageRoute(ChangePassword(
+      previousPassword: previousPassword,
+    ));
   }
 
   Future<dynamic> gotoSettingsScreen() async {
@@ -85,5 +95,19 @@ class NavigationServices {
     return Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const SplashScreen()),
         (Route<dynamic> route) => false);
+  }
+
+  Future<dynamic> gotoPayScreen({
+    required Hotel hotel,
+    required Room room,
+    required DateTime startDateBooking,
+    required DateTime endDateBooking,
+  }) async {
+    return await _pushMaterialPageRoute(PayScreen(
+      hotel: hotel,
+      room: room,
+      startDateBooking: startDateBooking,
+      endDateBooking: endDateBooking,
+    ));
   }
 }

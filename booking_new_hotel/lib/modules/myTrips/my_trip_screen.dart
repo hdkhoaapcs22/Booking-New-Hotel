@@ -9,7 +9,7 @@ import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_card.dart';
 import 'favorites_list_view.dart';
-import 'finish_trip_view.dart';
+// import 'finish_trip_view.dart';
 import 'upcoming_list_view.dart';
 
 class MyTripsScreen extends StatefulWidget {
@@ -39,7 +39,7 @@ class _MyTripsScreenState extends State<MyTripsScreen>
   }
 
   Future<bool> getData() async {
-    await Future.delayed(const Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 500));
     return true;
   }
 
@@ -105,13 +105,6 @@ class _MyTripsScreenState extends State<MyTripsScreen>
                         : AppTheme.secondaryTextColor,
                     "upcoming"),
                 _getTabBarUI(() {
-                  tabClick(TopBarType.Finished);
-                },
-                    tabType == TopBarType.Finished
-                        ? AppTheme.primaryColor
-                        : AppTheme.secondaryTextColor,
-                    "finished"),
-                _getTabBarUI(() {
                   tabClick(TopBarType.Favorites);
                 },
                     tabType == TopBarType.Favorites
@@ -165,12 +158,7 @@ class _MyTripsScreenState extends State<MyTripsScreen>
             indexView =
                 UpcomingListView(animationController: tabAnimationController);
           });
-        } else if (tabType == TopBarType.Finished) {
-          setState(() {
-            indexView =
-                FinishTripView(animationController: tabAnimationController);
-          });
-        } else if (tabType == TopBarType.Favorites) {
+        } else {
           setState(() {
             indexView =
                 FavoritesListView(animationController: tabAnimationController);

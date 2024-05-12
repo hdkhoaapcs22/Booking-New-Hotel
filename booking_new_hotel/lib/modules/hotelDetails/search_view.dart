@@ -22,7 +22,6 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListCellAnimationView(
       animation: animation,
-      animationController: animationController,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: AspectRatio(

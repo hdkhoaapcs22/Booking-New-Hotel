@@ -3,12 +3,17 @@ import 'package:booking_new_hotel/models/room.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../global/global_var.dart';
 import '../../utils/text_styles.dart';
 
+// ignore: must_be_immutable
 class RoomBookingScreen extends StatefulWidget {
   final Hotel hotel;
-  const RoomBookingScreen({super.key, required this.hotel});
+  DateTime startDateBooking, endDateBooking;
+  RoomBookingScreen(
+      {super.key,
+      required this.hotel,
+      required this.startDateBooking,
+      required this.endDateBooking});
 
   @override
   State<RoomBookingScreen> createState() => _RoomBookingScreenState();
@@ -27,9 +32,10 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
 
   @override
   void initState() {
+    print("it is in initState of room_booking");
     fetchRoomList();
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
+        duration: const Duration(milliseconds: 1500), vsync: this);
     super.initState();
   }
 
@@ -41,14 +47,12 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
 
   @override
   Widget build(BuildContext context) {
-    bool isFav = GlobalVar.databaseService!.favoriteHotelsDatabase
-        .isFavoriteHotel(name: widget.hotel.name);
     print("It is in RoomBookingScreen");
     return roomList.isNotEmpty
         ? Scaffold(
             body: Column(
             children: [
-              getAppBarUI(isFavoriteHotel: isFav),
+              getAppBarUI(),
               Expanded(
                   child: ListView.builder(
                 padding: const EdgeInsets.all(0.0),
@@ -62,9 +66,12 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
                               curve: Curves.fastOutSlowIn)));
                   animationController.forward();
                   return RoomBookingView(
-                      roomData: roomList[index],
+                      hotel: widget.hotel,
+                      room: roomList[index],
                       animationController: animationController,
-                      animation: animation);
+                      animation: animation,
+                      startDateBooking: widget.startDateBooking,
+                      endDateBooking: widget.endDateBooking);
                 },
               ))
             ],
@@ -72,7 +79,7 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
         : const SizedBox();
   }
 
-  Widget getAppBarUI({required bool isFavoriteHotel}) {
+  Widget getAppBarUI() {
     return Padding(
       padding: EdgeInsets.only(
           top: AppBar().preferredSize.height, left: 16, right: 16, bottom: 16),
@@ -97,30 +104,6 @@ class _RoomBookingScreenState extends State<RoomBookingScreen>
                 child: Text(widget.hotel.name,
                     style: TextStyles(context).getTitleStyle(),
                     overflow: TextOverflow.ellipsis),
-              ),
-            ),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: const BorderRadius.all(Radius.circular(32.0)),
-                onTap: () {
-                  if (isFavoriteHotel) {
-                    GlobalVar.databaseService!.favoriteHotelsDatabase
-                        .removeFavoriteHotel(name: widget.hotel.locationOfHotel);
-                  } else {
-                    GlobalVar.databaseService!.favoriteHotelsDatabase
-                        .addFavoriteHotel(favoriteHotel: widget.hotel);
-                  }
-                  setState(() {
-                    isFavoriteHotel = !isFavoriteHotel;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Icon(
-                    isFavoriteHotel ? Icons.favorite : Icons.favorite_border,
-                  ),
-                ),
               ),
             ),
           ]),

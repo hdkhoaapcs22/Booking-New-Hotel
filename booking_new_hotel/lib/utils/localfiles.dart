@@ -21,103 +21,10 @@ class Localfiles {
   static const String hotel_3 = BaseImageUrl + 'icon_hotel.jpg';
   static const String hotel_4 = BaseImageUrl + 'fusion_suite_hotel.jpg';
   static const String hotel_5 = BaseImageUrl + 'muong_thanh_hotel.jpg';
-  static const String room_1_deluxe_queen_wink =
-      BaseImageUrl + 'room_1_deluxe_queen_wink.jpg';
-  static const String room_2_deluxe_queen_wink =
-      BaseImageUrl + 'room_2_deluxe_queen_wink.jpg';
-  static const String room_3_deluxe_queen_wink =
-      BaseImageUrl + 'room_3_deluxe_queen_wink.jpg';
-  static const String room_1_deluxe_king_wink =
-      BaseImageUrl + 'room_1_deluxe_king_wink.jpg';
-  static const String room_2_deluxe_king_wink =
-      BaseImageUrl + 'room_2_deluxe_king_wink.jpg';
-  static const String room_3_deluxe_king_wink =
-      BaseImageUrl + 'room_3_deluxe_king_wink.jpg';
-  static const String room_1_premier_wink =
-      BaseImageUrl + 'room_1_premier_wink.jpg';
-  static const String room_2_premier_wink =
-      BaseImageUrl + 'room_2_premier_wink.jpg';
-  static const String room_3_premier_wink =
-      BaseImageUrl + 'room_3_premier_wink.jpg';
-  static const String room_1_suite_palace =
-      BaseImageUrl + 'room_1_suite_palace.jpg';
-  static const String room_2_suite_palace =
-      BaseImageUrl + 'room_2_suite_palace.jpg';
-  static const String room_3_suite_palace =
-      BaseImageUrl + 'room_3_suite_palace.jpg';
-  static const String room_1_deluxe_palace =
-      BaseImageUrl + 'room_1_deluxe_palace.jpg';
-  static const String room_2_deluxe_palace =
-      BaseImageUrl + 'room_2_deluxe_palace.jpg';
-  static const String room_3_deluxe_palace =
-      BaseImageUrl + 'room_3_deluxe_palace.jpg';
-  static const String room_1_family_palace =
-      BaseImageUrl + 'room_1_family_palace.jpg';
-  static const String room_2_family_palace =
-      BaseImageUrl + 'room_2_family_palace.jpg';
-  static const String room_3_family_palace =
-      BaseImageUrl + 'room_3_family_palace.jpg';
-  static const String room_1_superior_icon =
-      BaseImageUrl + 'room_1_superior_icon.jpg';
-  static const String room_2_superior_icon =
-      BaseImageUrl + 'room_2_superior_icon.jpg';
-  static const String room_3_superior_icon =
-      BaseImageUrl + 'room_3_superior_icon.jpg';
-  static const String room_1_signature_icon =
-      BaseImageUrl + 'room_1_signature_icon.jpg';
-  static const String room_2_signature_icon =
-      BaseImageUrl + 'room_2_signature_icon.jpg';
-  static const String room_3_signature_icon =
-      BaseImageUrl + 'room_3_signature_icon.jpg';
-  static const String room_1_premier_icon =
-      BaseImageUrl + 'room_1_premier_icon.jpg';
-  static const String room_2_premier_icon =
-      BaseImageUrl + 'room_2_premier_icon.jpg';
-  static const String room_3_premier_icon =
-      BaseImageUrl + 'room_3_premier_icon.jpg';
-  static const String room_1_suite_fusion =
-      BaseImageUrl + 'room_1_suite_fusion.jpg';
-  static const String room_2_suite_fusion =
-      BaseImageUrl + 'room_2_suite_fusion.jpg';
-  static const String room_3_suite_fusion =
-      BaseImageUrl + 'room_3_suite_fusion.jpg';
-  static const String room_1_premier_fusion =
-      BaseImageUrl + 'room_1_premier_fusion.jpg';
-  static const String room_2_premier_fusion =
-      BaseImageUrl + 'room_2_premier_fusion.jpg';
-  static const String room_3_premier_fusion =
-      BaseImageUrl + 'room_3_premier_fusion.jpg';
-  static const String room_1_family_fusion =
-      BaseImageUrl + 'room_1_family_fusion.jpg';
-  static const String room_2_family_fusion =
-      BaseImageUrl + 'room_2_family_fusion.jpg';
-  static const String room_3_family_fusion =
-      BaseImageUrl + 'room_3_family_fusion.jpg';
-  static const String room_1_king_muong_thanh =
-      BaseImageUrl + 'room_1_king_muong_thanh.jpg';
-  static const String room_2_king_muong_thanh =
-      BaseImageUrl + 'room_2_king_muong_thanh.jpg';
-  static const String room_3_king_muong_thanh =
-      BaseImageUrl + 'room_3_king_muong_thanh.jpg';
-  static const String room_1_twin_muong_thanh =
-      BaseImageUrl + 'room_1_twin_muong_thanh.jpg';
-  static const String room_2_twin_muong_thanh =
-      BaseImageUrl + 'room_2_twin_muong_thanh.jpg';
-  static const String room_3_twin_muong_thanh =
-      BaseImageUrl + 'room_3_twin_muong_thanh.jpg';
-  static const String room_1_suite_muong_thanh =
-      BaseImageUrl + 'room_1_suite_muong_thanh.jpg';
-  static const String room_2_suite_muong_thanh =
-      BaseImageUrl + 'room_2_suite_muong_thanh.jpg';
-  static const String room_3_suite_muong_thanh =
-      BaseImageUrl + 'room_3_suite_muong_thanh.jpg';
-  // static const String hotel_room_1 = BaseImageUrl + 'hotel_room_1.jpg';
-  // static const String hotel_room_2 = BaseImageUrl + 'hotel_room_2.jpg';
-  // static const String hotel_room_3 = BaseImageUrl + 'hotel_room_3.jpg';
-  // static const String hotel_room_4 = BaseImageUrl + 'hotel_room_4.jpg';
-  // static const String hotel_room_5 = BaseImageUrl + 'hotel_room_5.jpg';
-  // static const String hotel_room_6 = BaseImageUrl + 'hotel_room_6.jpg';
-  // static const String hotel_room_7 = BaseImageUrl + 'hotel_room_7.jpg';
+  static const String hotel_6 = BaseImageUrl + 'nikko_hotel.jpg';
+  static const String hotel_7 = BaseImageUrl + 'pullman_hotel.jpg';
+  static const String hotel_8 = BaseImageUrl + 'silverland_may_hotel.jpg';
+  static const String hotel_9 = BaseImageUrl + 'popular_hotel_2.jpg';
   static const String hotel_Type_1 = BaseImageUrl + 'hotel_Type_1.jpg';
   static const String hotel_Type_2 = BaseImageUrl + 'hotel_Type_2.jpg';
   static const String hotel_Type_3 = BaseImageUrl + 'hotel_Type_3.jpg';
@@ -134,10 +41,10 @@ class Localfiles {
   static const String userImage = BaseImageUrl + 'userImage.jpg';
   static const String popular_1 = BaseImageUrl + 'popular_hotel_1.jpg';
   static const String popular_2 = BaseImageUrl + 'popular_hotel_2.jpg';
-  static const String popular_3 = BaseImageUrl + 'national_pagoda.jpg';
-  static const String popular_4 = BaseImageUrl + 'star_bridge.jpg';
-  static const String popular_5 = BaseImageUrl + 'museum.jpg';
-  static const String popular_6 = BaseImageUrl + 'municipal_theatre.jpg';
+  static const String popular_3 = BaseImageUrl + 'la_vela_hotel.jpg';
+  static const String popular_4 = BaseImageUrl + 'fusion_suite_hotel.jpg';
+  static const String popular_5 = BaseImageUrl + 'nikko_hotel.jpg';
+  static const String popular_6 = BaseImageUrl + 'vinpearly_hotel.jpg';
   static const String room_1 = BaseImageUrl + 'room_1.jpg';
   static const String room_2 = BaseImageUrl + 'room_2.jpg';
   static const String room_3 = BaseImageUrl + 'room_3.jpg';

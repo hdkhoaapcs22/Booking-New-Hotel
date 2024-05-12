@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:booking_new_hotel/global/global_var.dart';
@@ -69,11 +68,11 @@ class _HotelDetailsState extends State<HotelDetails>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   animationController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +144,7 @@ class _HotelDetailsState extends State<HotelDetails>
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 24, right: 24, top: 8, bottom: 16),
+                      left: 20, right: 20, top: 8, bottom: 16),
                   child: RatingView(hotelData: widget.hotelData),
                 ),
                 _getPhotoReviewUI("room_photo"),
@@ -171,7 +170,9 @@ class _HotelDetailsState extends State<HotelDetails>
                     buttonText: AppLocalizations(context).of("book_now"),
                     onTap: () {
                       NavigationServices(context).gotoRoomBookingScreen(
-                        widget.hotelData,
+                        hotel: widget.hotelData,
+                        startDateBooking: widget.hotelData.date!.startDate,
+                        endDateBooking: widget.hotelData.date!.endDate,
                       );
                     },
                   ),
@@ -356,9 +357,9 @@ class _HotelDetailsState extends State<HotelDetails>
                                   const BorderRadius.all(Radius.circular(24.0)),
                               child: BackdropFilter(
                                 filter: ImageFilter.blur(
-                                    sigmaX: 10.0,
+                                    sigmaX: 15.0,
                                     sigmaY:
-                                        10.0), // the more value, the more blur
+                                        15.0), // the more value, the more blur
                                 child: Container(
                                   color: Colors.black12,
                                   padding: const EdgeInsets.all(4.0),
@@ -381,7 +382,11 @@ class _HotelDetailsState extends State<HotelDetails>
                                           onTap: () {
                                             NavigationServices(context)
                                                 .gotoRoomBookingScreen(
-                                              widget.hotelData,
+                                              hotel: widget.hotelData,
+                                              startDateBooking: widget
+                                                  .hotelData.date!.startDate,
+                                              endDateBooking: widget
+                                                  .hotelData.date!.endDate,
                                             );
                                           },
                                         ),
@@ -490,20 +495,26 @@ class _HotelDetailsState extends State<HotelDetails>
                   style: TextStyles(context).getBoldStyle().copyWith(
                       fontSize: 22,
                       color: isInList ? AppTheme.fontcolor : Colors.white)),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.95,
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(widget.hotelData.locationOfHotel,
+                      style: TextStyles(context).getRegularStyle().copyWith(
+                          fontSize: 15,
+                          color: isInList
+                              ? Theme.of(context).disabledColor.withOpacity(0.5)
+                              : Colors.white),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis),
+                ),
+              ),
+              const SizedBox(height: 4),
+              // ignore: deprecated_member_use
               Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(widget.hotelData.locationOfHotel,
-                        style: TextStyles(context).getRegularStyle().copyWith(
-                            fontSize: 14,
-                            color: isInList
-                                ? Theme.of(context)
-                                    .disabledColor
-                                    .withOpacity(0.5)
-                                : Colors.white)),
-                    const SizedBox(width: 4),
-                    // ignore: deprecated_member_use
                     Icon(FontAwesomeIcons.mapMarkerAlt,
                         size: 12, color: AppTheme.primaryColor),
                     Text(
@@ -515,19 +526,14 @@ class _HotelDetailsState extends State<HotelDetails>
                               ? Theme.of(context).disabledColor.withOpacity(0.5)
                               : Colors.white),
                     ),
-
-                    Expanded(
-                      child: Text(
-                        AppLocalizations(context).of("km_to_city"),
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyles(context).getRegularStyle().copyWith(
-                            fontSize: 14,
-                            color: isInList
-                                ? Theme.of(context)
-                                    .disabledColor
-                                    .withOpacity(0.5)
-                                : Colors.white),
-                      ),
+                    Text(
+                      AppLocalizations(context).of("km_text"),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyles(context).getRegularStyle().copyWith(
+                          fontSize: 14,
+                          color: isInList
+                              ? Theme.of(context).disabledColor.withOpacity(0.5)
+                              : Colors.white),
                     ),
                   ]),
               isInList
@@ -536,7 +542,7 @@ class _HotelDetailsState extends State<HotelDetails>
                       padding: const EdgeInsets.only(top: 4),
                       child: Row(
                         children: [
-                          Helper.ratingStar(Random().nextDouble() * 5.1 + 3.5),
+                          Helper.ratingStar(widget.hotelData.rating),
                           Text(
                             "${widget.hotelData.reviews}",
                             style: TextStyles(context)
@@ -570,7 +576,7 @@ class _HotelDetailsState extends State<HotelDetails>
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "\$${widget.hotelData.averagePrice}",
+                "${widget.hotelData.averagePrice}\$",
                 textAlign: TextAlign.left,
                 style: TextStyles(context).getBoldStyle().copyWith(
                     fontSize: 22,

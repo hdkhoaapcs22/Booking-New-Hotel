@@ -22,70 +22,70 @@ class _RangeSliderViewState extends State<RangeSliderView> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-        children: [
-          Stack(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(),
-                    flex: _values.start.round(),
+    return Column(
+      children: [
+        Stack(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: _values.start.round(),
+                  child: const SizedBox(),
+                ),
+                SizedBox(
+                  width: 54,
+                  child: Text(
+                    "${_values.start.round()}\$", // \$ is used to show the dollar sign, and ${_values.start.round()} is used to show the value of the start range
+                    textAlign: TextAlign.center,
                   ),
-                  Container(
-                    width: 54,
-                    child: Text(
-                      "\$${_values.start.round()}", // \$ is used to show the dollar sign, and ${_values.start.round()} is used to show the value of the start range
-                      textAlign: TextAlign.center,
-                    ),
+                ),
+                Expanded(
+                  flex: 2000 - _values.start.round(),
+                  child: const SizedBox(),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: _values.end.round(),
+                  child: const SizedBox(),
+                ),
+                SizedBox(
+                  width: 54,
+                  child: Text(
+                    "${_values.end.round()}\$",
+                    textAlign: TextAlign.center,
                   ),
-                  Expanded(
-                    flex: 1000 - _values.start.round(),
-                    child: SizedBox(),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: _values.end.round(),
-                    child: SizedBox(),
-                  ),
-                  Container(
-                    width: 54,
-                    child: Text(
-                      "\$${_values.end.round()}",
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1000 - _values.end.round(),
-                    child: SizedBox(),
-                  ),
-                ],
-              )
-            ],
-          ),
-          SliderTheme(
-              data: SliderThemeData(),
-              child: RangeSlider(
-                values: _values,
-                min: 10.0,
-                max: 1000.0,
-                activeColor: Theme.of(context).primaryColor,
-                inactiveColor: Colors.grey.withOpacity(0.4),
-                divisions: 1000,
-                onChanged: (values) {
-                  try {
-                    setState(() {
-                      _values = values;
-                    });
-                    widget.onChangeRangeValue(
-                        _values); // This will pass the value of the range slider to the parent widget. We need to do this because the state of the parent widget is not accessible from the child widget.
-                  } catch (e) {}
-                },
-              ))
-        ],
+                ),
+                Expanded(
+                  flex: 2000 - _values.end.round(),
+                  child: const SizedBox(),
+                ),
+              ],
+            )
+          ],
+        ),
+        SliderTheme(
+            data: const SliderThemeData(),
+            child: RangeSlider(
+              values: _values,
+              min: 10.0,
+              max: 2000.0,
+              activeColor: Theme.of(context).primaryColor,
+              inactiveColor: Colors.grey.withOpacity(0.4),
+              divisions: 1000,
+              onChanged: (values) {
+                try {
+                  setState(() {
+                    _values = values;
+                  });
+                  widget.onChangeRangeValue(
+                      _values); // This will pass the value of the range slider to the parent widget. We need to do this because the state of the parent widget is not accessible from the child widget.
+                } catch (e) {}
+              },
+            ))
+      ],
     );
   }
 }

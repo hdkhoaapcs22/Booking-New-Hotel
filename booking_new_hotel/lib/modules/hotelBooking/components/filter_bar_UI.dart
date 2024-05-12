@@ -24,7 +24,7 @@ class FilterBarUI extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Text(
-                    "530",
+                    hotelFound.toString(),
                     style: TextStyles(context).getRegularStyle(),
                   ),
                 ),

@@ -12,14 +12,15 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 import '../../global/global_var.dart';
+import '../../models/room_data.dart';
 import '../../providers/theme_provider.dart';
 import '../../routes/route_names.dart';
 import '../../utils/enum.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/common_button.dart';
-import '../../widgets/common_card.dart';
-import '../../widgets/common_search_bar.dart';
+// import '../../widgets/common_card.dart';
+// import '../../widgets/common_search_bar.dart';
 import 'popular_list_view.dart';
 import 'title_view.dart';
 
@@ -38,19 +39,14 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
   late AnimationController animationController;
   var sliderImageHeight = 0.0;
 
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
-
   void calculateDistanceBetweenUserAndHotels() {
     for (int i = 0; i < GlobalVar.listAllHotels!.length; ++i) {
       GlobalVar.listAllHotels![i].dist = Geolocator.distanceBetween(
-          GlobalVar.locationOfUser!.latitude,
-          GlobalVar.locationOfUser!.longitude,
-          GlobalVar.listAllHotels![i].position!.latitude,
-          GlobalVar.listAllHotels![i].position!.longitude)/1000.0;
+              GlobalVar.locationOfUser!.latitude,
+              GlobalVar.locationOfUser!.longitude,
+              GlobalVar.listAllHotels![i].position!.latitude,
+              GlobalVar.listAllHotels![i].position!.longitude) /
+          1000.0;
     }
   }
 
@@ -90,7 +86,6 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
         }
       }
     });
-
     super.initState();
   }
 
@@ -136,12 +131,9 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                               return TitleView(
                                   titleText:
                                       AppLocalizations(context).of("best_deal"),
-                                  subText:
-                                      AppLocalizations(context).of("view_all"),
                                   animationController:
                                       widget.animationController,
                                   animation: animation,
-                                  isLeftButton: true,
                                   click: () {});
                             } else {
                               return getDealListView(index);
@@ -174,12 +166,12 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                           end: Alignment.bottomCenter,
                         ))),
                   ),
-                  Positioned(
-                    top: MediaQuery.of(context).padding.top,
-                    left: 0,
-                    right: 0,
-                    child: searchUI(),
-                  )
+                  // Positioned(
+                  //   top: MediaQuery.of(context).padding.top,
+                  //   left: 0,
+                  //   right: 0,
+                  //   child: searchUI(),
+                  // )
                 ])));
   }
 
@@ -234,6 +226,8 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
                     child: Opacity(
                       opacity: opecity,
                       child: CommonButton(
+                        width: 140,
+                        height: 48,
                         onTap: () {
                           if (opecity != 0) {
                             NavigationServices(context).gotoHotelHomeScreen();
@@ -254,25 +248,25 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
         });
   }
 
-  searchUI() {
-    return Padding(
-        padding: EdgeInsets.only(
-            left: 24, right: 24, top: AppBar().preferredSize.height * 1.25),
-        child: CommonCard(
-            radius: 36,
-            child: InkWell(
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
-              onTap: () {
-                NavigationServices(context).gotoSearchScreen();
-              },
-              child: CommonSearchBar(
-                // ignore: deprecated_member_use
-                iconData: FontAwesomeIcons.search,
-                enabled: false,
-                text: AppLocalizations(context).of("where_are_you_going"),
-              ),
-            )));
-  }
+  // searchUI() {
+  //   return Padding(
+  //       padding: EdgeInsets.only(
+  //           left: 24, right: 24, top: AppBar().preferredSize.height * 1.25),
+  //       child: CommonCard(
+  //           radius: 36,
+  //           child: InkWell(
+  //             borderRadius: const BorderRadius.all(Radius.circular(30)),
+  //             onTap: () {
+  //               NavigationServices(context).gotoSearchScreen();
+  //             },
+  //             child: CommonSearchBar(
+  //               // ignore: deprecated_member_use
+  //               iconData: FontAwesomeIcons.search,
+  //               enabled: false,
+  //               text: AppLocalizations(context).of("where_are_you_going"),
+  //             ),
+  //           )));
+  // }
 
   List<Hotel> _chooseRandomlyBestDealHotels() {
     List<Hotel> bestDealHotels = [];
@@ -283,6 +277,9 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
         GlobalVar.listAllHotels![randomIndex].discountRate =
             Random().nextInt(20) + 20;
         GlobalVar.listAllHotels![randomIndex].isBestDeal = true;
+        GlobalVar.listAllHotels![randomIndex].date = DateText(
+            startDate: DateTime.now(),
+            endDate: DateTime.now().add(const Duration(days: 1)));
       }
     }
     return bestDealHotels;

@@ -25,7 +25,7 @@ class _FilterScreenState extends State<FilterScreen> {
   bool isShowAllDestinationButton = false;
 
   final columnCount = 2;
-  RangeValues _values = const RangeValues(100, 600);
+  RangeValues _values = const RangeValues(50, 600);
   double distValue = 50;
 
   @override
@@ -146,12 +146,12 @@ class _FilterScreenState extends State<FilterScreen> {
 
   List<Widget> getList() {
     List<Widget> cateforiesFilter = [];
-    int count = 0;
+    int index = 0;
     for (int i = 0; i < categoriesAmenityFilterList.length / columnCount; ++i) {
       List<Widget> listUI = [];
       for (int j = 0; j < columnCount; ++j) {
-        try {
-          final data = categoriesAmenityFilterList[count];
+        if (index < categoriesAmenityFilterList.length) {
+          final data = categoriesAmenityFilterList[index];
           listUI.add(
             Expanded(
               child: Row(
@@ -226,8 +226,8 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
             ),
           );
-          ++count;
-        } catch (e) {}
+          ++index;
+        }
       }
       cateforiesFilter.add(Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -336,29 +336,28 @@ class _FilterScreenState extends State<FilterScreen> {
       if (i <= 5) {
         resForShowLess.add(resForShowMore[i]);
         if (i == 5) {
-          resForShowLess.add(
-            Center(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                  onTap: () {
-                    setState(() {
-                      isShowAllDestinationButton = true;
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Text(
-                          AppLocalizations(context).of("more_than"),
-                          style: TextStyles(context).getRegularStyle(),
+          resForShowLess.add(Center(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                onTap: () {
+                  setState(() {
+                    isShowAllDestinationButton = true;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(
+                      AppLocalizations(context).of("more_than"),
+                      style: TextStyles(context).getRegularStyle(),
                     ),
                   ),
                 ),
               ),
             ),
-            )  );
+          ));
         }
       }
       if (i == destinationDistrictFilterList.length - 1) {
@@ -376,9 +375,9 @@ class _FilterScreenState extends State<FilterScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
-                    child:  Text(
-                        AppLocalizations(context).of("less_than"),
-                        style: TextStyles(context).getRegularStyle(),
+                    child: Text(
+                      AppLocalizations(context).of("less_than"),
+                      style: TextStyles(context).getRegularStyle(),
                     ),
                   ),
                 ),

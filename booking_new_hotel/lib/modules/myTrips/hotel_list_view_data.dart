@@ -33,7 +33,6 @@ class HotelListViewData extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListCellAnimationView(
       animation: animation,
-      animationController: animationController,
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
         child: InkWell(
@@ -131,7 +130,7 @@ class HotelListViewData extends StatelessWidget {
                                 .copyWith(fontSize: 14),
                           ),
                           Text(
-                            AppLocalizations(context).of("km_to_city"),
+                            AppLocalizations(context).of("km_text"),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyles(context)
                                 .getDescriptionStyle()

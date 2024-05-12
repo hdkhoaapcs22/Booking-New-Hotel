@@ -6,7 +6,9 @@ import 'package:booking_new_hotel/widgets/bottom_top_move_animation_view.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/theme_provider.dart';
 import '../../routes/route_names.dart';
 import '../../utils/enum.dart';
 import '../../utils/localfiles.dart';
@@ -38,11 +40,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
   }
 
-  dispose() {
-    widget.animationController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -50,88 +47,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
             var userInfoData = snapshot.data!.docs[0];
-            return BottomTopMoveAnimationView(
-                animationController: widget.animationController,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.only(
-                            left: 20, top: AppBar().preferredSize.height),
-                        child: Row(
+            return Consumer<ThemeProvider>(
+              builder:  (_, provider, child) => BottomTopMoveAnimationView(
+                  animationController: widget.animationController,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: 20, top: AppBar().preferredSize.height),
+                          child: Row(
+                            children: [
+                              GlobalVar.iconic.appIcon(context),
+                              const SizedBox(width: 10),
+                              GlobalVar.iconic.nameOfApp(context),
+                              const SizedBox(width: 200),
+                              PopupMenuButton<PopupListItems>(
+                                icon: const Icon(Icons.more_horiz),
+                                offset: const Offset(-10, 38),
+                                itemBuilder: (_) =>
+                                    PopupMenuListItems().getPopupListItems(),
+                                onSelected: (PopupListItems result) {
+                                  switch (result) {
+                                    case PopupListItems.Settings:
+                                      {
+                                        NavigationServices(context)
+                                            .gotoSettingsScreen();
+                                        break;
+                                      }
+                                    case PopupListItems.ChangePassword:
+                                      {
+                                        NavigationServices(context)
+                                            .gotoChangePasswordScreen(previousPassword:userInfoData['password']);
+                                        break;
+                                      }
+                                  }
+                                },
+                              )
+                            ],
+                          )),
+                      const SizedBox(height: 98),
+                      const Center(
+                        child: CircleAvatar(
+                          radius: 61,
+                          backgroundImage: AssetImage(Localfiles.userImage),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 34,
+                      ),
+                      CommonButton(
+                        padding: const EdgeInsets.only(left: 48, right: 48),
+                        buttonTextWidget: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            GlobalVar.iconic.appIcon(context),
-                            const SizedBox(width: 10),
-                            GlobalVar.iconic.nameOfApp(context),
-                            const SizedBox(width: 200),
-                            PopupMenuButton<PopupListItems>(
-                              icon: const Icon(Icons.more_horiz),
-                              offset: const Offset(-10, 38),
-                              itemBuilder: (_) =>
-                                  PopupMenuListItems().getPopupListItems(),
-                              onSelected: (PopupListItems result) {
-                                switch (result) {
-                                  case PopupListItems.Settings:
-                                    {
-                                      NavigationServices(context)
-                                          .gotoSettingsScreen();
-                                      break;
-                                    }
-                                  case PopupListItems.ChangePassword:
-                                    {
-                                      NavigationServices(context)
-                                          .gotoChangePasswordScreen();
-                                      break;
-                                    }
-                                }
-                              },
-                            )
-                          ],
-                        )),
-                    const SizedBox(height: 98),
-                    const Center(
-                      child: CircleAvatar(
-                        radius: 61,
-                        backgroundImage: AssetImage(Localfiles.userImage),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 34,
-                    ),
-                    CommonButton(
-                      padding: const EdgeInsets.only(left: 48, right: 48),
-                      buttonTextWidget: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            FontAwesomeIcons.penToSquare,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            AppLocalizations(context).of("edit_profile"),
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: Colors.white,
+                            const Icon(
+                              FontAwesomeIcons.penToSquare,
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 12),
+                            Text(
+                              AppLocalizations(context).of("edit_profile"),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          NavigationServices(context).gotoEditProfileScreen();
+                        },
                       ),
-                      onTap: () {
-                        NavigationServices(context).gotoEditProfileScreen();
-                      },
-                    ),
-                    const SizedBox(height: 42),
-                    Divider(
-                      height: 1,
-                      color: Colors.grey.withOpacity(0.5),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: profileDetails(userInfoData),
-                    )
-                  ],
-                ));
+                      const SizedBox(height: 42),
+                      Divider(
+                        height: 1,
+                        color: Colors.grey.withOpacity(0.5),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: profileDetails(userInfoData),
+                      )
+                    ],
+                  )),
+            );
           }
           return const SizedBox();
         });
@@ -161,8 +160,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             endIndent: 20,
           ),
           const SizedBox(height: 10),
-          profileItemDetail("mail_text", const Icon(FontAwesomeIcons.envelope),
-              GlobalVar.user!.getEmail),
+          profileItemDetail("mail", const Icon(FontAwesomeIcons.envelope),
+              userInfoData['mail']),
           Divider(
             height: 2,
             color: Colors.grey.withOpacity(0.5),
@@ -207,25 +206,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     ]);
   }
-
-  // chooseItem(String item, userInfoData) {
-  //   switch (item) {
-  //     case "name":
-  //       {
-  //         return userInfoData['name'];
-  //       }
-  //     case "mail_text":
-  //       {
-  //         return GlobalVar.user!.getEmail;
-  //       }
-  //     case "phone":
-  //       {
-  //         return userInfoData['phone'];
-  //       }
-  //     case "address_text":
-  //       {
-  //         return userInfoData['address'];
-  //       }
-  //   }
-  // }
 }

@@ -10,7 +10,13 @@ class LocationService {
   Future<bool> getLocation(BuildContext context) async {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      await showDialogForAskLocation(context);
+      LocationPermission permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return false;
+      }
+      else if (permission != LocationPermission.denied || permission != LocationPermission.deniedForever) {
+        await showDialogForAskLocation(context);
+      }
       return false;
     }
     //

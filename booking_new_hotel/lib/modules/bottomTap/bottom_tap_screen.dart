@@ -1,4 +1,3 @@
-import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,7 +29,7 @@ class _BottomTapScreenState extends State<BottomTapScreen>
   void initState() {
     print("It is in initState of BottomTapScreen");
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 400), vsync: this);
+        duration: const Duration(milliseconds: 600), vsync: this);
     indexView = Container();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // it will run after the build method
@@ -39,16 +38,10 @@ class _BottomTapScreenState extends State<BottomTapScreen>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
-
   Future starLoadingScreen() async {
     print("It is in starLoadingScreen of BottomTapScreen");
     await Future.delayed(
-        const Duration(milliseconds: 480)); // it will wait for 480ms
+        const Duration(milliseconds: 800)); // it will wait for 480ms
     setState(() {
       isFirstTime = false;
       indexView = HomeExploreScreen(

@@ -24,7 +24,6 @@ class ReviewsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListCellAnimationView(
       animation: animation,
-      animationController: animationController,
       yTranslation: 40,
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, top: 16),

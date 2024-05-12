@@ -32,13 +32,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   late AnimationController _animationController;
   List<Hotel> filterHotelList = GlobalVar.listAllHotels!;
   ScrollController scrollController = ScrollController();
+  TextEditingController searchController = TextEditingController();
   IconData favoriteIcon = Icons.favorite_border;
   late Map categoriesFilter;
-  int room = 1;
-  int add = 2;
-
-  DateTime startDate = DateTime.now();
-  DateTime endDate = DateTime.now().add(const Duration(days: 5));
+  late DateTime startDateBooking, endDateBooking;
 
   bool _isShowMap = false;
 
@@ -77,11 +74,12 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     return true;
   }
 
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   searchController.dispose();
+  //   animationController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +126,10 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                       callback: () {
                                         NavigationServices(context)
                                             .gotoRoomBookingScreen(
-                                                filterHotelList[index]);
+                                                hotel: filterHotelList[index],
+                                                startDateBooking:
+                                                    startDateBooking,
+                                                endDateBooking: endDateBooking);
                                       },
                                       hotelData: filterHotelList[index],
                                       animation: animation,
@@ -168,8 +169,8 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                   RoomData roomData,
                                                 ) {
                                                   setState(() {
-                                                    // searchByDateAndRoomData(
-                                                    //     start, end, roomData, type: 'search by date and room data');
+                                                    startDateBooking = start;
+                                                    endDateBooking = end;
                                                     searchWithAllCriteria(
                                                         typeSearching:
                                                             'Search by date and room data',
@@ -182,7 +183,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                             ),
                                           ),
                                           FilterBarUI(filterHotelList.length,
-                                              (value) {
+                                               (value) {
                                             if (value != null) {
                                               // searchByPriceAmenityDistance(
                                               //     value);
@@ -308,8 +309,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                     child: TextField(
                       maxLines: 1,
                       enabled: true,
-                      onChanged: (String text) => searchWithAllCriteria(
-                          typeSearching: 'Search by location', text: text),
+                      controller: searchController,
                       cursorColor: Theme.of(context).primaryColor,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10),
@@ -333,7 +333,11 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  searchWithAllCriteria(
+                      typeSearching: 'Search by location',
+                      text: searchController.text.trim().toLowerCase());
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(14),
                   // ignore: deprecated_member_use
@@ -353,11 +357,11 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     if (text.isEmpty) {
       tmp = GlobalVar.listAllHotels!;
     } else {
-      RegExp exp = RegExp(' .+');
+      RegExp exp = RegExp(text);
       for (int i = 0; i < GlobalVar.listAllHotels!.length; i++) {
         RegExpMatch? match =
-            exp.firstMatch(GlobalVar.listAllHotels![i].locationOfHotel);
-        if (match![0].toString().trim() == text) {
+            exp.firstMatch(GlobalVar.listAllHotels![i].name.toLowerCase());
+        if (match != null) {
           tmp.add(GlobalVar.listAllHotels![i]);
         }
       }
@@ -371,7 +375,8 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
       return true;
     }
     for (int i = 1; i < destination.length; ++i) {
-      if (currentHotel.locationOfHotel.split(', ')[0] == destination[i].destination) {
+      if (currentHotel.locationOfHotel.split(', ')[0] ==
+          destination[i].destination) {
         return true;
       }
     }
@@ -395,8 +400,12 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
 
   bool checkByDate(DateTime start, DateTime end, DateText? date) {
     if (start.day == 0 && end.day == 0) return true;
-    return (date!.startDate == start.day || date.startDate - 1 >= start.day) &&
-        (date.endDate == end.day || date.endDate + 1 <= end.day);
+    if (date!.startDate.year != start.year) return false;
+    if (date.endDate.month == end.month) return false;
+    if (date.startDate.day != start.day || date.endDate.day != end.day) {
+      return false;
+    }
+    return true;
   }
 
   Future<List<Hotel>> searchByDateAndRoomData(DateTime start, DateTime end,
