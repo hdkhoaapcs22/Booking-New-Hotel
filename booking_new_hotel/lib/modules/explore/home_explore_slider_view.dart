@@ -32,16 +32,16 @@ class _HomeExploreSliderViewState extends State<HomeExploreSliderView> {
   @override
   void initState() {
     pageViewData.add(PageViewData(
-        titleText: "cape Town",
+        titleText: "bitexco",
         subText: "five_star",
         assetImage: Localfiles.explore_2));
     pageViewData.add(PageViewData(
-        titleText: "turkey",
-        subText: "five_star",
+        titleText: "landmark_81",
+        subText: "world_class_service",
         assetImage: Localfiles.explore_1));
     pageViewData.add(PageViewData(
-        titleText: "egypt",
-        subText: "five_star",
+        titleText: "national_pagoda",
+        subText: "relaxing_place",
         assetImage: Localfiles.explore_3));
     sliderTimer = Timer.periodic(const Duration(seconds: 4), (timer) {
       if (mounted) {

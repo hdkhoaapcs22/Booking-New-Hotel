@@ -34,10 +34,12 @@ class Localfiles {
   static const String hotel_Type_7 = BaseImageUrl + 'hotel_Type_7.jpg';
   static const String hotel_Type_8 = BaseImageUrl + 'hotel_Type_8.jpg';
   static const String hotel_Type_9 = BaseImageUrl + 'hotel_Type_9.jpg';
-  static const String introduction = BaseImageUrl + 'introduction.jpg';
+  static const String introduction = BaseImageUrl + 'introduction_2.png';
   static const String introduction1 = BaseImageUrl + 'introduction1.png';
   static const String introduction2 = BaseImageUrl + 'introduction2.png';
   static const String introduction3 = BaseImageUrl + 'introduction3.png';
+  static const String verifyScreenImage =
+      BaseImageUrl + 'verify_screen_image.png';
   static const String userImage = BaseImageUrl + 'userImage.jpg';
   static const String popular_1 = BaseImageUrl + 'popular_hotel_1.jpg';
   static const String popular_2 = BaseImageUrl + 'popular_hotel_2.jpg';

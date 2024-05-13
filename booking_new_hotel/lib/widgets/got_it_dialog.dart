@@ -8,15 +8,21 @@ class GotItDialog {
   late BuildContext context;
   late String title;
   String? description;
-  GotItDialog({required this.context, required this.title, this.description});
+  GotItDialog({
+    required this.context,
+    required this.title,
+    this.description,
+  });
   Future gotItDialog() {
     return showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
         content: SizedBox(
           height: MediaQuery.of(context).size.height * 0.082,
           width: MediaQuery.of(context).size.width * 0.67,
-          child: Column(children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               AppLocalizations(context).of(title),
               style: TextStyles(context).getTitleStyle().copyWith(
@@ -26,12 +32,15 @@ class GotItDialog {
             description != null
                 ? Padding(
                     padding: const EdgeInsets.only(top: 12, bottom: 5),
-                    child: Text(
-                      AppLocalizations(context).of(description!),
-                      style: TextStyles(context).getRegularStyle().copyWith(
-                            fontSize: 16,
-                            wordSpacing: 1.5,
-                          ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        AppLocalizations(context).of(description!),
+                        style: TextStyles(context).getRegularStyle().copyWith(
+                              fontSize: 16,
+                              wordSpacing: 1.2,
+                            ),
+                      ),
                     ),
                   )
                 : Container(),
@@ -39,7 +48,7 @@ class GotItDialog {
         ),
         actions: [
           Container(
-              height: 45,
+              height: 40,
               decoration: BoxDecoration(
                 color: Colors.grey[200],
               ),

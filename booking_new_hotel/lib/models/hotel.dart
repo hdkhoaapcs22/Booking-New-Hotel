@@ -47,19 +47,19 @@ class Hotel {
     ),
     Hotel(
       imageHotel: Localfiles.popular_3,
-      name: 'Vernazza',
+      name: 'LA VELA',
     ),
     Hotel(
       imageHotel: Localfiles.popular_4,
-      name: 'London',
+      name: 'FUSION SUITE',
     ),
     Hotel(
       imageHotel: Localfiles.popular_5,
-      name: 'Venice',
+      name: 'NIKKO',
     ),
     Hotel(
       imageHotel: Localfiles.popular_6,
-      name: 'Diamond Head',
+      name: 'VINPEARLY LANDMARK 81',
     ),
   ];
 
@@ -165,60 +165,60 @@ class Hotel {
   //   ),
   // ];
 
-  static List<Hotel> lastsSearchesList = [
-    Hotel(
-      imageHotel: Localfiles.popular_4,
-      name: 'London',
-      // roomData: RoomData(numberOfBed: 1, numberOfPeople: 3),
-      date: DateText(
-          startDate: DateTime.now(),
-          endDate: DateTime.now().add(const Duration(days: 2))),
-      dateTxt: '12 - 22 Dec',
-    ),
-    Hotel(
-      imageHotel: Localfiles.popular_1,
-      name: 'Paris',
-      // roomData: RoomData(numberOfBed: 1, numberOfPeople: 3),
-      date: DateText(
-          startDate: DateTime.now(),
-          endDate: DateTime.now().add(const Duration(days: 2))),
-      dateTxt: '12 - 24 Sep',
-    ),
-    Hotel(
-      imageHotel: Localfiles.city_3,
-      name: 'New York',
-      // roomData: RoomData(numberOfBed: 1, numberOfPeople: 3),
-      date: DateText(
-          startDate: DateTime.now(),
-          endDate: DateTime.now().add(const Duration(days: 2))),
-      dateTxt: '20 - 22 Sep',
-    ),
-    Hotel(
-      imageHotel: Localfiles.city_4,
-      name: 'Tokyo',
-      // roomData: RoomData(numberOfBed: 12, numberOfPeople: 22),
-      date: DateText(
-          startDate: DateTime.now(),
-          endDate: DateTime.now().add(const Duration(days: 2))),
-      dateTxt: '12 - 22 Nov',
-    ),
-    Hotel(
-      imageHotel: Localfiles.city_5,
-      name: 'Shanghai',
-      // roomData: RoomData(numberOfBed: 10, numberOfPeople: 15),
-      date: DateText(
-          startDate: DateTime.now(),
-          endDate: DateTime.now().add(const Duration(days: 2))),
-      dateTxt: '10 - 15 Dec',
-    ),
-    Hotel(
-      imageHotel: Localfiles.city_6,
-      name: 'Moscow',
-      // roomData: RoomData(numberOfBed: 12, numberOfPeople: 14),
-      date: DateText(
-          startDate: DateTime.now(),
-          endDate: DateTime.now().add(const Duration(days: 2))),
-      dateTxt: '12 - 14 Dec',
-    ),
-  ];
+  // static List<Hotel> lastsSearchesList = [
+  //   Hotel(
+  //     imageHotel: Localfiles.popular_4,
+  //     name: 'London',
+  //     // roomData: RoomData(numberOfBed: 1, numberOfPeople: 3),
+  //     date: DateText(
+  //         startDate: DateTime.now(),
+  //         endDate: DateTime.now().add(const Duration(days: 2))),
+  //     dateTxt: '12 - 22 Dec',
+  //   ),
+  //   Hotel(
+  //     imageHotel: Localfiles.popular_1,
+  //     name: 'Paris',
+  //     // roomData: RoomData(numberOfBed: 1, numberOfPeople: 3),
+  //     date: DateText(
+  //         startDate: DateTime.now(),
+  //         endDate: DateTime.now().add(const Duration(days: 2))),
+  //     dateTxt: '12 - 24 Sep',
+  //   ),
+  //   Hotel(
+  //     imageHotel: Localfiles.city_3,
+  //     name: 'New York',
+  //     // roomData: RoomData(numberOfBed: 1, numberOfPeople: 3),
+  //     date: DateText(
+  //         startDate: DateTime.now(),
+  //         endDate: DateTime.now().add(const Duration(days: 2))),
+  //     dateTxt: '20 - 22 Sep',
+  //   ),
+  //   Hotel(
+  //     imageHotel: Localfiles.city_4,
+  //     name: 'Tokyo',
+  //     // roomData: RoomData(numberOfBed: 12, numberOfPeople: 22),
+  //     date: DateText(
+  //         startDate: DateTime.now(),
+  //         endDate: DateTime.now().add(const Duration(days: 2))),
+  //     dateTxt: '12 - 22 Nov',
+  //   ),
+  //   Hotel(
+  //     imageHotel: Localfiles.city_5,
+  //     name: 'Shanghai',
+  //     // roomData: RoomData(numberOfBed: 10, numberOfPeople: 15),
+  //     date: DateText(
+  //         startDate: DateTime.now(),
+  //         endDate: DateTime.now().add(const Duration(days: 2))),
+  //     dateTxt: '10 - 15 Dec',
+  //   ),
+  //   Hotel(
+  //     imageHotel: Localfiles.city_6,
+  //     name: 'Moscow',
+  //     // roomData: RoomData(numberOfBed: 12, numberOfPeople: 14),
+  //     date: DateText(
+  //         startDate: DateTime.now(),
+  //         endDate: DateTime.now().add(const Duration(days: 2))),
+  //     dateTxt: '12 - 14 Dec',
+  //   ),
+  // ];
 }

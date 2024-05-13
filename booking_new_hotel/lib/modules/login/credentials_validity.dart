@@ -1,4 +1,3 @@
-import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
 import 'package:flutter/material.dart';
 

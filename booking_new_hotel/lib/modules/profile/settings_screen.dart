@@ -1,3 +1,4 @@
+import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/providers/theme_provider.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
 import 'package:booking_new_hotel/utils/enum.dart';
@@ -13,6 +14,7 @@ import '../../utils/themes.dart';
 import '../../widgets/common_app_bar_view.dart';
 import '../../widgets/common_card.dart';
 import '../../utils/helper.dart';
+import '../login/login_or_signup_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -53,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     return InkWell(
                         onTap: () {
                           switch (index) {
-                           case 0:
+                            case 0:
                               break;
                             case 1:
                               _getFontPopUI();
@@ -89,18 +91,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       ),
                                     ),
                                   ),
-                                  index == 0 ? _themeUI() :
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 16),
-                                    child: Icon(
-                                      settingsList[index].iconData,
-                                      color: AppTheme.primaryColor,
-                                    ),
-                                  ),
+                                  index == 0
+                                      ? _themeUI()
+                                      : Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 16),
+                                          child: Icon(
+                                            settingsList[index].iconData,
+                                            color: AppTheme.primaryColor,
+                                          ),
+                                        ),
                                 ],
                               ),
                             ),
-                            
                             Padding(
                               padding:
                                   const EdgeInsets.only(left: 16, right: 16),
@@ -374,8 +377,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                          AppLocalizations(context).of("select_color"),
+                      child: Text(AppLocalizations(context).of("select_color"),
                           style: TextStyles(context)
                               .getBoldStyle()
                               .copyWith(fontSize: 22))),
@@ -488,7 +490,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
 
     if (isOk) {
-      NavigationServices(context).gotoSplashScreen();
+      GlobalVar.authService.signOutAccount();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  LoginOrSignUpScreen(gobalState: true)),
+          (route) => false);
     }
   }
 }

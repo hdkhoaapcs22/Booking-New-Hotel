@@ -1,6 +1,5 @@
 import 'package:booking_new_hotel/modules/bottomTap/bottom_tap_screen.dart';
 import 'package:booking_new_hotel/modules/hotelDetails/room_booking.dart';
-import 'package:booking_new_hotel/modules/hotelDetails/search_screen.dart';
 import 'package:booking_new_hotel/modules/profile/change_password.dart';
 import 'package:booking_new_hotel/modules/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,9 @@ import '../modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/hotelDetails/reviews_list_screen.dart';
+import '../modules/login/authenticaltion_wrapper.dart';
 import '../modules/login/login_or_signup_screen.dart';
+import '../modules/login/send_email_to_verify_screen.dart';
 import '../modules/payScreen/pay_screen.dart';
 import '../modules/profile/settings_screen.dart';
 import '../modules/splash/splash_screen.dart';
@@ -43,9 +44,9 @@ class NavigationServices {
     return _pushMaterialPageRoute(const BottomTapScreen());
   }
 
-  // void gotoSearchScreen() async {
-  //   return _pushMaterialPageRoute(const SearchScreen());
-  // }
+  void gotoVerifyEmailScreen(String email) async {
+    return _pushMaterialPageRoute(SendEmailToVerify(email: email));
+  }
 
   void gotoHotelHomeScreen() async {
     return _pushMaterialPageRoute(const HotelHomeScreen());

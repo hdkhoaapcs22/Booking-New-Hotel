@@ -245,32 +245,46 @@
         "ja": "すべてクリア"
     },
     {
-        "text_id": "cape Town",
-        "en": "Cape Town",
-        "fr": "Le Cap",
-        "ar": "كيب تاون",
-        "ja": "ケープタウン"
-    },
-    {
-        "text_id": "turkey",
-        "en": "Turkey",
-        "fr": "Dinde",
-        "ar": "تركيا",
-        "ja": "トルコ"
-    },
-    {
-        "text_id": "egypt",
-        "en": "Egypt",
-        "fr": "Egypte",
-        "ar": "مصر",
-        "ja": "エジプト"
-    },
-    {
         "text_id": "five_star",
         "en": "Extraordinary five-star\noutdoor activites",
         "fr": "Activités d'extérieur \nextraordinaires",
         "ar": "أنشطة غير عادية من فئة الخمس نجوم \nفي الهواء الطلق",
         "ja": "並外れた5つ星の\n屋外アクティビティ"
+    },
+    {
+        "text_id": "world_class_service",
+        "en": "Enjoy world-class service\nand amenities",
+        "fr": "Profitez d'un service de classe mondiale\net des équipements",
+        "ar": "استمتع بخدمة عالمية المستوى\nووسائل الراحة",
+        "ja": "世界クラスのサービスをお楽しみください\nそしてアメニティ"
+    },
+    {
+        "text_id": "relaxing_place",
+        "en": "The perfect place to\nunwind for you",
+        "fr": "L'endroit parfait pour \nse détendre pour vous",
+        "ar": "المكان المثالي لل\nاسترخاء بالنسبة لك",
+        "ja": "あなたのためのリラックスする\n完璧な場所"
+    },
+    {
+        "text_id": "bitexco",
+        "en": "Bitexco",
+        "fr": "Bitexco",
+        "ar": "بيتيكسكو",
+        "ja": "ビテクスコ"
+    },
+    {
+        "text_id": "landmark_81",
+        "en": "Landmark 81",
+        "fr": "Landmark 81",
+        "ar": "لاندمارك 81",    
+        "ja": "ランドマーク81"
+    },
+    {
+        "text_id": "national_pagoda",
+        "en": "National Pagoda",
+        "fr": "Pagode nationale",
+        "ar": "معبد وطني",
+        "ja": "国立パゴダ"
     },
     {
         "text_id": "view_hotel",
@@ -1142,8 +1156,8 @@
     },
     {
         "text_id": "call_next_hours",
-        "en": "We will call you to confim in the next few hours",
-        "fr": "Nous vous appellerons pour confirmer dans les prochaines heures",
+        "en": "We will call you to confirm in the next few hours",
+        "fr": "Appel de confirmation à venir",
         "ar": "سنتصل بك للتأكيد في الساعات القادمة",
         "ja": "数時間以内に確認のためにお電話します"
     },
@@ -1156,7 +1170,7 @@
     },
     {
         "text_id": "fill_information",
-        "en": "Please fill in the information in the profile screen",
+        "en": "Fill in the information in the profile screen",
         "fr": "Veuillez remplir les",
         "ar": "يرجى ملء المعلومات في شاشة الملف الشخصي",
         "ja": "プロフィール画面の情報を入力してください"        
@@ -1195,5 +1209,26 @@
         "fr": "12:00 PM",
         "ar": "12:00 مساءً",
         "ja": "12:00 PM"
+    },
+    {
+        "text_id": "invalid_credential",
+        "en": "Invalid credential",
+        "fr": "Identifiant invalide",
+        "ar": "بيانات الاعتماد غير صالحة",
+        "ja": "無効な資格情報"
+    },
+    {
+        "text_id": "invalid_credential_description",
+        "en": "Incorrect email or password",
+        "fr": "E-mail ou mot de passe incorrect",
+        "ar": "ابيانات الحساب غير صحيحة",
+        "ja": "アカウント情報が正しくありません"
+    },
+    {
+        "text_id": "sign_up_error",
+        "en": "Sign up error",
+        "fr": "Erreur d'inscription",
+        "ar": "خطأ في التسجيل",
+        "ja": "サインアップエラー"
     }
 ]

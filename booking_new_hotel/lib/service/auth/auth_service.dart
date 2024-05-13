@@ -1,15 +1,11 @@
 // import 'package:booking_new_hotel/modules/profile/user.dart';
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   // firebase auth instance
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  // custom return user
-  // ignore: unused_element
-  // MyUser? _userFromFirebaseUser(User? user) {
-  //   return user != null ? MyUser(uid: user.uid) : null;
-  // }
 
   // register with email and password
   Future registerWithEmailAndPassword(
@@ -22,6 +18,10 @@ class AuthService {
     } catch (e) {
       return null;
     }
+  }
+
+  FirebaseAuth getAuthInstance() {
+    return _auth;
   }
 
   // sign in with email and password

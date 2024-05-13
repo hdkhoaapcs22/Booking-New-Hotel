@@ -15,4 +15,5 @@ class GlobalVar {
   static DatabaseService? databaseService;
   static Position? locationOfUser;
   static String? userPassword;
+  static String? userEmail;
 }

@@ -7,7 +7,6 @@ import 'package:booking_new_hotel/modules/explore/home_explore_slider_view.dart'
 import 'package:booking_new_hotel/modules/explore/hotel_list_view_page.dart';
 import 'package:booking_new_hotel/widgets/bottom_top_move_animation_view.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 

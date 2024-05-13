@@ -183,7 +183,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                             ),
                                           ),
                                           FilterBarUI(filterHotelList.length,
-                                               (value) {
+                                              (value) {
                                             if (value != null) {
                                               // searchByPriceAmenityDistance(
                                               //     value);
@@ -273,7 +273,8 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                       borderRadius:
                           const BorderRadius.all(Radius.circular(32.0)),
                       onTap: () {
-                        _isShowMap = !_isShowMap;
+                        // _isShowMap = !_isShowMap;
+                        // NavigationServices(context).gotoGoogleMap();
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8),

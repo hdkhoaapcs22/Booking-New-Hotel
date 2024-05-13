@@ -5,11 +5,11 @@ import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
-import '../../routes/route_names.dart';
 import '../../service/database/database_service.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
+import 'send_email_to_verify_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   final Function() onTap;
@@ -165,7 +165,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             password: tmpPassword,
           );
           Navigator.pop(context);
-          NavigationServices(context).gotoBottomTapScreen();
+          // NavigationServices(context).gotoVerifyEmailScreen(tmpEmail);
+          Navigator.of(context)
+              .push(MaterialPageRoute(
+                  builder: (context) => SendEmailToVerify(email: tmpEmail)))
+              .then((value) => widget.onTap());
+        }
+        else
+        {
+          print("Error in sign up");
+          Navigator.pop(context);
         }
       });
     }
