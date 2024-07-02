@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
-import 'package:booking_new_hotel/modules/splash/introductionScreen.dart';
-import 'package:booking_new_hotel/modules/splash/splashScreen.dart';
+import 'package:booking_new_hotel/modules/splash/introduction_screen.dart';
+import 'package:booking_new_hotel/modules/splash/splash_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import 'common/common.dart';
-import 'modules/next_page.dart';
+import 'modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import 'utils/enum.dart';
 import '../routes/routes.dart';
 
@@ -75,15 +75,15 @@ class _MotelAppState extends State<MotelApp> {
     applicationcontext = context;
     _setStatusBarNavigationBarTheme(theme);
     // we call some theme basic data set in the app like color, font, theme mode, language
-    context
-        .read<ThemeProvider>()
-        .checkAndSetThemeMode(MediaQuery.of(context).platformBrightness);
+    // context
+    //     .read<ThemeProvider>()
+    //     .checkAndSetThemeMode(MediaQuery.of(context).platformBrightness);
 
-    context
-        .read<ThemeProvider>()
-        .checkAndSetLanguage(); // it helps to set the previous language
-    context.read<ThemeProvider>().checkAndSetFonType();
-    context.read<ThemeProvider>().checkAndSetColorType();
+    // context
+    //     .read<ThemeProvider>()
+    //     .checkAndSetLanguage(); // it helps to set the previous language
+    // context.read<ThemeProvider>().checkAndSetFonType();
+    // context.read<ThemeProvider>().checkAndSetColorType();
   }
 
   Map<String, WidgetBuilder> _buildRoutes() {
@@ -91,7 +91,8 @@ class _MotelAppState extends State<MotelApp> {
       RoutesName.Splash: (BuildContext context) => const SplashScreen(),
       RoutesName.Introduction: (BuildContext context) =>
           const IntroductionScreen(),
-      RoutesName.NextPage: (BuildContext context) => const NextPage(),
+      RoutesName.FilterScreen: (BuildContext context) =>
+          const FilterScreen(),
     };
   }
 

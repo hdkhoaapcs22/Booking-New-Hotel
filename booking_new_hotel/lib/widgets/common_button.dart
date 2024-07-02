@@ -2,36 +2,42 @@ import 'package:flutter/material.dart';
 import '../utils/text_styles.dart';
 import 'tap_effect.dart';
 
+// ignore: must_be_immutable
 class CommonButton extends StatelessWidget {
   final VoidCallback? onTap;
   final EdgeInsetsGeometry? padding;
   final String? buttonText;
   final Widget? buttonTextWidget;
   final Color? textColor, backgroundColor;
-  final bool? isClickable;
+  bool isClickable;
   final double radius;
+  double height, width, fontSize;
 
-  const CommonButton(
-      {Key? key,
-      this.onTap,
-      this.padding,
-      this.buttonText,
-      this.buttonTextWidget,
-      this.textColor = Colors.white,
-      this.backgroundColor,
-      this.isClickable = true,
-      this.radius = 24.0})
-      : super(key: key);
+  CommonButton({
+    Key? key,
+    this.onTap,
+    this.padding,
+    this.buttonText,
+    this.buttonTextWidget,
+    this.textColor = Colors.white,
+    this.backgroundColor,
+    this.isClickable = true,
+    this.radius = 24.0,
+    this.height = 48,
+    this.fontSize = 16,
+    this.width = double.infinity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding ?? const EdgeInsets.only(),
       child: TapEffect(
-          isClickable: isClickable!,
+          isClickable: isClickable,
           onClick: onTap ?? () {},
           child: SizedBox(
-              height: 48,
+              height: height,
+              width: width,
               child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(radius),
@@ -47,7 +53,7 @@ class CommonButton extends StatelessWidget {
                           buttonText ?? "",
                           style: TextStyles(context).getRegularStyle().copyWith(
                                 color: textColor,
-                                fontSize: 16,
+                                fontSize: fontSize,
                               ),
                         ),
                   )))),

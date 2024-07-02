@@ -1,0 +1,314 @@
+import 'dart:async';
+import 'dart:math';
+
+import 'package:booking_new_hotel/languages/appLocalizations.dart';
+import 'package:booking_new_hotel/models/hotel.dart';
+import 'package:booking_new_hotel/modules/explore/home_explore_slider_view.dart';
+import 'package:booking_new_hotel/modules/explore/hotel_list_view_page.dart';
+import 'package:booking_new_hotel/widgets/bottom_top_move_animation_view.dart';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
+
+import '../../global/global_var.dart';
+import '../../models/room_data.dart';
+import '../../providers/theme_provider.dart';
+import '../../routes/route_names.dart';
+import '../../utils/enum.dart';
+import '../../utils/text_styles.dart';
+import '../../utils/themes.dart';
+import '../../widgets/common_button.dart';
+// import '../../widgets/common_card.dart';
+// import '../../widgets/common_search_bar.dart';
+import 'popular_list_view.dart';
+import 'title_view.dart';
+
+class HomeExploreScreen extends StatefulWidget {
+  final AnimationController animationController;
+
+  const HomeExploreScreen({super.key, required this.animationController});
+
+  @override
+  State<HomeExploreScreen> createState() => _HomeExploreScreenState();
+}
+
+class _HomeExploreScreenState extends State<HomeExploreScreen>
+    with TickerProviderStateMixin {
+  late ScrollController scrollController;
+  late AnimationController animationController;
+  var sliderImageHeight = 0.0;
+
+  void calculateDistanceBetweenUserAndHotels() {
+    for (int i = 0; i < GlobalVar.listAllHotels!.length; ++i) {
+      GlobalVar.listAllHotels![i].dist = Geolocator.distanceBetween(
+              GlobalVar.locationOfUser!.latitude,
+              GlobalVar.locationOfUser!.longitude,
+              GlobalVar.listAllHotels![i].position!.latitude,
+              GlobalVar.listAllHotels![i].position!.longitude) /
+          1000.0;
+    }
+  }
+
+  @override
+  void initState() {
+    const LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 500,
+    );
+    StreamSubscription<Position> _ =
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position position) {
+      GlobalVar.locationOfUser = position;
+    });
+
+    calculateDistanceBetweenUserAndHotels();
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 0));
+    widget.animationController.forward();
+    scrollController = ScrollController(initialScrollOffset: 0.0);
+    scrollController.addListener(() {
+      if (mounted) {
+        // check if the state is 'mounted'
+        if (scrollController.offset < 0) {
+          // set a static value below half scrolling values
+          animationController.animateTo(0.0);
+        } else if (scrollController.offset > 0.0 &&
+            scrollController.offset < sliderImageHeight) {
+          //we need around half scrolling values
+          if (scrollController.offset < ((sliderImageHeight / 1.5))) {
+            animationController
+                .animateTo((scrollController.offset / sliderImageHeight));
+          } else {
+            animationController
+                .animateTo(((sliderImageHeight / 1.5) / sliderImageHeight));
+          }
+        }
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print("It is in explore screen");
+    sliderImageHeight = MediaQuery.of(context).size.width * 1.25;
+    return BottomTopMoveAnimationView(
+        animationController: widget.animationController,
+        child: Consumer<ThemeProvider>(
+            builder: (context, value, child) => Stack(children: [
+                  Container(
+                      color: AppTheme.scaffoldBackgroundColor,
+                      child: ListView.builder(
+                          controller: scrollController,
+                          itemCount: 4,
+                          padding: EdgeInsets.only(
+                              top: sliderImageHeight + 32, bottom: 16),
+                          itemBuilder: (context, index) {
+                            var animation = Tween(begin: 0.0, end: 1.0).animate(
+                              CurvedAnimation(
+                                  parent: widget.animationController,
+                                  curve: Curves.fastOutSlowIn),
+                            );
+                            if (index == 0) {
+                              return TitleView(
+                                titleText: AppLocalizations(context)
+                                    .of("popular_destination"),
+                                animationController: widget.animationController,
+                                animation: animation,
+                                click: () {},
+                              );
+                            } else if (index == 1) {
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: PopularListView(
+                                  animationController:
+                                      widget.animationController,
+                                  callBack: (index) {},
+                                ),
+                              );
+                            } else if (index == 2) {
+                              return TitleView(
+                                  titleText:
+                                      AppLocalizations(context).of("best_deal"),
+                                  animationController:
+                                      widget.animationController,
+                                  animation: animation,
+                                  click: () {});
+                            } else {
+                              return getDealListView(index);
+                            }
+                          })),
+                  sliderUI(), // animated slider UI
+                  viewHotelButton(
+                      animationController), // view hotel Button UI for on click event
+
+                  //search bar UI
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                        height: 80,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                          colors: [
+                            Theme.of(context)
+                                .colorScheme
+                                .background
+                                .withOpacity(0.4),
+                            Theme.of(context)
+                                .colorScheme
+                                .background
+                                .withOpacity(0.0),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ))),
+                  ),
+                  // Positioned(
+                  //   top: MediaQuery.of(context).padding.top,
+                  //   left: 0,
+                  //   right: 0,
+                  //   child: searchUI(),
+                  // )
+                ])));
+  }
+
+  sliderUI() {
+    return Positioned(
+        top: 0,
+        left: 0,
+        right: 0,
+        child: AnimatedBuilder(
+            animation: animationController,
+            builder: (BuildContext context, Widget? child) {
+              var opecity = 1.0 -
+                  (animationController.value == 0.64
+                      ? 1.0
+                      : animationController.value);
+              return SizedBox(
+                  height: sliderImageHeight *
+                      (1.0 -
+                          animationController
+                              .value), // when we scroll the image will be shrink
+                  child: HomeExploreSliderView(
+                    opValue: opecity,
+                    click: () {},
+                  ));
+            }));
+  }
+
+  viewHotelButton(AnimationController animationController) {
+    return AnimatedBuilder(
+        animation: animationController,
+        builder: (BuildContext context, Widget? child) {
+          var opecity = 1.0 -
+              (animationController.value == 0.64
+                  ? 1.0
+                  : animationController.value);
+          return Positioned(
+              left: 0,
+              right: 0,
+              top: 0,
+              height: sliderImageHeight * (1.0 - animationController.value),
+              child: Stack(children: [
+                Positioned(
+                    bottom: 32,
+                    right: context.read<ThemeProvider>().languageType ==
+                            LanguageType.ar
+                        ? 24
+                        : null,
+                    left: context.read<ThemeProvider>().languageType ==
+                            LanguageType.ar
+                        ? null
+                        : 24,
+                    child: Opacity(
+                      opacity: opecity,
+                      child: CommonButton(
+                        width: 140,
+                        height: 48,
+                        onTap: () {
+                          if (opecity != 0) {
+                            NavigationServices(context).gotoHotelHomeScreen();
+                          }
+                        },
+                        buttonTextWidget: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 24, right: 24, top: 8, bottom: 8),
+                            child: Text(
+                              AppLocalizations(context).of("view_hotel"),
+                              style: TextStyles(context)
+                                  .getRegularStyle()
+                                  .copyWith(color: AppTheme.whiteColor),
+                            )),
+                      ),
+                    ))
+              ]));
+        });
+  }
+
+  // searchUI() {
+  //   return Padding(
+  //       padding: EdgeInsets.only(
+  //           left: 24, right: 24, top: AppBar().preferredSize.height * 1.25),
+  //       child: CommonCard(
+  //           radius: 36,
+  //           child: InkWell(
+  //             borderRadius: const BorderRadius.all(Radius.circular(30)),
+  //             onTap: () {
+  //               NavigationServices(context).gotoSearchScreen();
+  //             },
+  //             child: CommonSearchBar(
+  //               // ignore: deprecated_member_use
+  //               iconData: FontAwesomeIcons.search,
+  //               enabled: false,
+  //               text: AppLocalizations(context).of("where_are_you_going"),
+  //             ),
+  //           )));
+  // }
+
+  List<Hotel> _chooseRandomlyBestDealHotels() {
+    List<Hotel> bestDealHotels = [];
+    while (bestDealHotels.length < 5) {
+      var randomIndex = Random().nextInt(GlobalVar.listAllHotels!.length);
+      if (!bestDealHotels.contains(GlobalVar.listAllHotels![randomIndex])) {
+        bestDealHotels.add(GlobalVar.listAllHotels![randomIndex]);
+        GlobalVar.listAllHotels![randomIndex].discountRate =
+            Random().nextInt(20) + 20;
+        GlobalVar.listAllHotels![randomIndex].isBestDeal = true;
+        GlobalVar.listAllHotels![randomIndex].date = DateText(
+            startDate: DateTime.now(),
+            endDate: DateTime.now().add(const Duration(days: 1)));
+      }
+    }
+    return bestDealHotels;
+  }
+
+  Widget getDealListView(int index) {
+    List<Hotel> bestDealHotelList = _chooseRandomlyBestDealHotels();
+    List<Widget> list = [];
+    bestDealHotelList.forEach((element) {
+      var animation = Tween(begin: 0.0, end: 1.0).animate(
+        CurvedAnimation(
+          parent: widget.animationController,
+          curve: const Interval(0, 1.0, curve: Curves.fastOutSlowIn),
+        ),
+      );
+      list.add(
+        HotelListViewPage(
+          callback: () {
+            NavigationServices(context).gotoHotelDetails(element);
+          },
+          hotelData: element,
+          animationController: widget.animationController,
+          animation: animation,
+        ),
+      );
+    });
+    return Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Column(
+          children: list,
+        ));
+  }
+}

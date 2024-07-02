@@ -77,11 +77,11 @@
         "ja": "アカウントを作成する"
     },
     {
-        "text_id": "your_mail",
-        "en": "Your email",
-        "fr": "Votre email",
-        "ar": "بريدك الالكتروني",
-        "ja": "あなたのメール"
+        "text_id": "mail",
+        "en": "Email",
+        "fr": "Email",
+        "ar": "البريد الإلكتروني",
+        "ja": "メール"
     },
     {
         "text_id": "password",
@@ -98,11 +98,39 @@
         "ja": "パスワードをお忘れですか？"
     },
     {
+        "text_id":"forgot_password",
+        "en": "Forgot\nPassword",
+        "fr": "Mot de passe\noublié",
+        "ar": "نسيت\nكلمة السر",
+        "ja": "パスワード\nを忘れた"
+    },
+    {
         "text_id": "resend_email_link",
         "en": "Enter your email to receive an email to reset your password",
         "fr": "Entrez votre email pour recevoir un email pour réinitialiser votre mot de passe",
         "ar": "أدخل بريدك الإلكتروني لتلقي بريد إلكتروني لإعادة تعيين كلمة المرور الخاصة بك",
         "ja": "パスワードをリセットするためのメールを受信するには、メールアドレスを入力してください"
+    },
+    {
+        "text_id": "reset_password",
+        "en": "Send Email",
+        "fr": "Envoyer un email",
+        "ar": "إرسال بريد إلكتروني",
+        "ja": "メールを送る"
+    },
+    {
+        "text_id":"reset_password_message",
+        "en": "We sent an email for you. Please check your email",
+        "fr": "Nous vous avons envoyé un email. Veuillez vérifier votre email",
+        "ar": "لقد أرسلنا بريدًا إلكترونيًا لك. يرجى التحقق من بريدك الإلكتروني",
+        "ja": "私たちはあなたにメールを送りました。あなたのメールをチェックしてください"
+    },
+    {
+        "text_id": "got_it",
+        "en": "GOT IT",
+        "fr": "COMPRIS",
+        "ar": "فهمت",
+        "ja": "わかりました"
     },
     {
         "text_id": "invalid_email",
@@ -161,20 +189,6 @@
         "ja": "サインアップ"
     },
     {
-        "text_id": "first_name",
-        "en": "First name",
-        "fr": "Prénom",
-        "ar": "الاسم الأول",
-        "ja": "ファーストネーム"
-    },
-    {
-        "text_id": "last_name",
-        "en": "Last name",
-        "fr": "Nom de famille",
-        "ar": "الكنية",
-        "ja": "苗字"
-    },
-    {
         "text_id": "explore",
         "en": "Explore",
         "fr": "explorer",
@@ -217,62 +231,6 @@
         "ja": "ホテル"
     },
     {
-        "text_id": "Backpacker_data",
-        "en": "Backpacker",
-        "fr": "Randonneuse",
-        "ar": "الرحال",
-        "ja": "バックパッカー"
-    },
-    {
-        "text_id": "Resort_data",
-        "en": "Resort",
-        "fr": "Recours",
-        "ar": "ملجأ",
-        "ja": "リゾート"
-    },
-    {
-        "text_id": "villa_data",
-        "en": "Villa",
-        "fr": "Villa",
-        "ar": "فيلا",
-        "ja": "ヴィラ"
-    },
-    {
-        "text_id": "apartment",
-        "en": "Apartment",
-        "fr": "Appartement",
-        "ar": "شقة",
-        "ja": "アパート"
-    },
-    {
-        "text_id": "guest_house",
-        "en": "Guest house",
-        "fr": "Maison d'hôtes",
-        "ar": "منزل الضيف",
-        "ja": "ゲストハウス"
-    },
-    {
-        "text_id": "motel",
-        "en": "Motel",
-        "fr": "Motel",
-        "ar": "فندق صغير",
-        "ja": "モーテル"
-    },
-    {
-        "text_id": "accommodation",
-        "en": "Accommodation",
-        "fr": "Hébergement",
-        "ar": "إقامة",
-        "ja": "宿泊施設"
-    },
-    {
-        "text_id": "Bed_breakfast",
-        "en": "Bed & Breakfast",
-        "fr": "lit et petit-déjeuner",
-        "ar": "سرير و فطور",
-        "ja": "ベッド＆ブレックファスト"
-    },
-    {
         "text_id": "Last_search",
         "en": "Last searches",
         "fr": "Dernières recherches",
@@ -287,18 +245,46 @@
         "ja": "すべてクリア"
     },
     {
-        "text_id": "cape Town",
-        "en": "Cape Town",
-        "fr": "Le Cap",
-        "ar": "كيب تاون",
-        "ja": "ケープタウン"
-    },
-    {
         "text_id": "five_star",
         "en": "Extraordinary five-star\noutdoor activites",
         "fr": "Activités d'extérieur \nextraordinaires",
         "ar": "أنشطة غير عادية من فئة الخمس نجوم \nفي الهواء الطلق",
         "ja": "並外れた5つ星の\n屋外アクティビティ"
+    },
+    {
+        "text_id": "world_class_service",
+        "en": "Enjoy world-class service\nand amenities",
+        "fr": "Profitez d'un service de classe mondiale\net des équipements",
+        "ar": "استمتع بخدمة عالمية المستوى\nووسائل الراحة",
+        "ja": "世界クラスのサービスをお楽しみください\nそしてアメニティ"
+    },
+    {
+        "text_id": "relaxing_place",
+        "en": "The perfect place to\nunwind for you",
+        "fr": "L'endroit parfait pour \nse détendre pour vous",
+        "ar": "المكان المثالي لل\nاسترخاء بالنسبة لك",
+        "ja": "あなたのためのリラックスする\n完璧な場所"
+    },
+    {
+        "text_id": "bitexco",
+        "en": "Bitexco",
+        "fr": "Bitexco",
+        "ar": "بيتيكسكو",
+        "ja": "ビテクスコ"
+    },
+    {
+        "text_id": "landmark_81",
+        "en": "Landmark 81",
+        "fr": "Landmark 81",
+        "ar": "لاندمارك 81",    
+        "ja": "ランドマーク81"
+    },
+    {
+        "text_id": "national_pagoda",
+        "en": "National Pagoda",
+        "fr": "Pagode nationale",
+        "ar": "معبد وطني",
+        "ja": "国立パゴダ"
     },
     {
         "text_id": "view_hotel",
@@ -343,13 +329,6 @@
         "ja": "すべて表示"
     },
     {
-        "text_id": "km_to_city",
-        "en": "km to city",
-        "fr": "km de la ville",
-        "ar": "كم للمدينة",
-        "ja": "街までキロ"
-    },
-    {
         "text_id": "per_night",
         "en": "/per night",
         "fr": "/par nuit",
@@ -366,7 +345,7 @@
     {
         "text_id": "book_now",
         "en": "Book now",
-        "fr": "Destination\npopulaire",
+        "fr": "Destination populaire",
         "ar": " احجز الآن",
         "ja": "今予約する"
     },
@@ -385,11 +364,11 @@
         "ja": "概要"
     },
     {
-        "text_id": "read_more",
-        "en": "read more",
-        "fr": "Lire la suite",
-        "ar": "اقرأ أكثر",
-        "ja": "続きを読む"
+        "text_id": "more_than",
+        "en": "More than",
+        "fr": "Plus de",
+        "ar": "أكثر من",
+        "ja": "より多くの"
     },
     {
         "text_id": "less",
@@ -428,9 +407,9 @@
     },
     {
         "text_id": "price",
-        "en": "Prcie",
+        "en": "Price",
         "fr": "Prix",
-        "ar": "سعر",
+        "ar": "السعر",
         "ja": "価格"
     },
     {
@@ -490,13 +469,6 @@
         "ja": "ホテルが見つかりました"
     },
     {
-        "text_id": "filtter",
-        "en": "filtter",
-        "fr": "filtre",
-        "ar": "منقي",
-        "ja": "フィルタ"
-    },
-    {
         "text_id": "price_text",
         "en": "price (for 1 night)",
         "fr": "prix (pour 1 nuit)",
@@ -525,7 +497,7 @@
         "ja": "宿泊施設の種類"
     },
     {
-        "text_id": "Apply_text",
+        "text_id": "apply_text",
         "en": "Apply",
         "fr": "Appliquer",
         "ar": "تطبيق",
@@ -553,35 +525,35 @@
         "ja": "無料の朝食"
     },
     {
-        "text_id": "free_Parking",
+        "text_id": "free_parking",
         "en": "Free Parking",
         "fr": "Parking gratuit",
         "ar": "موقف سيارات مجاني",
         "ja": "無料駐車場"
     },
     {
-        "text_id": "pool_text",
-        "en": "Pool",
+        "text_id": "swimming_pool",
+        "en": "Swimming Pool",
         "fr": "Piscine",
-        "ar": "تجمع",
+        "ar": "حمام سباحة",
         "ja": "プール"
     },
     {
-        "text_id": "pet_friendlly",
-        "en": "Pet Friendlly",
+        "text_id" : "pet_friendly",
+        "en": "Pet Friendly",
         "fr": "Animaux acceptés",
-        "ar": "صديق للحيوانات الاليفة",
-        "ja": "ペットに優しい"
+        "ar": "صديق للحيوانات الأليفة",
+        "ja": "ペットフレンドリー"
     },
     {
-        "text_id": "Free_Wifi",
+        "text_id": "free_wifi",
         "en": "Free Wifi",
         "fr": "Wifi gratuit",
         "ar": "واى فاى مجانى",
         "ja": "無料のWifi"
     },
     {
-        "text_id": "Less_than",
+        "text_id": "less_than",
         "en": "Less than",
         "fr": "Moins que",
         "ar": "أقل من",
@@ -602,25 +574,11 @@
         "ja": "アマンダ"
     },
     {
-        "text_id": "view_edit",
-        "en": "View and Edit profile",
-        "fr": "Afficher et modifier le profil",
-        "ar": "عرض وتحرير الملف الشخصي",
-        "ja": "プロファイルの表示と編集"
-    },
-    {
         "text_id": "edit_profile",
         "en": "Edit Profile",
         "fr": "Editer le profil",
         "ar": "تعديل الملف الشخصي",
         "ja": "プロファイル編集"
-    },
-    {
-        "text_id": "username_text",
-        "en": "UserName",
-        "fr": "Nom d'utilisateur",
-        "ar": "اسم االمستخدم",
-        "ja": "ユーザー名"
     },
     {
         "text_id": "phone",
@@ -630,25 +588,11 @@
         "ja": "電話"
     },
     {
-        "text_id": "date_of_birth",
-        "en": "Date of Birth",
-        "fr": "Date de naissance",
-        "ar": "تاريخ الولادة",
-        "ja": "生年月日"
-    },
-    {
         "text_id": "address_text",
         "en": "Address",
         "fr": "Adresse",
         "ar": "عنوان",
         "ja": "住所"
-    },
-    {
-        "text_id": "mail_text",
-        "en": "Email",
-        "fr": "E-mail",
-        "ar": "بريد إلكتروني",
-        "ja": "Eメール"
     },
     {
         "text_id": "change_password",
@@ -658,11 +602,11 @@
         "ja": "パスワードを変更する"
     },
     {
-        "text_id": "enter_your_new_password",
-        "en": "Enter your new password and confirm your password",
-        "fr": "Entrez votre nouveau mot de passe et confirmez votre mot de passe",
-        "ar": "أدخل كلمة المرور الجديدة الخاصة بك وقم بتأكيد كلمة المرور الخاصة بك",
-        "ja": "新しいパスワードを入力し、パスワードを確認します"
+        "text_id": "enter_new_password",
+        "en": "Enter new password",
+        "fr": "Entrez un nouveau mot de passe",
+        "ar": "أدخل كلمة مرور جديدة",
+        "ja": "新しいパスワードを入力してください"
     },
     {
         "text_id": "new_password",
@@ -679,179 +623,11 @@
         "ja": "パスワードを認証する"
     },
     {
-        "text_id": "invite_friend",
-        "en": "Invite Friend",
-        "fr": "Inviter un ami",
-        "ar": "قم بدعوة صديق",
-        "ja": "友達を呼ぶ"
-    },
-    {
-        "text_id": "invite_your_friend",
-        "en": "Invite your Friend",
-        "fr": "Invitez votre ami",
-        "ar": "ادعو صديقك",
-        "ja": "友達を招待する"
-    },
-    {
-        "text_id": "invite_friend_desc",
-        "en": "are you one of those who makes everything at the last moment",
-        "fr": "es-tu de ceux qui font tout au dernier moment",
-        "ar": "هل أنت ممن يصنعون كل شيء في آخر لحظة",
-        "ja": "あなたは最後の瞬間にすべてを作る人の一人ですか"
-    },
-    {
-        "text_id": "share_text",
-        "en": "Share",
-        "fr": "Partager",
-        "ar": "يشارك",
-        "ja": "シェア"
-    },
-    {
-        "text_id": "credit_coupons",
-        "en": "Crdit & Coupons",
-        "fr": "Crédit et coupons",
-        "ar": "الائتمان والقسائم",
-        "ja": "クレジット＆クーポン"
-    },
-    {
-        "text_id": "help_center",
-        "en": "Help Center",
-        "fr": "Centre d'aide",
-        "ar": "مركز المساعدة",
-        "ja": "ヘルプセンター"
-    },
-    {
-        "text_id": "how_can_help_you",
-        "en": "How can we help",
-        "fr": "Comment pouvons nous aider",
-        "ar": "كيف يمكن أن نساعد",
-        "ja": "どのように我々は助けることができます"
-    },
-    {
-        "text_id": "search_help_artical",
-        "en": "Search help articales",
-        "fr": "Rechercher de l'aide Articales",
-        "ar": "ابحث في تعليمات المساعدة",
-        "ja": "ヘルプアーティカルを検索"
-    },
-    {
-        "text_id": "paying_for_a_reservation",
-        "en": "Paying for a reservation",
-        "fr": "Payer une réservation",
-        "ar": "دفع مقابل الحجز",
-        "ja": "予約の支払い"
-    },
-    {
-        "text_id": "trust_and_safety",
-        "en": "Trust and Safety",
-        "fr": "Confiance et sécurité",
-        "ar": "الثقة والأمان",
-        "ja": "信頼と安全"
-    },
-    {
-        "text_id": "How do I ",
-        "en": "How do I cancel my rooms reservation?",
-        "fr": "Comment annuler ma réservation de chambres?",
-        "ar": "كيف ألغي حجز غرفتي؟",
-        "ja": "部屋の予約をキャンセルするにはどうすればよいですか？"
-    },
-    {
-        "text_id": "What methods ",
-        "en": "What methods of payment does Roome accept?",
-        "fr": "Quels modes de paiement Roome accepte-t-il?",
-        "ar": "ما هي طرق الدفع التي يقبلها Roome؟",
-        "ja": "Roomeはどのような支払い方法を受け入れますか？"
-    },
-    {
-        "text_id": "I'm_a_guest_What",
-        "en": "I'm a guest. What are some safety tips I can follow?",
-        "fr": "Je suis un invité. Quels conseils de sécurité puis-je suivre?",
-        "ar": "أنا ضيف. ما هي بعض نصائح الأمان التي يمكنني اتباعها؟",
-        "ja": "私はゲストです。私が従うことができるいくつかの安全上のヒントは何ですか？"
-    },
-    {
-        "text_id": "When am I charged",
-        "en": "When am I charged for a reservation?",
-        "fr": "Quand suis-je facturé pour une réservation?",
-        "ar": "متى يتم محاسبتي على الحجز؟",
-        "ja": "予約はいつ請求されますか？"
-    },
-    {
-        "text_id": "How do I edit",
-        "en": "How do I edit or remove a payment method?",
-        "fr": "Comment modifier ou supprimer un mode de paiement?",
-        "ar": "كيف أقوم بتعديل أو إزالة طريقة الدفع؟",
-        "ja": "お支払い方法を編集または削除するにはどうすればよいですか？"
-    },
-    {
-        "text_id": "You can cancel",
-        "en": "You can cancel a reservation any time before Or during your trip. To cancel a reservation:",
-        "fr": "Vous pouvez annuler une réservation à tout moment avant ou pendant votre voyage. Pour annuler une réservation:",
-        "ar": "يمكنك إلغاء الحجز في أي وقت قبل أو أثناء رحلتك. لإلغاء الحجز:",
-        "ja": "旅行前または旅行中はいつでも予約をキャンセルできます。予約をキャンセルするには："
-    },
-    {
-        "text_id": "GO to Trips and choose yotr trip",
-        "en": "GO to Trips and choose yotr trip Click Your home reservation Click Modify reservation",
-        "fr": "Allez à Voyages et choisissez votre voyage Cliquez sur Votre réservation de maison Cliquez sur Modifier la réservation",
-        "ar": "اذهب إلى الرحلات واختر yotr trip انقر فوق حجز منزلك انقر فوق تعديل الحجز",
-        "ja": "Tripsに移動し、yotrtripを選択します。自宅の予約をクリックします。予約の変更をクリックします。"
-    },
-    {
-        "text_id": "You'll be taken to",
-        "en": "You'll be taken to a new page where you either change or cancel your reservation. Click the Next button under Cancel reservation to Start the cancellation process.",
-        "fr": "Vous serez redirigé vers une nouvelle page où vous modifiez ou annulez votre réservation. Cliquez sur le bouton Suivant sous Annuler la réservation pour démarrer le processus d'annulation.",
-        "ar": "سيتم نقلك إلى صفحة جديدة حيث يمكنك إما تغيير أو إلغاء حجزك. انقر فوق الزر التالي ضمن إلغاء الحجز لبدء عملية الإلغاء.",
-        "ja": "予約を変更またはキャンセルする新しいページに移動します。 [予約のキャンセル]の下の[次へ]ボタンをクリックして、キャンセルプロセスを開始します。"
-    },
-    {
-        "text_id": "If you cancel, your ",
-        "en": "If you cancel, your refund Will be determined by your host'r cancellation policy. We'll show your refund breakdown before you finalize the cancellation.",
-        "fr": "Si vous annulez, votre remboursement sera déterminé par la politique d'annulation de votre hôte. Nous vous montrerons le détail de votre remboursement avant de finaliser l'annulation.",
-        "ar": "إذا قمت بالإلغاء ، فسيتم تحديد المبلغ المسترد من خلال سياسة الإلغاء الخاصة بالمضيف. سنعرض تفاصيل استرداد الأموال الخاصة بك قبل الانتهاء من الإلغاء.",
-        "ja": "キャンセルした場合、返金はホストのキャンセルポリシーによって決定されます。キャンセルを確定する前に、払い戻しの内訳を表示します。"
-    },
-    {
-        "text_id": "Give feedback",
-        "en": "Give feedback",
-        "fr": "Donnez votre avis",
-        "ar": "إعطاء ردود الفعل",
-        "ja": "フィードバックを与えます"
-    },
-    {
-        "text_id": "Related articles",
-        "en": "Related articles",
-        "fr": "Articles Liés",
-        "ar": "مقالات ذات صلة",
-        "ja": "関連記事"
-    },
-    {
-        "text_id": "Can I change",
-        "en": "Can I change a reservation as a guest?",
-        "fr": "Puis-je modifier une réservation en tant qu'invité?",
-        "ar": "هل يمكنني تغيير الحجز كضيف؟",
-        "ja": "ゲストとして予約を変更することはできますか？"
-    },
-    {
-        "text_id": "HoW do I cancel",
-        "en": "HoW do I cancel a reservation request?",
-        "fr": "Comment annuler une demande de réservation?",
-        "ar": "كيف يمكنني إلغاء طلب الحجز؟",
-        "ja": "予約リクエストをキャンセルするにはどうすればよいですか？"
-    },
-    {
-        "text_id": "What is the",
-        "en": "What is the Resolution Center?",
-        "fr": "Qu'est-ce que le centre de résolution?",
-        "ar": "ما هو مركز القرار؟",
-        "ja": "解決センターとは何ですか？"
-    },
-    {
-        "text_id": "payment_text",
-        "en": "Payment",
-        "fr": "Paiement",
-        "ar": "دفع",
-        "ja": "支払い"
+        "text_id": "enter_confirm_password",
+        "en": "Enter confirm password",
+        "fr": "Entrez le mot de passe de confirmation",
+        "ar": "أدخل تأكيد كلمة المرور",
+        "ja": "確認パスワードを入力してください"
     },
     {
         "text_id": "setting_text",
@@ -859,13 +635,6 @@
         "fr": "Réglage",
         "ar": "جلسة",
         "ja": "設定"
-    },
-    {
-        "text_id": "Notifications",
-        "en": "Notifications",
-        "fr": "Notifications",
-        "ar": "إشعارات",
-        "ja": "通知"
     },
     {
         "text_id": "Theme Mode",
@@ -917,11 +686,11 @@
         "ja": "色"
     },
     {
-        "text_id": "Selected color",
-        "en": "Selected color",
-        "fr": "Couleur sélectionnée",
-        "ar": "اللون المحدد",
-        "ja": "選択した色"
+        "text_id": "select_color",
+        "en": "Select color",
+        "fr": "Sélectionnez la couleur",
+        "ar": "حدد اللون",
+        "ja": "色を選択"
     },
     {
         "text_id": "Language",
@@ -931,18 +700,11 @@
         "ja": "言語"
     },
     {
-        "text_id": "Selected language",
-        "en": "Selected language",
-        "fr": "Langue sélectionnée",
-        "ar": "اللغة المختارة",
-        "ja": "選択した言語"
-    },
-    {
-        "text_id": "Country",
-        "en": "Country",
-        "fr": "Pays",
-        "ar": "دولة",
-        "ja": "国"
+        "text_id": "select_language",
+        "en": "Select language",
+        "fr": "Sélectionnez la langue",
+        "ar": "اختر اللغة",
+        "ja": "言語を選択"
     },
     {
         "text_id": "Currency",
@@ -950,27 +712,6 @@
         "fr": "Devise",
         "ar": "عملة",
         "ja": "通貨"
-    },
-    {
-        "text_id": "Terms of Services",
-        "en": "Terms of Services",
-        "fr": "Conditions de services",
-        "ar": "شروط الخدمة",
-        "ja": "利用規約"
-    },
-    {
-        "text_id": "Privacy Policy",
-        "en": "Privacy Policy",
-        "fr": "Politique de confidentialité",
-        "ar": "سياسة الخصوصية",
-        "ja": "個人情報保護方針"
-    },
-    {
-        "text_id": "Give Us Feedbacks",
-        "en": "Give Us Feedbacks",
-        "fr": "Donnez-nous des commentaires",
-        "ar": "قدم لنا الاصداء",
-        "ja": "フィードバックをお寄せください"
     },
     {
         "text_id": "Log out",
@@ -1008,25 +749,11 @@
         "ja": "人"
     },
     {
-        "text_id": "room_data",
-        "en": "Room",
-        "fr": "Chambre",
-        "ar": "غرفة",
-        "ja": "ルーム"
-    },
-    {
         "text_id": "choose_date",
         "en": "Choose Date",
         "fr": "Choisissez la date",
         "ar": "اختر موعدا",
         "ja": "日付を選択"
-    },
-    {
-        "text_id": "Apply_date",
-        "en": "Apply",
-        "fr": "Appliquer",
-        "ar": "تطبيق",
-        "ja": "適用する"
     },
     {
         "text_id": "From_text",
@@ -1041,34 +768,6 @@
         "fr": "À",
         "ar": "ل",
         "ja": "に"
-    },
-    {
-        "text_id": "sleeps",
-        "en": "sleeps",
-        "fr": "dort",
-        "ar": "ينام",
-        "ja": "眠る"
-    },
-    {
-        "text_id": "children",
-        "en": "children",
-        "fr": "enfants",
-        "ar": "الأطفال",
-        "ja": "子供達"
-    },
-    {
-        "text_id": "enter_new_password",
-        "en": "enter new password",
-        "fr": "Entrez un nouveau mot de passe",
-        "ar": "أدخل كلمة مرور جديدة",
-        "ja": "新しいパスワードを入力してください"
-    },
-    {
-        "text_id": "enter_confirm_password",
-        "en": "enter confirm password",
-        "fr": "Entrez confirmer le mot de passe",
-        "ar": "أدخل تأكيد كلمة المرور",
-        "ja": "確認パスワードを入力してください"
     },
     {
         "text_id": "password_cannot_empty",
@@ -1106,13 +805,6 @@
         "ja": "メールを空にすることはできません"
     },
     {
-        "text_id": "enter_valid_email",
-        "en": "Please enter a valid email address",
-        "fr": "Veuillez entrer une adresse e-mail valide",
-        "ar": "الرجاء إدخال عنوان بريد إلكتروني صالح",
-        "ja": "有効なメールアドレスを入力してください"
-    },
-    {
         "text_id": "email_already_in_use",
         "en": "Email already in use",
         "fr": "Email déjà utilisé", 
@@ -1128,37 +820,415 @@
     },
     {
         "text_id": "enter_password",
-        "en": "enter password",
-        "fr": "enter_password",
+        "en": "Enter password",
+        "fr": "Entrez le mot de passe",
         "ar": "أدخل كلمة المرور",
-        "ja": "パスワードを入力する"
+        "ja": "パスワードを入力"
     },
     {
-        "text_id": "enter_first_name",
-        "en": "Enter first name",
-        "fr": "entrez votre prénom",
-        "ar": "أدخل الاسم الأول",
-        "ja": "名を入力してください"
+        "text_id": "enter_name",
+        "en": "Enter name",
+        "fr": "Entrez le nom",
+        "ar": "أدخل الاسم",
+        "ja": "名前を入力"
     },
     {
-        "text_id": "enter_last_name",
-        "en": "Enter first name",
-        "fr": "Entrer le nom de famille",
-        "ar": "إدخال اسم آخر",
-        "ja": "名前を入力してください"
+        "text_id": "name",
+        "en": "Name",
+        "fr": "Nom",
+        "ar": "اسم",
+        "ja": "名前"
     },
     {
-        "text_id": "first_name_cannot_empty",
-        "en": "First Name cannot be empty",
-        "fr": "Le prénom ne peut pas être vide",
-        "ar": "لا يمكن أن يكون الاسم الأول فارغًا",
-        "ja": "名を空にすることはできません"
+        "text_id":"enter_phone_number",
+    "en": "Enter phone number",
+    "fr": "Entrez le numéro de téléphone",
+    "ar": "أدخل رقم الهاتف",
+    "ja": "電話番号を入力"
     },
     {
-        "text_id": "last_name_cannot_empty",
-        "en": "Last Name cannot be empty",
-        "fr": "Le nom de famille ne peut pas être vide",
-        "ar": "لا يمكن أن يكون الاسم الأخير فارغًا",
-        "ja": "姓を空にすることはできません"
+        "text_id": "enter_address",
+        "en": "Enter address",
+        "fr": "Entrez l'adresse",
+        "ar": "أدخل العنوان",
+        "ja": "住所を入力"
+    },
+    {
+        "text_id": "update_profile",
+        "en": "Update",
+        "fr": "Mettre à jour",
+        "ar": "تحديث",
+        "ja": "更新"
+    },
+    {
+        "text_id": "updated",
+        "en": "Updated",
+        "fr": "Mis à jour",
+        "ar": "محدث",
+        "ja": "更新済み"
+    },
+    {
+        "text_id": "profile_updated",
+        "en": "Profile updated successfully!",
+        "fr": "Profil mis à jour avec succès!",
+        "ar": "تم تحديث الملف الشخصي بنجاح!",
+        "ja": "プロフィールが正常に更新されました！"
+    },
+    {
+        "text_id": "current_password_not_match",
+        "en": "Current password does not match",
+        "fr": "Le mot de passe actuel ne correspond pas",
+        "ar": "كلمة المرور الحالية غير متطابقة",
+        "ja": "現在のパスワードが一致しません"
+    },
+    {
+        "text_id": "strong_password_strong_defense",
+        "en": "Strong password, strong defense",
+        "fr": "Mot de passe fort, défense forte",
+        "ar": "كلمة مرور قوية ، دفاع قوي",
+        "ja": "強力なパスワード、強力な防御"
+    },
+    {
+        "text_id": "password_updated",
+        "en": "Password updated successfully!",
+        "fr": "Mot de passe mis à jour avec succès!",
+        "ar": "تم تحديث كلمة المرور بنجاح!",
+        "ja": "パスワードが正常に更新されました！"
+    },
+    {
+        "text_id": "current_password",
+        "en": "Current Password",
+        "fr": "Mot de passe actuel",
+        "ar": "كلمة المرور الحالية",
+        "ja": "現在のパスワード"
+    },
+    {
+        "text_id": "enter_current_password",
+        "en": "Enter current password",
+        "fr": "Entrez le mot de passe actuel",
+        "ar": "أدخل كلمة المرور الحالية",
+        "ja": "現在のパスワードを入力"
+    },
+    {
+        "text_id": "no_hotel_found",
+        "en": "We cannot find any hotel",
+        "fr": "Nous ne pouvons trouver aucun hôtel",
+        "ar": "لا يمكننا العثور على أي فندق",
+        "ja": "ホテルが見つかりません"
+    },
+    {
+        "text_id":"detail_title",
+        "en": "Detail Information",
+        "fr": "Information détaillée",
+        "ar": "معلومات مفصلة",
+        "ja": "詳細情報"
+    },
+    {
+        "text_id": "room_detail",
+        "en": "Room Detail",
+        "fr": "Détail de la chambre",
+        "ar": "تفاصيل الغرفة",
+        "ja": "部屋の詳細"
+    },
+    {
+        "text_id": "amenity",
+        "en": "Amenity",
+        "fr": "Commodité",
+        "ar": "وسيلة راحة",
+        "ja": "アメニティ"
+    },
+    {
+        "text_id": "district_1",
+        "en": "Dist 1",
+        "fr": "Dist 1",
+        "ar": "الحي 1",
+        "ja": "地区1"
+    },
+    {
+        "text_id": "district_2",
+        "en": "Dist 2",
+        "fr": "Dist 2",
+        "ar": "الحي 2",
+        "ja": "地区2"
+    },
+    {
+        "text_id": "district_3",
+        "en": "Dist 3",
+        "fr": "Dist 3",
+        "ar": "الحي 3",
+        "ja": "地区3"
+    },
+    {
+        "text_id": "district_4",
+        "en": "Dist 4",
+        "fr": "Dist 4",
+        "ar": "الحي 4",
+        "ja": "地区4"
+    },
+    {
+        "text_id": "district_5",
+        "en": "Dist 5",
+        "fr": "Dist 5",
+        "ar": "الحي 5",
+        "ja": "地区5"
+    },
+    {
+        "text_id": "district_6",
+        "en": "Dist 6",
+        "fr": "Dist 6",
+        "ar": "الحي 6",
+        "ja": "地区6"
+    },
+    {
+        "text_id":"district_7",
+        "en": "Dist 7",
+        "fr": "Dist 7",
+        "ar": "الحي 7",
+        "ja": "地区7"
+    },
+    {
+        "text_id": "district_8",
+        "en": "Dist 8",
+        "fr": "Dist 8",
+        "ar": "الحي 8",
+        "ja": "地区8"
+    },
+    {
+        "text_id": "district_9",
+        "en": "Dist 9",
+        "fr": "Dist 9",
+        "ar": "الحي 9",
+        "ja": "地区9"
+    },
+    {
+        "text_id": "district_10",
+        "en": "Dist 10",
+        "fr": "Dist 10",
+        "ar": "الحي 10",
+        "ja": "地区10"
+    },
+    {
+        "text_id": "district_11",
+        "en": "Dist 11",
+        "fr": "Dist 11",
+        "ar": "الحي 11",
+        "ja": "地区11"
+    },
+    {
+        "text_id": "district_12",
+        "en": "Dist 12",
+        "fr": "Dist 12",
+        "ar": "الحي 12",
+        "ja": "地区12"
+    },
+    {
+        "text_id": "binh_tan",
+        "en": "Binh Tan Dist",
+        "fr": "Binh Tan Dist",
+        "ar": "منطقة بينه تان",
+        "ja": "ビンタン地区"
+    },
+    {
+        "text_id": "binh_thanh",
+        "en": "Binh Thanh Dist",
+        "fr": "Binh Thanh Dist",
+        "ar": "منطقة بينه تان",
+        "ja": "ビンタン地区"
+    },
+    {
+        "text_id": "go_vap",
+        "en": "Go Vap Dist",
+        "fr": "Go Vap Dist",
+        "ar": "منطقة جو فاب",
+        "ja": "ゴーヴァップ地区"
+    },
+    {
+        "text_id": "phu_nhuan",
+        "en": "Phu Nhuan Dist",
+        "fr": "Phu Nhuan Dist",
+        "ar": "منطقة فو نهوان",
+        "ja": "フーヌアン地区"
+    },
+    {
+        "text_id": "tan_binh",
+        "en": "Tan Binh Dist",
+        "fr": "Tan Binh Dist",
+        "ar": "منطقة تان بينه",
+        "ja": "タンビン地区"
+    },
+    {
+        "text_id": "tan_phu",
+        "en": "Tan Phu Dist",
+        "fr": "Tan Phu Dist",
+        "ar": "منطقة تان فو",
+        "ja": "タンフー地区"
+    },
+    {
+        "text_id": "payment_details",
+        "en": "Payment Details",
+        "fr": "Détails de paiement",
+        "ar": "تفاصيل الدفع",
+        "ja": "支払い詳細"
+    },
+    {
+        "text_id": "night",
+        "en": "Night(s)",
+        "fr": "Nuit(s)",
+        "ar": "ليلة",
+        "ja": "夜"
+    },
+    {
+        "text_id": "check_in",
+        "en": "Check-in",
+        "fr": "Arrivée",
+        "ar": "تسجيل الوصول",
+        "ja": "チェックイン"
+    },
+    {
+        "text_id": "check_out",
+        "en": "Check-out",
+        "fr": "Check-out",
+        "ar": "الدفع",
+        "ja": "チェックアウト"
+    },
+    {
+        "text_id": "booked_soon",
+        "en": "Hurry up! It will be booked soon",
+        "fr": "Dépêchez-vous! Il sera bientôt réservé",
+        "ar": "أسرع! سيتم حجزه قريبًا",
+        "ja": "急いで！ すぐに予約されます"
+    },
+    {
+        "text_id": "initial_price",
+        "en": "Initial price",
+        "fr": "Prix ​​initial",
+        "ar": "السعر المبدئي",
+        "ja": "初期価格"
+    },
+    {
+        "text_id": "current_price",
+        "en": "Current price",
+        "fr": "Prix ​​actuel",
+        "ar": "السعر الحالي",
+        "ja": "現在の価格"
+    },
+    {
+        "text_id": "total_price",
+        "en": "Total price(include 5% tax)",
+        "fr": "Prix ​​total (taxe de 5% incluse)",
+        "ar": "السعر الإجمالي (تشمل 5٪ ضريبة)",
+        "ja": "合計価格（5％の税金を含む）"
+    },
+    {
+        "text_id": "off",
+        "en": "off",
+        "fr": "de",
+        "ar": "إيقاف",
+        "ja": "オフ"
+    },
+    {
+        "text_id": "pay_at_hotel",
+        "en": "You will pay at the hotel when you check-in",
+        "fr": "Vous paierez lorsque vous vous enregistrerez",
+        "ar": "سوف تدفع عند تسجيل الوصول",
+        "ja": "チェックイン時に支払います"
+    },
+    {
+        "text_id": "your_information",
+        "en": "Your Information",
+        "fr": "Vos informations",
+        "ar": "معلوماتك",
+        "ja": "あなたの情報"
+    },
+    {
+        "text_id": "pay_now",
+        "en": "Pay now",
+        "fr": "Payer maintenant",
+        "ar": "ادفع الآن",
+        "ja": "今すぐ支払う"
+    },
+    {
+        "text_id": "success",
+        "en": "Success",
+        "fr": "Succès",
+        "ar": "نجاح",
+        "ja": "成功"
+    },
+    {
+        "text_id": "call_next_hours",
+        "en": "We will call you to confirm in the next few hours",
+        "fr": "Appel de confirmation à venir",
+        "ar": "سنتصل بك للتأكيد في الساعات القادمة",
+        "ja": "数時間以内に確認のためにお電話します"
+    },
+    {
+        "text_id": "error",
+        "en": "Error",
+        "fr": "Erreur",
+        "ar": "خطأ",
+        "ja": "エラー"
+    },
+    {
+        "text_id": "fill_information",
+        "en": "Fill in the information in the profile screen",
+        "fr": "Veuillez remplir les",
+        "ar": "يرجى ملء المعلومات في شاشة الملف الشخصي",
+        "ja": "プロフィール画面の情報を入力してください"        
+    },
+    {
+        "text_id": "cancel",
+        "en": "Cancel",
+        "fr": "Annuler",
+        "ar": "إلغاء",
+        "ja": "キャンセル"
+    },
+    {
+        "text_id": "check_in_time",
+        "en": "Check-in time",
+        "fr": "Heure d'arrivée",
+        "ar": "وقت تسجيل الوصول",
+        "ja": "チェックイン時間"
+    },
+    {
+        "text_id": "check_out_time",
+        "en": "Check-out time",
+        "fr": "Heure de départ",
+        "ar": "وقت تسجيل الخروج",
+        "ja": "チェックアウト時間"
+    },
+    {
+        "text_id": "14:00 PM",
+        "en": "14:00 PM",
+        "fr": "14:00 PM",
+        "ar": "14:00 مساءً",
+        "ja": "14:00 PM"
+    },
+    {
+        "text_id": "12:00 PM",
+        "en": "12:00 PM",
+        "fr": "12:00 PM",
+        "ar": "12:00 مساءً",
+        "ja": "12:00 PM"
+    },
+    {
+        "text_id": "invalid_credential",
+        "en": "Invalid credential",
+        "fr": "Identifiant invalide",
+        "ar": "بيانات الاعتماد غير صالحة",
+        "ja": "無効な資格情報"
+    },
+    {
+        "text_id": "invalid_credential_description",
+        "en": "Incorrect email or password",
+        "fr": "E-mail ou mot de passe incorrect",
+        "ar": "ابيانات الحساب غير صحيحة",
+        "ja": "アカウント情報が正しくありません"
+    },
+    {
+        "text_id": "sign_up_error",
+        "en": "Sign up error",
+        "fr": "Erreur d'inscription",
+        "ar": "خطأ في التسجيل",
+        "ja": "サインアップエラー"
     }
 ]

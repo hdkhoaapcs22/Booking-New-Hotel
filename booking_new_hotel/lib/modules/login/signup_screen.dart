@@ -1,11 +1,15 @@
+import 'package:booking_new_hotel/global/global_var.dart';
+import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
+import 'package:booking_new_hotel/modules/login/credentials_validity.dart';
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
+import '../../service/database/database_service.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'send_email_to_verify_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   final Function() onTap;
@@ -16,15 +20,19 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String errorEmail = "";
-  String errorPassword = "";
-  String errorPasswordConfirm = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  double distanceEmailError = 34,
-      distancePasswordError = 34,
-      distanceConfirmPasswordError = 34;
+  ShowAuthError showAuthError = ShowAuthError();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,31 +59,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     padding:
                         const EdgeInsets.only(top: 15, left: 24, right: 24),
                     keyboardType: TextInputType.emailAddress,
-                    titleText: AppLocalizations(context).of("your_mail"),
+                    titleText: AppLocalizations(context).of("mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
-                    errorText: errorEmail,
+                    errorText: showAuthError.getmessageFirstFieldError,
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
                     padding: EdgeInsets.fromLTRB(
-                        24, distanceEmailError, 24, distancePasswordError),
+                        24,
+                        showAuthError
+                            .getgapBetweenFirstAndSecondFieldDuringError,
+                        24,
+                        showAuthError
+                            .getgapBetweenSecondAndThirdFieldDuringError),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
                     isObscureText: true,
-                    errorText: errorPassword,
+                    errorText: showAuthError.getmessageSecondFieldError,
                   ),
                   CommonTextFieldView(
                     controller: confirmPasswordController,
                     padding: EdgeInsets.only(
                         left: 24,
                         right: 24,
-                        bottom: distanceConfirmPasswordError),
+                        bottom: showAuthError
+                            .getgapBetweenThirdFieldAndButtonDuringError),
                     titleText: AppLocalizations(context).of("confirm_password"),
                     hintText:
                         AppLocalizations(context).of("enter_confirm_password"),
                     keyboardType: TextInputType.text,
-                    errorText: errorPasswordConfirm,
+                    errorText: showAuthError.getmessageThirdFieldError,
                     isObscureText: true,
                   ),
                   CommonButton(
@@ -127,59 +141,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
         builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
-
-    try {
-      if (passwordController.text.trim() ==
-          confirmPasswordController.text.trim()) {
-        await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        )
-            .then((value) {
-          errorPassword = "";
-          errorEmail = "";
-          errorPasswordConfirm = "";
-          distancePasswordError = 34;
-          passwordController.clear();
-          confirmPasswordController.clear();
-          emailController.clear();
-          Navigator.pop(context);
-          widget.onTap();
-        });
-      } else {
-        errorPasswordConfirm =
-            AppLocalizations(context).of('password_not_match');
-        errorEmail = errorPassword = "";
-        distancePasswordError = distanceEmailError = 34;
-        distanceConfirmPasswordError = 0;
-        setState(() {});
-        Navigator.pop(context);
-      }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'channel-error') {
-        if (emailController.text.trim().isEmpty) {
-          errorEmail = AppLocalizations(context).of('email_cannot_empty');
-          distanceEmailError = 0;
-        } else {
-          errorPassword = AppLocalizations(context).of('password_cannot_empty');
-          errorEmail = "";
-          distanceEmailError = 34;
-          distancePasswordError = 0;
-        }
-      } else if (e.code == 'email-already-in-use') {
-        errorEmail = AppLocalizations(context).of('email_already_in_use');
-        errorPassword = errorPasswordConfirm = "";
-        distanceEmailError = 0;
-        distancePasswordError = 34;
-      } else if (e.code == 'weak-password') {
-        errorPassword = AppLocalizations(context).of('valid_password');
-        errorEmail = errorPasswordConfirm = "";
-        distancePasswordError = 0;
-        distanceEmailError = 34;
-      }
+    String tmpEmail = emailController.text.trim();
+    String tmpPassword = passwordController.text;
+    String tmpConfirmPassword = confirmPasswordController.text;
+    CredentialsValidity credentialsValidity = CredentialsValidity();
+    if (!credentialsValidity.checkValidityInSignUp(showAuthError, context,
+        email: tmpEmail,
+        password: tmpPassword,
+        confirmPassword: tmpConfirmPassword)) {
       setState(() {});
       Navigator.pop(context);
+    } else {
+      await GlobalVar.authService
+          .registerWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
+          .then((value) {
+        if (value != null) {
+          GlobalVar.databaseService = DatabaseService(uid: value);
+          GlobalVar.databaseService!.userInfoDatabase.setUserInfoData(
+            name: "",
+            address: "",
+            phone: "",
+            email: tmpEmail,
+            password: tmpPassword,
+          );
+          Navigator.pop(context);
+          // NavigationServices(context).gotoVerifyEmailScreen(tmpEmail);
+          Navigator.of(context)
+              .push(MaterialPageRoute(
+                  builder: (context) => SendEmailToVerify(email: tmpEmail)))
+              .then((value) => widget.onTap());
+        }
+        else
+        {
+          print("Error in sign up");
+          Navigator.pop(context);
+        }
+      });
     }
   }
 }

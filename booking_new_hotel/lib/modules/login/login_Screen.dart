@@ -1,13 +1,19 @@
-import '../../routes/routes.dart';
+import 'package:booking_new_hotel/global/global_var.dart';
+import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
+import 'package:booking_new_hotel/routes/route_names.dart';
+
 import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
+import '../../service/database/database_service.dart';
+import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
 import '../../widgets/remove_focus.dart';
-import '../../widgets/common_app_bar_view.dart';
+import 'credentials_validity.dart';
 import 'facebook_twitter_button_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import 'forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function() onTap;
@@ -18,11 +24,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String errorEmail = "";
-  String errorPassword = "";
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  double distanceEmailError = 34, distancePasswordError = 34;
+  ShowAuthError showAuthError = ShowAuthError();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +42,20 @@ class _LoginScreenState extends State<LoginScreen> {
         resizeToAvoidBottomInset: false,
         body: RemoveFocus(
             onClick: () {
-              FocusScope.of(context).requestFocus(FocusNode());
+              FocusScope.of(context).requestFocus(
+                  FocusNode()); // if it is the last -> keyboard is closed
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CommonAppBarView(
-                  topPadding: AppBar().preferredSize.height - 20,
-                  titleText: AppLocalizations(context).of("login"),
-                  iconData: Icons.arrow_back_ios,
-                  onBackClick: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                Padding(
+                    padding: EdgeInsets.only(
+                        top: (AppBar().preferredSize.height * 2 - 12),
+                        left: 15,
+                        bottom: 15),
+                    child: Text(AppLocalizations(context).of("login"),
+                        style: TextStyles(context).getTitleStyle(28))),
                 Expanded(
                     child: Column(children: [
                   const Padding(
@@ -54,18 +66,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     padding: const EdgeInsets.only(top: 8, left: 24, right: 24),
                     keyboardType: TextInputType.emailAddress,
-                    titleText: AppLocalizations(context).of("your_mail"),
+                    titleText: AppLocalizations(context).of("mail"),
                     hintText: AppLocalizations(context).of("enter_your_email"),
-                    errorText: errorEmail,
+                    errorText: showAuthError.getmessageFirstFieldError,
                   ),
                   CommonTextFieldView(
                     controller: passwordController,
                     padding: EdgeInsets.fromLTRB(
-                        24, distanceEmailError, 24, distancePasswordError),
+                        24,
+                        showAuthError
+                            .getgapBetweenFirstAndSecondFieldDuringError,
+                        24,
+                        showAuthError
+                            .getgapBetweenThirdFieldAndButtonDuringError),
                     titleText: AppLocalizations(context).of("password"),
                     hintText: AppLocalizations(context).of("enter_password"),
                     keyboardType: TextInputType.text,
-                    errorText: errorPassword,
+                    errorText: showAuthError.getmessageSecondFieldError,
                     isObscureText: true,
                   ),
                   forgotPasswordUI(),
@@ -151,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   forgotPasswordUI() {
     return Padding(
-        padding: EdgeInsets.only(left: 24, right: 24),
+        padding: const EdgeInsets.only(left: 24, right: 24),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -159,7 +176,9 @@ class _LoginScreenState extends State<LoginScreen> {
             InkWell(
                 borderRadius: BorderRadius.circular(8),
                 onTap: () {
-                  print("Forgot Password");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const ForgotPassword();
+                  }));
                 },
                 child:
                     Text(AppLocalizations(context).of("forgot_your_Password"),
@@ -179,41 +198,28 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
+    String tmpEmail = emailController.text.trim();
+    String tmpPassword = passwordController.text;
 
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      )
-          .then((value) {
-        errorPassword = "";
-        distancePasswordError = 34;
-        passwordController.clear();
-        Navigator.pushReplacementNamed(context, RoutesName.NextPage);
-      });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'channel-error') {
-        if (emailController.text.trim().isEmpty) {
-          errorEmail = AppLocalizations(context).of('user_not_found');
-          distanceEmailError = 0;
-        } else {
-          errorPassword = AppLocalizations(context).of('password_cannot_empty');
-          errorEmail = "";
-          distanceEmailError = 34;
-          distancePasswordError = 0;
-        }
-      } else if (e.code == 'invalid-email') {
-        errorEmail = AppLocalizations(context).of('invalid_email');
-        distanceEmailError = 0;
-      } else if (e.code == 'invalid-credential') {
-        errorPassword = AppLocalizations(context).of('wrong_password');
-        distancePasswordError = 0;
-        errorEmail = "";
-        distanceEmailError = 34;
-      }
+    CredentialsValidity credentialsValidity = CredentialsValidity();
+    if (!credentialsValidity.checkValidityInLogin(showAuthError, context,
+        email: tmpEmail, password: tmpPassword)) {
       setState(() {});
       Navigator.pop(context);
+    } else {
+      await GlobalVar.authService
+          .signInWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
+          .then((value){
+        if (value != null) {
+          GlobalVar.databaseService = DatabaseService(uid: value);
+           GlobalVar.databaseService!.favoriteHotelsDatabase
+              .getFavoriteListData();
+          GlobalVar.databaseService!.upcomingHotelsDatabase.getUpcomingListData();
+          GlobalVar.userPassword = tmpPassword;
+          Navigator.pop(context);
+          NavigationServices(context).gotoBottomTapScreen();
+        }
+      });
     }
   }
 }

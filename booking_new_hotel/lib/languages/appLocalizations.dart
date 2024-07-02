@@ -62,6 +62,8 @@ class AppLocalizations {
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
+
+  getBoldStyle() {}
 }
 
 class _AppLocalizationsDelegate

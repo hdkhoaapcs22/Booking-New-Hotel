@@ -41,7 +41,13 @@ dependencies:
     google_fonts: ^6.1.0
     shared_preferences: ^2.2.2
     firebase_core: ^2.25.1
-    firebase_auth: ^4.17.1
+    firebase_auth: 4.17.3
+    flutter_rating_bar: ^4.0.1
+    path_provider: ^2.1.2
+    intl: ^0.18.1
+    smooth_star_rating_null_safety: ^1.0.4+2
+    cloud_firestore: ^4.15.3
+    geolocator: ^11.0.0
 
 dev_dependencies:
     flutter_test:

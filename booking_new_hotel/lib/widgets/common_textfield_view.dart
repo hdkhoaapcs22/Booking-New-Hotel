@@ -11,26 +11,27 @@ class CommonTextFieldView extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final TextEditingController? controller;
   final TextInputType? keyboardType; // used to set keyboard type
-  final double dynamicDistance;
 
-  const CommonTextFieldView(
-      {super.key,
-      this.titleText,
-      this.hintText,
-      this.errorText,
-      this.isObscureText = false,
-      required this.padding,
-      this.keyboardType,
-      this.controller,
-      this.dynamicDistance = 20.0});
+  const CommonTextFieldView({
+    super.key,
+    this.titleText,
+    this.hintText,
+    this.errorText,
+    this.isObscureText = false,
+    required this.padding,
+    this.keyboardType,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: padding,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      padding: padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Padding(
-              padding: EdgeInsets.only(top: dynamicDistance),
+              padding: const EdgeInsets.only(top: 20),
               child: Text(titleText ?? "",
                   style: TextStyles(context).getDescriptionStyle())),
           Card(
@@ -59,11 +60,16 @@ class CommonTextFieldView extends StatelessWidget {
           ),
           if (errorText != null && errorText!.isNotEmpty)
             Padding(
-                padding: const EdgeInsets.all(5),
-                child: Text(errorText ?? "",
-                    style: TextStyles(context).getDescriptionStyle().copyWith(
-                          color: AppTheme.redErrorColor,
-                        )))
-        ]));
+              padding: const EdgeInsets.all(5),
+              child: Text(
+                errorText ?? "",
+                style: TextStyles(context).getDescriptionStyle().copyWith(
+                      color: AppTheme.redErrorColor,
+                    ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }
