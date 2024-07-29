@@ -9,7 +9,8 @@ import '../../../utils/themes.dart';
 class FilterBarUI extends StatelessWidget {
   int hotelFound;
   Function(Map?) onFilterCallback;
-  FilterBarUI(this.hotelFound, this.onFilterCallback, {Key? key}) : super(key: key);
+  FilterBarUI(this.hotelFound, this.onFilterCallback, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

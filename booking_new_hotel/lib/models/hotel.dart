@@ -70,7 +70,7 @@ class Hotel {
       locationOfHotel:
           'This is located in a great spot close to shops and bars, very quiet location',
       rating: 8.0,
-      dateTxt: '21 May, 2019',
+      dateTxt: '12 May, 2024',
     ),
     Hotel(
       imageHotel: Localfiles.avatar3,
@@ -78,7 +78,7 @@ class Hotel {
       locationOfHotel:
           'Good staff, very comfortable bed, very quiet location, place could do with an update',
       rating: 8.0,
-      dateTxt: '21 May, 2019',
+      dateTxt: '8 May, 2024',
     ),
     Hotel(
       imageHotel: Localfiles.avatar5,
@@ -86,7 +86,7 @@ class Hotel {
       locationOfHotel:
           'This is located in a great spot close to shops and bars, very quiet location',
       rating: 6.0,
-      dateTxt: '21 May, 2019',
+      dateTxt: '1 May, 2024',
     ),
     Hotel(
       imageHotel: Localfiles.avatar2,
@@ -94,7 +94,7 @@ class Hotel {
       locationOfHotel:
           'Good staff, very comfortable bed, very quiet location, place could do with an update',
       rating: 9.0,
-      dateTxt: '21 May, 2019',
+      dateTxt: '29 April, 2024',
     ),
     Hotel(
       imageHotel: Localfiles.avatar4,

@@ -45,7 +45,7 @@ class _HotelListViewState extends State<HotelListView> {
     return ListCellAnimationView(
       animation: widget.animation,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(18, 8, 18, 5),
+        padding: const EdgeInsets.fromLTRB(18, 8, 18, 6),
         child: CommonCard(
           color: AppTheme.backgroundColor,
           radius: 16,
@@ -103,7 +103,7 @@ class _HotelListViewState extends State<HotelListView> {
                                     SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.662,
+                                                0.661,
                                         child: FittedBox(
                                           fit: BoxFit.scaleDown,
                                           child: Text(

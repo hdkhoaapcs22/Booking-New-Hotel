@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:booking_new_hotel/languages/appLocalizations.dart';
 import 'package:booking_new_hotel/models/hotel.dart';
@@ -11,7 +10,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 import '../../global/global_var.dart';
-import '../../models/room_data.dart';
 import '../../providers/theme_provider.dart';
 import '../../routes/route_names.dart';
 import '../../utils/enum.dart';
@@ -60,7 +58,6 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
             .listen((Position position) {
       GlobalVar.locationOfUser = position;
     });
-
     calculateDistanceBetweenUserAndHotels();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 0));
@@ -267,25 +264,8 @@ class _HomeExploreScreenState extends State<HomeExploreScreen>
   //           )));
   // }
 
-  List<Hotel> _chooseRandomlyBestDealHotels() {
-    List<Hotel> bestDealHotels = [];
-    while (bestDealHotels.length < 5) {
-      var randomIndex = Random().nextInt(GlobalVar.listAllHotels!.length);
-      if (!bestDealHotels.contains(GlobalVar.listAllHotels![randomIndex])) {
-        bestDealHotels.add(GlobalVar.listAllHotels![randomIndex]);
-        GlobalVar.listAllHotels![randomIndex].discountRate =
-            Random().nextInt(20) + 20;
-        GlobalVar.listAllHotels![randomIndex].isBestDeal = true;
-        GlobalVar.listAllHotels![randomIndex].date = DateText(
-            startDate: DateTime.now(),
-            endDate: DateTime.now().add(const Duration(days: 1)));
-      }
-    }
-    return bestDealHotels;
-  }
-
   Widget getDealListView(int index) {
-    List<Hotel> bestDealHotelList = _chooseRandomlyBestDealHotels();
+    List<Hotel> bestDealHotelList = GlobalVar.bestDealHotels!;
     List<Widget> list = [];
     bestDealHotelList.forEach((element) {
       var animation = Tween(begin: 0.0, end: 1.0).animate(

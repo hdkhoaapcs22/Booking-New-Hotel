@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:booking_new_hotel/global/global_var.dart';
@@ -10,8 +11,11 @@ import 'package:booking_new_hotel/widgets/common_card.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/theme_provider.dart';
 import '../../routes/route_names.dart';
+import '../../utils/enum.dart';
 import '../../utils/helper.dart';
 import '../../utils/text_styles.dart';
 import 'hotel_room_list.dart';
@@ -29,11 +33,27 @@ class _HotelDetailsState extends State<HotelDetails>
     with TickerProviderStateMixin {
   ScrollController scrollController =
       ScrollController(initialScrollOffset: 0.0);
-  String hotelText1 =
-      "Featuring a fit ness center, Grand Royale Park Hotel is located in Sweden, 4.7km from National Musium...";
-  String hotelText2 =
-      "Featuring a fit ness center, Grand Royale Park Hotel is located in Sweden, 4.7km from National Musium a fitness center ";
-
+  List<String> shortReviews = [
+    "Rooms are spacious, well-appointed, and equipped with the latest technology,...",
+    "It enhances guest experiences with special offers,...",
+    "They provide top-notch amenities, including gourmet dining options, luxury spas,...",
+    "Guests can expect a range of luxury amenities such as fine dining restaurants,...",
+    "Five-star hotels provide amenities such as in-room fitness gear, poolside service, childcare,...",
+    "Many five-star hotels are adopting sustainable practices, offering eco-friendly amenities,...",
+    "Expect high security with features like electric safes, digital room key entry,...",
+    "Guests can enjoy remote access to room lighting, climate control, and smart beds...",
+  ];
+  List<String> longReviews = [
+    "Rooms are spacious, well-appointed, and equipped with the latest technology and conveniences to ensure a comfortable stay.",
+    "It enhances guest experiences with special offers, including free breakfast, spa credits, and VIP upgrades.",
+    "They provide top-notch amenities, including gourmet dining options, luxury spas, and full-service health clubs with lavish locker rooms.",
+    "Guests can expect a range of luxury amenities such as fine dining restaurants, bars, high-speed Wi-Fi, smart TVs, and spa treatments1.",
+    "Five-star hotels provide amenities such as in-room fitness gear, poolside service, childcare, and exclusive activities like yachting.",
+    "Many five-star hotels are adopting sustainable practices, offering eco-friendly amenities and services2.",
+    "Expect high security with features like electric safes, digital room key entry, and separate guest elevators2.",
+    "Guests can enjoy remote access to room lighting, climate control, and smart beds, enhancing comfort and convenience2.",
+  ];
+  int indexReviews = Random().nextInt(8);
   bool isReadless = false;
   late AnimationController animationController;
   double imageHeight = 0.0;
@@ -119,7 +139,9 @@ class _HotelDetailsState extends State<HotelDetails>
                     text: TextSpan(
                       children: [
                         TextSpan(
-                            text: !isReadless ? hotelText1 : hotelText2,
+                            text: !isReadless
+                                ? shortReviews[indexReviews]
+                                : longReviews[indexReviews],
                             style: TextStyles(context)
                                 .getDescriptionStyle()
                                 .copyWith(fontSize: 14),
@@ -575,24 +597,44 @@ class _HotelDetailsState extends State<HotelDetails>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                "${widget.hotelData.averagePrice}\$",
-                textAlign: TextAlign.left,
-                style: TextStyles(context).getBoldStyle().copyWith(
-                    fontSize: 22,
-                    color: isInList
-                        ? Theme.of(context).textTheme.bodyLarge!.color
-                        : Colors.white),
-              ),
-              Text(
-                AppLocalizations(context).of("per_night"),
-                textAlign: TextAlign.left,
-                style: TextStyles(context).getRegularStyle().copyWith(
-                    fontSize: 14,
-                    color: isInList
-                        ? Theme.of(context).disabledColor
-                        : Colors.white),
-              ),
+              widget.hotelData.discountRate == 0
+                  ? Text("${widget.hotelData.averagePrice}\$",
+                      textAlign: TextAlign.left,
+                      style: TextStyles(context).getBoldStyle().copyWith(
+                            fontSize: 24,
+                            color: AppTheme.whiteColor,
+                          ))
+                  : Row(children: [
+                      Text("${widget.hotelData.averagePrice}",
+                          style: TextStyle(
+                            color: AppTheme.secondaryTextColor,
+                            fontSize: 19,
+                            decoration: TextDecoration.lineThrough,
+                          )),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                          "${widget.hotelData.averagePrice - (widget.hotelData.averagePrice * widget.hotelData.discountRate ~/ 100)}\$",
+                          textAlign: TextAlign.left,
+                          style: TextStyles(context).getBoldStyle().copyWith(
+                                fontSize: 24,
+                                color: AppTheme.whiteColor,
+                              )),
+                    ]),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: context.read<ThemeProvider>().languageType ==
+                            LanguageType.ar
+                        ? 2.0
+                        : 0.0),
+                child: Text(
+                  AppLocalizations(context).of("per_night"),
+                  style: TextStyles(context)
+                      .getRegularStyle()
+                      .copyWith(fontSize: 14),
+                ),
+              )
             ]),
       ],
     );

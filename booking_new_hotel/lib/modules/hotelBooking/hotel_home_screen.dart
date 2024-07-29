@@ -35,8 +35,9 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   TextEditingController searchController = TextEditingController();
   IconData favoriteIcon = Icons.favorite_border;
   late Map categoriesFilter;
-  late DateTime startDateBooking, endDateBooking;
-
+  DateTime startDateBooking = DateTime.now(),
+      endDateBooking = DateTime.now().add(const Duration(days: 5));
+  RoomData roomDataForSearching = RoomData(numberOfBed: 0, numberOfPeople: 0);
   bool _isShowMap = false;
 
   final searchBarHeight = 158.0;
@@ -67,11 +68,6 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
       }
     });
     super.initState();
-  }
-
-  Future<bool> getData() async {
-    await Future.delayed(const Duration(milliseconds: 800));
-    return true;
   }
 
   // @override
@@ -171,12 +167,12 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                                                   setState(() {
                                                     startDateBooking = start;
                                                     endDateBooking = end;
+                                                    roomDataForSearching =
+                                                        roomData;
                                                     searchWithAllCriteria(
-                                                        typeSearching:
-                                                            'Search by date and room data',
-                                                        start: start,
-                                                        end: end,
-                                                        roomData: roomData);
+                                                      typeSearching:
+                                                          'Search by date and room data',
+                                                    );
                                                   });
                                                 }),
                                               ],
@@ -316,6 +312,8 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
                         contentPadding: const EdgeInsets.all(10),
                         errorText: null,
                         border: InputBorder.none,
+                        hintText:
+                            AppLocalizations(context).of("search_hotel_name"),
                         hintStyle:
                             TextStyles(context).getDescriptionStyle().copyWith(
                                   color: AppTheme.secondaryTextColor,
@@ -388,11 +386,15 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
     return await currentHotel.listOfRooms!;
   }
 
-  Future<bool> checkByRoomData(Hotel currentHotel, RoomData roomData) async {
+  Future<bool> checkByRoomData(Hotel currentHotel) async {
+    if (roomDataForSearching.numberOfBed == 0 ||
+        roomDataForSearching.numberOfPeople == 0) return true;
     List<Room> listOfRooms = await getListOfRooms(currentHotel);
     for (int i = 0; i < listOfRooms.length; ++i) {
-      if (listOfRooms[i].roomData.numberOfBed == roomData.numberOfBed &&
-          listOfRooms[i].roomData.numberOfPeople == roomData.numberOfPeople) {
+      if (listOfRooms[i].roomData.numberOfBed ==
+              roomDataForSearching.numberOfBed &&
+          listOfRooms[i].roomData.numberOfPeople ==
+              roomDataForSearching.numberOfPeople) {
         return true;
       }
     }
@@ -402,19 +404,19 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   bool checkByDate(DateTime start, DateTime end, DateText? date) {
     if (start.day == 0 && end.day == 0) return true;
     if (date!.startDate.year != start.year) return false;
-    if (date.endDate.month == end.month) return false;
+    if (date.endDate.month != end.month) return false;
     if (date.startDate.day != start.day || date.endDate.day != end.day) {
       return false;
     }
     return true;
   }
 
-  Future<List<Hotel>> searchByDateAndRoomData(DateTime start, DateTime end,
-      RoomData roomData, List<Hotel> traverseList) async {
+  Future<List<Hotel>> searchByDateAndRoomData(List<Hotel> traverseList) async {
     List<Hotel> tmp = [];
     for (int i = 0; i < traverseList.length; i++) {
-      if (checkByDate(start, end, traverseList[i].date!) &&
-          await checkByRoomData(traverseList[i], roomData)) {
+      if (checkByDate(
+              startDateBooking, endDateBooking, traverseList[i].date!) &&
+          await checkByRoomData(traverseList[i])) {
         tmp.add(traverseList[i]);
       }
     }
@@ -428,6 +430,11 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   }
 
   bool checkAmenity(Hotel currentHotel, List<CategoriesFilterList> amenity) {
+    if (currentHotel.amenity!.isFreeBreakfast == true &&
+        currentHotel.amenity!.isFreeParking == true &&
+        currentHotel.amenity!.isPool == true &&
+        currentHotel.amenity!.isPetFriendly == true &&
+        currentHotel.amenity!.isFreeWifi == true) return true;
     return currentHotel.amenity!.isFreeBreakfast == amenity[0].isSelected &&
         currentHotel.amenity!.isFreeParking == amenity[1].isSelected &&
         currentHotel.amenity!.isPool == amenity[2].isSelected &&
@@ -478,15 +485,11 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
   // 2. If we just use filterHotelList to search, it is also incorrect because when it is empty in just a case,
   // and after that, we control to match a hotel, the result is still empty.
   void searchWithAllCriteria(
-      {DateTime? start,
-      DateTime? end,
-      RoomData? roomData,
-      String text = '',
-      required String typeSearching}) async {
+      {String text = '', required String typeSearching}) async {
     List<Hotel> tmp = [];
     if (filterHotelList.isEmpty) {
       tmp = searchByLocation(text, GlobalVar.listAllHotels!);
-      tmp = await searchByDateAndRoomData(start!, end!, roomData!, tmp);
+      tmp = await searchByDateAndRoomData(tmp);
       tmp = searchByPriceAmenityDistance(tmp);
     } else {
       switch (typeSearching) {
@@ -497,8 +500,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen>
           }
         case 'Search by date and room data':
           {
-            tmp = await searchByDateAndRoomData(
-                start!, end!, roomData!, filterHotelList);
+            tmp = await searchByDateAndRoomData(filterHotelList);
             break;
           }
         case 'Search by price, amenity, distance and type':

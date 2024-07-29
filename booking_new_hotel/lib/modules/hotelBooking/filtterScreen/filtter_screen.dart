@@ -179,19 +179,19 @@ class _FilterScreenState extends State<FilterScreen> {
                               }
                             case "swimming_pool":
                               {
-                                categoriesAmenityFilterList[2].isSelected =
+                                categoriesAmenityFilterList[4].isSelected =
                                     data.isSelected;
                                 break;
                               }
                             case "pet_friendly":
                               {
-                                categoriesAmenityFilterList[3].isSelected =
+                                categoriesAmenityFilterList[2].isSelected =
                                     data.isSelected;
                                 break;
                               }
                             case "free_wifi":
                               {
-                                categoriesAmenityFilterList[4].isSelected =
+                                categoriesAmenityFilterList[3].isSelected =
                                     data.isSelected;
                                 break;
                               }

@@ -14,8 +14,7 @@ import '../login/show_auth_error.dart';
 
 // ignore: must_be_immutable
 class ChangePassword extends StatefulWidget {
-  String previousPassword;
-  ChangePassword({super.key, required this.previousPassword});
+  ChangePassword({super.key});
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -121,7 +120,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     if (!credentialsValidity.checkValidityInChangePassword(
         showAuthError: showAuthError,
         context: context,
-        previousPassword: widget.previousPassword,
+        previousPassword: GlobalVar.userPassword!,
         enterPassword: tmpCurrentPassword,
         newPassword: tmpNewPassword,
         confirmPassword: tmpConfirmNewPassword)) {

@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../global/global_var.dart';
 import '../../utils/helper.dart';
 import '../../utils/text_styles.dart';
+import '../../utils/themes.dart';
 
 class UpcomingListView extends StatefulWidget {
   final AnimationController animationController;
@@ -73,12 +74,12 @@ class _UpcomingListViewState extends State<UpcomingListView> {
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
                       itemBuilder: (context, index) => Container(
-                          height: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery.of(context).size.width * 0.85,
                           width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.only(top: 20),
                           padding: const EdgeInsets.fromLTRB(7, 8, 4, 5),
                           decoration: BoxDecoration(
-                            color: const Color(0xfff7f7f7),
+                            color: AppTheme.backgroundColor,
                             boxShadow: const [
                               BoxShadow(
                                 color: Colors.black12,

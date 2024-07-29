@@ -9,7 +9,6 @@ import '../modules/hotelBooking/filtterScreen/filtter_screen.dart';
 import '../modules/hotelBooking/hotel_home_screen.dart';
 import '../modules/hotelDetails/hotel_details.dart';
 import '../modules/hotelDetails/reviews_list_screen.dart';
-import '../modules/login/authenticaltion_wrapper.dart';
 import '../modules/login/login_or_signup_screen.dart';
 import '../modules/login/send_email_to_verify_screen.dart';
 import '../modules/payScreen/pay_screen.dart';
@@ -81,21 +80,12 @@ class NavigationServices {
     return await _pushMaterialPageRoute(const EditProfile());
   }
 
-  Future<dynamic> gotoChangePasswordScreen(
-      {required String previousPassword}) async {
-    return await _pushMaterialPageRoute(ChangePassword(
-      previousPassword: previousPassword,
-    ));
+  Future<dynamic> gotoChangePasswordScreen() async {
+    return await _pushMaterialPageRoute(ChangePassword());
   }
 
   Future<dynamic> gotoSettingsScreen() async {
     return await _pushMaterialPageRoute(const SettingsScreen());
-  }
-
-  Future<dynamic> gotoSplashScreen() async {
-    return Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const SplashScreen()),
-        (Route<dynamic> route) => false);
   }
 
   Future<dynamic> gotoPayScreen({

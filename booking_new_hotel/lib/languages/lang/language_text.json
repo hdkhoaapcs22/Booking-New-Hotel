@@ -1230,5 +1230,12 @@
         "fr": "Erreur d'inscription",
         "ar": "خطأ في التسجيل",
         "ja": "サインアップエラー"
+    },
+    {
+        "text_id": "search_hotel_name",
+        "en": "Enter hotel name",
+        "fr": "Entrez le nom de l'hôtel",
+        "ar": "أدخل اسم الفندق",
+        "ja": "ホテル名を入力"
     }
 ]

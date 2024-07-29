@@ -28,12 +28,12 @@ class _RatingViewState extends State<RatingView> {
             Row(
               children: [
                 SizedBox(
-                  width: 60,
+                  width: 80,
                   child: Text(
                     rating.toStringAsFixed(1),
                     textAlign: TextAlign.left,
                     style: TextStyles(context).getBoldStyle().copyWith(
-                          fontSize: 38,
+                          fontSize: 42,
                           color: Theme.of(context).primaryColor,
                         ),
                   ),

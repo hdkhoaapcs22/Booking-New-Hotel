@@ -32,11 +32,11 @@ class _HomeExploreSliderViewState extends State<HomeExploreSliderView> {
   @override
   void initState() {
     pageViewData.add(PageViewData(
-        titleText: "bitexco",
+        titleText: "landmark_81",
         subText: "five_star",
         assetImage: Localfiles.explore_2));
     pageViewData.add(PageViewData(
-        titleText: "landmark_81",
+        titleText: "bitexco",
         subText: "world_class_service",
         assetImage: Localfiles.explore_1));
     pageViewData.add(PageViewData(

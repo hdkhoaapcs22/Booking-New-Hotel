@@ -31,10 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
         Geolocator.getServiceStatusStream().listen((status) async {
       if (status == ServiceStatus.disabled) {
         GlobalVar.locationOfUser = await Geolocator.getLastKnownPosition();
-      } else {
-        GlobalVar.locationOfUser = await Geolocator.getCurrentPosition();
-        print("After turn on again: ${GlobalVar.locationOfUser!.latitude}");
-        print("After turn on again: ${GlobalVar.locationOfUser!.longitude}");
       }
     });
     WidgetsBinding.instance
@@ -130,18 +126,50 @@ class _SplashScreenState extends State<SplashScreen> {
                 duration: const Duration(milliseconds: 680),
                 child: Padding(
                   padding: EdgeInsets.only(
-                      bottom: 24.0 + MediaQuery.of(context).padding.bottom,
-                      top: 16.0),
-                  child: Text(
-                    AppLocalizations(context).of("already_have_account"),
-                    textAlign: TextAlign.left,
-                    style: TextStyles(context)
-                        .getDescriptionStyle()
-                        .copyWith(color: AppTheme.whiteColor),
+                    bottom: 24.0 + MediaQuery.of(context).padding.bottom,
+                    top: 16.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppLocalizations(context).of("already_have_account"),
+                        textAlign: TextAlign.left,
+                        style: TextStyles(context)
+                            .getDescriptionStyle()
+                            .copyWith(color: AppTheme.whiteColor),
+                      ),
+                      const SizedBox(width: 5),
+                      GestureDetector(
+                        onTap: () async {
+                          if (await LocationService().getLocation(context)) {
+                            showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (context) => const Center(
+                                      child: CircularProgressIndicator(),
+                                    ));
+                            GlobalVar.locationOfUser =
+                                await Geolocator.getCurrentPosition(
+                                    desiredAccuracy: LocationAccuracy.high);
+                            Navigator.of(context).pop();
+                            NavigationServices(context)
+                                .gotoLoginOrSignUpScreen(true);
+                          }
+                        },
+                        child: Text(AppLocalizations(context).of("login"),
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              color: Colors.blue,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ],
                   ),
                 )),
             const SizedBox(
-              height: 20,
+              height: 30,
             )
           ])
         ],

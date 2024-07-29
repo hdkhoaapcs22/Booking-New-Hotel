@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:booking_new_hotel/global/global_var.dart';
 import 'package:booking_new_hotel/modules/login/show_auth_error.dart';
 import 'package:booking_new_hotel/routes/route_names.dart';
@@ -6,6 +8,8 @@ import 'package:booking_new_hotel/widgets/common_button.dart';
 import 'package:booking_new_hotel/widgets/common_textfield_view.dart';
 import 'package:flutter/material.dart';
 import '../../languages/appLocalizations.dart';
+import '../../models/hotel.dart';
+import '../../models/room_data.dart';
 import '../../service/database/database_service.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/themes.dart';
@@ -209,17 +213,36 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       await GlobalVar.authService
           .signInWithEmailAndPassword(email: tmpEmail, password: tmpPassword)
-          .then((value){
+          .then((value) {
         if (value != null) {
           GlobalVar.databaseService = DatabaseService(uid: value);
-           GlobalVar.databaseService!.favoriteHotelsDatabase
+          GlobalVar.databaseService!.favoriteHotelsDatabase
               .getFavoriteListData();
-          GlobalVar.databaseService!.upcomingHotelsDatabase.getUpcomingListData();
+          GlobalVar.databaseService!.upcomingHotelsDatabase
+              .getUpcomingListData();
+          GlobalVar.bestDealHotels = _chooseRandomlyBestDealHotels();
           GlobalVar.userPassword = tmpPassword;
           Navigator.pop(context);
           NavigationServices(context).gotoBottomTapScreen();
         }
       });
     }
+  }
+
+  List<Hotel> _chooseRandomlyBestDealHotels() {
+    List<Hotel> tmp = [];
+    while (tmp.length < 5) {
+      var randomIndex = Random().nextInt(GlobalVar.listAllHotels!.length);
+      if (!tmp.contains(GlobalVar.listAllHotels![randomIndex])) {
+        tmp.add(GlobalVar.listAllHotels![randomIndex]);
+        GlobalVar.listAllHotels![randomIndex].discountRate =
+            Random().nextInt(20) + 20;
+        GlobalVar.listAllHotels![randomIndex].isBestDeal = true;
+        GlobalVar.listAllHotels![randomIndex].date = DateText(
+            startDate: DateTime.now(),
+            endDate: DateTime.now().add(const Duration(days: 1)));
+      }
+    }
+    return tmp;
   }
 }

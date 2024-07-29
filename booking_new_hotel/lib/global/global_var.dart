@@ -16,4 +16,5 @@ class GlobalVar {
   static Position? locationOfUser;
   static String? userPassword;
   static String? userEmail;
+  static List<Hotel>? bestDealHotels;
 }

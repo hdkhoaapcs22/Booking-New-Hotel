@@ -48,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
             var userInfoData = snapshot.data!.docs[0];
             return Consumer<ThemeProvider>(
-              builder:  (_, provider, child) => BottomTopMoveAnimationView(
+              builder: (_, provider, child) => BottomTopMoveAnimationView(
                   animationController: widget.animationController,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     case PopupListItems.ChangePassword:
                                       {
                                         NavigationServices(context)
-                                            .gotoChangePasswordScreen(previousPassword:userInfoData['password']);
+                                            .gotoChangePasswordScreen();
                                         break;
                                       }
                                   }

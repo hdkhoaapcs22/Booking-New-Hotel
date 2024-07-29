@@ -37,6 +37,7 @@ class FavoriteHotelsDatabase {
       'rating': favoriteHotel.rating,
       'price': favoriteHotel.averagePrice,
       'reviews': favoriteHotel.reviews,
+      'discountRate': favoriteHotel.discountRate,
     });
   }
 

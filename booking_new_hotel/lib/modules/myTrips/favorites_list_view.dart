@@ -42,6 +42,7 @@ class _FavoritesListViewState extends State<FavoritesListView> {
                       rating: doc['rating'],
                       averagePrice: doc['price'],
                       imageHotel: doc['image'],
+                      discountRate: doc['discountRate'],
                     ))
                 .toList();
             return ListView.builder(

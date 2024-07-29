@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../models/room_data.dart';
 import '../../../utils/helper.dart';
 import '../../../utils/text_styles.dart';
+import '../../../utils/themes.dart';
 import 'calendar_pop_view.dart';
 import 'room_pop_up_view.dart';
 
@@ -22,7 +23,7 @@ class TimeDateView extends StatefulWidget {
 }
 
 class _TimeDateViewState extends State<TimeDateView> {
-  RoomData _roomData = RoomData(numberOfBed: 0,numberOfPeople: 0);
+  RoomData _roomData = RoomData(numberOfBed: 0, numberOfPeople: 0);
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(const Duration(days: 5));
   LanguageType _languageType = applicationcontext == null
@@ -88,9 +89,8 @@ class _TimeDateViewState extends State<TimeDateView> {
                   ),
                   Text(
                     subTitle,
-                    style: TextStyles(context)
-                        .getDescriptionStyle()
-                        .copyWith(fontSize: 16, color: Colors.black),
+                    style: TextStyles(context).getDescriptionStyle().copyWith(
+                        fontSize: 16, color: AppTheme.primaryTextColor),
                   ),
                 ],
               ),

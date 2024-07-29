@@ -461,7 +461,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Padding(
                       padding: const EdgeInsets.only(top: 16.0, bottom: 8),
                       child: Text(
-                          AppLocalizations(context).of("Selected language"),
+                          AppLocalizations(context).of("select_language"),
                           style: TextStyles(context)
                               .getBoldStyle()
                               .copyWith(fontSize: 22))),
